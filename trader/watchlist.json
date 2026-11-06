@@ -1,0 +1,331 @@
+{
+  "as_of": "2026-11-06T14:09:53+05:30",
+  "market": "INDIA_NSE_BSE",
+  "timezone": "Asia/Kolkata",
+  "mode": "orb",
+  "universe_size": 40,
+  "scanned": 40,
+  "matched": 40,
+  "results": [
+    {
+      "ticker": "TATAMOTORS.BO",
+      "name": "Tata Motors (BSE)",
+      "exchange": "BSE",
+      "setups": [
+        "orb",
+        "breakout_20d",
+        "bull_flag"
+      ],
+      "score": 181.86,
+      "close": 845.14,
+      "latest_close": 886.2,
+      "change_pct": 5.29,
+      "rvol": 3.13,
+      "atr": 1.89,
+      "levels": {
+        "or_high": 843.28,
+        "or_low": 841.2,
+        "or_mid": 842.24,
+        "stop_hint": 842.24,
+        "target_2r": 850.94,
+        "target_4r": 856.74
+      },
+      "sizing_preview": {
+        "shares": 34,
+        "stop_distance_inr": 2.9,
+        "max_loss_inr": 98.6,
+        "profit_at_4r_inr": 394.4
+      },
+      "data_source": "indian_market_sim",
+      "why": "BSE ORB breakout above ₹843.28 (OR ₹841.2-₹843.28, RVOL 3.13x); 34 shares risks ₹98.6 (<= ₹100 strict SL) for ₹394 target."
+    },
+    {
+      "ticker": "NTPC.BO",
+      "name": "NTPC Ltd (BSE)",
+      "exchange": "BSE",
+      "setups": [
+        "orb",
+        "breakout_20d",
+        "bull_flag"
+      ],
+      "score": 173.31,
+      "close": 412.8,
+      "latest_close": 427.47,
+      "change_pct": 2.77,
+      "rvol": 3.15,
+      "atr": 1.02,
+      "levels": {
+        "or_high": 411.89,
+        "or_low": 411.17,
+        "or_mid": 411.53,
+        "stop_hint": 411.53,
+        "target_2r": 415.34,
+        "target_4r": 417.88
+      },
+      "sizing_preview": {
+        "shares": 78,
+        "stop_distance_inr": 1.27,
+        "max_loss_inr": 99.06,
+        "profit_at_4r_inr": 396.24
+      },
+      "data_source": "indian_market_sim",
+      "why": "BSE ORB breakout above ₹411.89 (OR ₹411.17-₹411.89, RVOL 3.15x); 78 shares risks ₹99.06 (<= ₹100 strict SL) for ₹396 target."
+    },
+    {
+      "ticker": "INFY.BO",
+      "name": "Infosys (BSE)",
+      "exchange": "BSE",
+      "setups": [
+        "orb",
+        "breakout_20d",
+        "bull_flag"
+      ],
+      "score": 173.04,
+      "close": 1867.95,
+      "latest_close": 1932.36,
+      "change_pct": 3.52,
+      "rvol": 3.02,
+      "atr": 4.29,
+      "levels": {
+        "or_high": 1863.85,
+        "or_low": 1860.97,
+        "or_mid": 1862.41,
+        "stop_hint": 1862.41,
+        "target_2r": 1879.03,
+        "target_4r": 1890.11
+      },
+      "sizing_preview": {
+        "shares": 18,
+        "stop_distance_inr": 5.54,
+        "max_loss_inr": 99.72,
+        "profit_at_4r_inr": 398.88
+      },
+      "data_source": "indian_market_sim",
+      "why": "BSE ORB breakout above ₹1863.85 (OR ₹1860.97-₹1863.85, RVOL 3.02x); 18 shares risks ₹99.72 (<= ₹100 strict SL) for ₹399 target."
+    },
+    {
+      "ticker": "RELIANCE.NS",
+      "name": "Reliance Industries",
+      "exchange": "NSE",
+      "setups": [
+        "orb",
+        "breakout_20d",
+        "bull_flag"
+      ],
+      "score": 173,
+      "close": 1323.72,
+      "latest_close": 1349.42,
+      "change_pct": 2.99,
+      "rvol": 3.15,
+      "atr": 3.58,
+      "levels": {
+        "or_high": 1320.81,
+        "or_low": 1317.74,
+        "or_mid": 1319.28,
+        "stop_hint": 1319.28,
+        "target_2r": 1332.6,
+        "target_4r": 1341.48
+      },
+      "sizing_preview": {
+        "shares": 22,
+        "stop_distance_inr": 4.44,
+        "max_loss_inr": 97.68,
+        "profit_at_4r_inr": 390.72
+      },
+      "data_source": "indian_market_sim",
+      "why": "NSE ORB breakout above ₹1320.81 (OR ₹1317.74-₹1320.81, RVOL 3.15x); 22 shares risks ₹97.68 (<= ₹100 strict SL) for ₹391 target."
+    },
+    {
+      "ticker": "LT.NS",
+      "name": "Larsen & Toubro",
+      "exchange": "NSE",
+      "setups": [
+        "orb",
+        "breakout_20d",
+        "bull_flag"
+      ],
+      "score": 171.94,
+      "close": 3618.55,
+      "latest_close": 3760.84,
+      "change_pct": 3.62,
+      "rvol": 3.07,
+      "atr": 8.34,
+      "levels": {
+        "or_high": 3610.61,
+        "or_low": 3605.75,
+        "or_mid": 3608.18,
+        "stop_hint": 3608.18,
+        "target_2r": 3639.29,
+        "target_4r": 3660.03
+      },
+      "sizing_preview": {
+        "shares": 9,
+        "stop_distance_inr": 10.37,
+        "max_loss_inr": 93.33,
+        "profit_at_4r_inr": 373.32
+      },
+      "data_source": "indian_market_sim",
+      "why": "NSE ORB breakout above ₹3610.61 (OR ₹3605.75-₹3610.61, RVOL 3.07x); 9 shares risks ₹93.33 (<= ₹100 strict SL) for ₹373 target."
+    },
+    {
+      "ticker": "INFY.NS",
+      "name": "Infosys",
+      "exchange": "NSE",
+      "setups": [
+        "orb",
+        "breakout_20d",
+        "bull_flag"
+      ],
+      "score": 167.71,
+      "close": 1867.5,
+      "latest_close": 1918.16,
+      "change_pct": 4.86,
+      "rvol": 2.72,
+      "atr": 4.64,
+      "levels": {
+        "or_high": 1863.4,
+        "or_low": 1860.22,
+        "or_mid": 1861.81,
+        "stop_hint": 1861.81,
+        "target_2r": 1878.88,
+        "target_4r": 1890.26
+      },
+      "sizing_preview": {
+        "shares": 17,
+        "stop_distance_inr": 5.69,
+        "max_loss_inr": 96.73,
+        "profit_at_4r_inr": 386.92
+      },
+      "data_source": "indian_market_sim",
+      "why": "NSE ORB breakout above ₹1863.4 (OR ₹1860.22-₹1863.4, RVOL 2.72x); 17 shares risks ₹96.73 (<= ₹100 strict SL) for ₹387 target."
+    },
+    {
+      "ticker": "NTPC.NS",
+      "name": "NTPC Ltd",
+      "exchange": "NSE",
+      "setups": [
+        "orb",
+        "breakout_20d",
+        "bull_flag"
+      ],
+      "score": 167.42,
+      "close": 412.93,
+      "latest_close": 423.24,
+      "change_pct": 3.33,
+      "rvol": 2.87,
+      "atr": 1.05,
+      "levels": {
+        "or_high": 412.02,
+        "or_low": 411.35,
+        "or_mid": 411.69,
+        "stop_hint": 411.69,
+        "target_2r": 415.41,
+        "target_4r": 417.89
+      },
+      "sizing_preview": {
+        "shares": 80,
+        "stop_distance_inr": 1.24,
+        "max_loss_inr": 99.2,
+        "profit_at_4r_inr": 396.8
+      },
+      "data_source": "indian_market_sim",
+      "why": "NSE ORB breakout above ₹412.02 (OR ₹411.35-₹412.02, RVOL 2.87x); 80 shares risks ₹99.2 (<= ₹100 strict SL) for ₹397 target."
+    },
+    {
+      "ticker": "SBIN.BO",
+      "name": "State Bank of India (BSE)",
+      "exchange": "BSE",
+      "setups": [
+        "orb",
+        "breakout_20d",
+        "bull_flag"
+      ],
+      "score": 166.18,
+      "close": 836.07,
+      "latest_close": 867.71,
+      "change_pct": 3.57,
+      "rvol": 2.81,
+      "atr": 2.19,
+      "levels": {
+        "or_high": 834.23,
+        "or_low": 832.71,
+        "or_mid": 833.47,
+        "stop_hint": 833.47,
+        "target_2r": 841.27,
+        "target_4r": 846.47
+      },
+      "sizing_preview": {
+        "shares": 38,
+        "stop_distance_inr": 2.6,
+        "max_loss_inr": 98.8,
+        "profit_at_4r_inr": 395.2
+      },
+      "data_source": "indian_market_sim",
+      "why": "BSE ORB breakout above ₹834.23 (OR ₹832.71-₹834.23, RVOL 2.81x); 38 shares risks ₹98.8 (<= ₹100 strict SL) for ₹395 target."
+    },
+    {
+      "ticker": "ZOMATO.NS",
+      "name": "Zomato Ltd",
+      "exchange": "NSE",
+      "setups": [
+        "orb",
+        "breakout_20d",
+        "bull_flag"
+      ],
+      "score": 160.62,
+      "close": 262.97,
+      "latest_close": 270.29,
+      "change_pct": 2.46,
+      "rvol": 2.76,
+      "atr": 0.69,
+      "levels": {
+        "or_high": 262.39,
+        "or_low": 261.87,
+        "or_mid": 262.13,
+        "stop_hint": 262.13,
+        "target_2r": 264.65,
+        "target_4r": 266.33
+      },
+      "sizing_preview": {
+        "shares": 119,
+        "stop_distance_inr": 0.84,
+        "max_loss_inr": 99.96,
+        "profit_at_4r_inr": 399.84
+      },
+      "data_source": "indian_market_sim",
+      "why": "NSE ORB breakout above ₹262.39 (OR ₹261.87-₹262.39, RVOL 2.76x); 119 shares risks ₹99.96 (<= ₹100 strict SL) for ₹400 target."
+    },
+    {
+      "ticker": "M&M.NS",
+      "name": "Mahindra & Mahindra",
+      "exchange": "NSE",
+      "setups": [
+        "orb",
+        "breakout_20d",
+        "bull_flag"
+      ],
+      "score": 160.19,
+      "close": 2992.59,
+      "latest_close": 3030.3,
+      "change_pct": 3.13,
+      "rvol": 2.67,
+      "atr": 6.22,
+      "levels": {
+        "or_high": 2986.02,
+        "or_low": 2981.28,
+        "or_mid": 2983.65,
+        "stop_hint": 2983.65,
+        "target_2r": 3010.47,
+        "target_4r": 3028.35
+      },
+      "sizing_preview": {
+        "shares": 11,
+        "stop_distance_inr": 8.94,
+        "max_loss_inr": 98.34,
+        "profit_at_4r_inr": 393.36
+      },
+      "data_source": "indian_market_sim",
+      "why": "NSE ORB breakout above ₹2986.02 (OR ₹2981.28-₹2986.02, RVOL 2.67x); 11 shares risks ₹98.34 (<= ₹100 strict SL) for ₹393 target."
+    }
+  ]
+}

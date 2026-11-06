@@ -1,0 +1,14 @@
+{
+  "name": "indian-day-trader-skill",
+  "version": "1.0.0",
+  "description": "Standalone Indian Market (NSE & BSE) Autonomous Day-Trader Skill Engine (Rs 20,000 Budget | Rs 400/day Target | Strict Rs 100 Stop-Loss)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "auto": "node trader/indian_trader.js auto",
+    "scan": "node trader/indian_trader.js scan",
+    "timemachine": "node trader/indian_trader.js timemachine"
+  },
+  "author": "Anand Surla <anand.bvc@gmail.com>",
+  "license": "MIT"
+}

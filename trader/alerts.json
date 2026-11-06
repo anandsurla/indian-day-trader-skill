@@ -1,0 +1,33 @@
+{
+  "as_of": "2026-11-06T14:09:53+05:30",
+  "market": "INDIA_NSE_BSE",
+  "timezone": "Asia/Kolkata",
+  "alerts": [
+    {
+      "id": "TATAMOTORS.BO-strict-stop",
+      "ticker": "TATAMOTORS.BO",
+      "type": "STOP_LOSS_STRICT",
+      "condition": "price <= 842.24",
+      "level_inr": 842.24,
+      "max_loss_inr": 98.6,
+      "status": "ARMED"
+    },
+    {
+      "id": "TATAMOTORS.BO-daily-target-400",
+      "ticker": "TATAMOTORS.BO",
+      "type": "TAKE_PROFIT_TARGET",
+      "condition": "price >= 857.87",
+      "level_inr": 857.87,
+      "net_profit_inr": 402.07,
+      "status": "ARMED"
+    },
+    {
+      "id": "TATAMOTORS.BO-mis-flat-by",
+      "ticker": "TATAMOTORS.BO",
+      "type": "MIS_INTRADAY_SQUARE_OFF",
+      "condition": "time_ist >= 15:15",
+      "flat_by_ist": "15:15",
+      "status": "ARMED"
+    }
+  ]
+}

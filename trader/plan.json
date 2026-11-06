@@ -1,0 +1,48 @@
+{
+  "as_of": "2026-11-06T14:09:53+05:30",
+  "market": "INDIA_NSE_BSE",
+  "exchange": "BSE",
+  "currency": "INR",
+  "ticker": "TATAMOTORS.BO",
+  "side": "buy",
+  "entry": {
+    "price": 845.14,
+    "source": "trader-entry",
+    "rule": "orb",
+    "triggered_at_ist": "2026-11-06T09:35:00+05:30"
+  },
+  "opening_range": {
+    "start": "09:15",
+    "end": "09:30",
+    "high": 843.28,
+    "low": 841.2,
+    "mid": 842.24,
+    "range": 2.08,
+    "bars": 3
+  },
+  "atr": 2.61,
+  "stop": {
+    "price": 842.24,
+    "rule": "strict-or-mid",
+    "distance": 2.9,
+    "pct": 0.343,
+    "strict_max_loss_inr": 100
+  },
+  "target_1_trail_trigger": {
+    "price": 850.94,
+    "rule": "2R_lock_breakeven",
+    "distance": 5.8,
+    "r_multiple": 2
+  },
+  "target": {
+    "price": 857.87,
+    "rule": "4.39R_daily_400_target",
+    "distance": 12.73,
+    "pct": 1.506,
+    "r_multiple": 4.39,
+    "daily_profit_goal_inr": 400
+  },
+  "reward_risk": 4.39,
+  "flat_by": "15:15",
+  "summary": "TATAMOTORS.BO long from ₹845.14: STRICT stop ₹842.24 (-₹2.9/sh, max loss capped at ₹100), target ₹857.87 (+₹12.73/sh, 4.39R for ₹400/day goal), flat by 15:15 IST."
+}

@@ -1,0 +1,23 @@
+{
+  "as_of": "2026-11-06T14:09:53+05:30",
+  "market": "INDIA_NSE_BSE",
+  "currency": "INR",
+  "paper": true,
+  "account_budget_inr": 20000,
+  "daily_profit_target_inr": 400,
+  "strict_max_loss_per_trade_inr": 100,
+  "strict_max_daily_loss_inr": 100,
+  "active_position": {
+    "symbol": "TATAMOTORS.BO",
+    "exchange": "BSE",
+    "product": "MIS (Intraday)",
+    "side": "BUY",
+    "qty": 34,
+    "entry_price_inr": 845.14,
+    "strict_stop_loss_inr": 842.24,
+    "take_profit_target_inr": 857.87,
+    "max_loss_at_stop_inr": 98.6,
+    "net_profit_at_target_inr": 402.07,
+    "flat_by_ist": "15:15"
+  }
+}

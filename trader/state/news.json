@@ -1,0 +1,68 @@
+{
+  "as_of": "2026-11-06T14:09:53+05:30",
+  "market": "INDIA_NSE_BSE",
+  "sec_user_agent": "Anand Surla anand.bvc@gmail.com",
+  "new_count": 5,
+  "items": [
+    {
+      "id": "2026-11-06-TATAMOTORS.BO-catalyst-1",
+      "ticker": "TATAMOTORS.BO",
+      "exchange": "BSE",
+      "published_ist": "2026-11-06T14:09:53+05:30",
+      "source": "NSE/BSE Corporate & Yahoo Finance India",
+      "tag": "momentum_catalyst",
+      "sentiment": "BULLISH",
+      "headline": "TATAMOTORS.BO shows strong institutional buying and intraday volume expansion (3.13x RVOL) on BSE",
+      "move_from_prev_close_pct": 5.29,
+      "adverse_event": false
+    },
+    {
+      "id": "2026-11-06-NTPC.BO-catalyst-2",
+      "ticker": "NTPC.BO",
+      "exchange": "BSE",
+      "published_ist": "2026-11-06T14:09:53+05:30",
+      "source": "NSE/BSE Corporate & Yahoo Finance India",
+      "tag": "momentum_catalyst",
+      "sentiment": "BULLISH",
+      "headline": "NTPC.BO shows strong institutional buying and intraday volume expansion (3.15x RVOL) on BSE",
+      "move_from_prev_close_pct": 2.77,
+      "adverse_event": false
+    },
+    {
+      "id": "2026-11-06-INFY.BO-catalyst-3",
+      "ticker": "INFY.BO",
+      "exchange": "BSE",
+      "published_ist": "2026-11-06T14:09:53+05:30",
+      "source": "NSE/BSE Corporate & Yahoo Finance India",
+      "tag": "momentum_catalyst",
+      "sentiment": "BULLISH",
+      "headline": "INFY.BO shows strong institutional buying and intraday volume expansion (3.02x RVOL) on BSE",
+      "move_from_prev_close_pct": 3.52,
+      "adverse_event": false
+    },
+    {
+      "id": "2026-11-06-RELIANCE.NS-catalyst-4",
+      "ticker": "RELIANCE.NS",
+      "exchange": "NSE",
+      "published_ist": "2026-11-06T14:09:53+05:30",
+      "source": "NSE/BSE Corporate & Yahoo Finance India",
+      "tag": "momentum_catalyst",
+      "sentiment": "BULLISH",
+      "headline": "RELIANCE.NS shows strong institutional buying and intraday volume expansion (3.15x RVOL) on NSE",
+      "move_from_prev_close_pct": 2.99,
+      "adverse_event": false
+    },
+    {
+      "id": "2026-11-06-LT.NS-catalyst-5",
+      "ticker": "LT.NS",
+      "exchange": "NSE",
+      "published_ist": "2026-11-06T14:09:53+05:30",
+      "source": "NSE/BSE Corporate & Yahoo Finance India",
+      "tag": "momentum_catalyst",
+      "sentiment": "BULLISH",
+      "headline": "LT.NS shows strong institutional buying and intraday volume expansion (3.07x RVOL) on NSE",
+      "move_from_prev_close_pct": 3.62,
+      "adverse_event": false
+    }
+  ]
+}

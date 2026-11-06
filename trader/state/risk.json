@@ -1,0 +1,36 @@
+{
+  "as_of": "2026-11-06T14:09:53+05:30",
+  "date": "2026-11-06",
+  "market": "INDIA_NSE_BSE",
+  "currency": "INR",
+  "verdict": "PASS",
+  "rules_checked": {
+    "account_budget_inr": 20000,
+    "daily_profit_target_inr": 400,
+    "strict_max_loss_per_trade_inr": 100,
+    "strict_max_daily_loss_inr": 100,
+    "realized_loss_today_inr": 0,
+    "trade_risk_at_stop_inr": 98.6,
+    "reward_risk_ratio": 4.39,
+    "paper_mode": true
+  },
+  "reasons": [],
+  "approved_order": {
+    "symbol": "TATAMOTORS.BO",
+    "exchange": "BSE",
+    "product": "MIS",
+    "side": "buy",
+    "qty": 34,
+    "type": "limit",
+    "limit_price": 845.14,
+    "time_in_force": "day",
+    "order_class": "bracket",
+    "take_profit": {
+      "limit_price": 857.87
+    },
+    "stop_loss": {
+      "stop_price": 842.24,
+      "strict": true
+    }
+  }
+}

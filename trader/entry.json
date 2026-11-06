@@ -1,0 +1,35 @@
+{
+  "as_of": "2026-11-06T14:09:53+05:30",
+  "market": "INDIA_NSE_BSE",
+  "exchange": "BSE",
+  "currency": "INR",
+  "ticker": "TATAMOTORS.BO",
+  "name": "Tata Motors (BSE)",
+  "rule": "orb",
+  "interval": "5m",
+  "or_minutes": 15,
+  "session_date": "2026-11-06",
+  "status": "triggered",
+  "opening_range": {
+    "start": "09:15",
+    "end": "09:30",
+    "high": 843.28,
+    "low": 841.2,
+    "mid": 842.24,
+    "range": 2.08,
+    "bars": 3
+  },
+  "level": 843.28,
+  "trigger": {
+    "bar_time_ist": "2026-11-06T09:35:00+05:30",
+    "bar_open": 842.49,
+    "bar_high": 845.34,
+    "bar_low": 842.34,
+    "bar_close": 845.14,
+    "bar_volume": 256730,
+    "volume_ratio": 3.13
+  },
+  "entry_price_hint": 845.14,
+  "stop_hint": 842.24,
+  "summary": "TATAMOTORS.BO (BSE) triggered 15m ORB above ₹843.28 at 09:35 IST — bar closed at ₹845.14 (3.13x avg volume)."
+}

@@ -1,0 +1,49 @@
+{
+  "as_of": "2026-11-06T14:09:53+05:30",
+  "market": "INDIA_NSE_BSE",
+  "currency": "INR",
+  "budget_inr": 20000,
+  "intraday_leverage": 5,
+  "buying_power_inr": 95000,
+  "daily_profit_target_inr": 400,
+  "strict_max_loss_per_trade_inr": 100,
+  "sizing": {
+    "ticker": "TATAMOTORS.BO",
+    "exchange": "BSE",
+    "entry_price_inr": 845.14,
+    "stop_price_inr": 842.24,
+    "target_price_inr": 857.87,
+    "stop_distance_inr": 2.9,
+    "target_distance_inr": 12.73,
+    "shares_by_strict_stop_loss": 34,
+    "shares_by_intraday_margin": 112,
+    "shares_selected": 34,
+    "binding_constraint": "strict_max_loss_per_trade_100_inr",
+    "notional_value_inr": 28734.76,
+    "margin_used_inr": 5746.95,
+    "max_loss_at_stop_inr": 98.6,
+    "gross_profit_at_target_inr": 432.82,
+    "estimated_indian_taxes_and_brokerage_inr": 30.75,
+    "net_profit_at_target_inr": 402.07
+  },
+  "orders": [
+    {
+      "symbol": "TATAMOTORS.BO",
+      "exchange": "BSE",
+      "product": "MIS",
+      "side": "buy",
+      "qty": 34,
+      "type": "limit",
+      "limit_price": 845.14,
+      "time_in_force": "day",
+      "order_class": "bracket",
+      "take_profit": {
+        "limit_price": 857.87
+      },
+      "stop_loss": {
+        "stop_price": 842.24,
+        "strict": true
+      }
+    }
+  ]
+}
