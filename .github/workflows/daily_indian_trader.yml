@@ -1,17 +1,18 @@
-name: Daily Indian NSE & BSE Autonomous Paper Trader
+name: Live Indian NSE & BSE Autonomous Paper Trader (Every 15m Market Hours)
 
 on:
   schedule:
-    # 09:35 IST (04:05 UTC) - Morning Opening Range Breakout Entry & Scan
-    - cron: '5 4 * * 1-5'
-    # 12:30 IST (07:00 UTC) - Mid-Day Trail & Position Check
-    - cron: '0 7 * * 1-5'
-    # 15:20 IST (09:50 UTC) - Post 15:15 IST MIS Square-Off & Daily/Weekly Report Commit
-    - cron: '50 9 * * 1-5'
+    # Runs every 15 minutes during Indian Market Hours (09:15 IST to 15:30 IST, Mon-Fri)
+    # 03:45 UTC to 10:00 UTC = 09:15 IST to 15:30 IST
+    - cron: '*/15 4-9 * * 1-5'
+    - cron: '45 3 * * 1-5'
+    - cron: '0,15,30 10 * * 1-5'
   workflow_dispatch:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 jobs:
   run-indian-trader:
@@ -25,17 +26,27 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Run Autonomous NSE & BSE Pipeline & Update Day/Weekly Reports
+      - name: Monitor Active Trade (Entry / Trail / Exit) & Scan NSE/BSE
         env:
           LIVE_YAHOO: 'true'
         run: |
-          node trader/indian_trader.js auto
-          node -e "const r = require('./trader/reporter'); r.generateAllReports();"
+          node -e '
+            const trader = require("./trader/indian_trader");
+            const reporter = require("./trader/reporter");
+            (async () => {
+              const mon = await trader.monitorAndManageActiveTrade();
+              console.log("Monitor status:", mon.status);
+              if (mon.status === "NO_OPEN_POSITION" || mon.status === "CLOSED_AUTONOMOUSLY") {
+                await trader.runAutonomousPipeline();
+              }
+              reporter.generateAllReports();
+            })();
+          '
 
-      - name: Commit & Push Updated Day-Wise and Weekly Reports to GitHub
+      - name: Commit & Push Live Trade State + Day/Weekly Reports + GitHub Pages Dashboard
         run: |
           git config user.name "Anand Surla (Autonomous Bot)"
           git config user.email "anand.bvc@gmail.com"
-          git add reports/ trader/
-          git diff --staged --quiet || git commit -m "Auto-update Day-Wise & Weekly Consolidated Paper Trade Reports ($(date -u +'%Y-%m-%d %H:%M UTC'))"
+          git add reports/ trader/ docs/
+          git diff --staged --quiet || git commit -m "Live Trade Monitor: Update NSE/BSE position, Day-Wise & Weekly reports ($(date -u +'%Y-%m-%d %H:%M UTC'))"
           git push origin main

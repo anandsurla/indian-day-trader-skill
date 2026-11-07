@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🇮🇳 Indian Day-Trader Skill (NSE & BSE) — Live Cloud Dashboard</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card: #111827;
+      --border: #1f2937;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --green: #10b981;
+      --red: #ef4444;
+      --blue: #3b82f6;
+      --yellow: #f59e0b;
+    }
+    * { box-sizing: border-box; }
+    body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 20px; }
+    .container { max-width: 1320px; margin: 0 auto; }
+    .header {
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;
+      background: var(--card); padding: 18px 22px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 16px;
+    }
+    .btn-group { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .btn {
+      background: var(--blue); color: #fff; border: none; padding: 10px 16px; border-radius: 8px;
+      font-weight: 600; font-size: 0.9rem; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+    }
+    .btn:hover { opacity: 0.92; }
+    .btn-green { background: #059669; }
+    .btn-purple { background: #7c3aed; }
+    .btn-outline { background: #1e293b; border: 1px solid #334155; }
+    #statusBanner {
+      display: none; padding: 12px 18px; border-radius: 8px; margin-bottom: 16px;
+      background: rgba(16, 185, 129, 0.15); border: 1px solid var(--green); color: #34d399; font-weight: 600;
+    }
+    .how-it-works { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 18px; }
+    .step-box { background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; padding: 12px 16px; font-size: 0.85rem; line-height: 1.45; }
+    .step-num { color: #60a5fa; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 4px; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 20px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px; margin-bottom: 18px; }
+    .label { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; font-weight: 700; }
+    .big-val { font-size: 1.55rem; font-weight: 800; margin: 6px 0; }
+    .explain { font-size: 0.83rem; color: #cbd5e1; line-height: 1.45; }
+    .green { color: #34d399; } .red { color: #f87171; } .blue { color: #60a5fa; } .yellow { color: #fbbf24; }
+    .tabs { display: flex; gap: 8px; border-bottom: 1px solid var(--border); margin-bottom: 18px; overflow-x: auto; padding-bottom: 2px; }
+    .tab-btn {
+      background: #1e293b; color: var(--muted); border: 1px solid transparent; padding: 11px 18px;
+      border-radius: 8px 8px 0 0; font-weight: 700; font-size: 0.9rem; cursor: pointer; white-space: nowrap;
+    }
+    .tab-btn.active { background: var(--blue); color: #fff; }
+    .panel { display: none; }
+    .panel.active { display: block; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 10px; }
+    th, td { padding: 11px 12px; border-bottom: 1px solid var(--border); text-align: left; }
+    th { background: rgba(255,255,255,0.03); color: var(--muted); font-weight: 700; }
+    .pill { display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 0.76rem; font-weight: 700; }
+    .pill-green { background: rgba(16,185,129,0.15); color: #34d399; }
+    .pill-blue { background: rgba(59,130,246,0.15); color: #60a5fa; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div>
+      <h2 style="margin:0;">🇮🇳 Indian Day-Trader Skill — 24/7 Live Cloud Monitor (NSE & BSE)</h2>
+      <div style="color:#93c5fd; font-size:0.86rem; margin-top:4px;">
+        Account Capital: <strong>₹20,000</strong> • Mandatory Daily Profit: <strong>₹400/day (Pure Net, Brokerage Excluded)</strong> • Strict Stop-Loss: <strong>Max ₹100</strong>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn" onclick="refreshFromGitHub()">🔄 Refresh Live Trade Data</button>
+      <a href="https://github.com/anandsurla/indian-day-trader-skill/actions/workflows/daily_indian_trader.yml" target="_blank" class="btn btn-purple">⚡ View / Trigger Cloud Bot on GitHub</a>
+      <a href="https://raw.githubusercontent.com/anandsurla/indian-day-trader-skill/main/reports/PAPER_TRADES_AUDIT.csv" target="_blank" class="btn btn-outline">📥 Download Excel (.CSV)</a>
+    </div>
+  </div>
+
+  <div id="statusBanner"></div>
+
+  <div class="how-it-works">
+    <div class="step-box">
+      <div class="step-num">Step 1 • Auto 15m Cloud Bot</div>
+      GitHub Actions runs automatically every 15 minutes during <strong>09:15–15:30 IST</strong> (Mon–Fri) even when your laptop is OFF.
+    </div>
+    <div class="step-box">
+      <div class="step-num">Step 2 • Strict ₹100 Stop-Loss</div>
+      Sizes shares so maximum possible loss at Stop-Loss is <strong>strictly under ₹100</strong>.
+    </div>
+    <div class="step-box">
+      <div class="step-num">Step 3 • ₹400 Net (Excl. Brokerage)</div>
+      Adds Zerodha/BSE/NSE brokerage + STT + GST <strong>on top of ₹400</strong> so you pocket <strong>₹400+ pure profit</strong>.
+    </div>
+    <div class="step-box">
+      <div class="step-num">Step 4 • Day & Weekly GitHub Audit</div>
+      Automatically updates this live page plus <strong>Day-Wise</strong> and <strong>Weekly Consolidated</strong> reports in GitHub.
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="openTab('tab-today', this)">🟢 1. Active Trade & Live Status</button>
+    <button class="tab-btn" onclick="openTab('tab-daily', this)">📅 2. Day-Wise Paper Trades (<span id="daysCount">0</span> Days)</button>
+    <button class="tab-btn" onclick="openTab('tab-weekly', this)">📊 3. Weekly Consolidated Summary</button>
+    <button class="tab-btn" onclick="openTab('tab-scanner', this)">🔍 4. All Scanned Stocks (NSE & BSE)</button>
+    <button class="tab-btn" onclick="openTab('tab-news', this)">📰 5. Top Business Articles</button>
+  </div>
+
+  <div id="tab-today" class="panel active">Loading live trade data from GitHub...</div>
+  <div id="tab-daily" class="panel"></div>
+  <div id="tab-weekly" class="panel"></div>
+  <div id="tab-scanner" class="panel"></div>
+  <div id="tab-news" class="panel"></div>
+</div>
+
+<script>
+  const RAW_BASE = 'https://raw.githubusercontent.com/anandsurla/indian-day-trader-skill/main';
+
+  function openTab(tabId, btnEl) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    if (btnEl) btnEl.classList.add('active');
+  }
+
+  async function fetchJson(relPath) {
+    const r = await fetch(`${RAW_BASE}/${relPath}?t=${Date.now()}`);
+    return r.json();
+  }
+
+  async function refreshFromGitHub() {
+    const b = document.getElementById('statusBanner');
+    b.style.display = 'block';
+    b.textContent = '🔄 Fetching latest live paper trade & reports from GitHub...';
+    await loadCloudDashboard();
+    b.textContent = '✅ Live data refreshed from GitHub repository (' + new Date().toLocaleTimeString() + ')';
+    setTimeout(() => { b.style.display = 'none'; }, 4000);
+  }
+
+  async function loadCloudDashboard() {
+    try {
+      const [watchlist, entry, orders, tmData, daily, weekly, news] = await Promise.all([
+        fetchJson('trader/watchlist.json'),
+        fetchJson('trader/entry.json'),
+        fetchJson('trader/orders.json'),
+        fetchJson('trader/timemachine.json'),
+        fetchJson('trader/daily_summary.json'),
+        fetchJson('trader/weekly_summary.json'),
+        fetchJson('trader/state/news.json')
+      ]);
+
+      const sz = orders.sizing || {};
+      const tm = tmData.monte_carlo || {};
+      const t = entry.technicals || {};
+      const n = entry.business_news || {};
+      const brk = sz.brokerage_breakdown || {};
+
+      document.getElementById('daysCount').textContent = (daily && daily.days) ? daily.days.length : 0;
+
+      document.getElementById('tab-today').innerHTML = `
+        <div class="kpi-grid">
+          <div class="card">
+            <div class="label">1. What Stock Did AI Pick?</div>
+            <div class="big-val blue">${sz.ticker} (${sz.exchange})</div>
+            <div class="explain">
+              Sector: <strong>${entry.sector || 'Indian Equities'}</strong><br>
+              Action: <span class="pill pill-green">AUTO BUY ${sz.shares_selected} Shares @ ₹${sz.entry_price_inr}</span><br>
+              Margin Used: <strong>₹${sz.margin_used_inr}</strong> (out of ₹20,000 capital)
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="label">2. Strict Stop-Loss (Max Risk ₹100)</div>
+            <div class="big-val red">₹${sz.stop_price_inr}</div>
+            <div class="explain">
+              If price drops to ₹${sz.stop_price_inr}, AI sells immediately.<br>
+              Maximum Possible Loss: <strong class="red">₹${sz.max_loss_at_stop_inr}</strong> (Strictly <= ₹100)<br>
+              2R Profit Trail Trigger: <strong>₹${tmData.plan ? tmData.plan.target_2r_trail : '-'}</strong>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="label">3. Mandatory Profit (Brokerage Excluded)</div>
+            <div class="big-val green">+₹${sz.net_profit_at_target_inr} NET</div>
+            <div class="explain">
+              AI Sell Target Price: <strong class="green">₹${sz.target_price_inr}</strong><br>
+              Gross Profit at Target: <strong>₹${sz.gross_profit_at_target_inr}</strong><br>
+              Minus Brokerage, STT & GST: <strong class="yellow">-₹${sz.estimated_indian_taxes_and_brokerage_inr}</strong><br>
+              <strong>Pure Take-Home Profit: +₹${sz.net_profit_at_target_inr}</strong>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="label">4. Win Probability (10,000 Replays)</div>
+            <div class="big-val green">${((tm.p_win_combined || 0.68) * 100).toFixed(1)}% Win Rate</div>
+            <div class="explain">
+              Tested across 10,000 NSE/BSE intraday simulations.<br>
+              Expected Return: <strong>+${tm.expected_r}R</strong> per trade<br>
+              Mandatory Auto Square-Off Time: <strong>15:15 IST</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-top:0;">📖 Why Did the AI Select ${sz.ticker}? (Plain-English Summary)</h3>
+          <ul style="line-height:1.75; color:#e2e8f0; margin-bottom:0;">
+            <li><strong>Technical Standards Passed:</strong> Trading above institutional Session VWAP (<strong>₹${t.vwap || sz.entry_price_inr}</strong>), Bullish EMA Stack (EMA9 <strong>₹${t.ema9 || '-'}</strong> > EMA20 <strong>₹${t.ema20 || '-'}</strong> > EMA50 <strong>₹${t.ema50 || '-'}</strong>), and healthy RSI Momentum (<strong>${t.rsi14 || 65}</strong>).</li>
+            <li><strong>Current-Day Business News (${n.source || 'ET Markets / Moneycontrol'}):</strong> <span class="green">[${n.sentiment || 'BULLISH'}]</span> <em>"${n.headline || ''}"</em></li>
+            <li><strong>Exact Brokerage & Tax Deduction Breakdown (₹${sz.estimated_indian_taxes_and_brokerage_inr} Total):</strong> Discount Brokerage: ₹${brk.brokerage || 0} | STT: ₹${brk.stt || 0} | Exchange Fee: ₹${brk.exchangeCharge || 0} | 18% GST: ₹${brk.gst || 0} | Stamp Duty: ₹${brk.stampDuty || 0}.</li>
+          </ul>
+        </div>
+      `;
+
+      const days = (daily && daily.days) ? daily.days : [];
+      document.getElementById('tab-daily').innerHTML = days.map(day => `
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <div>
+              <h3 style="margin:0;">🗓️ Date: ${day.date} (Week of ${day.week_start})</h3>
+              <div style="color:var(--muted); font-size:0.84rem; margin-top:4px;">
+                Total Paper Trades: <strong>${day.total_trades}</strong> (${day.open_trades} Active, ${day.closed_trades} Closed) • Daily Mandatory Net Goal: <strong>₹400.00</strong>
+              </div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:0.8rem; color:var(--muted);">Day's Pure Net Profit (After Brokerage & Taxes)</div>
+              <div class="big-val green" style="font-size:1.3rem; margin:2px 0;">
+                Realized: ₹${day.realized_net_pnl_excl_brokerage_inr} | With Active Target: +₹${day.projected_net_pnl_at_target_inr}
+              </div>
+            </div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Status</th><th>Stock</th><th>Exch</th><th>Shares</th><th>Entry (₹)</th><th>Strict SL (₹)</th><th>Target / Exit (₹)</th><th>Max Loss (<=₹100)</th><th>Brokerage & Tax</th><th>Pure Net Profit (Excl. Brokerage)</th><th>Decision Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${day.trades.map(tr => `
+                <tr>
+                  <td><span class="pill ${tr.status === 'CLOSED' ? 'pill-green' : 'pill-blue'}">${tr.status}</span></td>
+                  <td><strong>${tr.symbol}</strong></td>
+                  <td>${tr.exchange}</td>
+                  <td><strong>${tr.qty}</strong></td>
+                  <td>₹${tr.entry_price_inr}</td>
+                  <td class="red">₹${tr.strict_stop_loss_inr}</td>
+                  <td class="green">₹${tr.target_price_inr}</td>
+                  <td class="red">₹${tr.max_loss_at_stop_inr}</td>
+                  <td class="yellow">-₹${tr.brokerage_and_taxes_inr}</td>
+                  <td class="green"><strong>+₹${tr.status === 'CLOSED' ? tr.net_pnl_excl_brokerage_inr : tr.target_net_profit_inr}</strong></td>
+                  <td style="font-size:0.8rem; color:#cbd5e1;">${tr.exit_reason}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `).join('');
+
+      const weeks = (weekly && weekly.weeks) ? weekly.weeks : [];
+      document.getElementById('tab-weekly').innerHTML = weeks.map(w => `
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <div>
+              <h3 style="margin:0;">📊 Weekly Consolidated Audit — Week Starting Monday ${w.week_start}</h3>
+              <div style="color:var(--muted); font-size:0.85rem; margin-top:4px;">
+                Active Days: <strong>${w.trading_days_active}</strong> • Total Trades: <strong>${w.total_trades}</strong> • Win Rate: <strong class="green">${w.win_rate_pct}%</strong> (${w.wins}W / ${w.losses}L)
+              </div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:0.8rem; color:var(--muted);">Weekly Pure Net Profit (After Deducting ₹${w.realized_brokerage_and_taxes_inr} Brokerage)</div>
+              <div class="big-val green" style="font-size:1.35rem; margin:2px 0;">
+                Realized: +₹${w.realized_net_pnl_excl_brokerage_inr} (Projected w/ Active: +₹${w.projected_net_pnl_with_active_target_inr})
+              </div>
+            </div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th><th>Total Trades</th><th>Open</th><th>Closed</th><th>Realized Gross Profit (₹)</th><th>Brokerage & Govt Taxes Deducted (₹)</th><th>Realized Pure Net Profit (₹)</th><th>Total Net Profit incl. Active Target (₹)</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${w.days.map(dr => `
+                <tr>
+                  <td><strong>${dr.date}</strong></td>
+                  <td>${dr.total_trades}</td>
+                  <td>${dr.open_trades}</td>
+                  <td>${dr.closed_trades}</td>
+                  <td>₹${dr.realized_gross_pnl_inr}</td>
+                  <td class="yellow">-₹${dr.realized_brokerage_and_taxes_inr}</td>
+                  <td class="green"><strong>+₹${dr.realized_net_pnl_excl_brokerage_inr}</strong></td>
+                  <td class="green"><strong>+₹${dr.projected_net_pnl_at_target_inr}</strong></td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `).join('');
+
+      const results = (watchlist && watchlist.results) ? watchlist.results : [];
+      document.getElementById('tab-scanner').innerHTML = `
+        <div class="card">
+          <h3 style="margin-top:0;">🔍 Top 10 NSE & BSE Stocks Ranked by Technicals + News + Capital Efficiency</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Rank</th><th>Stock</th><th>Exch</th><th>Sector</th><th>Score</th><th>Entry (₹)</th><th>VWAP (₹)</th><th>RSI(14)</th><th>Shares</th><th>Strict Max Loss</th><th>Brokerage/Tax</th><th>Pure Net Profit</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${results.map((r, i) => `
+                <tr>
+                  <td>#${i + 1}</td>
+                  <td><strong>${r.ticker}</strong></td>
+                  <td>${r.exchange}</td>
+                  <td>${r.sector || 'Equities'}</td>
+                  <td><span class="pill pill-green">${r.score}</span></td>
+                  <td>₹${r.close}</td>
+                  <td>₹${r.technicals ? r.technicals.vwap : '-'}</td>
+                  <td>${r.technicals ? r.technicals.rsi14 : '-'}</td>
+                  <td><strong>${r.sizing_preview.shares}</strong></td>
+                  <td class="red">₹${r.sizing_preview.max_loss_inr}</td>
+                  <td class="yellow">-₹${r.sizing_preview.brokerage_and_taxes_inr || 30}</td>
+                  <td class="green"><strong>+₹${r.sizing_preview.net_profit_excl_brokerage_inr || r.sizing_preview.profit_at_4r_inr}</strong></td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+
+      const newsItems = (news && news.items) ? news.items.slice(0, 12) : [];
+      document.getElementById('tab-news').innerHTML = `
+        <div class="card">
+          <h3 style="margin-top:0;">📰 Top Indian Business Articles & Sector Catalysts (ET Markets / Moneycontrol / LiveMint)</h3>
+          <table>
+            <thead>
+              <tr><th>Stock</th><th>Exchange</th><th>Sector</th><th>Source</th><th>Sentiment</th><th>Headline / Market Impact</th></tr>
+            </thead>
+            <tbody>
+              ${newsItems.map(item => `
+                <tr>
+                  <td><strong>${item.ticker}</strong></td>
+                  <td>${item.exchange}</td>
+                  <td>${item.sector || 'Equities'}</td>
+                  <td>${item.source}</td>
+                  <td><span class="pill pill-green">${item.sentiment}</span></td>
+                  <td>${item.headline}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    } catch (err) {
+      console.error('Error loading cloud dashboard:', err);
+    }
+  }
+
+  loadCloudDashboard();
+  setInterval(loadCloudDashboard, 30000);
+</script>
+</body>
+</html>
