@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-07T13:39:25+05:30",
+  "as_of": "2026-11-07T13:40:25+05:30",
   "market": "INDIA_NSE_BSE",
   "exchange": "NSE",
   "currency": "INR",
@@ -7,7 +7,7 @@
   "autonomous": true,
   "status": "FILLED_PAPER_OPEN",
   "ticket": {
-    "id": "IND_1794038965664",
+    "id": "IND_1794039025575",
     "symbol": "ZOMATO.NS",
     "exchange": "NSE",
     "product": "MIS (Intraday)",
@@ -28,6 +28,6 @@
     "breakeven_locked": false,
     "trailing_stop_active": false,
     "flat_by_ist": "15:15",
-    "opened_at_ist": "2026-11-07T13:39:25+05:30"
+    "opened_at_ist": "2026-11-07T13:40:25+05:30"
   }
 }
