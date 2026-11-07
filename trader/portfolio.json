@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-07T13:21:17+05:30",
+  "as_of": "2026-11-07T13:22:17+05:30",
   "market": "INDIA_NSE_BSE",
   "currency": "INR",
   "paper": true,
@@ -8,7 +8,7 @@
   "brokerage_excluded_from_profit": true,
   "strict_max_loss_per_trade_inr": 100,
   "strict_max_daily_loss_inr": 100,
-  "realized_net_profit_today_inr": 1205.43,
-  "total_brokerage_paid_today_inr": 107.85,
+  "realized_net_profit_today_inr": 1607.24,
+  "total_brokerage_paid_today_inr": 143.8,
   "active_position": null
 }
