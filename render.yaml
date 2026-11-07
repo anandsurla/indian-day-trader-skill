@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: indian-day-trader-skill
+    runtime: node
+    plan: free
+    buildCommand: echo "Zero external dependencies - ready to run"
+    startCommand: node server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: LIVE_YAHOO
+        value: "true"
+      - key: SEC_USER_AGENT
+        value: "Anand Surla anand.bvc@gmail.com"

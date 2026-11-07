@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Standalone Web Dashboard, Day-Wise/Weekly Reporter & Autonomous Entry/Exit Loop
- * Project 2: Indian-Day-Trader-Skill (NSE & BSE) — Port 3001
+ * Project 2: Indian-Day-Trader-Skill (NSE & BSE) — Port 3001 (or Render PORT)
  */
 
 const http = require('http');
@@ -12,7 +12,6 @@ const reporter = require('./trader/reporter');
 
 const PORT = process.env.PORT || 3001;
 const TRADER_DIR = path.join(__dirname, 'trader');
-const REPORTS_DIR = path.join(__dirname, 'reports');
 
 let latestRun = null;
 
@@ -98,7 +97,19 @@ function seedInitialPaperHistoryIfEmpty() {
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://localhost:${PORT}`);
 
-  // 1. Full State API (powers all 5 tabs)
+  // 0. Health Check API for Render Free Tier & Keep-Alive
+  if (url.pathname === '/api/health') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({
+      status: 'OK',
+      project: 'indian-day-trader-skill',
+      market: 'INDIA_NSE_BSE',
+      timestamp_ist: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+    }));
+    return;
+  }
+
+  // 1. Full State API (powers all 6 tabs)
   if (url.pathname === '/api/state') {
     if (!latestRun) latestRun = await indianTrader.runAutonomousPipeline();
     const reps = reporter.generateAllReports();
@@ -132,13 +143,12 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // 3. Simulate Booking Today's Active Paper Trade at Target (+₹400 Net) or Stop-Loss
+  // 3. Record Today's Active Paper Trade at Target (+₹400 Net)
   if (url.pathname === '/api/book-paper-trade' && req.method === 'POST') {
     const portPath = path.join(TRADER_DIR, 'portfolio.json');
     const histPath = path.join(TRADER_DIR, 'trade_history.json');
     const portfolio = readJsonSafe(portPath, {});
-    const pos = portfolio.active_position;
-    if (!pos) {
+    if (!portfolio.active_position) {
       latestRun = await indianTrader.runAutonomousPipeline();
     }
     const updatedPort = readJsonSafe(portPath, {});
@@ -165,7 +175,7 @@ const server = http.createServer(async (req, res) => {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({
       success: true,
-      message: 'Paper trade booked at +₹400+ Net Profit (excluding brokerage) and added to Day-Wise & Weekly reports!',
+      message: 'Paper trade booked at +₹400+ Net Profit (excluding brokerage) and synced to GitHub!',
       git_sync: syncRes
     }));
     return;
@@ -191,7 +201,7 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // 6. Serve Simple, Clear, Easy-to-Understand 5-Tab UI
+  // 6. Serve Simple, Clear, Easy-to-Understand 6-Tab UI
   res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
   res.end(`<!DOCTYPE html>
 <html lang="en">
@@ -214,8 +224,6 @@ const server = http.createServer(async (req, res) => {
     * { box-sizing: border-box; }
     body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 20px; }
     .container { max-width: 1320px; margin: 0 auto; }
-
-    /* Top Header */
     .header {
       display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;
       background: var(--card); padding: 18px 22px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 16px;
@@ -224,39 +232,25 @@ const server = http.createServer(async (req, res) => {
     .btn {
       background: var(--blue); color: #fff; border: none; padding: 10px 16px; border-radius: 8px;
       font-weight: 600; font-size: 0.9rem; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
-      transition: opacity 0.15s, transform 0.1s;
     }
     .btn:hover { opacity: 0.92; }
-    .btn:active { transform: scale(0.98); }
     .btn:disabled { opacity: 0.5; cursor: wait; }
     .btn-green { background: #059669; }
     .btn-purple { background: #7c3aed; }
     .btn-outline { background: #1e293b; border: 1px solid #334155; }
-
-    /* Status Toast Banner */
     #statusBanner {
       display: none; padding: 12px 18px; border-radius: 8px; margin-bottom: 16px;
       background: rgba(16, 185, 129, 0.15); border: 1px solid var(--green); color: #34d399; font-weight: 600;
     }
-
-    /* Simple Step-by-Step Guide Bar */
-    .how-it-works {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 18px;
-    }
-    .step-box {
-      background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; padding: 12px 16px; font-size: 0.85rem; line-height: 1.45;
-    }
+    .how-it-works { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 18px; }
+    .step-box { background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; padding: 12px 16px; font-size: 0.85rem; line-height: 1.45; }
     .step-num { color: #60a5fa; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 4px; }
-
-    /* Big KPI Cards */
     .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 20px; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px; margin-bottom: 18px; }
-    .label { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.03em; }
+    .label { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; font-weight: 700; }
     .big-val { font-size: 1.55rem; font-weight: 800; margin: 6px 0; }
     .explain { font-size: 0.83rem; color: #cbd5e1; line-height: 1.45; }
     .green { color: #34d399; } .red { color: #f87171; } .blue { color: #60a5fa; } .yellow { color: #fbbf24; }
-
-    /* Navigation Tabs */
     .tabs { display: flex; gap: 8px; border-bottom: 1px solid var(--border); margin-bottom: 18px; overflow-x: auto; padding-bottom: 2px; }
     .tab-btn {
       background: #1e293b; color: var(--muted); border: 1px solid transparent; padding: 11px 18px;
@@ -265,20 +259,17 @@ const server = http.createServer(async (req, res) => {
     .tab-btn.active { background: var(--blue); color: #fff; }
     .panel { display: none; }
     .panel.active { display: block; }
-
     table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 10px; }
     th, td { padding: 11px 12px; border-bottom: 1px solid var(--border); text-align: left; }
     th { background: rgba(255,255,255,0.03); color: var(--muted); font-weight: 700; }
     .pill { display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 0.76rem; font-weight: 700; }
     .pill-green { background: rgba(16,185,129,0.15); color: #34d399; }
-    .pill-red { background: rgba(239,68,68,0.15); color: #f87171; }
     .pill-blue { background: rgba(59,130,246,0.15); color: #60a5fa; }
     pre { background: #090d16; padding: 14px; border-radius: 8px; border: 1px solid var(--border); overflow-x: auto; color: #cbd5e1; font-size: 0.84rem; line-height: 1.5; }
   </style>
 </head>
 <body>
 <div class="container">
-  <!-- HEADER -->
   <div class="header">
     <div>
       <h2 style="margin:0;">🇮🇳 Indian Day-Trader Skill — Simple Autonomous Dashboard (NSE & BSE)</h2>
@@ -294,10 +285,8 @@ const server = http.createServer(async (req, res) => {
     </div>
   </div>
 
-  <!-- STATUS FEEDBACK BANNER -->
   <div id="statusBanner"></div>
 
-  <!-- 4-STEP PLAIN ENGLISH EXPLANATION -->
   <div class="how-it-works">
     <div class="step-box">
       <div class="step-num">Step 1 • Auto Market Scan</div>
@@ -317,29 +306,35 @@ const server = http.createServer(async (req, res) => {
     </div>
   </div>
 
-  <!-- NAVIGATION TABS -->
   <div class="tabs">
     <button class="tab-btn active" onclick="openTab('tab-today', this)">🟢 1. Today's AI Trade (Simple View)</button>
     <button class="tab-btn" onclick="openTab('tab-daily', this)">📅 2. Day-Wise Paper Trades (<span id="daysCount">0</span> Days)</button>
     <button class="tab-btn" onclick="openTab('tab-weekly', this)">📊 3. Weekly Consolidated Summary</button>
     <button class="tab-btn" onclick="openTab('tab-scanner', this)">🔍 4. All Scanned Stocks (NSE & BSE)</button>
     <button class="tab-btn" onclick="openTab('tab-news', this)">📰 5. Top Business Articles</button>
+    <button class="tab-btn" onclick="openTab('tab-cloud', this)">☁️ 6. Free Render 24/7 Setup</button>
   </div>
 
-  <!-- TAB 1: TODAY'S AI TRADE -->
   <div id="tab-today" class="panel active"></div>
-
-  <!-- TAB 2: DAY-WISE PAPER TRADES -->
   <div id="tab-daily" class="panel"></div>
-
-  <!-- TAB 3: WEEKLY CONSOLIDATED SUMMARY -->
   <div id="tab-weekly" class="panel"></div>
-
-  <!-- TAB 4: SCANNER -->
   <div id="tab-scanner" class="panel"></div>
-
-  <!-- TAB 5: BUSINESS NEWS -->
   <div id="tab-news" class="panel"></div>
+  <div id="tab-cloud" class="panel">
+    <div class="card">
+      <h3 style="margin-top:0;">☁️ Run 24/7 for FREE on Render + GitHub Actions (Laptop Can Stay OFF!)</h3>
+      <p style="color:#cbd5e1; line-height:1.6;">
+        Your repository (<code>https://github.com/anandsurla/indian-day-trader-skill</code>) now includes both a <strong>Render Free Blueprint (<code>render.yaml</code>)</strong> and a <strong>GitHub Actions Daily Cloud Schedule (<code>.github/workflows/daily_indian_trader.yml</code>)</strong>.
+      </p>
+      <ol style="line-height:1.85; color:#e2e8f0;">
+        <li>Open <strong><a href="https://dashboard.render.com/select-repo?type=blueprint" target="_blank" style="color:#60a5fa;">Render Dashboard → New Blueprint Instance</a></strong> (or <strong>New Web Service</strong>).</li>
+        <li>Select your GitHub repository: <strong><code>anandsurla/indian-day-trader-skill</code></strong>.</li>
+        <li>Choose the <strong>Free ($0/month)</strong> plan and click <strong>Apply / Create Web Service</strong>.</li>
+        <li>Render automatically uses <code>node server.js</code> and <code>/api/health</code>, and keeps your live dashboard online!</li>
+        <li>Even when your laptop is OFF, <strong>GitHub Actions</strong> automatically runs your NSE/BSE trades every weekday at <strong>09:35 IST, 12:30 IST, and 15:20 IST</strong> and commits the updated <strong>Day-Wise & Weekly Consolidated Reports</strong> directly into your GitHub repo for free!</li>
+      </ol>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -402,7 +397,7 @@ const server = http.createServer(async (req, res) => {
       const r = await fetch('/api/sync-github', { method: 'POST' });
       const d = await r.json();
       await loadDashboard();
-      showStatus('☁️ ' + (d.message || 'Reports saved and committed to Git!'));
+      showStatus('☁️ ' + (d.message || 'Reports saved and pushed to GitHub!'));
     } catch (e) {
       showStatus('❌ Git Sync Error: ' + e.message, true);
     } finally {
@@ -422,7 +417,6 @@ const server = http.createServer(async (req, res) => {
 
     document.getElementById('daysCount').textContent = (d.daily && d.daily.days) ? d.daily.days.length : 0;
 
-    // 1. Render Tab 1: Today's AI Trade in Plain English
     document.getElementById('tab-today').innerHTML = \`
       <div class="kpi-grid">
         <div class="card">
@@ -477,7 +471,6 @@ const server = http.createServer(async (req, res) => {
       </div>
     \`;
 
-    // 2. Render Tab 2: Day-Wise Paper Trades
     const days = (d.daily && d.daily.days) ? d.daily.days : [];
     document.getElementById('tab-daily').innerHTML = days.map(day => \`
       <div class="card">
@@ -522,7 +515,6 @@ const server = http.createServer(async (req, res) => {
       </div>
     \`).join('');
 
-    // 3. Render Tab 3: Weekly Consolidated Summary
     const weeks = (d.weekly && d.weekly.weeks) ? d.weekly.weeks : [];
     document.getElementById('tab-weekly').innerHTML = \`
       \${weeks.map(w => \`
@@ -570,7 +562,6 @@ const server = http.createServer(async (req, res) => {
       </div>
     \`;
 
-    // 4. Render Tab 4: All Scanned Stocks
     const results = (d.watchlist && d.watchlist.results) ? d.watchlist.results : [];
     document.getElementById('tab-scanner').innerHTML = \`
       <div class="card">
@@ -603,7 +594,6 @@ const server = http.createServer(async (req, res) => {
       </div>
     \`;
 
-    // 5. Render Tab 5: Business News
     const newsItems = (d.news && d.news.items) ? d.news.items.slice(0, 12) : [];
     document.getElementById('tab-news').innerHTML = \`
       <div class="card">
@@ -658,4 +648,14 @@ server.listen(PORT, '0.0.0.0', async () => {
       reporter.generateAllReports();
     }
   }, 30000);
+
+  // Render Free Tier Keep-Alive Self-Pinger (every 10 minutes)
+  setInterval(async () => {
+    const extUrl = process.env.RENDER_EXTERNAL_URL || process.env.APP_URL;
+    if (extUrl) {
+      try {
+        await fetch(`${extUrl.replace(/\/$/, '')}/api/health`);
+      } catch (e) {}
+    }
+  }, 10 * 60 * 1000);
 });

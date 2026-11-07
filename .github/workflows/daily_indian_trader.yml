@@ -1,0 +1,41 @@
+name: Daily Indian NSE & BSE Autonomous Paper Trader
+
+on:
+  schedule:
+    # 09:35 IST (04:05 UTC) - Morning Opening Range Breakout Entry & Scan
+    - cron: '5 4 * * 1-5'
+    # 12:30 IST (07:00 UTC) - Mid-Day Trail & Position Check
+    - cron: '0 7 * * 1-5'
+    # 15:20 IST (09:50 UTC) - Post 15:15 IST MIS Square-Off & Daily/Weekly Report Commit
+    - cron: '50 9 * * 1-5'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-indian-trader:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Autonomous NSE & BSE Pipeline & Update Day/Weekly Reports
+        env:
+          LIVE_YAHOO: 'true'
+        run: |
+          node trader/indian_trader.js auto
+          node -e "const r = require('./trader/reporter'); r.generateAllReports();"
+
+      - name: Commit & Push Updated Day-Wise and Weekly Reports to GitHub
+        run: |
+          git config user.name "Anand Surla (Autonomous Bot)"
+          git config user.email "anand.bvc@gmail.com"
+          git add reports/ trader/
+          git diff --staged --quiet || git commit -m "Auto-update Day-Wise & Weekly Consolidated Paper Trade Reports ($(date -u +'%Y-%m-%d %H:%M UTC'))"
+          git push origin main
