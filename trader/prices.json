@@ -1,13 +1,13 @@
 {
-  "as_of": "2026-11-06T14:09:53+05:30",
+  "as_of": "2026-11-07T13:20:10+05:30",
   "market": "INDIA_NSE_BSE",
   "currency": "INR",
   "quotes": {
-    "TATAMOTORS.BO": {
-      "price": 845.14,
+    "ZOMATO.NS": {
+      "price": 262.69,
       "currency": "INR",
-      "exchange": "BSE",
-      "as_of": "2026-11-06T14:09:53+05:30"
+      "exchange": "NSE",
+      "as_of": "2026-11-07T13:20:10+05:30"
     }
   }
 }

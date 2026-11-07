@@ -1,35 +1,50 @@
 {
-  "as_of": "2026-11-06T14:09:53+05:30",
+  "as_of": "2026-11-07T13:20:10+05:30",
   "market": "INDIA_NSE_BSE",
-  "exchange": "BSE",
+  "exchange": "NSE",
   "currency": "INR",
-  "ticker": "TATAMOTORS.BO",
-  "name": "Tata Motors (BSE)",
-  "rule": "orb",
+  "ticker": "ZOMATO.NS",
+  "name": "Zomato Ltd",
+  "sector": "Consumer Tech",
+  "rule": "orb_vwap_ema_news",
   "interval": "5m",
   "or_minutes": 15,
-  "session_date": "2026-11-06",
+  "session_date": "2026-11-07",
   "status": "triggered",
   "opening_range": {
     "start": "09:15",
     "end": "09:30",
-    "high": 843.28,
-    "low": 841.2,
-    "mid": 842.24,
-    "range": 2.08,
+    "high": 262.11,
+    "low": 261.71,
+    "mid": 261.91,
+    "range": 0.4,
     "bars": 3
   },
-  "level": 843.28,
-  "trigger": {
-    "bar_time_ist": "2026-11-06T09:35:00+05:30",
-    "bar_open": 842.49,
-    "bar_high": 845.34,
-    "bar_low": 842.34,
-    "bar_close": 845.14,
-    "bar_volume": 256730,
-    "volume_ratio": 3.13
+  "technicals": {
+    "vwap": 263.18,
+    "ema9": 269.08,
+    "ema20": 268.66,
+    "ema50": 267.43,
+    "rsi14": 63.4,
+    "above_vwap": true,
+    "ema_stack_aligned": true
   },
-  "entry_price_hint": 845.14,
-  "stop_hint": 842.24,
-  "summary": "TATAMOTORS.BO (BSE) triggered 15m ORB above ₹843.28 at 09:35 IST — bar closed at ₹845.14 (3.13x avg volume)."
+  "business_news": {
+    "source": "Economic Times / Moneycontrol India",
+    "sentiment": "BULLISH",
+    "headline": "Zomato Ltd: Zomato Ltd (NSE) sees positive institutional volume flow and bullish sector breadth"
+  },
+  "level": 262.11,
+  "trigger": {
+    "bar_time_ist": "2026-11-07T09:35:00+05:30",
+    "bar_open": 262.04,
+    "bar_high": 262.82,
+    "bar_low": 261.92,
+    "bar_close": 262.69,
+    "bar_volume": 222153,
+    "volume_ratio": 2.73
+  },
+  "entry_price_hint": 262.69,
+  "stop_hint": 261.91,
+  "summary": "ZOMATO.NS (NSE) triggered 15m ORB + VWAP breakout above ₹262.11 at ₹262.69 (RVOL 2.73x, RSI 63.4)."
 }

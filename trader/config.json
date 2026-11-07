@@ -10,6 +10,7 @@
   "budget": 20000,
   "daily_profit_target_inr": 400,
   "daily_profit_target_pct": 2,
+  "mandatory_net_profit_excl_brokerage": true,
   "intraday_leverage": 5,
   "max_position_pct": 90,
   "max_order_usd": 90000,

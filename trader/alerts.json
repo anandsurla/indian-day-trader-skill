@@ -1,29 +1,37 @@
 {
-  "as_of": "2026-11-06T14:09:53+05:30",
+  "as_of": "2026-11-07T13:20:10+05:30",
   "market": "INDIA_NSE_BSE",
   "timezone": "Asia/Kolkata",
   "alerts": [
     {
-      "id": "TATAMOTORS.BO-strict-stop",
-      "ticker": "TATAMOTORS.BO",
+      "id": "ZOMATO.NS-strict-stop",
+      "ticker": "ZOMATO.NS",
       "type": "STOP_LOSS_STRICT",
-      "condition": "price <= 842.24",
-      "level_inr": 842.24,
-      "max_loss_inr": 98.6,
+      "condition": "price <= 261.91",
+      "level_inr": 261.91,
+      "max_loss_inr": 99.84,
       "status": "ARMED"
     },
     {
-      "id": "TATAMOTORS.BO-daily-target-400",
-      "ticker": "TATAMOTORS.BO",
-      "type": "TAKE_PROFIT_TARGET",
-      "condition": "price >= 857.87",
-      "level_inr": 857.87,
-      "net_profit_inr": 402.07,
+      "id": "ZOMATO.NS-breakeven-1r",
+      "ticker": "ZOMATO.NS",
+      "type": "TAX_FREE_BREAKEVEN_LOCK",
+      "condition": "price >= 263.47",
+      "level_inr": 263.47,
       "status": "ARMED"
     },
     {
-      "id": "TATAMOTORS.BO-mis-flat-by",
-      "ticker": "TATAMOTORS.BO",
+      "id": "ZOMATO.NS-daily-target-400-net",
+      "ticker": "ZOMATO.NS",
+      "type": "TAKE_PROFIT_TARGET_NET_400",
+      "condition": "price >= 266.11",
+      "level_inr": 266.11,
+      "net_profit_excl_brokerage_inr": 401.81,
+      "status": "ARMED"
+    },
+    {
+      "id": "ZOMATO.NS-mis-flat-by",
+      "ticker": "ZOMATO.NS",
       "type": "MIS_INTRADAY_SQUARE_OFF",
       "condition": "time_ist >= 15:15",
       "flat_by_ist": "15:15",
