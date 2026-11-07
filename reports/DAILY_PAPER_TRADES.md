@@ -2,12 +2,13 @@
 **Account Size:** ₹20,000 | **Mandatory Daily Target:** ₹400/day (Pure Net Profit Excluding Brokerage) | **Strict Stop-Loss:** Max ₹100/trade
 
 ## 🗓️ Date: 2026-11-07 (Week of 2026-11-02)
-- **Trades Taken:** 13 (0 Open, 13 Closed)
-- **Realized Net Profit (Excl. Brokerage):** ₹5223.53 | **Brokerage & Govt Taxes Deducted:** ₹467.35
-- **Projected Net Profit (Including Active Target):** **+₹5223.53** (Goal: ₹400/day)
+- **Trades Taken:** 14 (0 Open, 14 Closed)
+- **Realized Net Profit (Excl. Brokerage):** ₹5625.34 | **Brokerage & Govt Taxes Deducted:** ₹503.3
+- **Projected Net Profit (Including Active Target):** **+₹5625.34** (Goal: ₹400/day)
 
 | Status | Stock | Exch | Qty | Entry (₹) | Stop-Loss (₹) | Target (₹) | Max Loss (<=₹100) | Brokerage & Tax (₹) | Pure Net Profit at Target / Exit (₹) | Exit / Status Note |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **CLOSED** | **ZOMATO.NS** | NSE | 128 | ₹262.69 | ₹267.08 | ₹266.11 | ₹99.84 | ₹35.95 | **₹401.81** | TARGET_HIT_MANDATORY_400_NET_PROFIT |
 | **CLOSED** | **ZOMATO.NS** | NSE | 128 | ₹262.69 | ₹267.08 | ₹266.11 | ₹99.84 | ₹35.95 | **₹401.81** | TARGET_HIT_MANDATORY_400_NET_PROFIT |
 | **CLOSED** | **ZOMATO.NS** | NSE | 128 | ₹262.69 | ₹267.08 | ₹266.11 | ₹99.84 | ₹35.95 | **₹401.81** | TARGET_HIT_MANDATORY_400_NET_PROFIT |
 | **CLOSED** | **ZOMATO.NS** | NSE | 128 | ₹262.69 | ₹267.08 | ₹266.11 | ₹99.84 | ₹35.95 | **₹401.81** | TARGET_HIT_MANDATORY_400_NET_PROFIT |
