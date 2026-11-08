@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-08T03:53:37.881Z",
+  "generated_at": "2026-11-08T03:54:37.898Z",
   "account_budget_inr": 20000,
   "weekly_net_profit_goal_inr": 2000,
   "weeks": [
@@ -7,26 +7,26 @@
       "week_start": "2026-11-02",
       "weekly_target_net_inr": 2000,
       "trading_days_active": 5,
-      "total_trades": 25,
-      "closed_trades": 25,
+      "total_trades": 26,
+      "closed_trades": 26,
       "open_trades": 0,
-      "wins": 25,
+      "wins": 26,
       "losses": 0,
       "win_rate_pct": 100,
-      "realized_gross_pnl_inr": 10928.92,
-      "realized_brokerage_and_taxes_inr": 881.32,
-      "realized_net_pnl_excl_brokerage_inr": 10047.6,
-      "projected_net_pnl_with_active_target_inr": 10047.6,
+      "realized_gross_pnl_inr": 11365.16,
+      "realized_brokerage_and_taxes_inr": 915.49,
+      "realized_net_pnl_excl_brokerage_inr": 10449.67,
+      "projected_net_pnl_with_active_target_inr": 10449.67,
       "days": [
         {
           "date": "2026-11-08",
-          "total_trades": 3,
+          "total_trades": 4,
           "open_trades": 0,
-          "closed_trades": 3,
-          "realized_gross_pnl_inr": 1308.72,
-          "realized_brokerage_and_taxes_inr": 102.51,
-          "realized_net_pnl_excl_brokerage_inr": 1206.21,
-          "projected_net_pnl_at_target_inr": 1206.21
+          "closed_trades": 4,
+          "realized_gross_pnl_inr": 1744.96,
+          "realized_brokerage_and_taxes_inr": 136.68,
+          "realized_net_pnl_excl_brokerage_inr": 1608.28,
+          "projected_net_pnl_at_target_inr": 1608.28
         },
         {
           "date": "2026-11-07",
