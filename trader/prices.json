@@ -1,13 +1,13 @@
 {
-  "as_of": "2026-11-08T09:55:22+05:30",
+  "as_of": "2026-11-08T09:56:27+05:30",
   "market": "INDIA_NSE_BSE",
   "currency": "INR",
   "quotes": {
-    "NTPC.BO": {
-      "price": 414.16,
+    "TATAMOTORS.BO": {
+      "price": 841.38,
       "currency": "INR",
       "exchange": "BSE",
-      "as_of": "2026-11-08T09:55:22+05:30"
+      "as_of": "2026-11-08T09:56:27+05:30"
     }
   }
 }

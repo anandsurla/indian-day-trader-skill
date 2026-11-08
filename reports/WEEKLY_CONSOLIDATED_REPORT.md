@@ -2,13 +2,13 @@
 **Account Size:** ₹20,000 | **Weekly Net Target (5 Days × ₹400):** ₹2,000/week (100% Excluding Brokerage & Taxes)
 
 ## 📈 Week Starting Monday: 2026-11-02
-- **Active Trading Days:** 5 | **Total Trades:** 49 (0 Open, 49 Closed)
-- **Realized Gross Profit:** ₹20863.53 | **Total Brokerage & Taxes Deducted:** ₹1702.67
-- **Realized Pure Net Profit:** **₹19160.86** | **Projected Net Profit (with Active Trade Target):** **+₹19160.86**
+- **Active Trading Days:** 5 | **Total Trades:** 50 (0 Open, 50 Closed)
+- **Realized Gross Profit:** ₹21299.77 | **Total Brokerage & Taxes Deducted:** ₹1736.84
+- **Realized Pure Net Profit:** **₹19562.93** | **Projected Net Profit (with Active Trade Target):** **+₹19562.93**
 
 | Date | Total Trades | Open | Closed | Realized Gross (₹) | Brokerage & Taxes (₹) | Realized Net Profit (₹) | Projected Net Profit with Active Target (₹) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **2026-11-08** | 27 | 0 | 27 | ₹11243.33 | ₹923.86 | ₹10319.47 | **+₹10319.47** |
+| **2026-11-08** | 28 | 0 | 28 | ₹11679.57 | ₹958.03 | ₹10721.54 | **+₹10721.54** |
 | **2026-11-07** | 19 | 0 | 19 | ₹8317.44 | ₹683.05 | ₹7634.39 | **+₹7634.39** |
 | **2026-11-06** | 1 | 0 | 1 | ₹432.82 | ₹30.75 | ₹402.07 | **+₹402.07** |
 | **2026-11-05** | 1 | 0 | 1 | ₹435.88 | ₹33.83 | ₹402.05 | **+₹402.05** |

@@ -1,35 +1,35 @@
 {
-  "as_of": "2026-11-08T09:55:22+05:30",
+  "as_of": "2026-11-08T09:56:27+05:30",
   "market": "INDIA_NSE_BSE",
   "exchange": "BSE",
   "currency": "INR",
-  "ticker": "NTPC.BO",
+  "ticker": "TATAMOTORS.BO",
   "plan": {
-    "entry": 414.16,
-    "stop": 412.9,
-    "target_2r_trail": 416.68,
-    "target": 419.69,
-    "reward_risk": 4.39,
+    "entry": 841.38,
+    "stop": 838.76,
+    "target_2r_trail": 846.62,
+    "target": 852.86,
+    "reward_risk": 4.38,
     "flat_by": "15:15"
   },
   "monte_carlo": {
     "method": "intraday_block_bootstrap_with_2r_trailing_lock",
     "sims": 10000,
     "horizon_bars": 68,
-    "p_target_full_400": 0.1955,
-    "p_trail_2r_win": 0.4698,
-    "p_win_combined": 0.6653,
-    "p_stop": 0.3304,
-    "p_expired": 0.0043,
-    "expected_r": 1.24,
+    "p_target_full_400": 0.1573,
+    "p_trail_2r_win": 0.4481,
+    "p_win_combined": 0.6054,
+    "p_stop": 0.3898,
+    "p_expired": 0.0048,
+    "expected_r": 0.98,
     "close_Loop_quantiles_inr": {
-      "p10": 412.9,
-      "p25": 412.9,
-      "p50": 416.05,
-      "p75": 416.05,
-      "p90": 419.69
+      "p10": 838.76,
+      "p25": 838.76,
+      "p50": 845.31,
+      "p75": 845.31,
+      "p90": 852.86
     }
   },
   "verdict": "favorable",
-  "summary": "10,000 NSE/BSE session replays for NTPC.BO: 66.5% win rate (19.6% full ₹400 net target + 47.0% 2R trail win) vs 33.0% strict ₹100 stop -> Expected +1.24R per trade."
+  "summary": "10,000 NSE/BSE session replays for TATAMOTORS.BO: 60.5% win rate (15.7% full ₹400 net target + 44.8% 2R trail win) vs 39.0% strict ₹100 stop -> Expected +0.98R per trade."
 }
