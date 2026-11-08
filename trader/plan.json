@@ -1,12 +1,12 @@
 {
-  "as_of": "2026-11-08T09:57:16+05:30",
+  "as_of": "2026-11-08T12:04:08+05:30",
   "market": "INDIA_NSE_BSE",
-  "exchange": "BSE",
+  "exchange": "NSE",
   "currency": "INR",
-  "ticker": "NTPC.BO",
+  "ticker": "RELIANCE.NS",
   "side": "buy",
   "entry": {
-    "price": 414.16,
+    "price": 1319.73,
     "source": "trader-entry",
     "rule": "6_pillar_cpr_orb_supertrend_vwap",
     "triggered_at_ist": "2026-11-08 09:35:00 IST"
@@ -14,41 +14,41 @@
   "opening_range": {
     "start": "09:15",
     "end": "09:30",
-    "high": 413.25,
-    "low": 412.55,
-    "mid": 412.9,
-    "range": 0.7,
+    "high": 1316.83,
+    "low": 1313.94,
+    "mid": 1315.38,
+    "range": 2.89,
     "bars": 3
   },
-  "atr": 1.13,
+  "atr": 3.91,
   "stop": {
-    "price": 412.9,
+    "price": 1315.38,
     "rule": "strict-or-mid",
-    "distance": 1.26,
-    "pct": 0.304,
+    "distance": 4.35,
+    "pct": 0.33,
     "strict_max_loss_inr": 100
   },
   "breakeven_1r_lock": {
-    "trigger_price": 415.42,
-    "new_stop_price": 414.7,
+    "trigger_price": 1324.08,
+    "new_stop_price": 1321.24,
     "note": "Covers 100% of brokerage & statutory taxes once price moves +1R"
   },
   "target_1_trail_trigger": {
-    "price": 416.68,
+    "price": 1328.43,
     "rule": "2R_lock_profit_trail",
-    "distance": 2.52,
+    "distance": 8.7,
     "r_multiple": 2
   },
   "target": {
-    "price": 419.69,
-    "rule": "4.39R_mandatory_400_net_excl_brokerage",
-    "distance": 5.53,
-    "pct": 1.335,
-    "r_multiple": 4.39,
+    "price": 1339.41,
+    "rule": "4.52R_mandatory_400_net_excl_brokerage",
+    "distance": 19.68,
+    "pct": 1.491,
+    "r_multiple": 4.52,
     "mandatory_net_profit_goal_inr": 400,
-    "estimated_brokerage_and_taxes_inr": 34.96
+    "estimated_brokerage_and_taxes_inr": 31.05
   },
-  "reward_risk": 4.39,
+  "reward_risk": 4.52,
   "flat_by": "15:15",
-  "summary": "NTPC.BO BUY @ ₹414.16: Strict SL ₹412.9 (Max Loss <= ₹100), Target ₹419.69 (Gross ₹436.87 - Brokerage/Taxes ₹34.96 = Pure Net Profit >= ₹400)."
+  "summary": "RELIANCE.NS BUY @ ₹1319.73: Strict SL ₹1315.38 (Max Loss <= ₹100), Target ₹1339.41 (Gross ₹432.96 - Brokerage/Taxes ₹31.05 = Pure Net Profit >= ₹400)."
 }

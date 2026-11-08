@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-08T09:57:16+05:30",
+  "as_of": "2026-11-08T12:04:08+05:30",
   "market": "INDIA_NSE_BSE",
   "currency": "INR",
   "budget_inr": 20000,
@@ -9,50 +9,50 @@
   "brokerage_excluded_from_profit": true,
   "strict_max_loss_per_trade_inr": 100,
   "sizing": {
-    "ticker": "NTPC.BO",
-    "exchange": "BSE",
-    "entry_price_inr": 414.16,
-    "stop_price_inr": 412.9,
-    "target_price_inr": 419.69,
-    "stop_distance_inr": 1.26,
-    "target_distance_inr": 5.53,
-    "shares_by_strict_stop_loss": 79,
-    "shares_by_intraday_margin": 229,
-    "shares_selected": 79,
+    "ticker": "RELIANCE.NS",
+    "exchange": "NSE",
+    "entry_price_inr": 1319.73,
+    "stop_price_inr": 1315.38,
+    "target_price_inr": 1339.41,
+    "stop_distance_inr": 4.35,
+    "target_distance_inr": 19.68,
+    "shares_by_strict_stop_loss": 22,
+    "shares_by_intraday_margin": 71,
+    "shares_selected": 22,
     "binding_constraint": "strict_max_loss_per_trade_100_inr",
-    "notional_value_inr": 32718.64,
-    "margin_used_inr": 6543.73,
-    "max_loss_at_stop_inr": 99.54,
-    "gross_profit_at_target_inr": 436.87,
-    "estimated_indian_taxes_and_brokerage_inr": 34.98,
-    "shoonya_zero_brokerage_taxes_inr": 11.67,
+    "notional_value_inr": 29034.06,
+    "margin_used_inr": 5806.81,
+    "max_loss_at_stop_inr": 95.7,
+    "gross_profit_at_target_inr": 432.96,
+    "estimated_indian_taxes_and_brokerage_inr": 31.07,
+    "shoonya_zero_brokerage_taxes_inr": 10.36,
     "brokerage_breakdown": {
-      "brokerage": 19.76,
-      "stt": 8.29,
-      "exchangeCharge": 1.96,
-      "sebiCharge": 0.07,
-      "gst": 3.92,
-      "stampDuty": 0.98
+      "brokerage": 17.55,
+      "stt": 7.37,
+      "exchangeCharge": 1.74,
+      "sebiCharge": 0.06,
+      "gst": 3.48,
+      "stampDuty": 0.87
     },
     "net_profit_at_target_inr": 401.89,
-    "net_profit_with_shoonya_zero_brokerage_inr": 425.2
+    "net_profit_with_shoonya_zero_brokerage_inr": 422.6
   },
   "orders": [
     {
-      "symbol": "NTPC.BO",
-      "exchange": "BSE",
+      "symbol": "RELIANCE.NS",
+      "exchange": "NSE",
       "product": "MIS",
       "side": "buy",
-      "qty": 79,
+      "qty": 22,
       "type": "limit",
-      "limit_price": 414.16,
+      "limit_price": 1319.73,
       "time_in_force": "day",
       "order_class": "bracket",
       "take_profit": {
-        "limit_price": 419.69
+        "limit_price": 1339.41
       },
       "stop_loss": {
-        "stop_price": 412.9,
+        "stop_price": 1315.38,
         "strict": true
       }
     }

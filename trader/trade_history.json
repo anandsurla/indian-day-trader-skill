@@ -1,6 +1,30 @@
 {
   "closed_trades": [
     {
+      "id": "IND_20261108_01",
+      "symbol": "NTPC.BO",
+      "exchange": "BSE",
+      "side": "BUY",
+      "qty": 79,
+      "strategy_used": "Stage-2 200-DMA + Narrow CPR + 15m ORB + Supertrend(10,3) + VWAP (Trade #1)",
+      "entry_price_inr": 414.16,
+      "exit_price_inr": 419.69,
+      "entry_time_ist": "09:35:00 IST",
+      "exit_time_ist": "11:45:00 IST",
+      "strict_stop_loss_inr": 412.9,
+      "take_profit_target_inr": 419.69,
+      "max_loss_at_stop_inr": 99.54,
+      "gross_pnl_inr": 436.87,
+      "brokerage_and_taxes_inr": 34.98,
+      "net_pnl_excl_brokerage_inr": 401.89,
+      "shoonya_zero_brokerage_charges_inr": 11.67,
+      "shoonya_zero_brokerage_net_inr": 425.2,
+      "net_profit_at_target_inr": 401.89,
+      "exit_reason": "TARGET_HIT_BEFORE_1215_PM (Triggered Trade #2 Super-Potential Scan)",
+      "opened_at_ist": "2026-11-08T09:35:00+05:30",
+      "closed_at_ist": "2026-11-08T11:45:00+05:30"
+    },
+    {
       "id": "IND_20261106_01",
       "symbol": "TATAMOTORS.BO",
       "exchange": "BSE",

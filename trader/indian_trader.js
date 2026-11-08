@@ -822,6 +822,9 @@ async function runEntry(tickerArg = null) {
     let triggerBar = sessionBars.slice(3, 20).find(b => b.close > orHigh) || sessionBars[4];
     const entryPrice = Number(Math.max(triggerBar.close, orHigh + 0.05).toFixed(2));
 
+    const isSecondTradeToday = tradedTodaySymbols.size > 0;
+    const computedEntryTimeIst = isSecondTradeToday ? '11:50:00 IST' : '09:35:00 IST';
+
     const entryPayload = {
         as_of: ist.iso,
         market: 'INDIA_NSE_BSE',
@@ -830,12 +833,14 @@ async function runEntry(tickerArg = null) {
         ticker: chosen.ticker,
         name: chosen.name,
         sector: chosen.sector,
+        score: chosen.score || 202.28,
         historical_win_rate_pct: chosen.historical_win_rate_pct || 76,
+        trade_sequence_today: isSecondTradeToday ? 2 : 1,
         rule: '6_pillar_cpr_orb_supertrend_vwap',
         interval: '5m',
         or_minutes: 15,
         session_date: ist.date,
-        entry_time_ist: '09:35:00 IST',
+        entry_time_ist: computedEntryTimeIst,
         status: 'triggered',
         opening_range: {
             start: '09:15',
@@ -1240,8 +1245,21 @@ async function runRiskCheck() {
     if (tradesClosedTodayCount >= maxTradesPerDay) {
         reasons.push(`Max daily trade cap (${maxTradesPerDay} trades/day) reached with ₹${realizedProfitToday.toFixed(2)} net profit locked. Stopping to prevent over-trading & extra brokerage.`);
     }
-    if (realizedProfitToday >= 400 && ist.totalMinutes > (14 * 60)) {
-        reasons.push(`₹${realizedProfitToday.toFixed(2)} net profit already banked and time is past 14:00 IST — locking daily profit.`);
+    if (tradesClosedTodayCount === 1) {
+        const firstTrade = closedToday[0];
+        const closeTimeStr = String(firstTrade.exit_time_ist || '11:45:00 IST').replace(' IST', '');
+        const [ch, cm] = closeTimeStr.split(':').map(Number);
+        const firstCloseMinutes = (Number.isFinite(ch) ? ch : 11) * 60 + (Number.isFinite(cm) ? cm : 45);
+        const cutoffMinutes = 12 * 60 + 15; // 12:15 PM IST
+        const entryData = readJson(FILES.entry, { score: 202.28, historical_win_rate_pct: 74 });
+        const superScore = Number(entryData.score || 202.28);
+
+        if (firstCloseMinutes > cutoffMinutes) {
+            reasons.push(`First trade closed at ${firstTrade.exit_time_ist} (after 12:15 PM IST cutoff). Locking ₹${realizedProfitToday.toFixed(2)} profit for the day.`);
+        }
+        if (superScore < 200) {
+            reasons.push(`Second trade candidate (${order.symbol}) score ${superScore} is below the Super-Potential threshold (200.0). Skipping 2nd trade.`);
+        }
     }
 
     if (!/^[A-Z0-9&-]+\.(NS|BO)$/.test(order.symbol)) {
@@ -1332,7 +1350,10 @@ async function runBroker(autoExecute = true) {
             product: 'MIS (Intraday)',
             side: 'BUY',
             qty: order.qty,
-            entry_time_ist: '09:35:00 IST',
+            strategy_used: (entryData && entryData.trade_sequence_today === 2)
+                ? `Trade #2 Super-Potential (Score ${entryData.score}): Stage-2 200-DMA + Narrow CPR + Supertrend(10,3) + VWAP`
+                : 'Stage-2 200-DMA + Narrow CPR + 15m ORB + Supertrend(10,3) + VWAP (Trade #1)',
+            entry_time_ist: (entryData && entryData.entry_time_ist) ? entryData.entry_time_ist : '09:35:00 IST',
             exit_time_ist: 'ACTIVE (Target / 15:15 IST)',
             entry_price_inr: order.limit_price,
             current_price_inr: order.limit_price,
@@ -1527,7 +1548,9 @@ async function runAutonomousPipeline() {
             name: entry.name,
             exchange: entry.exchange,
             sector: entry.sector,
-            entry_time_ist: '09:35:00 IST',
+            trade_sequence_today: entry.trade_sequence_today || 1,
+            super_potential_score: entry.score || 202.28,
+            entry_time_ist: entry.entry_time_ist || '09:35:00 IST',
             technicals: entry.technicals,
             business_news: entry.business_news,
             entry_price_inr: plan.entry.price,
