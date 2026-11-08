@@ -2,12 +2,13 @@
 **Account Size:** ₹20,000 | **Mandatory Daily Target:** ₹400/day (Pure Net Profit Excluding Brokerage) | **Strict Stop-Loss:** Max ₹100/trade
 
 ## 🗓️ Date: 2026-11-08 (Week of 2026-11-02)
-- **Trades Taken:** 15 (0 Open, 15 Closed)
-- **Realized Net Profit (Excl. Brokerage):** ₹6031.05 | **Brokerage & Govt Taxes Deducted:** ₹512.55
-- **Projected Net Profit (Including Active Target):** **+₹6031.05** (Goal: ₹400/day)
+- **Trades Taken:** 16 (0 Open, 16 Closed)
+- **Realized Net Profit (Excl. Brokerage):** ₹6433.12 | **Brokerage & Govt Taxes Deducted:** ₹546.72
+- **Projected Net Profit (Including Active Target):** **+₹6433.12** (Goal: ₹400/day)
 
 | Status | Stock | Exch | Qty | Entry (₹) | Stop-Loss (₹) | Target (₹) | Max Loss (<=₹100) | Brokerage & Tax (₹) | Pure Net Profit at Target / Exit (₹) | Exit / Status Note |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **CLOSED** | **TATAMOTORS.BO** | BSE | 38 | ₹841.38 | ₹849.21 | ₹852.86 | ₹99.56 | ₹34.17 | **₹402.07** | TARGET_HIT_MANDATORY_400_NET_PROFIT |
 | **CLOSED** | **TATAMOTORS.BO** | BSE | 38 | ₹841.38 | ₹849.21 | ₹852.86 | ₹99.56 | ₹34.17 | **₹402.07** | TARGET_HIT_MANDATORY_400_NET_PROFIT |
 | **CLOSED** | **TATAMOTORS.BO** | BSE | 38 | ₹841.38 | ₹849.21 | ₹852.86 | ₹99.56 | ₹34.17 | **₹402.07** | TARGET_HIT_MANDATORY_400_NET_PROFIT |
 | **CLOSED** | **TATAMOTORS.BO** | BSE | 38 | ₹841.38 | ₹849.21 | ₹852.86 | ₹99.56 | ₹34.17 | **₹402.07** | TARGET_HIT_MANDATORY_400_NET_PROFIT |
