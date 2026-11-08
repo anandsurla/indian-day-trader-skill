@@ -327,22 +327,22 @@
     <div class="kpi-grid">
       <div class="kpi-card">
         <div class="kpi-label">1. Total Profit (Gross)</div>
-        <div class="kpi-value" id="kpi-gross">₹1,739.63</div>
-        <div class="kpi-sub" id="kpi-gross-sub">Across 4 Closed Trades (Before Brokerage)</div>
+        <div class="kpi-value" id="kpi-gross">₹1,302.76</div>
+        <div class="kpi-sub" id="kpi-gross-sub">Across 3 Closed Trades (Before Brokerage)</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-label">2. Trade Brokerage & Govt Taxes</div>
-        <div class="kpi-value text-amber" id="kpi-brokerage">-₹130.74</div>
+        <div class="kpi-value text-amber" id="kpi-brokerage">-₹95.76</div>
         <div class="kpi-sub">Brokerage + STT + Exchange + GST + Stamp</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-label">3. Final Net Profit (After Brokerage)</div>
-        <div class="kpi-value text-green" id="kpi-net">+₹1,608.89</div>
+        <div class="kpi-value text-green" id="kpi-net">+₹1,207.00</div>
         <div class="kpi-sub">100% Pure Profit in Your Pocket (≥ ₹400/trade)</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-label">4. Net Profit with #1 Zero-Brokerage (Shoonya)</div>
-        <div class="kpi-value text-blue" id="kpi-shoonya">+₹1,697.31</div>
+        <div class="kpi-value text-blue" id="kpi-shoonya">+₹1,272.11</div>
         <div class="kpi-sub">Finvasia Shoonya: ₹0 Brokerage (Only ~₹9.80 Tax)</div>
       </div>
     </div>
@@ -531,9 +531,26 @@
 
       // Render Active Trades Table
       const activeTbody = document.getElementById('active-trades-tbody');
+      const statusBadge = document.getElementById('active-status-badge');
+      const cycleStatus = document.getElementById('auto-cycle-status');
       if (activeList.length === 0) {
-        activeTbody.innerHTML = '<tr><td colspan="12" style="text-align:center; color:var(--muted);">Agent is waiting for next NSE/BSE market session (09:15 IST)...</td></tr>';
+        if (statusBadge) {
+          statusBadge.className = 'badge badge-amber';
+          statusBadge.textContent = '🔴 MARKET CLOSED (WEEKEND / OFF-HOURS)';
+        }
+        if (cycleStatus) {
+          cycleStatus.style.color = 'var(--amber)';
+          cycleStatus.textContent = 'Market Closed — Waiting for Monday 09:15 IST Open';
+        }
+        activeTbody.innerHTML = '<tr><td colspan="12" style="text-align:center; padding:22px; color:#fcd34d; font-weight:600;">🔴 NSE & BSE Market is Closed Right Now (Weekend / Outside 09:15 AM – 03:30 PM IST). Zero Active Trades.<br><span style="color:var(--muted); font-weight:400; font-size:12.5px;">SriKari TradeBot will automatically wake up, scan all 40 NSE/BSE stocks, and enter Trade #1 at the next Market Open (Monday 09:35:00 IST).</span></td></tr>';
       } else {
+        if (statusBadge) {
+          statusBadge.className = 'badge badge-green';
+          statusBadge.textContent = '🟢 LIVE AUTO-TRADING';
+        }
+        if (cycleStatus) {
+          cycleStatus.style.color = 'var(--green)';
+        }
         activeTbody.innerHTML = activeList.map(t => {
           const livePrice = t.live_price_inr || t.entry_price_inr;
           const scaledQty = Math.max(1, Math.round(t.qty * scale));

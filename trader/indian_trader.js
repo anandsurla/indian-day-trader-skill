@@ -1402,6 +1402,7 @@ async function runBroker(autoExecute = true) {
     const order = risk.approved_order;
     const sizing = ordersData.sizing;
 
+    const isLiveMarketOpen = Boolean(ist.isMarketHours);
     const brokerPayload = {
         as_of: ist.iso,
         market: 'INDIA_NSE_BSE',
@@ -1409,7 +1410,10 @@ async function runBroker(autoExecute = true) {
         currency: 'INR',
         paper: Boolean(cfg.paper),
         autonomous: Boolean(cfg.autonomous || autoExecute),
-        status: autoExecute ? 'FILLED_PAPER_OPEN' : 'READY_FOR_EXECUTION',
+        market_open_now: isLiveMarketOpen,
+        status: !isLiveMarketOpen
+            ? 'MARKET_CLOSED_WAITING_FOR_OPEN'
+            : (autoExecute ? 'FILLED_PAPER_OPEN' : 'READY_FOR_EXECUTION'),
         ticket: {
             id: `IND_${Date.now()}`,
             date: ist.date,
@@ -1465,7 +1469,8 @@ async function runBroker(autoExecute = true) {
         strict_max_daily_loss_inr: cfg.max_daily_loss_inr,
         realized_net_profit_today_inr: existingPort.realized_net_profit_today_inr || 0,
         total_brokerage_paid_today_inr: existingPort.total_brokerage_paid_today_inr || 0,
-        active_position: brokerPayload.ticket
+        market_open_now: isLiveMarketOpen,
+        active_position: isLiveMarketOpen ? brokerPayload.ticket : null
     });
 
     return brokerPayload;
