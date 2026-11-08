@@ -1518,15 +1518,86 @@ async function monitorAndManageActiveTrade() {
 
     const pos = portfolio.active_position;
     const { candles } = await fetchSymbolBars(pos.symbol, '5m', '5d');
+    // Inspect ALL intraday candles since entry (High & Low) so if Target or Stop-Loss was touched
+    // in between wakeups (Exchange Bracket Order OCO fill), the exact touch price & minute are captured!
+    const recentBars = candles.slice(-6);
     const latestBar = candles[candles.length - 1];
     const currentPrice = latestBar ? latestBar.close : pos.current_price_inr;
 
     const isShort = String(pos.side || 'BUY').toUpperCase() === 'SELL';
     pos.current_price_inr = currentPrice;
-    if (!isShort && currentPrice > (pos.peak_price_inr || pos.entry_price_inr)) {
-        pos.peak_price_inr = currentPrice;
-    } else if (isShort && currentPrice < (pos.peak_price_inr || pos.entry_price_inr)) {
-        pos.peak_price_inr = currentPrice;
+
+    let exitReason = null;
+    let exitPrice = currentPrice;
+    let exactExitTimeIst = ist.time;
+
+    for (const bar of recentBars) {
+        const barHigh = Number(bar.high || bar.close);
+        const barLow = Number(bar.low || bar.close);
+        const barTimeIst = bar.istTime ? `${bar.istTime}:00 IST` : ist.time;
+
+        if (!isShort && barHigh > (pos.peak_price_inr || pos.entry_price_inr)) {
+            pos.peak_price_inr = barHigh;
+        } else if (isShort && barLow < (pos.peak_price_inr || pos.entry_price_inr)) {
+            pos.peak_price_inr = barLow;
+        }
+
+        const liveCharges = calculateIndianCharges({
+            exchange: pos.exchange,
+            entryPrice: pos.entry_price_inr,
+            exitPrice: bar.close,
+            quantity: pos.qty
+        });
+
+        // 1. Check if Stop-Loss was hit inside this candle (barLow for BUY, barHigh for SELL)
+        if (!isShort ? barLow <= pos.strict_stop_loss_inr : barHigh >= pos.strict_stop_loss_inr) {
+            exitReason = pos.trailing_stop_active
+                ? 'TRAILING_PROFIT_STOP_BOOKED'
+                : (pos.breakeven_locked ? 'TAX_FREE_BREAKEVEN_EXIT' : 'STRICT_100_INR_STOP_LOSS_EXIT');
+            exitPrice = pos.strict_stop_loss_inr;
+            exactExitTimeIst = barTimeIst;
+            break;
+        }
+
+        // 2. Check if Target was hit inside this candle (barHigh for BUY, barLow for SELL)
+        if (!isShort ? barHigh >= pos.take_profit_target_inr : barLow <= pos.take_profit_target_inr) {
+            exitReason = 'TARGET_HIT_MANDATORY_400_NET_PROFIT';
+            exitPrice = pos.take_profit_target_inr;
+            exactExitTimeIst = barTimeIst;
+            break;
+        }
+
+        // 3. Activate +1R Breakeven Shield if touched inside this candle
+        if (!pos.breakeven_locked && (!isShort ? barHigh >= pos.breakeven_1r_trigger_inr : barLow <= pos.breakeven_1r_trigger_inr)) {
+            pos.breakeven_locked = true;
+            if (!isShort) {
+                const taxFreeStop = Number((pos.entry_price_inr + liveCharges.perShareBuffer + 0.10).toFixed(2));
+                if (taxFreeStop > pos.strict_stop_loss_inr) pos.strict_stop_loss_inr = taxFreeStop;
+            } else {
+                const taxFreeStop = Number((pos.entry_price_inr - liveCharges.perShareBuffer - 0.10).toFixed(2));
+                if (taxFreeStop < pos.strict_stop_loss_inr) pos.strict_stop_loss_inr = taxFreeStop;
+            }
+        }
+
+        // 4. Activate +2R Dynamic Trailing Stop if touched inside this candle
+        if (!isShort ? barHigh >= pos.trail_2r_trigger_inr : barLow <= pos.trail_2r_trigger_inr) {
+            pos.trailing_stop_active = true;
+            if (!isShort) {
+                const peakGain = pos.peak_price_inr - pos.entry_price_inr;
+                const trailedStop = Number((pos.entry_price_inr + Math.max(peakGain * 0.65, liveCharges.perShareBuffer * 2)).toFixed(2));
+                if (trailedStop > pos.strict_stop_loss_inr) pos.strict_stop_loss_inr = trailedStop;
+            } else {
+                const peakGain = pos.entry_price_inr - pos.peak_price_inr;
+                const trailedStop = Number((pos.entry_price_inr - Math.max(peakGain * 0.65, liveCharges.perShareBuffer * 2)).toFixed(2));
+                if (trailedStop < pos.strict_stop_loss_inr) pos.strict_stop_loss_inr = trailedStop;
+            }
+        }
+    }
+
+    if (!exitReason && ist.isSquareOffWindow) {
+        exitReason = 'MANDATORY_1515_IST_MIS_SQUARE_OFF';
+        exitPrice = currentPrice;
+        exactExitTimeIst = ist.time;
     }
 
     const liveCharges = calculateIndianCharges({
@@ -1535,46 +1606,6 @@ async function monitorAndManageActiveTrade() {
         exitPrice: currentPrice,
         quantity: pos.qty
     });
-
-    if (!pos.breakeven_locked && (!isShort ? currentPrice >= pos.breakeven_1r_trigger_inr : currentPrice <= pos.breakeven_1r_trigger_inr)) {
-        pos.breakeven_locked = true;
-        if (!isShort) {
-            const taxFreeStop = Number((pos.entry_price_inr + liveCharges.perShareBuffer + 0.10).toFixed(2));
-            if (taxFreeStop > pos.strict_stop_loss_inr) pos.strict_stop_loss_inr = taxFreeStop;
-        } else {
-            const taxFreeStop = Number((pos.entry_price_inr - liveCharges.perShareBuffer - 0.10).toFixed(2));
-            if (taxFreeStop < pos.strict_stop_loss_inr) pos.strict_stop_loss_inr = taxFreeStop;
-        }
-    }
-
-    if (!isShort ? currentPrice >= pos.trail_2r_trigger_inr : currentPrice <= pos.trail_2r_trigger_inr) {
-        pos.trailing_stop_active = true;
-        if (!isShort) {
-            const peakGain = pos.peak_price_inr - pos.entry_price_inr;
-            const trailedStop = Number((pos.entry_price_inr + Math.max(peakGain * 0.65, liveCharges.perShareBuffer * 2)).toFixed(2));
-            if (trailedStop > pos.strict_stop_loss_inr) pos.strict_stop_loss_inr = trailedStop;
-        } else {
-            const peakGain = pos.entry_price_inr - pos.peak_price_inr;
-            const trailedStop = Number((pos.entry_price_inr - Math.max(peakGain * 0.65, liveCharges.perShareBuffer * 2)).toFixed(2));
-            if (trailedStop < pos.strict_stop_loss_inr) pos.strict_stop_loss_inr = trailedStop;
-        }
-    }
-
-    let exitReason = null;
-    let exitPrice = currentPrice;
-
-    if (!isShort ? currentPrice >= pos.take_profit_target_inr : currentPrice <= pos.take_profit_target_inr) {
-        exitReason = 'TARGET_HIT_MANDATORY_400_NET_PROFIT';
-        exitPrice = pos.take_profit_target_inr;
-    } else if (!isShort ? currentPrice <= pos.strict_stop_loss_inr : currentPrice >= pos.strict_stop_loss_inr) {
-        exitReason = pos.trailing_stop_active
-            ? 'TRAILING_PROFIT_STOP_BOOKED'
-            : (pos.breakeven_locked ? 'TAX_FREE_BREAKEVEN_EXIT' : 'STRICT_100_INR_STOP_LOSS_EXIT');
-        exitPrice = pos.strict_stop_loss_inr;
-    } else if (ist.isSquareOffWindow) {
-        exitReason = 'MANDATORY_1515_IST_MIS_SQUARE_OFF';
-        exitPrice = currentPrice;
-    }
 
     if (exitReason) {
         const finalCharges = calculateIndianCharges({
@@ -1591,9 +1622,9 @@ async function monitorAndManageActiveTrade() {
         const closedRecord = {
             ...pos,
             exit_price_inr: exitPrice,
-            exit_time_ist: ist.time,
+            exit_time_ist: exactExitTimeIst,
             exit_reason: exitReason,
-            closed_at_ist: `${ist.date} ${ist.time}`,
+            closed_at_ist: `${ist.date} ${exactExitTimeIst}`,
             gross_pnl_inr: grossPnl,
             brokerage_and_taxes_inr: finalCharges.total,
             shoonya_zero_brokerage_taxes_inr: finalCharges.shoonyaZeroBrokerageTotal,

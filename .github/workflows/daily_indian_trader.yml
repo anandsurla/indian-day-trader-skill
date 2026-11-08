@@ -1,12 +1,12 @@
-name: Live Indian NSE & BSE Autonomous Paper Trader (Every 15m Market Hours)
+name: Live Indian NSE & BSE Autonomous Paper Trader (Every 5m + Full Candle High/Low Bracket Check)
 
 on:
   schedule:
-    # Runs every 15 minutes during Indian Market Hours (09:15 IST to 15:30 IST, Mon-Fri)
+    # Runs every 5 minutes during Indian Market Hours (09:15 IST to 15:30 IST, Mon-Fri)
     # 03:45 UTC to 10:00 UTC = 09:15 IST to 15:30 IST
-    - cron: '*/15 4-9 * * 1-5'
-    - cron: '45 3 * * 1-5'
-    - cron: '0,15,30 10 * * 1-5'
+    - cron: '*/5 4-9 * * 1-5'
+    - cron: '45,50,55 3 * * 1-5'
+    - cron: '0,5,10,15,20,25,30 10 * * 1-5'
   workflow_dispatch:
 
 permissions:
