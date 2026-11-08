@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-08T09:48:28+05:30",
+  "as_of": "2026-11-08T09:51:21+05:30",
   "market": "INDIA_NSE_BSE",
   "currency": "INR",
   "budget_inr": 20000,
@@ -9,48 +9,48 @@
   "brokerage_excluded_from_profit": true,
   "strict_max_loss_per_trade_inr": 100,
   "sizing": {
-    "ticker": "TATAMOTORS.BO",
+    "ticker": "NTPC.BO",
     "exchange": "BSE",
-    "entry_price_inr": 841.38,
-    "stop_price_inr": 838.76,
-    "target_price_inr": 852.86,
-    "stop_distance_inr": 2.62,
-    "target_distance_inr": 11.48,
-    "shares_by_strict_stop_loss": 38,
-    "shares_by_intraday_margin": 112,
-    "shares_selected": 38,
+    "entry_price_inr": 414.16,
+    "stop_price_inr": 412.9,
+    "target_price_inr": 419.69,
+    "stop_distance_inr": 1.26,
+    "target_distance_inr": 5.53,
+    "shares_by_strict_stop_loss": 79,
+    "shares_by_intraday_margin": 229,
+    "shares_selected": 79,
     "binding_constraint": "strict_max_loss_per_trade_100_inr",
-    "notional_value_inr": 31972.44,
-    "margin_used_inr": 6394.49,
-    "max_loss_at_stop_inr": 99.56,
-    "gross_profit_at_target_inr": 436.24,
-    "estimated_indian_taxes_and_brokerage_inr": 34.17,
+    "notional_value_inr": 32718.64,
+    "margin_used_inr": 6543.73,
+    "max_loss_at_stop_inr": 99.54,
+    "gross_profit_at_target_inr": 436.87,
+    "estimated_indian_taxes_and_brokerage_inr": 34.98,
     "brokerage_breakdown": {
-      "brokerage": 19.31,
-      "stt": 8.1,
-      "exchangeCharge": 1.91,
-      "sebiCharge": 0.06,
-      "gst": 3.83,
-      "stampDuty": 0.96
+      "brokerage": 19.76,
+      "stt": 8.29,
+      "exchangeCharge": 1.96,
+      "sebiCharge": 0.07,
+      "gst": 3.92,
+      "stampDuty": 0.98
     },
-    "net_profit_at_target_inr": 402.07
+    "net_profit_at_target_inr": 401.89
   },
   "orders": [
     {
-      "symbol": "TATAMOTORS.BO",
+      "symbol": "NTPC.BO",
       "exchange": "BSE",
       "product": "MIS",
       "side": "buy",
-      "qty": 38,
+      "qty": 79,
       "type": "limit",
-      "limit_price": 841.38,
+      "limit_price": 414.16,
       "time_in_force": "day",
       "order_class": "bracket",
       "take_profit": {
-        "limit_price": 852.86
+        "limit_price": 419.69
       },
       "stop_loss": {
-        "stop_price": 838.76,
+        "stop_price": 412.9,
         "strict": true
       }
     }

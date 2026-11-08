@@ -1,11 +1,11 @@
 {
-  "as_of": "2026-11-08T09:48:28+05:30",
+  "as_of": "2026-11-08T09:51:21+05:30",
   "market": "INDIA_NSE_BSE",
   "exchange": "BSE",
   "currency": "INR",
-  "ticker": "TATAMOTORS.BO",
-  "name": "Tata Motors (BSE)",
-  "sector": "Automobile & EV",
+  "ticker": "NTPC.BO",
+  "name": "NTPC Ltd (BSE)",
+  "sector": "Power & Energy",
   "rule": "orb_vwap_ema_news",
   "interval": "5m",
   "or_minutes": 15,
@@ -14,37 +14,37 @@
   "opening_range": {
     "start": "09:15",
     "end": "09:30",
-    "high": 839.53,
-    "low": 837.99,
-    "mid": 838.76,
-    "range": 1.54,
+    "high": 413.25,
+    "low": 412.55,
+    "mid": 412.9,
+    "range": 0.7,
     "bars": 3
   },
   "technicals": {
-    "vwap": 842.48,
-    "ema9": 853.64,
-    "ema20": 852.63,
-    "ema50": 850.56,
-    "rsi14": 64.1,
+    "vwap": 414.32,
+    "ema9": 426.83,
+    "ema20": 425.97,
+    "ema50": 423.26,
+    "rsi14": 66.4,
     "above_vwap": true,
     "ema_stack_aligned": true
   },
   "business_news": {
-    "source": "Economic Times Markets / Moneycontrol",
+    "source": "Economic Times Energy / Moneycontrol",
     "sentiment": "BULLISH",
-    "headline": "Tata Motors (BSE): Indian Auto & EV stocks rally on strong monthly dispatch growth and institutional FII inflows"
+    "headline": "NTPC Ltd (BSE): Power & PSU utilities surge on record peak electricity demand and renewable capacity additions"
   },
-  "level": 839.53,
+  "level": 413.25,
   "trigger": {
     "bar_time_ist": "2026-11-08T09:35:00+05:30",
-    "bar_open": 839.31,
-    "bar_high": 841.63,
-    "bar_low": 838.95,
-    "bar_close": 841.38,
-    "bar_volume": 254160,
-    "volume_ratio": 3.13
+    "bar_open": 413.19,
+    "bar_high": 414.45,
+    "bar_low": 412.88,
+    "bar_close": 414.16,
+    "bar_volume": 254928,
+    "volume_ratio": 3.12
   },
-  "entry_price_hint": 841.38,
-  "stop_hint": 838.76,
-  "summary": "TATAMOTORS.BO (BSE) triggered 15m ORB + VWAP breakout above ₹839.53 at ₹841.38 (RVOL 3.13x, RSI 64.1)."
+  "entry_price_hint": 414.16,
+  "stop_hint": 412.9,
+  "summary": "NTPC.BO (BSE) triggered 15m ORB + VWAP breakout above ₹413.25 at ₹414.16 (RVOL 3.12x, RSI 66.4)."
 }
