@@ -302,20 +302,12 @@
     <div class="header">
       <div class="brand">
         <h1>🇮🇳 Indian Day-Trader — Executive Analyst View</h1>
-        <p id="capital-subtitle">Shoonya Account Balance: <strong>₹20,000</strong> &nbsp;|&nbsp; Daily Net Target (2%): <strong class="text-green">+₹400/trade</strong> &nbsp;|&nbsp; Strict Stop-Loss (0.5%): <strong class="text-red">≤ ₹100/trade</strong></p>
+        <p id="capital-subtitle">Auto-Fetched Account Balance: <strong>₹20,000</strong> &nbsp;|&nbsp; Auto Daily Net Target (2%): <strong class="text-green">+₹400/trade</strong> &nbsp;|&nbsp; Auto Strict Stop-Loss (0.5%): <strong class="text-red">≤ ₹100/trade</strong></p>
       </div>
       <div class="actions">
-        <div style="display:flex; align-items:center; gap:6px; background:#111827; border:1px solid #334155; padding:4px 10px; border-radius:8px; font-size:12.5px;">
-          <span style="color:var(--muted);">Shoonya Balance:</span>
-          <select id="balance-select" onchange="onBalanceChange(this.value)" style="background:#1e293b; color:#f8fafc; border:1px solid #475569; border-radius:6px; padding:4px 8px; font-weight:700; cursor:pointer;">
-            <option value="5000">₹5,000 (Target +₹100 | SL ≤ ₹25)</option>
-            <option value="20000" selected>₹20,000 (Target +₹400 | SL ≤ ₹100)</option>
-            <option value="50000">₹50,000 (Target +₹1,000 | SL ≤ ₹250)</option>
-          </select>
-        </div>
         <div class="autopilot-pill">
           <span class="pulse-dot"></span>
-          100% AUTO-PILOT: ON
+          100% AUTO-PILOT & AUTO-BALANCE: ON
         </div>
         <button class="btn btn-blue" onclick="sendReportToGitHub()">📄 Daily GitHub Report</button>
       </div>

@@ -321,6 +321,48 @@ function calculateDynamicAccountScaling(balanceInr) {
     };
 }
 
+/**
+ * Automatically fetches live cash balance from Finvasia Shoonya NorenWClientTP/Limits API
+ * when SHOONYA_USER_ID & SHOONYA_SUSERTOKEN are provided, or falls back to account budget.
+ */
+async function fetchShoonyaLiveBalance(fallbackBudget = 20000) {
+    if (process.env.SHOONYA_BALANCE_INR) {
+        return Number(process.env.SHOONYA_BALANCE_INR);
+    }
+    const uid = process.env.SHOONYA_USER_ID;
+    const token = process.env.SHOONYA_SUSERTOKEN;
+    if (uid && token) {
+        try {
+            const payload = `jData=${JSON.stringify({ uid, actid: uid })}&jKey=${token}`;
+            const raw = await new Promise((resolve, reject) => {
+                const req = https.request({
+                    hostname: 'api.shoonya.com',
+                    path: '/NorenWClientTP/Limits',
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Content-Length': Buffer.byteLength(payload)
+                    },
+                    timeout: 4000
+                }, res => {
+                    let body = '';
+                    res.on('data', d => { body += d; });
+                    res.on('end', () => resolve(body));
+                });
+                req.on('error', reject);
+                req.write(payload);
+                req.end();
+            });
+            const data = JSON.parse(raw);
+            if (data && data.stat === 'Ok') {
+                const availableCash = Number(data.cash || 0) + Number(data.payin || 0) - Number(data.marginused || 0);
+                if (availableCash >= 1000) return availableCash;
+            }
+        } catch (e) {}
+    }
+    return Number(fallbackBudget || 20000);
+}
+
 function loadConfig() {
     const defaults = {
         market: 'INDIA_NSE_BSE',
