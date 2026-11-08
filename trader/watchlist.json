@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-08T12:54:23+05:30",
+  "as_of": "2026-11-08T13:09:18+05:30",
   "market": "INDIA_NSE_BSE",
   "timezone": "Asia/Kolkata",
   "mode": "orb",
@@ -28,11 +28,13 @@
       "name": "NTPC Ltd (BSE)",
       "exchange": "BSE",
       "sector": "Power & Energy",
+      "side": "BUY",
       "setups": [
-        "15m_ORB",
+        "BUY_LONG_TREND",
+        "15m_ORB_Breakout",
         "Session_VWAP",
         "Stage2_200DMA_Uptrend",
-        "Narrow_CPR_Breakout",
+        "Narrow_CPR",
         "Supertrend_Bullish",
         "EMA_9_21_50_Stack"
       ],
@@ -74,6 +76,7 @@
         "target_net_400": 419.69
       },
       "sizing_preview": {
+        "side": "BUY",
         "shares": 79,
         "stop_distance_inr": 1.26,
         "max_loss_inr": 99.54,
@@ -83,18 +86,20 @@
         "net_profit_excl_brokerage_inr": 401.91
       },
       "data_source": "indian_market_sim",
-      "why": "BSE High-Accuracy Confluence: Stage-2 (Price > 50/200 DMA) + Narrow CPR Breakout + Supertrend Bullish + Above VWAP (₹414.32), RSI 66.4, RVOL 3.12x."
+      "why": "BSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹414.32), RSI 66.4, RVOL 3.12x."
     },
     {
       "ticker": "RELIANCE.NS",
       "name": "Reliance Industries",
       "exchange": "NSE",
       "sector": "Energy & Telecom",
+      "side": "BUY",
       "setups": [
-        "15m_ORB",
+        "BUY_LONG_TREND",
+        "15m_ORB_Breakout",
         "Session_VWAP",
         "Stage2_200DMA_Uptrend",
-        "Narrow_CPR_Breakout",
+        "Narrow_CPR",
         "Supertrend_Bullish",
         "EMA_9_21_50_Stack"
       ],
@@ -136,6 +141,7 @@
         "target_net_400": 1339.41
       },
       "sizing_preview": {
+        "side": "BUY",
         "shares": 22,
         "stop_distance_inr": 4.35,
         "max_loss_inr": 95.7,
@@ -145,18 +151,20 @@
         "net_profit_excl_brokerage_inr": 401.91
       },
       "data_source": "indian_market_sim",
-      "why": "NSE High-Accuracy Confluence: Stage-2 (Price > 50/200 DMA) + Narrow CPR Breakout + Supertrend Bullish + Above VWAP (₹1321.1), RSI 71.9, RVOL 3.13x."
+      "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹1321.1), RSI 71.9, RVOL 3.13x."
     },
     {
       "ticker": "ICICIBANK.NS",
       "name": "ICICI Bank",
       "exchange": "NSE",
       "sector": "Banking",
+      "side": "BUY",
       "setups": [
-        "15m_ORB",
+        "BUY_LONG_TREND",
+        "15m_ORB_Breakout",
         "Session_VWAP",
         "Stage2_200DMA_Uptrend",
-        "Narrow_CPR_Breakout",
+        "Narrow_CPR",
         "Supertrend_Bullish",
         "EMA_9_21_50_Stack"
       ],
@@ -198,6 +206,7 @@
         "target_net_400": 1307.75
       },
       "sizing_preview": {
+        "side": "BUY",
         "shares": 24,
         "stop_distance_inr": 4.06,
         "max_loss_inr": 97.44,
@@ -207,15 +216,17 @@
         "net_profit_excl_brokerage_inr": 402.04
       },
       "data_source": "indian_market_sim",
-      "why": "NSE High-Accuracy Confluence: Stage-2 (Price > 50/200 DMA) + Narrow CPR Breakout + Supertrend Bullish + Above VWAP (₹1289.99), RSI 72.8, RVOL 3.07x."
+      "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹1289.99), RSI 72.8, RVOL 3.07x."
     },
     {
       "ticker": "TATAMOTORS.BO",
       "name": "Tata Motors (BSE)",
       "exchange": "BSE",
       "sector": "Automobile & EV",
+      "side": "BUY",
       "setups": [
-        "15m_ORB",
+        "BUY_LONG_TREND",
+        "15m_ORB_Breakout",
         "Session_VWAP",
         "Stage2_200DMA_Uptrend",
         "Supertrend_Bullish",
@@ -259,6 +270,7 @@
         "target_net_400": 852.86
       },
       "sizing_preview": {
+        "side": "BUY",
         "shares": 38,
         "stop_distance_inr": 2.62,
         "max_loss_inr": 99.56,
@@ -268,18 +280,20 @@
         "net_profit_excl_brokerage_inr": 402.09
       },
       "data_source": "indian_market_sim",
-      "why": "BSE High-Accuracy Confluence: Stage-2 (Price > 50/200 DMA) + CPR Breakout + Supertrend Bullish + Above VWAP (₹842.48), RSI 64.1, RVOL 3.13x."
+      "why": "BSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹842.48), RSI 64.1, RVOL 3.13x."
     },
     {
       "ticker": "LT.NS",
       "name": "Larsen & Toubro",
       "exchange": "NSE",
       "sector": "Infrastructure",
+      "side": "BUY",
       "setups": [
-        "15m_ORB",
+        "BUY_LONG_TREND",
+        "15m_ORB_Breakout",
         "Session_VWAP",
         "Stage2_200DMA_Uptrend",
-        "Narrow_CPR_Breakout",
+        "Narrow_CPR",
         "Supertrend_Bullish",
         "EMA_9_21_50_Stack"
       ],
@@ -321,6 +335,7 @@
         "target_net_400": 3674.35
       },
       "sizing_preview": {
+        "side": "BUY",
         "shares": 9,
         "stop_distance_inr": 11.06,
         "max_loss_inr": 99.54,
@@ -330,315 +345,7 @@
         "net_profit_excl_brokerage_inr": 401.99
       },
       "data_source": "indian_market_sim",
-      "why": "NSE High-Accuracy Confluence: Stage-2 (Price > 50/200 DMA) + Narrow CPR Breakout + Supertrend Bullish + Above VWAP (₹3626.36), RSI 64.9, RVOL 3.04x."
-    },
-    {
-      "ticker": "ZOMATO.NS",
-      "name": "Zomato Ltd",
-      "exchange": "NSE",
-      "sector": "Consumer Tech",
-      "setups": [
-        "15m_ORB",
-        "Session_VWAP",
-        "Stage2_200DMA_Uptrend",
-        "Narrow_CPR_Breakout",
-        "Supertrend_Bullish",
-        "EMA_9_21_50_Stack"
-      ],
-      "score": 194.47,
-      "historical_win_rate_pct": 77,
-      "close": 262.59,
-      "latest_close": 268.7,
-      "change_pct": 3.19,
-      "rvol": 2.71,
-      "atr": 0.62,
-      "technicals": {
-        "vwap": 262.87,
-        "ema9": 268.54,
-        "ema20": 268.15,
-        "ema50": 266.88,
-        "dma50": 252,
-        "dma200": 220,
-        "cpr_pivot": 260.12,
-        "cpr_tc": 260.25,
-        "cpr_r1": 263.05,
-        "narrow_cpr": true,
-        "supertrend": "BULLISH_GREEN",
-        "rsi14": 64,
-        "above_vwap": true,
-        "ema_stack_aligned": true,
-        "stage2_historical_uptrend": true
-      },
-      "business_news": {
-        "source": "Economic Times / Moneycontrol India",
-        "sentiment": "BULLISH",
-        "headline": "Zomato Ltd: Zomato Ltd (NSE) sees positive institutional volume flow and bullish sector breadth"
-      },
-      "levels": {
-        "or_high": 262.01,
-        "or_low": 261.16,
-        "or_mid": 261.59,
-        "stop_hint": 261.59,
-        "target_2r": 264.59,
-        "target_net_400": 266.89
-      },
-      "sizing_preview": {
-        "shares": 100,
-        "stop_distance_inr": 1,
-        "max_loss_inr": 100,
-        "brokerage_and_taxes_inr": 28.1,
-        "shoonya_zero_brokerage_tax_inr": 9.36,
-        "gross_profit_at_target_inr": 430,
-        "net_profit_excl_brokerage_inr": 401.9
-      },
-      "data_source": "indian_market_sim",
-      "why": "NSE High-Accuracy Confluence: Stage-2 (Price > 50/200 DMA) + Narrow CPR Breakout + Supertrend Bullish + Above VWAP (₹262.87), RSI 64, RVOL 2.71x."
-    },
-    {
-      "ticker": "HDFCBANK.NS",
-      "name": "HDFC Bank",
-      "exchange": "NSE",
-      "sector": "Banking",
-      "setups": [
-        "15m_ORB",
-        "Session_VWAP",
-        "Stage2_200DMA_Uptrend",
-        "Narrow_CPR_Breakout",
-        "Supertrend_Bullish",
-        "EMA_9_21_50_Stack"
-      ],
-      "score": 191.21,
-      "historical_win_rate_pct": 73,
-      "close": 1739.6,
-      "latest_close": 1791,
-      "change_pct": 3.25,
-      "rvol": 2.88,
-      "atr": 4.19,
-      "technicals": {
-        "vwap": 1740.83,
-        "ema9": 1785.83,
-        "ema20": 1782.43,
-        "ema50": 1773.65,
-        "dma50": 1710,
-        "dma200": 1645,
-        "cpr_pivot": 1740.51,
-        "cpr_tc": 1743.49,
-        "cpr_r1": 1749.68,
-        "narrow_cpr": true,
-        "supertrend": "BULLISH_GREEN",
-        "rsi14": 74.1,
-        "above_vwap": true,
-        "ema_stack_aligned": true,
-        "stage2_historical_uptrend": true
-      },
-      "business_news": {
-        "source": "Moneycontrol / ET Markets",
-        "sentiment": "BULLISH",
-        "headline": "HDFC Bank: Private & PSU Banks hold steady above key support on resilient credit growth and stable NIMs"
-      },
-      "levels": {
-        "or_high": 1735.78,
-        "or_low": 1732.12,
-        "or_mid": 1733.95,
-        "stop_hint": 1733.95,
-        "target_2r": 1750.9,
-        "target_net_400": 1765.11
-      },
-      "sizing_preview": {
-        "shares": 17,
-        "stop_distance_inr": 5.65,
-        "max_loss_inr": 96.05,
-        "brokerage_and_taxes_inr": 31.61,
-        "shoonya_zero_brokerage_tax_inr": 10.54,
-        "gross_profit_at_target_inr": 433.67,
-        "net_profit_excl_brokerage_inr": 402.06
-      },
-      "data_source": "indian_market_sim",
-      "why": "NSE High-Accuracy Confluence: Stage-2 (Price > 50/200 DMA) + Narrow CPR Breakout + Supertrend Bullish + Above VWAP (₹1740.83), RSI 74.1, RVOL 2.88x."
-    },
-    {
-      "ticker": "HDFCBANK.BO",
-      "name": "HDFC Bank (BSE)",
-      "exchange": "BSE",
-      "sector": "Banking",
-      "setups": [
-        "15m_ORB",
-        "Session_VWAP",
-        "Stage2_200DMA_Uptrend",
-        "Supertrend_Bullish",
-        "EMA_9_21_50_Stack"
-      ],
-      "score": 189.71,
-      "historical_win_rate_pct": 73,
-      "close": 1738.85,
-      "latest_close": 1774.42,
-      "change_pct": 2.77,
-      "rvol": 3.17,
-      "atr": 4.06,
-      "technicals": {
-        "vwap": 1742.21,
-        "ema9": 1772.35,
-        "ema20": 1769.19,
-        "ema50": 1763.08,
-        "dma50": 1710,
-        "dma200": 1645,
-        "cpr_pivot": 1734.94,
-        "cpr_tc": 1739.13,
-        "cpr_r1": 1745.73,
-        "narrow_cpr": false,
-        "supertrend": "BULLISH_GREEN",
-        "rsi14": 72.1,
-        "above_vwap": true,
-        "ema_stack_aligned": true,
-        "stage2_historical_uptrend": true
-      },
-      "business_news": {
-        "source": "Moneycontrol / ET Markets",
-        "sentiment": "BULLISH",
-        "headline": "HDFC Bank (BSE): Private & PSU Banks hold steady above key support on resilient credit growth and stable NIMs"
-      },
-      "levels": {
-        "or_high": 1735.03,
-        "or_low": 1731.5,
-        "or_mid": 1733.26,
-        "stop_hint": 1733.26,
-        "target_2r": 1750.03,
-        "target_net_400": 1764.36
-      },
-      "sizing_preview": {
-        "shares": 17,
-        "stop_distance_inr": 5.59,
-        "max_loss_inr": 95.03,
-        "brokerage_and_taxes_inr": 31.61,
-        "shoonya_zero_brokerage_tax_inr": 10.54,
-        "gross_profit_at_target_inr": 433.67,
-        "net_profit_excl_brokerage_inr": 402.06
-      },
-      "data_source": "indian_market_sim",
-      "why": "BSE High-Accuracy Confluence: Stage-2 (Price > 50/200 DMA) + CPR Breakout + Supertrend Bullish + Above VWAP (₹1742.21), RSI 72.1, RVOL 3.17x."
-    },
-    {
-      "ticker": "BEL.BO",
-      "name": "Bharat Electronics (BSE)",
-      "exchange": "BSE",
-      "sector": "Defence Electronics",
-      "setups": [
-        "15m_ORB",
-        "Session_VWAP",
-        "Stage2_200DMA_Uptrend",
-        "Narrow_CPR_Breakout",
-        "Supertrend_Bullish",
-        "EMA_9_21_50_Stack"
-      ],
-      "score": 188.34,
-      "historical_win_rate_pct": 78,
-      "close": 297.91,
-      "latest_close": 306.83,
-      "change_pct": 3.86,
-      "rvol": 2.36,
-      "atr": 0.6,
-      "technicals": {
-        "vwap": 298.28,
-        "ema9": 306.17,
-        "ema20": 305.51,
-        "ema50": 303.83,
-        "dma50": 290,
-        "dma200": 265,
-        "cpr_pivot": 296.21,
-        "cpr_tc": 296.61,
-        "cpr_r1": 298.98,
-        "narrow_cpr": true,
-        "supertrend": "BULLISH_GREEN",
-        "rsi14": 69.7,
-        "above_vwap": true,
-        "ema_stack_aligned": true,
-        "stage2_historical_uptrend": true
-      },
-      "business_news": {
-        "source": "Economic Times / Moneycontrol India",
-        "sentiment": "BULLISH",
-        "headline": "Bharat Electronics (BSE): Bharat Electronics (BSE) (BSE) sees positive institutional volume flow and bullish sector breadth"
-      },
-      "levels": {
-        "or_high": 297.26,
-        "or_low": 296.74,
-        "or_mid": 297,
-        "stop_hint": 297,
-        "target_2r": 299.73,
-        "target_net_400": 301.92
-      },
-      "sizing_preview": {
-        "shares": 109,
-        "stop_distance_inr": 0.91,
-        "max_loss_inr": 99.19,
-        "brokerage_and_taxes_inr": 34.69,
-        "shoonya_zero_brokerage_tax_inr": 11.56,
-        "gross_profit_at_target_inr": 437.09,
-        "net_profit_excl_brokerage_inr": 402.4
-      },
-      "data_source": "indian_market_sim",
-      "why": "BSE High-Accuracy Confluence: Stage-2 (Price > 50/200 DMA) + Narrow CPR Breakout + Supertrend Bullish + Above VWAP (₹298.28), RSI 69.7, RVOL 2.36x."
-    },
-    {
-      "ticker": "SBIN.BO",
-      "name": "State Bank of India (BSE)",
-      "exchange": "BSE",
-      "sector": "PSU Banking",
-      "setups": [
-        "15m_ORB",
-        "Session_VWAP",
-        "Stage2_200DMA_Uptrend",
-        "Supertrend_Bullish",
-        "EMA_9_21_50_Stack"
-      ],
-      "score": 188.11,
-      "historical_win_rate_pct": 75,
-      "close": 839.24,
-      "latest_close": 861.68,
-      "change_pct": 4.85,
-      "rvol": 2.76,
-      "atr": 2.11,
-      "technicals": {
-        "vwap": 840.58,
-        "ema9": 861.72,
-        "ema20": 860.01,
-        "ema50": 855.82,
-        "dma50": 818,
-        "dma200": 780,
-        "cpr_pivot": 826.54,
-        "cpr_tc": 828.88,
-        "cpr_r1": 832.31,
-        "narrow_cpr": false,
-        "supertrend": "BULLISH_GREEN",
-        "rsi14": 64.4,
-        "above_vwap": true,
-        "ema_stack_aligned": true,
-        "stage2_historical_uptrend": true
-      },
-      "business_news": {
-        "source": "Economic Times / Moneycontrol India",
-        "sentiment": "BULLISH",
-        "headline": "State Bank of India (BSE): State Bank of India (BSE) (BSE) sees positive institutional volume flow and bullish sector breadth"
-      },
-      "levels": {
-        "or_high": 837.4,
-        "or_low": 835.95,
-        "or_mid": 836.67,
-        "stop_hint": 836.67,
-        "target_2r": 844.38,
-        "target_net_400": 850.72
-      },
-      "sizing_preview": {
-        "shares": 38,
-        "stop_distance_inr": 2.57,
-        "max_loss_inr": 97.66,
-        "brokerage_and_taxes_inr": 34.07,
-        "shoonya_zero_brokerage_tax_inr": 11.35,
-        "gross_profit_at_target_inr": 436.24,
-        "net_profit_excl_brokerage_inr": 402.17
-      },
-      "data_source": "indian_market_sim",
-      "why": "BSE High-Accuracy Confluence: Stage-2 (Price > 50/200 DMA) + CPR Breakout + Supertrend Bullish + Above VWAP (₹840.58), RSI 64.4, RVOL 2.76x."
+      "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹3626.36), RSI 64.9, RVOL 3.04x."
     }
   ]
 }

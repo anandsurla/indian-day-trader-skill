@@ -708,7 +708,6 @@ async function runScanner(mode = 'orb', topN = 10) {
         if (!bars5m || bars5m.length < 150) continue;
 
         const tickerNews = newsByTicker[item.ticker] || { sentiment: 'NEUTRAL', catalyst_score: 10, adverse_event: false };
-        if (tickerNews.adverse_event || tickerNews.sentiment === 'BEARISH') continue;
 
         const sessionBars = bars5m.slice(-75);
         const prevSessionBars = bars5m.slice(-150, -75);
@@ -721,13 +720,12 @@ async function runScanner(mode = 'orb', topN = 10) {
         const orRange = Number((orHigh - orLow).toFixed(2));
         const orPct = Number(((orRange / orLow) * 100).toFixed(2));
 
-        let triggerBar = sessionBars.slice(3, 18).find(b => b.close > orHigh) || sessionBars[4];
         const latestBar = sessionBars[sessionBars.length - 1];
         const closes = bars5m.map(b => b.close);
         const prevSessionClose = prevSessionBars[prevSessionBars.length - 1].close;
         const changePct = Number((((latestBar.close - prevSessionClose) / prevSessionClose) * 100).toFixed(2));
 
-        // 2. Central Pivot Range (CPR) & R1 from previous session
+        // 2. Central Pivot Range (CPR) & R1/S1 from previous session
         const cpr = calcCPR(prevSessionBars);
 
         // 3. Supertrend (10, 3), Session VWAP, EMA 9/21/50, RSI-14, ATR-14
@@ -739,47 +737,77 @@ async function runScanner(mode = 'orb', topN = 10) {
         const rsi14 = calcRSI(closes, 14);
         const atr = calcATR(sessionBars.slice(0, 15), 14);
 
-        // 4. Historical Stage-2 Uptrend Check (Price > 50-DMA > 200-DMA)
-        const entryPrice = Number(Math.max(triggerBar.close, orHigh + 0.05).toFixed(2));
+        // Determine Market Direction: BUY (LONG) vs SELL (SHORT) according to Market Position & News
+        const isBearishSetup = (tickerNews.sentiment === 'BEARISH' || tickerNews.adverse_event) ||
+            (!supertrend.is_bullish && latestBar.close < vwap && rsi14 < 48);
+        const tradeSide = isBearishSetup ? 'SELL' : 'BUY';
+
+        let triggerBar;
+        let entryPrice;
+        if (tradeSide === 'BUY') {
+            triggerBar = sessionBars.slice(3, 18).find(b => b.close > orHigh) || sessionBars[4];
+            entryPrice = Number(Math.max(triggerBar.close, orHigh + 0.05).toFixed(2));
+        } else {
+            triggerBar = sessionBars.slice(3, 18).find(b => b.close < orLow) || sessionBars[4];
+            entryPrice = Number(Math.min(triggerBar.close, orLow - 0.05).toFixed(2));
+        }
+
         const stage2HistoricalUptrend = entryPrice > item.dma50 && item.dma50 > item.dma200;
+        const stage4HistoricalDowntrend = entryPrice < item.dma50;
 
         const avgVol = bars5m.slice(0, -10).reduce((s, b) => s + b.volume, 0) / Math.max(1, bars5m.length - 10);
         const rvol = Number((triggerBar.volume / Math.max(1, avgVol)).toFixed(2));
 
         const aboveVwap = entryPrice >= vwap * 0.998;
-        const emaAligned = ema9 >= ema20 * 0.998 && ema20 >= ema50 * 0.995;
-        const rsiHealthy = rsi14 >= 50 && rsi14 <= 75;
-        if (!aboveVwap || !rsiHealthy || !stage2HistoricalUptrend) continue;
+        const belowVwap = entryPrice <= vwap * 1.002;
+        const emaAligned = tradeSide === 'BUY'
+            ? (ema9 >= ema20 * 0.998 && ema20 >= ema50 * 0.995)
+            : (ema9 <= ema20 * 1.002);
+        const rsiHealthy = tradeSide === 'BUY'
+            ? (rsi14 >= 50 && rsi14 <= 75)
+            : (rsi14 >= 25 && rsi14 <= 48);
 
-        // 5. Strict ₹100 Stop-Loss & Mandatory ₹400 Net Profit (Excl. Brokerage) Sizing
-        const rawStop = orMid < entryPrice ? orMid : Number((entryPrice - Math.max(atr * 1.2, entryPrice * 0.0035)).toFixed(2));
-        const stopDistance = Math.max(0.5, Number((entryPrice - rawStop).toFixed(2)));
+        if (tradeSide === 'BUY' && (!aboveVwap || !rsiHealthy || !stage2HistoricalUptrend)) continue;
+        if (tradeSide === 'SELL' && (!belowVwap || !rsiHealthy)) continue;
+
+        // 5. Strict Stop-Loss & Mandatory Net Profit (Excl. Brokerage) Sizing for BOTH BUY & SELL
+        const rawStop = tradeSide === 'BUY'
+            ? (orMid < entryPrice ? orMid : Number((entryPrice - Math.max(atr * 1.2, entryPrice * 0.0035)).toFixed(2)))
+            : (orMid > entryPrice ? orMid : Number((entryPrice + Math.max(atr * 1.2, entryPrice * 0.0035)).toFixed(2)));
+        const stopDistance = Math.max(0.5, Number(Math.abs(entryPrice - rawStop).toFixed(2)));
         const maxSharesByRisk = Math.floor((cfg.max_loss_per_trade_inr || 100) / stopDistance);
         const maxSharesByLeverage = Math.floor(((cfg.budget || 20000) * (cfg.intraday_leverage || 5) * 0.95) / entryPrice);
         const feasibleShares = Math.min(maxSharesByRisk, maxSharesByLeverage);
         if (feasibleShares < 1) continue;
 
+        const targetGoalInr = cfg.daily_profit_target_inr || 400;
         const riskInr = Number((feasibleShares * stopDistance).toFixed(2));
         const estCharges = calculateIndianCharges({
             exchange: item.exchange,
             entryPrice,
-            exitPrice: entryPrice + (400 / feasibleShares),
+            exitPrice: tradeSide === 'BUY'
+                ? entryPrice + (targetGoalInr / feasibleShares)
+                : entryPrice - (targetGoalInr / feasibleShares),
             quantity: feasibleShares
         });
-        const requiredGrossFor400Net = Number((400 + estCharges.total + 2.0).toFixed(2));
-        const targetPriceFor400Net = Number((entryPrice + (requiredGrossFor400Net / feasibleShares)).toFixed(2));
-        const netProfitAtTarget = Number(((targetPriceFor400Net - entryPrice) * feasibleShares - estCharges.total).toFixed(2));
+        const requiredGrossForTargetNet = Number((targetGoalInr + estCharges.total + 2.0).toFixed(2));
+        const targetPriceFor400Net = tradeSide === 'BUY'
+            ? Number((entryPrice + (requiredGrossForTargetNet / feasibleShares)).toFixed(2))
+            : Number((entryPrice - (requiredGrossForTargetNet / feasibleShares)).toFixed(2));
+        const netProfitAtTarget = Number((Math.abs(targetPriceFor400Net - entryPrice) * feasibleShares - estCharges.total).toFixed(2));
 
-        const capitalEfficiency = riskInr / 100;
-        const cprBonus = (cpr.is_narrow_cpr ? 15 : 8) + (entryPrice >= cpr.tc ? 10 : 5);
-        const supertrendBonus = supertrend.is_bullish ? 12 : 0;
+        const capitalEfficiency = riskInr / (cfg.max_loss_per_trade_inr || 100);
+        const cprBonus = (cpr.is_narrow_cpr ? 15 : 8) + ((tradeSide === 'BUY' ? entryPrice >= cpr.tc : entryPrice <= cpr.bc) ? 10 : 5);
+        const supertrendBonus = (tradeSide === 'BUY' ? supertrend.is_bullish : !supertrend.is_bullish) ? 12 : 0;
         const histBonus = (item.histWinRate || 74) * 0.25;
-        const techScore = (aboveVwap ? 12 : 0) + (emaAligned ? 12 : 0) + cprBonus + supertrendBonus + histBonus;
-        const newsScore = Number(tickerNews.catalyst_score || 12);
+        const techScore = ((tradeSide === 'BUY' ? aboveVwap : belowVwap) ? 12 : 0) + (emaAligned ? 12 : 0) + cprBonus + supertrendBonus + histBonus;
+        const newsScore = tradeSide === 'SELL' ? Math.abs(Number(tickerNews.catalyst_score || 15)) : Number(tickerNews.catalyst_score || 12);
 
-        const setups = ['15m_ORB', 'Session_VWAP', 'Stage2_200DMA_Uptrend'];
-        if (cpr.is_narrow_cpr) setups.push('Narrow_CPR_Breakout');
-        if (supertrend.is_bullish) setups.push('Supertrend_Bullish');
+        const setups = tradeSide === 'BUY'
+            ? ['BUY_LONG_TREND', '15m_ORB_Breakout', 'Session_VWAP', 'Stage2_200DMA_Uptrend']
+            : ['SELL_SHORT_TREND', '15m_ORB_Breakdown', 'Below_Session_VWAP', 'Bearish_Catalyst'];
+        if (cpr.is_narrow_cpr) setups.push('Narrow_CPR');
+        setups.push(tradeSide === 'BUY' ? 'Supertrend_Bullish' : 'Supertrend_Bearish');
         if (emaAligned) setups.push('EMA_9_21_50_Stack');
 
         const score = Number(((rvol * 20) + (capitalEfficiency * 35) + techScore + newsScore + Math.max(0, 12 - orPct * 6)).toFixed(2));
@@ -789,6 +817,7 @@ async function runScanner(mode = 'orb', topN = 10) {
             name: item.name,
             exchange: item.exchange,
             sector: item.sector,
+            side: tradeSide,
             setups,
             score,
             historical_win_rate_pct: item.histWinRate || 75,
@@ -824,20 +853,23 @@ async function runScanner(mode = 'orb', topN = 10) {
                 or_low: orLow,
                 or_mid: orMid,
                 stop_hint: rawStop,
-                target_2r: Number((entryPrice + stopDistance * 2).toFixed(2)),
+                target_2r: tradeSide === 'BUY'
+                    ? Number((entryPrice + stopDistance * 2).toFixed(2))
+                    : Number((entryPrice - stopDistance * 2).toFixed(2)),
                 target_net_400: targetPriceFor400Net
             },
             sizing_preview: {
+                side: tradeSide,
                 shares: feasibleShares,
                 stop_distance_inr: stopDistance,
                 max_loss_inr: riskInr,
                 brokerage_and_taxes_inr: estCharges.total,
                 shoonya_zero_brokerage_tax_inr: estCharges.shoonyaZeroBrokerageTotal,
-                gross_profit_at_target_inr: Number(((targetPriceFor400Net - entryPrice) * feasibleShares).toFixed(2)),
+                gross_profit_at_target_inr: Number((Math.abs(targetPriceFor400Net - entryPrice) * feasibleShares).toFixed(2)),
                 net_profit_excl_brokerage_inr: netProfitAtTarget
             },
             data_source: source,
-            why: `${item.exchange} High-Accuracy Confluence: Stage-2 (Price > 50/200 DMA) + ${cpr.is_narrow_cpr ? 'Narrow CPR' : 'CPR'} Breakout + Supertrend Bullish + Above VWAP (₹${vwap}), RSI ${rsi14}, RVOL ${rvol}x.`
+            why: `${item.exchange} High-Accuracy ${tradeSide} Confluence: ${tradeSide === 'BUY' ? 'Stage-2 Uptrend + Above VWAP' : 'Bearish Breakdown + Below VWAP'} (₹${vwap}), RSI ${rsi14}, RVOL ${rvol}x.`
         });
     }
 
@@ -1489,8 +1521,11 @@ async function monitorAndManageActiveTrade() {
     const latestBar = candles[candles.length - 1];
     const currentPrice = latestBar ? latestBar.close : pos.current_price_inr;
 
+    const isShort = String(pos.side || 'BUY').toUpperCase() === 'SELL';
     pos.current_price_inr = currentPrice;
-    if (currentPrice > (pos.peak_price_inr || pos.entry_price_inr)) {
+    if (!isShort && currentPrice > (pos.peak_price_inr || pos.entry_price_inr)) {
+        pos.peak_price_inr = currentPrice;
+    } else if (isShort && currentPrice < (pos.peak_price_inr || pos.entry_price_inr)) {
         pos.peak_price_inr = currentPrice;
     }
 
@@ -1501,30 +1536,37 @@ async function monitorAndManageActiveTrade() {
         quantity: pos.qty
     });
 
-    if (!pos.breakeven_locked && currentPrice >= pos.breakeven_1r_trigger_inr) {
+    if (!pos.breakeven_locked && (!isShort ? currentPrice >= pos.breakeven_1r_trigger_inr : currentPrice <= pos.breakeven_1r_trigger_inr)) {
         pos.breakeven_locked = true;
-        const taxFreeStop = Number((pos.entry_price_inr + liveCharges.perShareBuffer + 0.10).toFixed(2));
-        if (taxFreeStop > pos.strict_stop_loss_inr) {
-            pos.strict_stop_loss_inr = taxFreeStop;
+        if (!isShort) {
+            const taxFreeStop = Number((pos.entry_price_inr + liveCharges.perShareBuffer + 0.10).toFixed(2));
+            if (taxFreeStop > pos.strict_stop_loss_inr) pos.strict_stop_loss_inr = taxFreeStop;
+        } else {
+            const taxFreeStop = Number((pos.entry_price_inr - liveCharges.perShareBuffer - 0.10).toFixed(2));
+            if (taxFreeStop < pos.strict_stop_loss_inr) pos.strict_stop_loss_inr = taxFreeStop;
         }
     }
 
-    if (currentPrice >= pos.trail_2r_trigger_inr) {
+    if (!isShort ? currentPrice >= pos.trail_2r_trigger_inr : currentPrice <= pos.trail_2r_trigger_inr) {
         pos.trailing_stop_active = true;
-        const peakGain = pos.peak_price_inr - pos.entry_price_inr;
-        const trailedStop = Number((pos.entry_price_inr + Math.max(peakGain * 0.65, liveCharges.perShareBuffer * 2)).toFixed(2));
-        if (trailedStop > pos.strict_stop_loss_inr) {
-            pos.strict_stop_loss_inr = trailedStop;
+        if (!isShort) {
+            const peakGain = pos.peak_price_inr - pos.entry_price_inr;
+            const trailedStop = Number((pos.entry_price_inr + Math.max(peakGain * 0.65, liveCharges.perShareBuffer * 2)).toFixed(2));
+            if (trailedStop > pos.strict_stop_loss_inr) pos.strict_stop_loss_inr = trailedStop;
+        } else {
+            const peakGain = pos.entry_price_inr - pos.peak_price_inr;
+            const trailedStop = Number((pos.entry_price_inr - Math.max(peakGain * 0.65, liveCharges.perShareBuffer * 2)).toFixed(2));
+            if (trailedStop < pos.strict_stop_loss_inr) pos.strict_stop_loss_inr = trailedStop;
         }
     }
 
     let exitReason = null;
     let exitPrice = currentPrice;
 
-    if (currentPrice >= pos.take_profit_target_inr) {
+    if (!isShort ? currentPrice >= pos.take_profit_target_inr : currentPrice <= pos.take_profit_target_inr) {
         exitReason = 'TARGET_HIT_MANDATORY_400_NET_PROFIT';
         exitPrice = pos.take_profit_target_inr;
-    } else if (currentPrice <= pos.strict_stop_loss_inr) {
+    } else if (!isShort ? currentPrice <= pos.strict_stop_loss_inr : currentPrice >= pos.strict_stop_loss_inr) {
         exitReason = pos.trailing_stop_active
             ? 'TRAILING_PROFIT_STOP_BOOKED'
             : (pos.breakeven_locked ? 'TAX_FREE_BREAKEVEN_EXIT' : 'STRICT_100_INR_STOP_LOSS_EXIT');
@@ -1541,7 +1583,9 @@ async function monitorAndManageActiveTrade() {
             exitPrice,
             quantity: pos.qty
         });
-        const grossPnl = Number(((exitPrice - pos.entry_price_inr) * pos.qty).toFixed(2));
+        const grossPnl = !isShort
+            ? Number(((exitPrice - pos.entry_price_inr) * pos.qty).toFixed(2))
+            : Number(((pos.entry_price_inr - exitPrice) * pos.qty).toFixed(2));
         const netPnlExclBrokerage = Number((grossPnl - finalCharges.total).toFixed(2));
 
         const closedRecord = {
@@ -1568,7 +1612,9 @@ async function monitorAndManageActiveTrade() {
         return { status: 'CLOSED_AUTONOMOUSLY', closed_trade: closedRecord, portfolio };
     }
 
-    const grossUnrealized = Number(((currentPrice - pos.entry_price_inr) * pos.qty).toFixed(2));
+    const grossUnrealized = !isShort
+        ? Number(((currentPrice - pos.entry_price_inr) * pos.qty).toFixed(2))
+        : Number(((pos.entry_price_inr - currentPrice) * pos.qty).toFixed(2));
     pos.unrealized_gross_pnl_inr = grossUnrealized;
     pos.unrealized_net_pnl_excl_brokerage_inr = Number((grossUnrealized - liveCharges.total).toFixed(2));
     portfolio.active_position = pos;

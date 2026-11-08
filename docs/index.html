@@ -313,10 +313,10 @@
       </div>
     </div>
 
-    <!-- Clear Explanation Banner: 100% Automatic + 12:15 PM Trade #2 Rule -->
+    <!-- Clear Explanation Banner: 100% Automatic + Two-Way BUY/SELL + 12:15 PM Trade #2 Rule -->
     <div class="auto-banner">
       <div>
-        <strong>🤖 Fully Automatic Agent (With 12:15 PM Trade #2 Rule):</strong> The agent automatically enters Trade #1 at 09:35 IST. If Trade #1 closes <strong>before 12:15 PM IST</strong> and another stock has <strong>Super-Potential (Score ≥ 200)</strong>, the agent automatically enters <strong>Trade #2</strong> and records every daily detail to GitHub.
+        <strong>🤖 Two-Way Autonomous Agent (BUY &amp; SELL Short + 12:15 PM Rule):</strong> SriKari TradeBot analyzes <strong>both BUY (Bullish Uptrend) and SELL (Bearish Intraday Short)</strong> opportunities based on market position &amp; news. If Trade #1 closes <strong>before 12:15 PM IST</strong> and another stock has <strong>Super-Potential (Score ≥ 200)</strong>, it automatically enters <strong>Trade #2</strong>.
       </div>
       <div id="auto-cycle-status" style="font-weight:700; color:var(--green);">Live Auto-Monitoring Active</div>
     </div>
@@ -561,7 +561,7 @@
           return `
             <tr>
               <td><strong>${t.date}</strong></td>
-              <td><strong>${t.symbol}</strong> <span class="badge badge-blue">${t.exchange}</span></td>
+              <td><strong>${t.symbol}</strong> <span class="badge badge-blue">${t.exchange}</span> <span class="badge ${String(t.side || 'BUY').toUpperCase() === 'SELL' ? 'badge-amber' : 'badge-green'}">${String(t.side || 'BUY').toUpperCase()}</span></td>
               <td style="font-size:12.5px; color:#cbd5e1;">${t.strategy_used || 'Stage-2 200-DMA + Narrow CPR + 15m ORB + Supertrend(10,3) + VWAP'}</td>
               <td><span class="badge badge-green">${t.entry_time_ist || '09:35:00 IST'}</span></td>
               <td><strong>${fmtInr(t.entry_price_inr)}</strong></td>
@@ -601,7 +601,7 @@
           return `
             <tr>
               <td><strong>${t.date}</strong></td>
-              <td><strong>${t.symbol}</strong> <span class="badge badge-blue">${t.exchange}</span></td>
+              <td><strong>${t.symbol}</strong> <span class="badge badge-blue">${t.exchange}</span> <span class="badge ${String(t.side || 'BUY').toUpperCase() === 'SELL' ? 'badge-amber' : 'badge-green'}">${String(t.side || 'BUY').toUpperCase()}</span></td>
               <td><strong>${scaledQty}</strong></td>
               <td><span class="badge badge-amber">${t.entry_time_ist || '09:35:00 IST'}</span></td>
               <td>${fmtInr(t.entry_price_inr)}</td>
