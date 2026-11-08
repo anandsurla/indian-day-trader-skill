@@ -1,12 +1,12 @@
 {
-  "as_of": "2026-11-08T10:06:33+05:30",
+  "as_of": "2026-11-08T10:09:53+05:30",
   "market": "INDIA_NSE_BSE",
   "exchange": "BSE",
   "currency": "INR",
-  "ticker": "NTPC.BO",
+  "ticker": "TATAMOTORS.BO",
   "side": "buy",
   "entry": {
-    "price": 414.16,
+    "price": 841.38,
     "source": "trader-entry",
     "rule": "orb_vwap_ema_news",
     "triggered_at_ist": "2026-11-08T09:35:00+05:30"
@@ -14,41 +14,41 @@
   "opening_range": {
     "start": "09:15",
     "end": "09:30",
-    "high": 413.25,
-    "low": 412.55,
-    "mid": 412.9,
-    "range": 0.7,
+    "high": 839.53,
+    "low": 837.99,
+    "mid": 838.76,
+    "range": 1.54,
     "bars": 3
   },
-  "atr": 1.13,
+  "atr": 2.36,
   "stop": {
-    "price": 412.9,
+    "price": 838.76,
     "rule": "strict-or-mid",
-    "distance": 1.26,
-    "pct": 0.304,
+    "distance": 2.62,
+    "pct": 0.311,
     "strict_max_loss_inr": 100
   },
   "breakeven_1r_lock": {
-    "trigger_price": 415.42,
-    "new_stop_price": 414.7,
+    "trigger_price": 844,
+    "new_stop_price": 842.38,
     "note": "Covers 100% of brokerage & statutory taxes once price moves +1R"
   },
   "target_1_trail_trigger": {
-    "price": 416.68,
+    "price": 846.62,
     "rule": "2R_lock_profit_trail",
-    "distance": 2.52,
+    "distance": 5.24,
     "r_multiple": 2
   },
   "target": {
-    "price": 419.69,
-    "rule": "4.39R_mandatory_400_net_excl_brokerage",
-    "distance": 5.53,
-    "pct": 1.335,
-    "r_multiple": 4.39,
+    "price": 852.86,
+    "rule": "4.38R_mandatory_400_net_excl_brokerage",
+    "distance": 11.48,
+    "pct": 1.364,
+    "r_multiple": 4.38,
     "mandatory_net_profit_goal_inr": 400,
-    "estimated_brokerage_and_taxes_inr": 34.96
+    "estimated_brokerage_and_taxes_inr": 34.15
   },
-  "reward_risk": 4.39,
+  "reward_risk": 4.38,
   "flat_by": "15:15",
-  "summary": "NTPC.BO BUY @ ₹414.16: Strict SL ₹412.9 (Max Loss <= ₹100), Target ₹419.69 (Gross ₹436.87 - Brokerage/Taxes ₹34.96 = Pure Net Profit >= ₹400), Auto Exit armed."
+  "summary": "TATAMOTORS.BO BUY @ ₹841.38: Strict SL ₹838.76 (Max Loss <= ₹100), Target ₹852.86 (Gross ₹436.24 - Brokerage/Taxes ₹34.15 = Pure Net Profit >= ₹400), Auto Exit armed."
 }
