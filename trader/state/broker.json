@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-08T12:04:08+05:30",
+  "as_of": "2026-11-08T12:10:29+05:30",
   "market": "INDIA_NSE_BSE",
   "exchange": "NSE",
   "currency": "INR",
@@ -7,7 +7,7 @@
   "autonomous": true,
   "status": "FILLED_PAPER_OPEN",
   "ticket": {
-    "id": "IND_1794119648704",
+    "id": "IND_1794120029282",
     "date": "2026-11-08",
     "symbol": "RELIANCE.NS",
     "name": "Reliance Industries",

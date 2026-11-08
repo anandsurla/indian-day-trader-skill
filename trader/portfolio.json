@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-08T12:04:08+05:30",
+  "as_of": "2026-11-08T12:10:29+05:30",
   "market": "INDIA_NSE_BSE",
   "currency": "INR",
   "paper": true,
@@ -11,7 +11,7 @@
   "realized_net_profit_today_inr": 0,
   "total_brokerage_paid_today_inr": 0,
   "active_position": {
-    "id": "IND_1794119648704",
+    "id": "IND_1794120029282",
     "date": "2026-11-08",
     "symbol": "RELIANCE.NS",
     "name": "Reliance Industries",

@@ -302,12 +302,20 @@
     <div class="header">
       <div class="brand">
         <h1>🇮🇳 Indian Day-Trader — Executive Analyst View</h1>
-        <p>Account Capital: <strong>₹20,000</strong> &nbsp;|&nbsp; Mandatory Daily Net Profit: <strong class="text-green">+₹400/day</strong> &nbsp;|&nbsp; Strict Stop-Loss: <strong class="text-red">≤ ₹100/trade</strong></p>
+        <p id="capital-subtitle">Shoonya Account Balance: <strong>₹20,000</strong> &nbsp;|&nbsp; Daily Net Target (2%): <strong class="text-green">+₹400/trade</strong> &nbsp;|&nbsp; Strict Stop-Loss (0.5%): <strong class="text-red">≤ ₹100/trade</strong></p>
       </div>
       <div class="actions">
+        <div style="display:flex; align-items:center; gap:6px; background:#111827; border:1px solid #334155; padding:4px 10px; border-radius:8px; font-size:12.5px;">
+          <span style="color:var(--muted);">Shoonya Balance:</span>
+          <select id="balance-select" onchange="onBalanceChange(this.value)" style="background:#1e293b; color:#f8fafc; border:1px solid #475569; border-radius:6px; padding:4px 8px; font-weight:700; cursor:pointer;">
+            <option value="5000">₹5,000 (Target +₹100 | SL ≤ ₹25)</option>
+            <option value="20000" selected>₹20,000 (Target +₹400 | SL ≤ ₹100)</option>
+            <option value="50000">₹50,000 (Target +₹1,000 | SL ≤ ₹250)</option>
+          </select>
+        </div>
         <div class="autopilot-pill">
           <span class="pulse-dot"></span>
-          100% AUTO-PILOT: ON (Zero Manual Action Needed)
+          100% AUTO-PILOT: ON
         </div>
         <button class="btn btn-blue" onclick="sendReportToGitHub()">📄 Daily GitHub Report</button>
       </div>
@@ -489,9 +497,20 @@
     const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/anandsurla/indian-day-trader-skill/main/trader';
 
     let appState = {
+      balance_inr: 20000,
       active_trades: [],
       closed_trades: []
     };
+
+    function onBalanceChange(val) {
+      appState.balance_inr = Number(val || 20000);
+      const targetNet = Math.round(appState.balance_inr * 0.02);
+      const strictSl = Math.round(appState.balance_inr * 0.005);
+      document.getElementById('capital-subtitle').innerHTML =
+        `Shoonya Account Balance: <strong>₹${appState.balance_inr.toLocaleString('en-IN')}</strong> &nbsp;|&nbsp; Daily Net Target (2%): <strong class="text-green">+₹${targetNet.toLocaleString('en-IN')}/trade</strong> &nbsp;|&nbsp; Strict Stop-Loss (0.5%): <strong class="text-red">≤ ₹${strictSl.toLocaleString('en-IN')}/trade</strong>`;
+      renderDashboard();
+      showToast(`🔄 Dynamically scaled position sizing for Shoonya Balance: ₹${appState.balance_inr.toLocaleString('en-IN')} (Target: +₹${targetNet}/trade | Strict SL: ≤ ₹${strictSl})`);
+    }
 
     function getISTTimeStr() {
       return new Date().toLocaleTimeString('en-IN', {
@@ -514,6 +533,7 @@
     }
 
     function renderDashboard() {
+      const scale = (appState.balance_inr || 20000) / 20000;
       const activeList = appState.active_trades || [];
       const closedList = appState.closed_trades || [];
 
@@ -524,6 +544,11 @@
       } else {
         activeTbody.innerHTML = activeList.map(t => {
           const livePrice = t.live_price_inr || t.entry_price_inr;
+          const scaledQty = Math.max(1, Math.round(t.qty * scale));
+          const scaledMaxLoss = t.max_loss_at_stop_inr * scale;
+          const scaledGross = t.target_gross_profit_inr * scale;
+          const scaledBrok = t.brokerage_and_taxes_inr * scale;
+          const scaledNet = t.target_net_profit_inr * scale;
           return `
             <tr>
               <td><strong>${t.date}</strong></td>
@@ -532,12 +557,12 @@
               <td><span class="badge badge-green">${t.entry_time_ist || '09:35:00 IST'}</span></td>
               <td><strong>${fmtInr(t.entry_price_inr)}</strong></td>
               <td class="text-blue"><strong>${fmtInr(livePrice)}</strong></td>
-              <td>${t.qty}</td>
-              <td class="text-red">${fmtInr(t.strict_stop_loss_inr)} <span style="font-size:11.5px;">(-${fmtInr(t.max_loss_at_stop_inr)})</span></td>
+              <td><strong>${scaledQty}</strong></td>
+              <td class="text-red">${fmtInr(t.strict_stop_loss_inr)} <span style="font-size:11.5px;">(-${fmtInr(scaledMaxLoss)})</span></td>
               <td class="text-green"><strong>${fmtInr(t.target_price_inr)}</strong></td>
-              <td><strong>${fmtInr(t.target_gross_profit_inr)}</strong></td>
-              <td class="text-amber">-${fmtInr(t.brokerage_and_taxes_inr)}</td>
-              <td class="text-green"><strong>+${fmtInr(t.target_net_profit_inr)}</strong></td>
+              <td><strong>${fmtInr(scaledGross)}</strong></td>
+              <td class="text-amber">-${fmtInr(scaledBrok)}</td>
+              <td class="text-green"><strong>+${fmtInr(scaledNet)}</strong></td>
             </tr>
           `;
         }).join('');
@@ -554,10 +579,11 @@
         closedTbody.innerHTML = '<tr><td colspan="11" style="text-align:center; color:var(--muted);">No closed trades yet.</td></tr>';
       } else {
         const rowsHtml = closedList.map(t => {
-          const gross = Number(t.gross_pnl_inr || 0);
-          const brok = Number(t.brokerage_and_taxes_inr || 0);
-          const net = Number(t.net_pnl_excl_brokerage_inr || 0);
-          const shoonyaNet = Number(t.shoonya_zero_brokerage_net_inr || (gross - 9.85));
+          const scaledQty = Math.max(1, Math.round(t.qty * scale));
+          const gross = Number(t.gross_pnl_inr || 0) * scale;
+          const brok = Number(t.brokerage_and_taxes_inr || 0) * scale;
+          const net = Number(t.net_pnl_excl_brokerage_inr || 0) * scale;
+          const shoonyaNet = Number(t.shoonya_zero_brokerage_net_inr || (t.gross_pnl_inr - 9.85)) * scale;
           totalGross += gross;
           totalBrok += brok;
           totalNet += net;
@@ -567,7 +593,7 @@
             <tr>
               <td><strong>${t.date}</strong></td>
               <td><strong>${t.symbol}</strong> <span class="badge badge-blue">${t.exchange}</span></td>
-              <td>${t.qty}</td>
+              <td><strong>${scaledQty}</strong></td>
               <td><span class="badge badge-amber">${t.entry_time_ist || '09:35:00 IST'}</span></td>
               <td>${fmtInr(t.entry_price_inr)}</td>
               <td><span class="badge badge-green">${t.exit_time_ist || '14:10:00 IST'}</span></td>

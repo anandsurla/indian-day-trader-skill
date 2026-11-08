@@ -309,6 +309,18 @@ function getISTInfo(date = new Date()) {
     };
 }
 
+function calculateDynamicAccountScaling(balanceInr) {
+    const b = Math.max(1000, Number(balanceInr || 20000));
+    return {
+        account_balance_inr: b,
+        intraday_buying_power_5x_inr: Math.round(b * 5 * 0.95),
+        daily_profit_target_inr: Math.round(b * 0.02),          // 2.0% of account balance (Net after brokerage)
+        strict_max_loss_per_trade_inr: Math.round(b * 0.005),   // 0.5% of account balance (Strict Stop-Loss)
+        strict_max_daily_loss_inr: Math.round(b * 0.005),       // 0.5% daily circuit breaker
+        two_trade_super_day_profit_inr: Math.round(b * 0.04)    // 4.0% if Trade #1 closes < 12:15 PM & Trade #2 wins
+    };
+}
+
 function loadConfig() {
     const defaults = {
         market: 'INDIA_NSE_BSE',
@@ -317,8 +329,10 @@ function loadConfig() {
         currency_symbol: '₹',
         timezone: 'Asia/Kolkata',
         budget: 20000,
+        dynamic_balance_scaling: true,
         daily_profit_target_inr: 400,
         daily_profit_target_pct: 2.0,
+        strict_stop_loss_pct: 0.5,
         mandatory_net_profit_excl_brokerage: true,
         recommended_zero_brokerage_broker: 'Finvasia Shoonya / Kotak Neo (₹0 Intraday Brokerage)',
         intraday_leverage: 5.0,
@@ -342,7 +356,9 @@ function loadConfig() {
         max_daily_loss_inr: 100,
         min_reward_risk: 2.0,
         target_reward_risk: 4.0,
-        max_trades_per_day: 3,
+        max_trades_per_day: 2,
+        second_trade_cutoff_ist: '12:15',
+        second_trade_min_super_score: 200,
         market_open: '09:15',
         opening_range_end: '09:30',
         no_entries_before: '09:30',
@@ -352,6 +368,17 @@ function loadConfig() {
     };
     const userCfg = readJson(FILES.config, {});
     const merged = { ...defaults, ...userCfg };
+    // Dynamic Shoonya / Trading Account Balance Scaling (2.0% Daily Net Target, 0.5% Strict Stop-Loss)
+    const activeBalance = Number(process.env.SHOONYA_BALANCE_INR || merged.budget || 20000);
+    const scaled = calculateDynamicAccountScaling(activeBalance);
+    merged.budget = scaled.account_balance_inr;
+    if (merged.dynamic_balance_scaling !== false) {
+        merged.daily_profit_target_inr = scaled.daily_profit_target_inr;
+        merged.max_loss_per_trade_inr = scaled.strict_max_loss_per_trade_inr;
+        merged.max_loss_per_trade_usd = scaled.strict_max_loss_per_trade_inr;
+        merged.max_daily_loss_inr = scaled.strict_max_daily_loss_inr;
+        merged.max_daily_loss_usd = scaled.strict_max_daily_loss_inr;
+    }
     writeJson(FILES.config, merged);
     return merged;
 }
