@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-08T09:57:19+05:30",
+  "as_of": "2026-11-08T10:06:32+05:30",
   "market": "INDIA_NSE_BSE",
   "timezone": "Asia/Kolkata",
   "mode": "orb",
@@ -19,8 +19,59 @@
   ],
   "universe_size": 40,
   "scanned": 40,
-  "matched": 17,
+  "matched": 18,
   "results": [
+    {
+      "ticker": "NTPC.BO",
+      "name": "NTPC Ltd (BSE)",
+      "exchange": "BSE",
+      "sector": "Power & Energy",
+      "setups": [
+        "orb",
+        "vwap_breakout",
+        "ema_stack_bullish",
+        "breakout_20d",
+        "bull_flag"
+      ],
+      "score": 203,
+      "close": 414.16,
+      "latest_close": 427,
+      "change_pct": 4.18,
+      "rvol": 3.12,
+      "atr": 1.1,
+      "technicals": {
+        "vwap": 414.32,
+        "ema9": 426.83,
+        "ema20": 425.97,
+        "ema50": 423.26,
+        "rsi14": 66.4,
+        "above_vwap": true,
+        "ema_stack_aligned": true
+      },
+      "business_news": {
+        "source": "Economic Times Energy / Moneycontrol",
+        "sentiment": "BULLISH",
+        "headline": "NTPC Ltd (BSE): Power & PSU utilities surge on record peak electricity demand and renewable capacity additions"
+      },
+      "levels": {
+        "or_high": 413.25,
+        "or_low": 412.55,
+        "or_mid": 412.9,
+        "stop_hint": 412.9,
+        "target_2r": 416.68,
+        "target_net_400": 419.69
+      },
+      "sizing_preview": {
+        "shares": 79,
+        "stop_distance_inr": 1.26,
+        "max_loss_inr": 99.54,
+        "brokerage_and_taxes_inr": 34.96,
+        "gross_profit_at_target_inr": 436.87,
+        "net_profit_excl_brokerage_inr": 401.91
+      },
+      "data_source": "indian_market_sim",
+      "why": "BSE ORB + VWAP (₹414.32) + EMA9/20/50 breakout, RSI 66.4, RVOL 3.12x | News: BULLISH (Economic Times Energy / Moneycontrol) | 79 sh risks ₹99.54 (<= ₹100 SL) for ₹401.91 Pure Net Profit (after ₹34.96 brokerage/taxes)."
+    },
     {
       "ticker": "TATAMOTORS.BO",
       "name": "Tata Motors (BSE)",
@@ -71,6 +122,261 @@
       },
       "data_source": "indian_market_sim",
       "why": "BSE ORB + VWAP (₹842.48) + EMA9/20/50 breakout, RSI 64.1, RVOL 3.13x | News: BULLISH (Economic Times Markets / Moneycontrol) | 38 sh risks ₹99.56 (<= ₹100 SL) for ₹402.09 Pure Net Profit (after ₹34.15 brokerage/taxes)."
+    },
+    {
+      "ticker": "LT.NS",
+      "name": "Larsen & Toubro",
+      "exchange": "NSE",
+      "sector": "Infrastructure",
+      "setups": [
+        "orb",
+        "vwap_breakout",
+        "ema_stack_bullish",
+        "breakout_20d",
+        "bull_flag"
+      ],
+      "score": 192.34,
+      "close": 3625.81,
+      "latest_close": 3692.33,
+      "change_pct": 1.96,
+      "rvol": 3.04,
+      "atr": 9.09,
+      "technicals": {
+        "vwap": 3626.36,
+        "ema9": 3691.55,
+        "ema20": 3685.35,
+        "ema50": 3669.92,
+        "rsi14": 64.9,
+        "above_vwap": true,
+        "ema_stack_aligned": true
+      },
+      "business_news": {
+        "source": "LiveMint / Economic Times",
+        "sentiment": "BULLISH",
+        "headline": "Larsen & Toubro: Infra & Capital Goods leaders gain on strong government capex order book visibility"
+      },
+      "levels": {
+        "or_high": 3617.85,
+        "or_low": 3611.65,
+        "or_mid": 3614.75,
+        "stop_hint": 3614.75,
+        "target_2r": 3647.93,
+        "target_net_400": 3674.35
+      },
+      "sizing_preview": {
+        "shares": 9,
+        "stop_distance_inr": 11.06,
+        "max_loss_inr": 99.54,
+        "brokerage_and_taxes_inr": 34.87,
+        "gross_profit_at_target_inr": 436.86,
+        "net_profit_excl_brokerage_inr": 401.99
+      },
+      "data_source": "indian_market_sim",
+      "why": "NSE ORB + VWAP (₹3626.36) + EMA9/20/50 breakout, RSI 64.9, RVOL 3.04x | News: BULLISH (LiveMint / Economic Times) | 9 sh risks ₹99.54 (<= ₹100 SL) for ₹401.99 Pure Net Profit (after ₹34.87 brokerage/taxes)."
+    },
+    {
+      "ticker": "SBIN.BO",
+      "name": "State Bank of India (BSE)",
+      "exchange": "BSE",
+      "sector": "PSU Banking",
+      "setups": [
+        "orb",
+        "vwap_breakout",
+        "ema_stack_bullish",
+        "breakout_20d",
+        "bull_flag"
+      ],
+      "score": 192.25,
+      "close": 839.24,
+      "latest_close": 861.68,
+      "change_pct": 4.85,
+      "rvol": 2.76,
+      "atr": 2.11,
+      "technicals": {
+        "vwap": 840.58,
+        "ema9": 861.72,
+        "ema20": 860.15,
+        "ema50": 855.82,
+        "rsi14": 64.4,
+        "above_vwap": true,
+        "ema_stack_aligned": true
+      },
+      "business_news": {
+        "source": "Economic Times / Moneycontrol India",
+        "sentiment": "BULLISH",
+        "headline": "State Bank of India (BSE): State Bank of India (BSE) (BSE) sees positive institutional volume flow and bullish sector breadth"
+      },
+      "levels": {
+        "or_high": 837.4,
+        "or_low": 835.95,
+        "or_mid": 836.67,
+        "stop_hint": 836.67,
+        "target_2r": 844.38,
+        "target_net_400": 850.72
+      },
+      "sizing_preview": {
+        "shares": 38,
+        "stop_distance_inr": 2.57,
+        "max_loss_inr": 97.66,
+        "brokerage_and_taxes_inr": 34.07,
+        "gross_profit_at_target_inr": 436.24,
+        "net_profit_excl_brokerage_inr": 402.17
+      },
+      "data_source": "indian_market_sim",
+      "why": "BSE ORB + VWAP (₹840.58) + EMA9/20/50 breakout, RSI 64.4, RVOL 2.76x | News: BULLISH (Economic Times / Moneycontrol India) | 38 sh risks ₹97.66 (<= ₹100 SL) for ₹402.17 Pure Net Profit (after ₹34.07 brokerage/taxes)."
+    },
+    {
+      "ticker": "RELIANCE.NS",
+      "name": "Reliance Industries",
+      "exchange": "NSE",
+      "sector": "Energy & Telecom",
+      "setups": [
+        "orb",
+        "vwap_breakout",
+        "ema_stack_bullish",
+        "breakout_20d",
+        "bull_flag"
+      ],
+      "score": 189.54,
+      "close": 1319.73,
+      "latest_close": 1343.67,
+      "change_pct": 2.59,
+      "rvol": 3.13,
+      "atr": 3.29,
+      "technicals": {
+        "vwap": 1321.1,
+        "ema9": 1339.75,
+        "ema20": 1337.38,
+        "ema50": 1333.33,
+        "rsi14": 71.9,
+        "above_vwap": true,
+        "ema_stack_aligned": true
+      },
+      "business_news": {
+        "source": "Business Standard / ET Markets",
+        "sentiment": "BULLISH",
+        "headline": "Reliance Industries: Telecom ARPU expansion and refining margin strength drive heavy institutional accumulation"
+      },
+      "levels": {
+        "or_high": 1316.83,
+        "or_low": 1313.94,
+        "or_mid": 1315.38,
+        "stop_hint": 1315.38,
+        "target_2r": 1328.43,
+        "target_net_400": 1339.41
+      },
+      "sizing_preview": {
+        "shares": 22,
+        "stop_distance_inr": 4.35,
+        "max_loss_inr": 95.7,
+        "brokerage_and_taxes_inr": 31.05,
+        "gross_profit_at_target_inr": 432.96,
+        "net_profit_excl_brokerage_inr": 401.91
+      },
+      "data_source": "indian_market_sim",
+      "why": "NSE ORB + VWAP (₹1321.1) + EMA9/20/50 breakout, RSI 71.9, RVOL 3.13x | News: BULLISH (Business Standard / ET Markets) | 22 sh risks ₹95.7 (<= ₹100 SL) for ₹401.91 Pure Net Profit (after ₹31.05 brokerage/taxes)."
+    },
+    {
+      "ticker": "HDFCBANK.BO",
+      "name": "HDFC Bank (BSE)",
+      "exchange": "BSE",
+      "sector": "Banking",
+      "setups": [
+        "orb",
+        "vwap_breakout",
+        "ema_stack_bullish",
+        "breakout_20d",
+        "bull_flag"
+      ],
+      "score": 188.97,
+      "close": 1738.85,
+      "latest_close": 1774.42,
+      "change_pct": 2.77,
+      "rvol": 3.17,
+      "atr": 4.06,
+      "technicals": {
+        "vwap": 1742.21,
+        "ema9": 1772.35,
+        "ema20": 1769.42,
+        "ema50": 1763.08,
+        "rsi14": 72.1,
+        "above_vwap": true,
+        "ema_stack_aligned": true
+      },
+      "business_news": {
+        "source": "Moneycontrol / ET Markets",
+        "sentiment": "BULLISH",
+        "headline": "HDFC Bank (BSE): Private & PSU Banks hold steady above key support on resilient credit growth and stable NIMs"
+      },
+      "levels": {
+        "or_high": 1735.03,
+        "or_low": 1731.5,
+        "or_mid": 1733.26,
+        "stop_hint": 1733.26,
+        "target_2r": 1750.03,
+        "target_net_400": 1764.36
+      },
+      "sizing_preview": {
+        "shares": 17,
+        "stop_distance_inr": 5.59,
+        "max_loss_inr": 95.03,
+        "brokerage_and_taxes_inr": 31.61,
+        "gross_profit_at_target_inr": 433.67,
+        "net_profit_excl_brokerage_inr": 402.06
+      },
+      "data_source": "indian_market_sim",
+      "why": "BSE ORB + VWAP (₹1742.21) + EMA9/20/50 breakout, RSI 72.1, RVOL 3.17x | News: BULLISH (Moneycontrol / ET Markets) | 17 sh risks ₹95.03 (<= ₹100 SL) for ₹402.06 Pure Net Profit (after ₹31.61 brokerage/taxes)."
+    },
+    {
+      "ticker": "ICICIBANK.NS",
+      "name": "ICICI Bank",
+      "exchange": "NSE",
+      "sector": "Banking",
+      "setups": [
+        "orb",
+        "vwap_breakout",
+        "ema_stack_bullish",
+        "breakout_20d",
+        "bull_flag"
+      ],
+      "score": 188.12,
+      "close": 1289.62,
+      "latest_close": 1315.35,
+      "change_pct": 2.97,
+      "rvol": 3.07,
+      "atr": 2.81,
+      "technicals": {
+        "vwap": 1289.99,
+        "ema9": 1314,
+        "ema20": 1310.38,
+        "ema50": 1302.83,
+        "rsi14": 72.8,
+        "above_vwap": true,
+        "ema_stack_aligned": true
+      },
+      "business_news": {
+        "source": "Moneycontrol / ET Markets",
+        "sentiment": "BULLISH",
+        "headline": "ICICI Bank: Private & PSU Banks hold steady above key support on resilient credit growth and stable NIMs"
+      },
+      "levels": {
+        "or_high": 1286.79,
+        "or_low": 1284.33,
+        "or_mid": 1285.56,
+        "stop_hint": 1285.56,
+        "target_2r": 1297.74,
+        "target_net_400": 1307.75
+      },
+      "sizing_preview": {
+        "shares": 24,
+        "stop_distance_inr": 4.06,
+        "max_loss_inr": 97.44,
+        "brokerage_and_taxes_inr": 33.08,
+        "gross_profit_at_target_inr": 435.12,
+        "net_profit_excl_brokerage_inr": 402.04
+      },
+      "data_source": "indian_market_sim",
+      "why": "NSE ORB + VWAP (₹1289.99) + EMA9/20/50 breakout, RSI 72.8, RVOL 3.07x | News: BULLISH (Moneycontrol / ET Markets) | 24 sh risks ₹97.44 (<= ₹100 SL) for ₹402.04 Pure Net Profit (after ₹33.08 brokerage/taxes)."
     },
     {
       "ticker": "ZOMATO.NS",
@@ -124,10 +430,10 @@
       "why": "NSE ORB + VWAP (₹262.87) + EMA9/20/50 breakout, RSI 64, RVOL 2.71x | News: BULLISH (Economic Times / Moneycontrol India) | 100 sh risks ₹100 (<= ₹100 SL) for ₹401.9 Pure Net Profit (after ₹28.1 brokerage/taxes)."
     },
     {
-      "ticker": "TATAMOTORS.NS",
-      "name": "Tata Motors",
+      "ticker": "HDFCBANK.NS",
+      "name": "HDFC Bank",
       "exchange": "NSE",
-      "sector": "Automobile & EV",
+      "sector": "Banking",
       "setups": [
         "orb",
         "vwap_breakout",
@@ -135,392 +441,95 @@
         "breakout_20d",
         "bull_flag"
       ],
-      "score": 167.99,
-      "close": 843.56,
-      "latest_close": 869.81,
-      "change_pct": 3.98,
-      "rvol": 1.75,
-      "atr": 1.98,
+      "score": 183.49,
+      "close": 1739.6,
+      "latest_close": 1791,
+      "change_pct": 3.25,
+      "rvol": 2.88,
+      "atr": 4.19,
       "technicals": {
-        "vwap": 844.63,
-        "ema9": 868.94,
-        "ema20": 867.55,
-        "ema50": 862.69,
-        "rsi14": 65.4,
+        "vwap": 1740.83,
+        "ema9": 1785.83,
+        "ema20": 1782.69,
+        "ema50": 1773.65,
+        "rsi14": 74.1,
         "above_vwap": true,
         "ema_stack_aligned": true
       },
       "business_news": {
-        "source": "Economic Times Markets / Moneycontrol",
+        "source": "Moneycontrol / ET Markets",
         "sentiment": "BULLISH",
-        "headline": "Tata Motors: Indian Auto & EV stocks rally on strong monthly dispatch growth and institutional FII inflows"
+        "headline": "HDFC Bank: Private & PSU Banks hold steady above key support on resilient credit growth and stable NIMs"
       },
       "levels": {
-        "or_high": 841.71,
-        "or_low": 839.64,
-        "or_mid": 840.67,
-        "stop_hint": 840.67,
-        "target_2r": 849.34,
-        "target_net_400": 856.29
+        "or_high": 1735.78,
+        "or_low": 1732.12,
+        "or_mid": 1733.95,
+        "stop_hint": 1733.95,
+        "target_2r": 1750.9,
+        "target_net_400": 1765.11
       },
       "sizing_preview": {
-        "shares": 34,
-        "stop_distance_inr": 2.89,
-        "max_loss_inr": 98.26,
-        "brokerage_and_taxes_inr": 30.68,
-        "gross_profit_at_target_inr": 432.82,
-        "net_profit_excl_brokerage_inr": 402.14
-      },
-      "data_source": "indian_market_sim",
-      "why": "NSE ORB + VWAP (₹844.63) + EMA9/20/50 breakout, RSI 65.4, RVOL 1.75x | News: BULLISH (Economic Times Markets / Moneycontrol) | 34 sh risks ₹98.26 (<= ₹100 SL) for ₹402.14 Pure Net Profit (after ₹30.68 brokerage/taxes)."
-    },
-    {
-      "ticker": "TCS.NS",
-      "name": "Tata Consultancy Services",
-      "exchange": "NSE",
-      "sector": "IT Services",
-      "setups": [
-        "orb",
-        "vwap_breakout",
-        "ema_stack_bullish"
-      ],
-      "score": 149.25,
-      "close": 2558.65,
-      "latest_close": 2498.5,
-      "change_pct": 0.34,
-      "rvol": 2.51,
-      "atr": 13.48,
-      "technicals": {
-        "vwap": 2534.94,
-        "ema9": 2498.02,
-        "ema20": 2497.37,
-        "ema50": 2500.5,
-        "rsi14": 59.8,
-        "above_vwap": true,
-        "ema_stack_aligned": true
-      },
-      "business_news": {
-        "source": "LiveMint Markets / Business Standard",
-        "sentiment": "BULLISH",
-        "headline": "Tata Consultancy Services: Large-cap IT stocks witness strong buying on global cloud deal wins and margin expansion outlook"
-      },
-      "levels": {
-        "or_high": 2558.6,
-        "or_low": 2490,
-        "or_mid": 2524.3,
-        "stop_hint": 2524.3,
-        "target_2r": 2627.35,
-        "target_net_400": 2762.49
-      },
-      "sizing_preview": {
-        "shares": 2,
-        "stop_distance_inr": 34.35,
-        "max_loss_inr": 68.7,
-        "brokerage_and_taxes_inr": 5.68,
-        "gross_profit_at_target_inr": 407.68,
-        "net_profit_excl_brokerage_inr": 402
-      },
-      "data_source": "yahoo_live_nse_bse",
-      "why": "NSE ORB + VWAP (₹2534.94) + EMA9/20/50 breakout, RSI 59.8, RVOL 2.51x | News: BULLISH (LiveMint Markets / Business Standard) | 2 sh risks ₹68.7 (<= ₹100 SL) for ₹402 Pure Net Profit (after ₹5.68 brokerage/taxes)."
-    },
-    {
-      "ticker": "NTPC.NS",
-      "name": "NTPC Ltd",
-      "exchange": "NSE",
-      "sector": "Power & Energy",
-      "setups": [
-        "orb",
-        "vwap_breakout",
-        "ema_stack_bullish",
-        "breakout_20d"
-      ],
-      "score": 149,
-      "close": 317.9,
-      "latest_close": 323.45,
-      "change_pct": 2.13,
-      "rvol": 1.77,
-      "atr": 1.41,
-      "technicals": {
-        "vwap": 313.79,
-        "ema9": 321.55,
-        "ema20": 321.23,
-        "ema50": 320.04,
-        "rsi14": 62.6,
-        "above_vwap": true,
-        "ema_stack_aligned": true
-      },
-      "business_news": {
-        "source": "Economic Times Energy / Moneycontrol",
-        "sentiment": "BULLISH",
-        "headline": "NTPC Ltd: Power & PSU utilities surge on record peak electricity demand and renewable capacity additions"
-      },
-      "levels": {
-        "or_high": 316.7,
-        "or_low": 309.25,
-        "or_mid": 312.98,
-        "stop_hint": 312.98,
-        "target_2r": 327.74,
-        "target_net_400": 338.35
-      },
-      "sizing_preview": {
-        "shares": 20,
-        "stop_distance_inr": 4.92,
-        "max_loss_inr": 98.4,
-        "brokerage_and_taxes_inr": 6.99,
-        "gross_profit_at_target_inr": 409,
-        "net_profit_excl_brokerage_inr": 402.01
-      },
-      "data_source": "yahoo_live_nse_bse",
-      "why": "NSE ORB + VWAP (₹313.79) + EMA9/20/50 breakout, RSI 62.6, RVOL 1.77x | News: BULLISH (Economic Times Energy / Moneycontrol) | 20 sh risks ₹98.4 (<= ₹100 SL) for ₹402.01 Pure Net Profit (after ₹6.99 brokerage/taxes)."
-    },
-    {
-      "ticker": "BHARTIARTL.BO",
-      "name": "Bharti Airtel (BSE)",
-      "exchange": "BSE",
-      "sector": "Telecom",
-      "setups": [
-        "orb",
-        "vwap_breakout",
-        "ema_stack_bullish",
-        "breakout_20d"
-      ],
-      "score": 133.76,
-      "close": 2106.6,
-      "latest_close": 2096.25,
-      "change_pct": 1.55,
-      "rvol": 1.64,
-      "atr": 12.01,
-      "technicals": {
-        "vwap": 2079.81,
-        "ema9": 2090.73,
-        "ema20": 2087.21,
-        "ema50": 2082.74,
-        "rsi14": 73,
-        "above_vwap": true,
-        "ema_stack_aligned": true
-      },
-      "business_news": {
-        "source": "Economic Times / Moneycontrol India",
-        "sentiment": "BULLISH",
-        "headline": "Bharti Airtel (BSE): Bharti Airtel (BSE) (BSE) sees positive institutional volume flow and bullish sector breadth"
-      },
-      "levels": {
-        "or_high": 2106.55,
-        "or_low": 2059,
-        "or_mid": 2082.78,
-        "stop_hint": 2082.78,
-        "target_2r": 2154.24,
-        "target_net_400": 2209.4
-      },
-      "sizing_preview": {
-        "shares": 4,
-        "stop_distance_inr": 23.82,
-        "max_loss_inr": 95.28,
-        "brokerage_and_taxes_inr": 9.2,
-        "gross_profit_at_target_inr": 411.2,
-        "net_profit_excl_brokerage_inr": 402
-      },
-      "data_source": "yahoo_live_nse_bse",
-      "why": "BSE ORB + VWAP (₹2079.81) + EMA9/20/50 breakout, RSI 73, RVOL 1.64x | News: BULLISH (Economic Times / Moneycontrol India) | 4 sh risks ₹95.28 (<= ₹100 SL) for ₹402 Pure Net Profit (after ₹9.2 brokerage/taxes)."
-    },
-    {
-      "ticker": "TATASTEEL.NS",
-      "name": "Tata Steel",
-      "exchange": "NSE",
-      "sector": "Metals & Mining",
-      "setups": [
-        "orb",
-        "vwap_breakout",
-        "ema_stack_bullish",
-        "breakout_20d"
-      ],
-      "score": 132.88,
-      "close": 182.42,
-      "latest_close": 186.3,
-      "change_pct": 2.19,
-      "rvol": 1.47,
-      "atr": 0.96,
-      "technicals": {
-        "vwap": 180.57,
-        "ema9": 185.19,
-        "ema20": 184.53,
-        "ema50": 183.44,
-        "rsi14": 74.4,
-        "above_vwap": true,
-        "ema_stack_aligned": true
-      },
-      "business_news": {
-        "source": "Economic Times / Moneycontrol India",
-        "sentiment": "BULLISH",
-        "headline": "Tata Steel: Tata Steel (NSE) sees positive institutional volume flow and bullish sector breadth"
-      },
-      "levels": {
-        "or_high": 182.37,
-        "or_low": 177.87,
-        "or_mid": 180.12,
-        "stop_hint": 180.12,
-        "target_2r": 187.02,
-        "target_net_400": 191.97
-      },
-      "sizing_preview": {
-        "shares": 43,
-        "stop_distance_inr": 2.3,
-        "max_loss_inr": 98.9,
-        "brokerage_and_taxes_inr": 8.59,
-        "gross_profit_at_target_inr": 410.65,
+        "shares": 17,
+        "stop_distance_inr": 5.65,
+        "max_loss_inr": 96.05,
+        "brokerage_and_taxes_inr": 31.61,
+        "gross_profit_at_target_inr": 433.67,
         "net_profit_excl_brokerage_inr": 402.06
       },
-      "data_source": "yahoo_live_nse_bse",
-      "why": "NSE ORB + VWAP (₹180.57) + EMA9/20/50 breakout, RSI 74.4, RVOL 1.47x | News: BULLISH (Economic Times / Moneycontrol India) | 43 sh risks ₹98.9 (<= ₹100 SL) for ₹402.06 Pure Net Profit (after ₹8.59 brokerage/taxes)."
+      "data_source": "indian_market_sim",
+      "why": "NSE ORB + VWAP (₹1740.83) + EMA9/20/50 breakout, RSI 74.1, RVOL 2.88x | News: BULLISH (Moneycontrol / ET Markets) | 17 sh risks ₹96.05 (<= ₹100 SL) for ₹402.06 Pure Net Profit (after ₹31.61 brokerage/taxes)."
     },
     {
-      "ticker": "TATASTEEL.BO",
-      "name": "Tata Steel (BSE)",
+      "ticker": "BEL.BO",
+      "name": "Bharat Electronics (BSE)",
       "exchange": "BSE",
-      "sector": "Metals & Mining",
+      "sector": "Defence Electronics",
       "setups": [
         "orb",
         "vwap_breakout",
         "ema_stack_bullish",
-        "breakout_20d"
+        "breakout_20d",
+        "bull_flag"
       ],
-      "score": 132.13,
-      "close": 182.45,
-      "latest_close": 186,
-      "change_pct": 2.06,
-      "rvol": 1.47,
-      "atr": 1.01,
+      "score": 179.82,
+      "close": 297.91,
+      "latest_close": 306.83,
+      "change_pct": 3.86,
+      "rvol": 2.36,
+      "atr": 0.6,
       "technicals": {
-        "vwap": 180.75,
-        "ema9": 185.09,
-        "ema20": 184.46,
-        "ema50": 183.39,
-        "rsi14": 73.3,
+        "vwap": 298.28,
+        "ema9": 306.17,
+        "ema20": 305.57,
+        "ema50": 303.83,
+        "rsi14": 69.7,
         "above_vwap": true,
         "ema_stack_aligned": true
       },
       "business_news": {
         "source": "Economic Times / Moneycontrol India",
         "sentiment": "BULLISH",
-        "headline": "Tata Steel (BSE): Tata Steel (BSE) (BSE) sees positive institutional volume flow and bullish sector breadth"
+        "headline": "Bharat Electronics (BSE): Bharat Electronics (BSE) (BSE) sees positive institutional volume flow and bullish sector breadth"
       },
       "levels": {
-        "or_high": 182.25,
-        "or_low": 177.75,
-        "or_mid": 180,
-        "stop_hint": 180,
-        "target_2r": 187.35,
-        "target_net_400": 192.7
+        "or_high": 297.26,
+        "or_low": 296.74,
+        "or_mid": 297,
+        "stop_hint": 297,
+        "target_2r": 299.73,
+        "target_net_400": 301.92
       },
       "sizing_preview": {
-        "shares": 40,
-        "stop_distance_inr": 2.45,
-        "max_loss_inr": 98,
-        "brokerage_and_taxes_inr": 7.99,
-        "gross_profit_at_target_inr": 410,
-        "net_profit_excl_brokerage_inr": 402.01
+        "shares": 109,
+        "stop_distance_inr": 0.91,
+        "max_loss_inr": 99.19,
+        "brokerage_and_taxes_inr": 34.69,
+        "gross_profit_at_target_inr": 437.09,
+        "net_profit_excl_brokerage_inr": 402.4
       },
-      "data_source": "yahoo_live_nse_bse",
-      "why": "BSE ORB + VWAP (₹180.75) + EMA9/20/50 breakout, RSI 73.3, RVOL 1.47x | News: BULLISH (Economic Times / Moneycontrol India) | 40 sh risks ₹98 (<= ₹100 SL) for ₹402.01 Pure Net Profit (after ₹7.99 brokerage/taxes)."
-    },
-    {
-      "ticker": "NTPC.BO",
-      "name": "NTPC Ltd (BSE)",
-      "exchange": "BSE",
-      "sector": "Power & Energy",
-      "setups": [
-        "orb",
-        "vwap_breakout",
-        "ema_stack_bullish",
-        "breakout_20d"
-      ],
-      "score": 129.96,
-      "close": 317.8,
-      "latest_close": 323,
-      "change_pct": 2.12,
-      "rvol": 1,
-      "atr": 1.43,
-      "technicals": {
-        "vwap": 314.29,
-        "ema9": 321.58,
-        "ema20": 321.24,
-        "ema50": 319.99,
-        "rsi14": 67.7,
-        "above_vwap": true,
-        "ema_stack_aligned": true
-      },
-      "business_news": {
-        "source": "Economic Times Energy / Moneycontrol",
-        "sentiment": "BULLISH",
-        "headline": "NTPC Ltd (BSE): Power & PSU utilities surge on record peak electricity demand and renewable capacity additions"
-      },
-      "levels": {
-        "or_high": 316.95,
-        "or_low": 308.75,
-        "or_mid": 312.85,
-        "stop_hint": 312.85,
-        "target_2r": 327.7,
-        "target_net_400": 338.25
-      },
-      "sizing_preview": {
-        "shares": 20,
-        "stop_distance_inr": 4.95,
-        "max_loss_inr": 99,
-        "brokerage_and_taxes_inr": 6.99,
-        "gross_profit_at_target_inr": 409,
-        "net_profit_excl_brokerage_inr": 402.01
-      },
-      "data_source": "yahoo_live_nse_bse",
-      "why": "BSE ORB + VWAP (₹314.29) + EMA9/20/50 breakout, RSI 67.7, RVOL 1x | News: BULLISH (Economic Times Energy / Moneycontrol) | 20 sh risks ₹99 (<= ₹100 SL) for ₹402.01 Pure Net Profit (after ₹6.99 brokerage/taxes)."
-    },
-    {
-      "ticker": "TCS.BO",
-      "name": "Tata Consultancy Services (BSE)",
-      "exchange": "BSE",
-      "sector": "IT Services",
-      "setups": [
-        "orb",
-        "vwap_breakout",
-        "ema_stack_bullish"
-      ],
-      "score": 124.13,
-      "close": 2559.55,
-      "latest_close": 2498.05,
-      "change_pct": 0.13,
-      "rvol": 1.44,
-      "atr": 13.69,
-      "technicals": {
-        "vwap": 2530.09,
-        "ema9": 2497.42,
-        "ema20": 2497.05,
-        "ema50": 2500.27,
-        "rsi14": 56.7,
-        "above_vwap": true,
-        "ema_stack_aligned": true
-      },
-      "business_news": {
-        "source": "LiveMint Markets / Business Standard",
-        "sentiment": "BULLISH",
-        "headline": "Tata Consultancy Services (BSE): Large-cap IT stocks witness strong buying on global cloud deal wins and margin expansion outlook"
-      },
-      "levels": {
-        "or_high": 2559.5,
-        "or_low": 2485.25,
-        "or_mid": 2522.38,
-        "stop_hint": 2522.38,
-        "target_2r": 2633.89,
-        "target_net_400": 2763.39
-      },
-      "sizing_preview": {
-        "shares": 2,
-        "stop_distance_inr": 37.17,
-        "max_loss_inr": 74.34,
-        "brokerage_and_taxes_inr": 5.68,
-        "gross_profit_at_target_inr": 407.68,
-        "net_profit_excl_brokerage_inr": 402
-      },
-      "data_source": "yahoo_live_nse_bse",
-      "why": "BSE ORB + VWAP (₹2530.09) + EMA9/20/50 breakout, RSI 56.7, RVOL 1.44x | News: BULLISH (LiveMint Markets / Business Standard) | 2 sh risks ₹74.34 (<= ₹100 SL) for ₹402 Pure Net Profit (after ₹5.68 brokerage/taxes)."
+      "data_source": "indian_market_sim",
+      "why": "BSE ORB + VWAP (₹298.28) + EMA9/20/50 breakout, RSI 69.7, RVOL 2.36x | News: BULLISH (Economic Times / Moneycontrol India) | 109 sh risks ₹99.19 (<= ₹100 SL) for ₹402.4 Pure Net Profit (after ₹34.69 brokerage/taxes)."
     }
   ]
 }
