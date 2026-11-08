@@ -1,21 +1,39 @@
-# 📅 Daily Paper Trade Report — Active & Closed Trades (NSE & BSE)
-**Account Capital:** ₹20,000 | **Mandatory Daily Target:** ₹400/day Net Profit (After Brokerage) | **Strict Stop-Loss:** Max ₹100/trade
+# 📅 Day-Wise Paper Trade Audit Report (NSE & BSE)
+**Account Size:** ₹20,000 | **Mandatory Daily Target:** ₹400/day (Pure Net Profit Excluding Brokerage) | **Strict Stop-Loss:** Max ₹100/trade
 
-## 💰 Overall Realized Profit Summary (Closed Trades)
-- **Total Gross Profit:** **₹1302.76**
-- **Total Trade Brokerage & Govt Taxes Deducted:** **-₹95.76**
-- **Final Net Profit (In Your Pocket After Brokerage):** **+₹1207** *(+₹1272.11 with Finvasia Shoonya ₹0 Brokerage)*
+## 🗓️ Date: 2026-11-08 (Week of 2026-11-02)
+- **Trades Taken:** 1 (0 Open, 1 Closed)
+- **Realized Net Profit (Excl. Brokerage):** ₹-134.17 | **Brokerage & Govt Taxes Deducted:** ₹34.63
+- **Projected Net Profit (Including Active Target):** **+₹-134.17** (Goal: ₹400/day)
 
-## 🟢 Active Trades (Open Now)
-| Date | Stock | Exch | Qty | Entry Time (IST) | Entry Price (₹) | Strict Stop-Loss (₹) | Target Price (₹) | Gross Profit at Target (₹) | Brokerage & Tax (₹) | Net Profit at Target (₹) | High-Accuracy Strategy |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **2026-11-08** | **NTPC.BO** | BSE | 79 | **09:35:00 IST** | ₹414.16 | ₹412.9 | ₹419.69 | ₹436.87 | -₹34.98 | **+₹401.89** | Stage-2 200-DMA + Narrow CPR + 15m ORB + Supertrend(10,3) + VWAP |
+| Status | Stock | Exch | Qty | Entry (₹) | Stop-Loss (₹) | Target (₹) | Max Loss (<=₹100) | Brokerage & Tax (₹) | Pure Net Profit at Target / Exit (₹) | Exit / Status Note |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **CLOSED** | **NTPC.BO** | BSE | 79 | ₹414.16 | ₹412.9 | ₹419.69 | ₹99.54 | ₹34.63 | **₹-134.17** | STRICT_100_INR_STOP_LOSS_EXIT |
 
-## ✅ Closed Trades (With Entry & Exit Time + Brokerage & Net Profit)
-| Date | Stock | Exch | Qty | Entry Time (IST) | Entry Price (₹) | Exit Time (IST) | Exit Price (₹) | Total Profit (Gross ₹) | Brokerage & Tax (₹) | Final Net Profit (₹) | Shoonya ₹0-Brokerage Net (₹) |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **2026-11-06** | **TATAMOTORS.BO** | BSE | 34 | **09:35:00 IST** | ₹845.14 | **14:10:00 IST** | ₹857.87 | ₹432.82 | -₹30.75 | **+₹402.07** | **+₹423.01** |
-| **2026-11-05** | **INFY.BO** | BSE | 17 | **09:35:00 IST** | ₹1861.74 | **13:45:00 IST** | ₹1887.38 | ₹435.88 | -₹33.83 | **+₹402.05** | **+₹424.99** |
-| **2026-11-04** | **RELIANCE.NS** | NSE | 22 | **09:35:00 IST** | ₹1323.72 | **14:20:00 IST** | ₹1343.45 | ₹434.06 | -₹31.18 | **+₹402.88** | **+₹424.11** |
-| **TOTAL** | **3 Trades** | - | - | - | - | - | - | **₹1302.76** | **-₹95.76** | **+₹1207** | **+₹1272.11** |
+## 🗓️ Date: 2026-11-06 (Week of 2026-11-02)
+- **Trades Taken:** 1 (0 Open, 1 Closed)
+- **Realized Net Profit (Excl. Brokerage):** ₹402.07 | **Brokerage & Govt Taxes Deducted:** ₹30.75
+- **Projected Net Profit (Including Active Target):** **+₹402.07** (Goal: ₹400/day)
+
+| Status | Stock | Exch | Qty | Entry (₹) | Stop-Loss (₹) | Target (₹) | Max Loss (<=₹100) | Brokerage & Tax (₹) | Pure Net Profit at Target / Exit (₹) | Exit / Status Note |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **CLOSED** | **TATAMOTORS.BO** | BSE | 34 | ₹845.14 | ₹842.24 | ₹857.87 | ₹98.6 | ₹30.75 | **₹402.07** | TARGET_HIT_MANDATORY_400_NET_PROFIT |
+
+## 🗓️ Date: 2026-11-05 (Week of 2026-11-02)
+- **Trades Taken:** 1 (0 Open, 1 Closed)
+- **Realized Net Profit (Excl. Brokerage):** ₹402.05 | **Brokerage & Govt Taxes Deducted:** ₹33.83
+- **Projected Net Profit (Including Active Target):** **+₹402.05** (Goal: ₹400/day)
+
+| Status | Stock | Exch | Qty | Entry (₹) | Stop-Loss (₹) | Target (₹) | Max Loss (<=₹100) | Brokerage & Tax (₹) | Pure Net Profit at Target / Exit (₹) | Exit / Status Note |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **CLOSED** | **INFY.BO** | BSE | 17 | ₹1861.74 | ₹1856.01 | ₹1887.38 | ₹97.41 | ₹33.83 | **₹402.05** | TARGET_HIT_MANDATORY_400_NET_PROFIT |
+
+## 🗓️ Date: 2026-11-04 (Week of 2026-11-02)
+- **Trades Taken:** 1 (0 Open, 1 Closed)
+- **Realized Net Profit (Excl. Brokerage):** ₹402.88 | **Brokerage & Govt Taxes Deducted:** ₹31.18
+- **Projected Net Profit (Including Active Target):** **+₹402.88** (Goal: ₹400/day)
+
+| Status | Stock | Exch | Qty | Entry (₹) | Stop-Loss (₹) | Target (₹) | Max Loss (<=₹100) | Brokerage & Tax (₹) | Pure Net Profit at Target / Exit (₹) | Exit / Status Note |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **CLOSED** | **RELIANCE.NS** | NSE | 22 | ₹1323.72 | ₹1319.28 | ₹1343.45 | ₹97.68 | ₹31.18 | **₹402.88** | TARGET_HIT_MANDATORY_400_NET_PROFIT |
 
