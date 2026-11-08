@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-07T13:40:19+05:30",
+  "as_of": "2026-11-08T09:20:52+05:30",
   "market": "INDIA_NSE_BSE",
   "timezone": "Asia/Kolkata",
   "mode": "orb",
@@ -19,8 +19,59 @@
   ],
   "universe_size": 40,
   "scanned": 40,
-  "matched": 16,
+  "matched": 17,
   "results": [
+    {
+      "ticker": "TATAMOTORS.BO",
+      "name": "Tata Motors (BSE)",
+      "exchange": "BSE",
+      "sector": "Automobile & EV",
+      "setups": [
+        "orb",
+        "vwap_breakout",
+        "ema_stack_bullish",
+        "breakout_20d",
+        "bull_flag"
+      ],
+      "score": 200.48,
+      "close": 841.38,
+      "latest_close": 853.43,
+      "change_pct": 2.95,
+      "rvol": 3.13,
+      "atr": 1.9,
+      "technicals": {
+        "vwap": 842.48,
+        "ema9": 853.64,
+        "ema20": 852.63,
+        "ema50": 850.56,
+        "rsi14": 64.1,
+        "above_vwap": true,
+        "ema_stack_aligned": true
+      },
+      "business_news": {
+        "source": "Economic Times Markets / Moneycontrol",
+        "sentiment": "BULLISH",
+        "headline": "Tata Motors (BSE): Indian Auto & EV stocks rally on strong monthly dispatch growth and institutional FII inflows"
+      },
+      "levels": {
+        "or_high": 839.53,
+        "or_low": 837.99,
+        "or_mid": 838.76,
+        "stop_hint": 838.76,
+        "target_2r": 846.62,
+        "target_net_400": 852.86
+      },
+      "sizing_preview": {
+        "shares": 38,
+        "stop_distance_inr": 2.62,
+        "max_loss_inr": 99.56,
+        "brokerage_and_taxes_inr": 34.15,
+        "gross_profit_at_target_inr": 436.24,
+        "net_profit_excl_brokerage_inr": 402.09
+      },
+      "data_source": "indian_market_sim",
+      "why": "BSE ORB + VWAP (₹842.48) + EMA9/20/50 breakout, RSI 64.1, RVOL 3.13x | News: BULLISH (Economic Times Markets / Moneycontrol) | 38 sh risks ₹99.56 (<= ₹100 SL) for ₹402.09 Pure Net Profit (after ₹34.15 brokerage/taxes)."
+    },
     {
       "ticker": "ZOMATO.NS",
       "name": "Zomato Ltd",
@@ -33,18 +84,18 @@
         "breakout_20d",
         "bull_flag"
       ],
-      "score": 186.21,
-      "close": 262.69,
-      "latest_close": 269.45,
-      "change_pct": 2.74,
-      "rvol": 2.73,
-      "atr": 0.55,
+      "score": 185.68,
+      "close": 262.59,
+      "latest_close": 268.7,
+      "change_pct": 3.19,
+      "rvol": 2.71,
+      "atr": 0.62,
       "technicals": {
-        "vwap": 263.18,
-        "ema9": 269.08,
-        "ema20": 268.66,
-        "ema50": 267.43,
-        "rsi14": 63.4,
+        "vwap": 262.87,
+        "ema9": 268.54,
+        "ema20": 268.19,
+        "ema50": 266.88,
+        "rsi14": 64,
         "above_vwap": true,
         "ema_stack_aligned": true
       },
@@ -54,23 +105,23 @@
         "headline": "Zomato Ltd: Zomato Ltd (NSE) sees positive institutional volume flow and bullish sector breadth"
       },
       "levels": {
-        "or_high": 262.11,
-        "or_low": 261.71,
-        "or_mid": 261.91,
-        "stop_hint": 261.91,
-        "target_2r": 264.25,
-        "target_net_400": 266.11
+        "or_high": 262.01,
+        "or_low": 261.16,
+        "or_mid": 261.59,
+        "stop_hint": 261.59,
+        "target_2r": 264.59,
+        "target_net_400": 266.89
       },
       "sizing_preview": {
-        "shares": 128,
-        "stop_distance_inr": 0.78,
-        "max_loss_inr": 99.84,
-        "brokerage_and_taxes_inr": 35.92,
-        "gross_profit_at_target_inr": 437.76,
-        "net_profit_excl_brokerage_inr": 401.84
+        "shares": 100,
+        "stop_distance_inr": 1,
+        "max_loss_inr": 100,
+        "brokerage_and_taxes_inr": 28.1,
+        "gross_profit_at_target_inr": 430,
+        "net_profit_excl_brokerage_inr": 401.9
       },
       "data_source": "indian_market_sim",
-      "why": "NSE ORB + VWAP (₹263.18) + EMA9/20/50 breakout, RSI 63.4, RVOL 2.73x | News: BULLISH (Economic Times / Moneycontrol India) | 128 sh risks ₹99.84 (<= ₹100 SL) for ₹401.84 Pure Net Profit (after ₹35.92 brokerage/taxes)."
+      "why": "NSE ORB + VWAP (₹262.87) + EMA9/20/50 breakout, RSI 64, RVOL 2.71x | News: BULLISH (Economic Times / Moneycontrol India) | 100 sh risks ₹100 (<= ₹100 SL) for ₹401.9 Pure Net Profit (after ₹28.1 brokerage/taxes)."
     },
     {
       "ticker": "TATAMOTORS.NS",
@@ -84,18 +135,18 @@
         "breakout_20d",
         "bull_flag"
       ],
-      "score": 168.88,
-      "close": 839.42,
-      "latest_close": 849.05,
-      "change_pct": 2.85,
-      "rvol": 1.89,
-      "atr": 1.82,
+      "score": 167.99,
+      "close": 843.56,
+      "latest_close": 869.81,
+      "change_pct": 3.98,
+      "rvol": 1.75,
+      "atr": 1.98,
       "technicals": {
-        "vwap": 839.88,
-        "ema9": 848.49,
-        "ema20": 847.12,
-        "ema50": 844.62,
-        "rsi14": 69.9,
+        "vwap": 844.63,
+        "ema9": 868.94,
+        "ema20": 867.55,
+        "ema50": 862.69,
+        "rsi14": 65.4,
         "above_vwap": true,
         "ema_stack_aligned": true
       },
@@ -105,23 +156,23 @@
         "headline": "Tata Motors: Indian Auto & EV stocks rally on strong monthly dispatch growth and institutional FII inflows"
       },
       "levels": {
-        "or_high": 837.58,
-        "or_low": 836.05,
-        "or_mid": 836.82,
-        "stop_hint": 836.82,
-        "target_2r": 844.62,
-        "target_net_400": 850.9
+        "or_high": 841.71,
+        "or_low": 839.64,
+        "or_mid": 840.67,
+        "stop_hint": 840.67,
+        "target_2r": 849.34,
+        "target_net_400": 856.29
       },
       "sizing_preview": {
-        "shares": 38,
-        "stop_distance_inr": 2.6,
-        "max_loss_inr": 98.8,
-        "brokerage_and_taxes_inr": 34.08,
-        "gross_profit_at_target_inr": 436.24,
-        "net_profit_excl_brokerage_inr": 402.16
+        "shares": 34,
+        "stop_distance_inr": 2.89,
+        "max_loss_inr": 98.26,
+        "brokerage_and_taxes_inr": 30.68,
+        "gross_profit_at_target_inr": 432.82,
+        "net_profit_excl_brokerage_inr": 402.14
       },
       "data_source": "indian_market_sim",
-      "why": "NSE ORB + VWAP (₹839.88) + EMA9/20/50 breakout, RSI 69.9, RVOL 1.89x | News: BULLISH (Economic Times Markets / Moneycontrol) | 38 sh risks ₹98.8 (<= ₹100 SL) for ₹402.16 Pure Net Profit (after ₹34.08 brokerage/taxes)."
+      "why": "NSE ORB + VWAP (₹844.63) + EMA9/20/50 breakout, RSI 65.4, RVOL 1.75x | News: BULLISH (Economic Times Markets / Moneycontrol) | 34 sh risks ₹98.26 (<= ₹100 SL) for ₹402.14 Pure Net Profit (after ₹30.68 brokerage/taxes)."
     },
     {
       "ticker": "TCS.NS",
@@ -470,56 +521,6 @@
       },
       "data_source": "yahoo_live_nse_bse",
       "why": "BSE ORB + VWAP (₹2530.09) + EMA9/20/50 breakout, RSI 56.7, RVOL 1.44x | News: BULLISH (LiveMint Markets / Business Standard) | 2 sh risks ₹74.34 (<= ₹100 SL) for ₹402 Pure Net Profit (after ₹5.68 brokerage/taxes)."
-    },
-    {
-      "ticker": "ICICIBANK.BO",
-      "name": "ICICI Bank (BSE)",
-      "exchange": "BSE",
-      "sector": "Banking",
-      "setups": [
-        "orb",
-        "vwap_breakout",
-        "ema_stack_bullish",
-        "breakout_20d"
-      ],
-      "score": 120.66,
-      "close": 1522.8,
-      "latest_close": 1569,
-      "change_pct": 4.71,
-      "rvol": 0.47,
-      "atr": 5.71,
-      "technicals": {
-        "vwap": 1505.95,
-        "ema9": 1562.42,
-        "ema20": 1556.9,
-        "ema50": 1544.54,
-        "rsi14": 74.5,
-        "above_vwap": true,
-        "ema_stack_aligned": true
-      },
-      "business_news": {
-        "source": "Economic Times Markets",
-        "sentiment": "NEUTRAL",
-        "headline": "<![CDATA[Patakha stock picks! ICICI Bank, BEL, 6 other stocks with 62% to buy this Samvat 2083. See full list]]>"
-      },
-      "levels": {
-        "or_high": 1520,
-        "or_low": 1499.3,
-        "or_mid": 1509.65,
-        "stop_hint": 1509.65,
-        "target_2r": 1549.1,
-        "target_net_400": 1581.88
-      },
-      "sizing_preview": {
-        "shares": 7,
-        "stop_distance_inr": 13.15,
-        "max_loss_inr": 92.05,
-        "brokerage_and_taxes_inr": 11.56,
-        "gross_profit_at_target_inr": 413.56,
-        "net_profit_excl_brokerage_inr": 402
-      },
-      "data_source": "yahoo_live_nse_bse",
-      "why": "BSE ORB + VWAP (₹1505.95) + EMA9/20/50 breakout, RSI 74.5, RVOL 0.47x | News: NEUTRAL (Economic Times Markets) | 7 sh risks ₹92.05 (<= ₹100 SL) for ₹402 Pure Net Profit (after ₹11.56 brokerage/taxes)."
     }
   ]
 }

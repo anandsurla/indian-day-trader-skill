@@ -1,6 +1,15 @@
 # 📅 Day-Wise Paper Trade Audit Report (NSE & BSE)
 **Account Size:** ₹20,000 | **Mandatory Daily Target:** ₹400/day (Pure Net Profit Excluding Brokerage) | **Strict Stop-Loss:** Max ₹100/trade
 
+## 🗓️ Date: 2026-11-08 (Week of 2026-11-02)
+- **Trades Taken:** 1 (1 Open, 0 Closed)
+- **Realized Net Profit (Excl. Brokerage):** ₹0 | **Brokerage & Govt Taxes Deducted:** ₹0
+- **Projected Net Profit (Including Active Target):** **+₹402.07** (Goal: ₹400/day)
+
+| Status | Stock | Exch | Qty | Entry (₹) | Stop-Loss (₹) | Target (₹) | Max Loss (<=₹100) | Brokerage & Tax (₹) | Pure Net Profit at Target / Exit (₹) | Exit / Status Note |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **OPEN (ACTIVE)** | **TATAMOTORS.BO** | BSE | 38 | ₹841.38 | ₹838.76 | ₹852.86 | ₹99.56 | ₹34.17 | **+₹402.07 (Target)** | ACTIVE_MONITORING (Auto-Exit Armed for Target ₹852.86 / SL ₹838.76) |
+
 ## 🗓️ Date: 2026-11-07 (Week of 2026-11-02)
 - **Trades Taken:** 19 (0 Open, 19 Closed)
 - **Realized Net Profit (Excl. Brokerage):** ₹7634.39 | **Brokerage & Govt Taxes Deducted:** ₹683.05

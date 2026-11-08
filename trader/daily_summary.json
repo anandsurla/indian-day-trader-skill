@@ -1,9 +1,48 @@
 {
-  "generated_at": "2026-11-07T08:10:49.461Z",
+  "generated_at": "2026-11-08T03:51:02.227Z",
   "account_budget_inr": 20000,
   "mandatory_daily_net_profit_inr": 400,
   "strict_max_loss_per_trade_inr": 100,
   "days": [
+    {
+      "date": "2026-11-08",
+      "week_start": "2026-11-02",
+      "daily_target_net_inr": 400,
+      "strict_daily_loss_limit_inr": 100,
+      "total_trades": 1,
+      "open_trades": 1,
+      "closed_trades": 0,
+      "wins": 0,
+      "losses": 0,
+      "realized_gross_pnl_inr": 0,
+      "realized_brokerage_and_taxes_inr": 0,
+      "realized_net_pnl_excl_brokerage_inr": 0,
+      "projected_net_pnl_at_target_inr": 402.07,
+      "trades": [
+        {
+          "id": "IND_1794109862201",
+          "date": "2026-11-08",
+          "week_start": "2026-11-02",
+          "status": "OPEN (ACTIVE)",
+          "symbol": "TATAMOTORS.BO",
+          "exchange": "BSE",
+          "side": "BUY",
+          "qty": 38,
+          "entry_price_inr": 841.38,
+          "current_or_exit_price_inr": 841.38,
+          "strict_stop_loss_inr": 838.76,
+          "target_price_inr": 852.86,
+          "max_loss_at_stop_inr": 99.56,
+          "gross_pnl_inr": 0,
+          "brokerage_and_taxes_inr": 34.17,
+          "net_pnl_excl_brokerage_inr": 0,
+          "target_net_profit_inr": 402.07,
+          "exit_reason": "ACTIVE_MONITORING (Auto-Exit Armed for Target ₹852.86 / SL ₹838.76)",
+          "opened_at_ist": "2026-11-08T09:21:02+05:30",
+          "closed_at_ist": "-"
+        }
+      ]
+    },
     {
       "date": "2026-11-07",
       "week_start": "2026-11-02",

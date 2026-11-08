@@ -1,14 +1,14 @@
 {
-  "as_of": "2026-11-07T13:40:25+05:30",
+  "as_of": "2026-11-08T09:21:01+05:30",
   "market": "INDIA_NSE_BSE",
-  "exchange": "NSE",
+  "exchange": "BSE",
   "currency": "INR",
-  "ticker": "ZOMATO.NS",
+  "ticker": "TATAMOTORS.BO",
   "plan": {
-    "entry": 262.69,
-    "stop": 261.91,
-    "target_2r_trail": 264.25,
-    "target": 266.11,
+    "entry": 841.38,
+    "stop": 838.76,
+    "target_2r_trail": 846.62,
+    "target": 852.86,
     "reward_risk": 4.38,
     "flat_by": "15:15"
   },
@@ -16,20 +16,20 @@
     "method": "intraday_block_bootstrap_with_2r_trailing_lock",
     "sims": 10000,
     "horizon_bars": 68,
-    "p_target_full_400": 0.1902,
-    "p_trail_2r_win": 0.4707,
-    "p_win_combined": 0.6609,
-    "p_stop": 0.338,
-    "p_expired": 0.0011,
-    "expected_r": 1.2,
+    "p_target_full_400": 0.1573,
+    "p_trail_2r_win": 0.4481,
+    "p_win_combined": 0.6054,
+    "p_stop": 0.3898,
+    "p_expired": 0.0048,
+    "expected_r": 0.98,
     "close_Loop_quantiles_inr": {
-      "p10": 261.91,
-      "p25": 261.91,
-      "p50": 263.86,
-      "p75": 263.86,
-      "p90": 266.11
+      "p10": 838.76,
+      "p25": 838.76,
+      "p50": 845.31,
+      "p75": 845.31,
+      "p90": 852.86
     }
   },
   "verdict": "favorable",
-  "summary": "10,000 NSE/BSE session replays for ZOMATO.NS: 66.1% win rate (19.0% full ₹400 net target + 47.1% 2R trail win) vs 33.8% strict ₹100 stop -> Expected +1.2R per trade."
+  "summary": "10,000 NSE/BSE session replays for TATAMOTORS.BO: 60.5% win rate (15.7% full ₹400 net target + 44.8% 2R trail win) vs 39.0% strict ₹100 stop -> Expected +0.98R per trade."
 }

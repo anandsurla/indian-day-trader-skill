@@ -1,50 +1,50 @@
 {
-  "as_of": "2026-11-07T13:40:25+05:30",
+  "as_of": "2026-11-08T09:21:01+05:30",
   "market": "INDIA_NSE_BSE",
-  "exchange": "NSE",
+  "exchange": "BSE",
   "currency": "INR",
-  "ticker": "ZOMATO.NS",
-  "name": "Zomato Ltd",
-  "sector": "Consumer Tech",
+  "ticker": "TATAMOTORS.BO",
+  "name": "Tata Motors (BSE)",
+  "sector": "Automobile & EV",
   "rule": "orb_vwap_ema_news",
   "interval": "5m",
   "or_minutes": 15,
-  "session_date": "2026-11-07",
+  "session_date": "2026-11-08",
   "status": "triggered",
   "opening_range": {
     "start": "09:15",
     "end": "09:30",
-    "high": 262.11,
-    "low": 261.71,
-    "mid": 261.91,
-    "range": 0.4,
+    "high": 839.53,
+    "low": 837.99,
+    "mid": 838.76,
+    "range": 1.54,
     "bars": 3
   },
   "technicals": {
-    "vwap": 263.18,
-    "ema9": 269.08,
-    "ema20": 268.66,
-    "ema50": 267.43,
-    "rsi14": 63.4,
+    "vwap": 842.48,
+    "ema9": 853.64,
+    "ema20": 852.63,
+    "ema50": 850.56,
+    "rsi14": 64.1,
     "above_vwap": true,
     "ema_stack_aligned": true
   },
   "business_news": {
-    "source": "Economic Times / Moneycontrol India",
+    "source": "Economic Times Markets / Moneycontrol",
     "sentiment": "BULLISH",
-    "headline": "Zomato Ltd: Zomato Ltd (NSE) sees positive institutional volume flow and bullish sector breadth"
+    "headline": "Tata Motors (BSE): Indian Auto & EV stocks rally on strong monthly dispatch growth and institutional FII inflows"
   },
-  "level": 262.11,
+  "level": 839.53,
   "trigger": {
-    "bar_time_ist": "2026-11-07T09:35:00+05:30",
-    "bar_open": 262.04,
-    "bar_high": 262.82,
-    "bar_low": 261.92,
-    "bar_close": 262.69,
-    "bar_volume": 222153,
-    "volume_ratio": 2.73
+    "bar_time_ist": "2026-11-08T09:35:00+05:30",
+    "bar_open": 839.31,
+    "bar_high": 841.63,
+    "bar_low": 838.95,
+    "bar_close": 841.38,
+    "bar_volume": 254160,
+    "volume_ratio": 3.13
   },
-  "entry_price_hint": 262.69,
-  "stop_hint": 261.91,
-  "summary": "ZOMATO.NS (NSE) triggered 15m ORB + VWAP breakout above ₹262.11 at ₹262.69 (RVOL 2.73x, RSI 63.4)."
+  "entry_price_hint": 841.38,
+  "stop_hint": 838.76,
+  "summary": "TATAMOTORS.BO (BSE) triggered 15m ORB + VWAP breakout above ₹839.53 at ₹841.38 (RVOL 3.13x, RSI 64.1)."
 }

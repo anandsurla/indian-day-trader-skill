@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-07T13:40:25+05:30",
+  "as_of": "2026-11-08T09:21:02+05:30",
   "market": "INDIA_NSE_BSE",
   "currency": "INR",
   "budget_inr": 20000,
@@ -9,48 +9,48 @@
   "brokerage_excluded_from_profit": true,
   "strict_max_loss_per_trade_inr": 100,
   "sizing": {
-    "ticker": "ZOMATO.NS",
-    "exchange": "NSE",
-    "entry_price_inr": 262.69,
-    "stop_price_inr": 261.91,
-    "target_price_inr": 266.11,
-    "stop_distance_inr": 0.78,
-    "target_distance_inr": 3.42,
-    "shares_by_strict_stop_loss": 128,
-    "shares_by_intraday_margin": 361,
-    "shares_selected": 128,
+    "ticker": "TATAMOTORS.BO",
+    "exchange": "BSE",
+    "entry_price_inr": 841.38,
+    "stop_price_inr": 838.76,
+    "target_price_inr": 852.86,
+    "stop_distance_inr": 2.62,
+    "target_distance_inr": 11.48,
+    "shares_by_strict_stop_loss": 38,
+    "shares_by_intraday_margin": 112,
+    "shares_selected": 38,
     "binding_constraint": "strict_max_loss_per_trade_100_inr",
-    "notional_value_inr": 33624.32,
-    "margin_used_inr": 6724.86,
-    "max_loss_at_stop_inr": 99.84,
-    "gross_profit_at_target_inr": 437.76,
-    "estimated_indian_taxes_and_brokerage_inr": 35.95,
+    "notional_value_inr": 31972.44,
+    "margin_used_inr": 6394.49,
+    "max_loss_at_stop_inr": 99.56,
+    "gross_profit_at_target_inr": 436.24,
+    "estimated_indian_taxes_and_brokerage_inr": 34.17,
     "brokerage_breakdown": {
-      "brokerage": 20.31,
-      "stt": 8.52,
-      "exchangeCharge": 2.01,
-      "sebiCharge": 0.07,
-      "gst": 4.03,
-      "stampDuty": 1.01
+      "brokerage": 19.31,
+      "stt": 8.1,
+      "exchangeCharge": 1.91,
+      "sebiCharge": 0.06,
+      "gst": 3.83,
+      "stampDuty": 0.96
     },
-    "net_profit_at_target_inr": 401.81
+    "net_profit_at_target_inr": 402.07
   },
   "orders": [
     {
-      "symbol": "ZOMATO.NS",
-      "exchange": "NSE",
+      "symbol": "TATAMOTORS.BO",
+      "exchange": "BSE",
       "product": "MIS",
       "side": "buy",
-      "qty": 128,
+      "qty": 38,
       "type": "limit",
-      "limit_price": 262.69,
+      "limit_price": 841.38,
       "time_in_force": "day",
       "order_class": "bracket",
       "take_profit": {
-        "limit_price": 266.11
+        "limit_price": 852.86
       },
       "stop_loss": {
-        "stop_price": 261.91,
+        "stop_price": 838.76,
         "strict": true
       }
     }

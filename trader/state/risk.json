@@ -1,6 +1,6 @@
 {
-  "as_of": "2026-11-07T13:40:25+05:30",
-  "date": "2026-11-07",
+  "as_of": "2026-11-08T09:21:02+05:30",
+  "date": "2026-11-08",
   "market": "INDIA_NSE_BSE",
   "currency": "INR",
   "verdict": "PASS",
@@ -11,27 +11,27 @@
     "strict_max_loss_per_trade_inr": 100,
     "strict_max_daily_loss_inr": 100,
     "realized_loss_today_inr": 0,
-    "trade_risk_at_stop_inr": 99.84,
-    "net_profit_after_brokerage_inr": 401.81,
+    "trade_risk_at_stop_inr": 99.56,
+    "net_profit_after_brokerage_inr": 402.07,
     "reward_risk_ratio": 4.38,
     "paper_mode": true
   },
   "reasons": [],
   "approved_order": {
-    "symbol": "ZOMATO.NS",
-    "exchange": "NSE",
+    "symbol": "TATAMOTORS.BO",
+    "exchange": "BSE",
     "product": "MIS",
     "side": "buy",
-    "qty": 128,
+    "qty": 38,
     "type": "limit",
-    "limit_price": 262.69,
+    "limit_price": 841.38,
     "time_in_force": "day",
     "order_class": "bracket",
     "take_profit": {
-      "limit_price": 266.11
+      "limit_price": 852.86
     },
     "stop_loss": {
-      "stop_price": 261.91,
+      "stop_price": 838.76,
       "strict": true
     }
   }
