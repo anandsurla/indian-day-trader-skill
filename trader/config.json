@@ -11,6 +11,7 @@
   "daily_profit_target_inr": 400,
   "daily_profit_target_pct": 2,
   "mandatory_net_profit_excl_brokerage": true,
+  "recommended_zero_brokerage_broker": "Finvasia Shoonya / Kotak Neo (₹0 Intraday Brokerage)",
   "intraday_leverage": 5,
   "max_position_pct": 90,
   "max_order_usd": 90000,
