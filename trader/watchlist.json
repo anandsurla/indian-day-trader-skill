@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-08T09:51:20+05:30",
+  "as_of": "2026-11-08T09:55:19+05:30",
   "market": "INDIA_NSE_BSE",
   "timezone": "Asia/Kolkata",
   "mode": "orb",
@@ -135,7 +135,7 @@
         "breakout_20d",
         "bull_flag"
       ],
-      "score": 192.34,
+      "score": 195.34,
       "close": 3625.81,
       "latest_close": 3692.33,
       "change_pct": 1.96,
@@ -151,9 +151,9 @@
         "ema_stack_aligned": true
       },
       "business_news": {
-        "source": "LiveMint / Economic Times",
-        "sentiment": "BULLISH",
-        "headline": "Larsen & Toubro: Infra & Capital Goods leaders gain on strong government capex order book visibility"
+        "source": "LiveMint Markets",
+        "sentiment": "NEUTRAL",
+        "headline": "How anti-AI trade after US midterm election results is reviving Indian, Chinese stocks"
       },
       "levels": {
         "or_high": 3617.85,
@@ -172,7 +172,58 @@
         "net_profit_excl_brokerage_inr": 401.99
       },
       "data_source": "indian_market_sim",
-      "why": "NSE ORB + VWAP (₹3626.36) + EMA9/20/50 breakout, RSI 64.9, RVOL 3.04x | News: BULLISH (LiveMint / Economic Times) | 9 sh risks ₹99.54 (<= ₹100 SL) for ₹401.99 Pure Net Profit (after ₹34.87 brokerage/taxes)."
+      "why": "NSE ORB + VWAP (₹3626.36) + EMA9/20/50 breakout, RSI 64.9, RVOL 3.04x | News: NEUTRAL (LiveMint Markets) | 9 sh risks ₹99.54 (<= ₹100 SL) for ₹401.99 Pure Net Profit (after ₹34.87 brokerage/taxes)."
+    },
+    {
+      "ticker": "HDFCBANK.BO",
+      "name": "HDFC Bank (BSE)",
+      "exchange": "BSE",
+      "sector": "Banking",
+      "setups": [
+        "orb",
+        "vwap_breakout",
+        "ema_stack_bullish",
+        "breakout_20d",
+        "bull_flag"
+      ],
+      "score": 192.97,
+      "close": 1738.85,
+      "latest_close": 1774.42,
+      "change_pct": 2.77,
+      "rvol": 3.17,
+      "atr": 4.06,
+      "technicals": {
+        "vwap": 1742.21,
+        "ema9": 1772.35,
+        "ema20": 1769.42,
+        "ema50": 1763.08,
+        "rsi14": 72.1,
+        "above_vwap": true,
+        "ema_stack_aligned": true
+      },
+      "business_news": {
+        "source": "LiveMint Markets",
+        "sentiment": "NEUTRAL",
+        "headline": "Muhurat Trading Picks: HDFC Bank, BSE to Zen Tech - SAHI Research’s 5 stocks to buy on Diwali 2026 for Samvat 2083"
+      },
+      "levels": {
+        "or_high": 1735.03,
+        "or_low": 1731.5,
+        "or_mid": 1733.26,
+        "stop_hint": 1733.26,
+        "target_2r": 1750.03,
+        "target_net_400": 1764.36
+      },
+      "sizing_preview": {
+        "shares": 17,
+        "stop_distance_inr": 5.59,
+        "max_loss_inr": 95.03,
+        "brokerage_and_taxes_inr": 31.61,
+        "gross_profit_at_target_inr": 433.67,
+        "net_profit_excl_brokerage_inr": 402.06
+      },
+      "data_source": "indian_market_sim",
+      "why": "BSE ORB + VWAP (₹1742.21) + EMA9/20/50 breakout, RSI 72.1, RVOL 3.17x | News: NEUTRAL (LiveMint Markets) | 17 sh risks ₹95.03 (<= ₹100 SL) for ₹402.06 Pure Net Profit (after ₹31.61 brokerage/taxes)."
     },
     {
       "ticker": "SBIN.BO",
@@ -226,108 +277,6 @@
       "why": "BSE ORB + VWAP (₹840.58) + EMA9/20/50 breakout, RSI 64.4, RVOL 2.76x | News: BULLISH (Economic Times / Moneycontrol India) | 38 sh risks ₹97.66 (<= ₹100 SL) for ₹402.17 Pure Net Profit (after ₹34.07 brokerage/taxes)."
     },
     {
-      "ticker": "RELIANCE.NS",
-      "name": "Reliance Industries",
-      "exchange": "NSE",
-      "sector": "Energy & Telecom",
-      "setups": [
-        "orb",
-        "vwap_breakout",
-        "ema_stack_bullish",
-        "breakout_20d",
-        "bull_flag"
-      ],
-      "score": 189.54,
-      "close": 1319.73,
-      "latest_close": 1343.67,
-      "change_pct": 2.59,
-      "rvol": 3.13,
-      "atr": 3.29,
-      "technicals": {
-        "vwap": 1321.1,
-        "ema9": 1339.75,
-        "ema20": 1337.38,
-        "ema50": 1333.33,
-        "rsi14": 71.9,
-        "above_vwap": true,
-        "ema_stack_aligned": true
-      },
-      "business_news": {
-        "source": "Business Standard / ET Markets",
-        "sentiment": "BULLISH",
-        "headline": "Reliance Industries: Telecom ARPU expansion and refining margin strength drive heavy institutional accumulation"
-      },
-      "levels": {
-        "or_high": 1316.83,
-        "or_low": 1313.94,
-        "or_mid": 1315.38,
-        "stop_hint": 1315.38,
-        "target_2r": 1328.43,
-        "target_net_400": 1339.41
-      },
-      "sizing_preview": {
-        "shares": 22,
-        "stop_distance_inr": 4.35,
-        "max_loss_inr": 95.7,
-        "brokerage_and_taxes_inr": 31.05,
-        "gross_profit_at_target_inr": 432.96,
-        "net_profit_excl_brokerage_inr": 401.91
-      },
-      "data_source": "indian_market_sim",
-      "why": "NSE ORB + VWAP (₹1321.1) + EMA9/20/50 breakout, RSI 71.9, RVOL 3.13x | News: BULLISH (Business Standard / ET Markets) | 22 sh risks ₹95.7 (<= ₹100 SL) for ₹401.91 Pure Net Profit (after ₹31.05 brokerage/taxes)."
-    },
-    {
-      "ticker": "HDFCBANK.BO",
-      "name": "HDFC Bank (BSE)",
-      "exchange": "BSE",
-      "sector": "Banking",
-      "setups": [
-        "orb",
-        "vwap_breakout",
-        "ema_stack_bullish",
-        "breakout_20d",
-        "bull_flag"
-      ],
-      "score": 188.97,
-      "close": 1738.85,
-      "latest_close": 1774.42,
-      "change_pct": 2.77,
-      "rvol": 3.17,
-      "atr": 4.06,
-      "technicals": {
-        "vwap": 1742.21,
-        "ema9": 1772.35,
-        "ema20": 1769.42,
-        "ema50": 1763.08,
-        "rsi14": 72.1,
-        "above_vwap": true,
-        "ema_stack_aligned": true
-      },
-      "business_news": {
-        "source": "Moneycontrol / ET Markets",
-        "sentiment": "BULLISH",
-        "headline": "HDFC Bank (BSE): Private & PSU Banks hold steady above key support on resilient credit growth and stable NIMs"
-      },
-      "levels": {
-        "or_high": 1735.03,
-        "or_low": 1731.5,
-        "or_mid": 1733.26,
-        "stop_hint": 1733.26,
-        "target_2r": 1750.03,
-        "target_net_400": 1764.36
-      },
-      "sizing_preview": {
-        "shares": 17,
-        "stop_distance_inr": 5.59,
-        "max_loss_inr": 95.03,
-        "brokerage_and_taxes_inr": 31.61,
-        "gross_profit_at_target_inr": 433.67,
-        "net_profit_excl_brokerage_inr": 402.06
-      },
-      "data_source": "indian_market_sim",
-      "why": "BSE ORB + VWAP (₹1742.21) + EMA9/20/50 breakout, RSI 72.1, RVOL 3.17x | News: BULLISH (Moneycontrol / ET Markets) | 17 sh risks ₹95.03 (<= ₹100 SL) for ₹402.06 Pure Net Profit (after ₹31.61 brokerage/taxes)."
-    },
-    {
       "ticker": "ICICIBANK.NS",
       "name": "ICICI Bank",
       "exchange": "NSE",
@@ -339,7 +288,7 @@
         "breakout_20d",
         "bull_flag"
       ],
-      "score": 188.12,
+      "score": 192.12,
       "close": 1289.62,
       "latest_close": 1315.35,
       "change_pct": 2.97,
@@ -355,9 +304,9 @@
         "ema_stack_aligned": true
       },
       "business_news": {
-        "source": "Moneycontrol / ET Markets",
-        "sentiment": "BULLISH",
-        "headline": "ICICI Bank: Private & PSU Banks hold steady above key support on resilient credit growth and stable NIMs"
+        "source": "Economic Times Markets",
+        "sentiment": "NEUTRAL",
+        "headline": "<![CDATA[Patakha stock picks! ICICI Bank, BEL, 6 other stocks with 62% to buy this Samvat 2083. See full list]]>"
       },
       "levels": {
         "or_high": 1286.79,
@@ -376,7 +325,58 @@
         "net_profit_excl_brokerage_inr": 402.04
       },
       "data_source": "indian_market_sim",
-      "why": "NSE ORB + VWAP (₹1289.99) + EMA9/20/50 breakout, RSI 72.8, RVOL 3.07x | News: BULLISH (Moneycontrol / ET Markets) | 24 sh risks ₹97.44 (<= ₹100 SL) for ₹402.04 Pure Net Profit (after ₹33.08 brokerage/taxes)."
+      "why": "NSE ORB + VWAP (₹1289.99) + EMA9/20/50 breakout, RSI 72.8, RVOL 3.07x | News: NEUTRAL (Economic Times Markets) | 24 sh risks ₹97.44 (<= ₹100 SL) for ₹402.04 Pure Net Profit (after ₹33.08 brokerage/taxes)."
+    },
+    {
+      "ticker": "HDFCBANK.NS",
+      "name": "HDFC Bank",
+      "exchange": "NSE",
+      "sector": "Banking",
+      "setups": [
+        "orb",
+        "vwap_breakout",
+        "ema_stack_bullish",
+        "breakout_20d",
+        "bull_flag"
+      ],
+      "score": 187.49,
+      "close": 1739.6,
+      "latest_close": 1791,
+      "change_pct": 3.25,
+      "rvol": 2.88,
+      "atr": 4.19,
+      "technicals": {
+        "vwap": 1740.83,
+        "ema9": 1785.83,
+        "ema20": 1782.69,
+        "ema50": 1773.65,
+        "rsi14": 74.1,
+        "above_vwap": true,
+        "ema_stack_aligned": true
+      },
+      "business_news": {
+        "source": "LiveMint Markets",
+        "sentiment": "NEUTRAL",
+        "headline": "Muhurat Trading Picks: HDFC Bank, BSE to Zen Tech - SAHI Research’s 5 stocks to buy on Diwali 2026 for Samvat 2083"
+      },
+      "levels": {
+        "or_high": 1735.78,
+        "or_low": 1732.12,
+        "or_mid": 1733.95,
+        "stop_hint": 1733.95,
+        "target_2r": 1750.9,
+        "target_net_400": 1765.11
+      },
+      "sizing_preview": {
+        "shares": 17,
+        "stop_distance_inr": 5.65,
+        "max_loss_inr": 96.05,
+        "brokerage_and_taxes_inr": 31.61,
+        "gross_profit_at_target_inr": 433.67,
+        "net_profit_excl_brokerage_inr": 402.06
+      },
+      "data_source": "indian_market_sim",
+      "why": "NSE ORB + VWAP (₹1740.83) + EMA9/20/50 breakout, RSI 74.1, RVOL 2.88x | News: NEUTRAL (LiveMint Markets) | 17 sh risks ₹96.05 (<= ₹100 SL) for ₹402.06 Pure Net Profit (after ₹31.61 brokerage/taxes)."
     },
     {
       "ticker": "ZOMATO.NS",
@@ -430,57 +430,6 @@
       "why": "NSE ORB + VWAP (₹262.87) + EMA9/20/50 breakout, RSI 64, RVOL 2.71x | News: BULLISH (Economic Times / Moneycontrol India) | 100 sh risks ₹100 (<= ₹100 SL) for ₹401.9 Pure Net Profit (after ₹28.1 brokerage/taxes)."
     },
     {
-      "ticker": "HDFCBANK.NS",
-      "name": "HDFC Bank",
-      "exchange": "NSE",
-      "sector": "Banking",
-      "setups": [
-        "orb",
-        "vwap_breakout",
-        "ema_stack_bullish",
-        "breakout_20d",
-        "bull_flag"
-      ],
-      "score": 183.49,
-      "close": 1739.6,
-      "latest_close": 1791,
-      "change_pct": 3.25,
-      "rvol": 2.88,
-      "atr": 4.19,
-      "technicals": {
-        "vwap": 1740.83,
-        "ema9": 1785.83,
-        "ema20": 1782.69,
-        "ema50": 1773.65,
-        "rsi14": 74.1,
-        "above_vwap": true,
-        "ema_stack_aligned": true
-      },
-      "business_news": {
-        "source": "Moneycontrol / ET Markets",
-        "sentiment": "BULLISH",
-        "headline": "HDFC Bank: Private & PSU Banks hold steady above key support on resilient credit growth and stable NIMs"
-      },
-      "levels": {
-        "or_high": 1735.78,
-        "or_low": 1732.12,
-        "or_mid": 1733.95,
-        "stop_hint": 1733.95,
-        "target_2r": 1750.9,
-        "target_net_400": 1765.11
-      },
-      "sizing_preview": {
-        "shares": 17,
-        "stop_distance_inr": 5.65,
-        "max_loss_inr": 96.05,
-        "brokerage_and_taxes_inr": 31.61,
-        "gross_profit_at_target_inr": 433.67,
-        "net_profit_excl_brokerage_inr": 402.06
-      },
-      "data_source": "indian_market_sim",
-      "why": "NSE ORB + VWAP (₹1740.83) + EMA9/20/50 breakout, RSI 74.1, RVOL 2.88x | News: BULLISH (Moneycontrol / ET Markets) | 17 sh risks ₹96.05 (<= ₹100 SL) for ₹402.06 Pure Net Profit (after ₹31.61 brokerage/taxes)."
-    },
-    {
       "ticker": "BEL.BO",
       "name": "Bharat Electronics (BSE)",
       "exchange": "BSE",
@@ -492,7 +441,7 @@
         "breakout_20d",
         "bull_flag"
       ],
-      "score": 179.82,
+      "score": 183.82,
       "close": 297.91,
       "latest_close": 306.83,
       "change_pct": 3.86,
@@ -508,9 +457,9 @@
         "ema_stack_aligned": true
       },
       "business_news": {
-        "source": "Economic Times / Moneycontrol India",
-        "sentiment": "BULLISH",
-        "headline": "Bharat Electronics (BSE): Bharat Electronics (BSE) (BSE) sees positive institutional volume flow and bullish sector breadth"
+        "source": "Economic Times Markets",
+        "sentiment": "NEUTRAL",
+        "headline": "<![CDATA[Patakha stock picks! ICICI Bank, BEL, 6 other stocks with 62% to buy this Samvat 2083. See full list]]>"
       },
       "levels": {
         "or_high": 297.26,
@@ -529,7 +478,58 @@
         "net_profit_excl_brokerage_inr": 402.4
       },
       "data_source": "indian_market_sim",
-      "why": "BSE ORB + VWAP (₹298.28) + EMA9/20/50 breakout, RSI 69.7, RVOL 2.36x | News: BULLISH (Economic Times / Moneycontrol India) | 109 sh risks ₹99.19 (<= ₹100 SL) for ₹402.4 Pure Net Profit (after ₹34.69 brokerage/taxes)."
+      "why": "BSE ORB + VWAP (₹298.28) + EMA9/20/50 breakout, RSI 69.7, RVOL 2.36x | News: NEUTRAL (Economic Times Markets) | 109 sh risks ₹99.19 (<= ₹100 SL) for ₹402.4 Pure Net Profit (after ₹34.69 brokerage/taxes)."
+    },
+    {
+      "ticker": "M&M.NS",
+      "name": "Mahindra & Mahindra",
+      "exchange": "NSE",
+      "sector": "Automobile",
+      "setups": [
+        "orb",
+        "vwap_breakout",
+        "ema_stack_bullish",
+        "breakout_20d",
+        "bull_flag"
+      ],
+      "score": 171.67,
+      "close": 2979.21,
+      "latest_close": 3007.61,
+      "change_pct": 2.4,
+      "rvol": 2.47,
+      "atr": 6.8,
+      "technicals": {
+        "vwap": 2980.21,
+        "ema9": 3004.89,
+        "ema20": 3004.21,
+        "ema50": 3001.28,
+        "rsi14": 51.2,
+        "above_vwap": true,
+        "ema_stack_aligned": true
+      },
+      "business_news": {
+        "source": "Economic Times / Moneycontrol India",
+        "sentiment": "BULLISH",
+        "headline": "Mahindra & Mahindra: Mahindra & Mahindra (NSE) sees positive institutional volume flow and bullish sector breadth"
+      },
+      "levels": {
+        "or_high": 2972.67,
+        "or_low": 2965.96,
+        "or_mid": 2969.32,
+        "stop_hint": 2969.32,
+        "target_2r": 2998.99,
+        "target_net_400": 3022.6
+      },
+      "sizing_preview": {
+        "shares": 10,
+        "stop_distance_inr": 9.89,
+        "max_loss_inr": 98.9,
+        "brokerage_and_taxes_inr": 31.85,
+        "gross_profit_at_target_inr": 433.9,
+        "net_profit_excl_brokerage_inr": 402.05
+      },
+      "data_source": "indian_market_sim",
+      "why": "NSE ORB + VWAP (₹2980.21) + EMA9/20/50 breakout, RSI 51.2, RVOL 2.47x | News: BULLISH (Economic Times / Moneycontrol India) | 10 sh risks ₹98.9 (<= ₹100 SL) for ₹402.05 Pure Net Profit (after ₹31.85 brokerage/taxes)."
     }
   ]
 }
