@@ -800,9 +800,16 @@ async function runEntry(tickerArg = null) {
         watchlist = await runScanner('orb', 10);
     }
 
+    const history = readJson(FILES.history, { closed_trades: [] });
+    const tradedTodaySymbols = new Set(
+        (history.closed_trades || [])
+            .filter(t => String(t.closed_at_ist || '').startsWith(ist.date))
+            .map(t => t.symbol)
+    );
+
     const chosen = tickerArg
         ? (watchlist.results.find(r => r.ticker === tickerArg) || watchlist.results[0])
-        : watchlist.results[0];
+        : (watchlist.results.find(r => !tradedTodaySymbols.has(r.ticker)) || watchlist.results[0]);
 
     const { candles: bars5m } = await fetchSymbolBars(chosen.ticker, '5m', '5d');
     const sessionBars = bars5m.slice(-75);
@@ -1220,9 +1227,22 @@ async function runRiskCheck() {
     const prevRiskState = readJson(FILES.riskState, { date: ist.date, realized_loss_today_inr: 0, realized_net_profit_today_inr: 0, trades_today: 0 });
     const realizedLossToday = prevRiskState.date === ist.date ? Number(prevRiskState.realized_loss_today_inr || 0) : 0;
 
+    const history = readJson(FILES.history, { closed_trades: [] });
+    const closedToday = (history.closed_trades || []).filter(t => String(t.closed_at_ist || '').startsWith(ist.date));
+    const tradesClosedTodayCount = closedToday.length;
+    const realizedProfitToday = closedToday.reduce((acc, t) => acc + Number(t.net_pnl_excl_brokerage_inr || 0), 0);
+    const maxTradesPerDay = Number(cfg.max_trades_per_day || 2);
+
     const reasons = [];
     const maxLossPerTrade = Number(cfg.max_loss_per_trade_inr || cfg.max_loss_per_trade_usd || 100);
     const maxDailyLoss = Number(cfg.max_daily_loss_inr || cfg.max_daily_loss_usd || 100);
+
+    if (tradesClosedTodayCount >= maxTradesPerDay) {
+        reasons.push(`Max daily trade cap (${maxTradesPerDay} trades/day) reached with ₹${realizedProfitToday.toFixed(2)} net profit locked. Stopping to prevent over-trading & extra brokerage.`);
+    }
+    if (realizedProfitToday >= 400 && ist.totalMinutes > (14 * 60)) {
+        reasons.push(`₹${realizedProfitToday.toFixed(2)} net profit already banked and time is past 14:00 IST — locking daily profit.`);
+    }
 
     if (!/^[A-Z0-9&-]+\.(NS|BO)$/.test(order.symbol)) {
         reasons.push(`Invalid Indian NSE/BSE ticker format: ${order.symbol}`);
