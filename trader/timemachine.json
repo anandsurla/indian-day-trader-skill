@@ -1,35 +1,35 @@
 {
-  "as_of": "2026-11-09T11:16:15+05:30",
+  "as_of": "2026-11-09T17:40:07+05:30",
   "market": "INDIA_NSE_BSE",
-  "exchange": "BSE",
+  "exchange": "NSE",
   "currency": "INR",
-  "ticker": "HDFCBANK.BO",
+  "ticker": "PNB.NS",
   "plan": {
-    "entry": 1746.33,
-    "stop": 1740.85,
-    "target_2r_trail": 1757.29,
-    "target": 1770.53,
-    "reward_risk": 4.42,
+    "entry": 128,
+    "stop": 126.86,
+    "target_2r_trail": 130.28,
+    "target": 132.76,
+    "reward_risk": 4.18,
     "flat_by": "15:15"
   },
   "monte_carlo": {
     "method": "intraday_block_bootstrap_with_2r_trailing_lock",
     "sims": 10000,
     "horizon_bars": 68,
-    "p_target_full_400": 0.2104,
-    "p_trail_2r_win": 0.4538,
-    "p_win_combined": 0.6642,
-    "p_stop": 0.331,
-    "p_expired": 0.0048,
-    "expected_r": 1.29,
+    "p_target_full_400": 0.0866,
+    "p_trail_2r_win": 0.2316,
+    "p_win_combined": 0.3182,
+    "p_stop": 0.2883,
+    "p_expired": 0.3935,
+    "expected_r": 1.09,
     "close_Loop_quantiles_inr": {
-      "p10": 1740.85,
-      "p25": 1740.85,
-      "p50": 1754.55,
-      "p75": 1754.55,
-      "p90": 1770.53
+      "p10": 126.86,
+      "p25": 126.86,
+      "p50": 129.71,
+      "p75": 130.31,
+      "p90": 132.19
     }
   },
   "verdict": "favorable",
-  "summary": "10,000 NSE/BSE session replays for HDFCBANK.BO: 66.4% win rate -> Expected +1.29R per trade."
+  "summary": "10,000 NSE/BSE session replays for PNB.NS: 31.8% win rate -> Expected +1.09R per trade."
 }

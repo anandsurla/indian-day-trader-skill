@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-09T11:16:16+05:30",
+  "as_of": "2026-11-09T17:40:07+05:30",
   "market": "INDIA_NSE_BSE",
   "currency": "INR",
   "budget_inr": 20000,
@@ -9,50 +9,50 @@
   "brokerage_excluded_from_profit": true,
   "strict_max_loss_per_trade_inr": 100,
   "sizing": {
-    "ticker": "HDFCBANK.BO",
-    "exchange": "BSE",
-    "entry_price_inr": 1746.33,
-    "stop_price_inr": 1740.85,
-    "target_price_inr": 1770.53,
-    "stop_distance_inr": 5.48,
-    "target_distance_inr": 24.2,
-    "shares_by_strict_stop_loss": 18,
-    "shares_by_intraday_margin": 54,
-    "shares_selected": 18,
+    "ticker": "PNB.NS",
+    "exchange": "NSE",
+    "entry_price_inr": 128,
+    "stop_price_inr": 126.86,
+    "target_price_inr": 132.76,
+    "stop_distance_inr": 1.14,
+    "target_distance_inr": 4.76,
+    "shares_by_strict_stop_loss": 87,
+    "shares_by_intraday_margin": 742,
+    "shares_selected": 87,
     "binding_constraint": "strict_max_loss_per_trade_100_inr",
-    "notional_value_inr": 31433.94,
-    "margin_used_inr": 6286.79,
-    "max_loss_at_stop_inr": 98.64,
-    "gross_profit_at_target_inr": 435.6,
-    "estimated_indian_taxes_and_brokerage_inr": 33.61,
-    "shoonya_zero_brokerage_taxes_inr": 11.2,
+    "notional_value_inr": 11136,
+    "margin_used_inr": 2227.2,
+    "max_loss_at_stop_inr": 99.18,
+    "gross_profit_at_target_inr": 414.12,
+    "estimated_indian_taxes_and_brokerage_inr": 12.07,
+    "shoonya_zero_brokerage_taxes_inr": 4.03,
     "brokerage_breakdown": {
-      "brokerage": 18.99,
-      "stt": 7.97,
-      "exchangeCharge": 1.88,
-      "sebiCharge": 0.06,
-      "gst": 3.77,
-      "stampDuty": 0.94
+      "brokerage": 6.81,
+      "stt": 2.89,
+      "exchangeCharge": 0.67,
+      "sebiCharge": 0.02,
+      "gst": 1.35,
+      "stampDuty": 0.33
     },
-    "net_profit_at_target_inr": 401.99,
-    "net_profit_with_shoonya_zero_brokerage_inr": 424.4
+    "net_profit_at_target_inr": 402.05,
+    "net_profit_with_shoonya_zero_brokerage_inr": 410.09
   },
   "orders": [
     {
-      "symbol": "HDFCBANK.BO",
-      "exchange": "BSE",
+      "symbol": "PNB.NS",
+      "exchange": "NSE",
       "product": "MIS",
       "side": "buy",
-      "qty": 18,
+      "qty": 87,
       "type": "limit",
-      "limit_price": 1746.33,
+      "limit_price": 128,
       "time_in_force": "day",
       "order_class": "bracket",
       "take_profit": {
-        "limit_price": 1770.53
+        "limit_price": 132.76
       },
       "stop_loss": {
-        "stop_price": 1740.85,
+        "stop_price": 126.86,
         "strict": true
       }
     }

@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-11-09T11:16:16+05:30",
+  "as_of": "2026-11-09T17:40:07+05:30",
   "date": "2026-11-09",
   "market": "INDIA_NSE_BSE",
   "currency": "INR",
-  "verdict": "PASS",
+  "verdict": "BLOCK",
   "rules_checked": {
     "account_budget_inr": 20000,
     "mandatory_daily_net_profit_target_inr": 400,
@@ -11,28 +11,13 @@
     "strict_max_loss_per_trade_inr": 100,
     "strict_max_daily_loss_inr": 100,
     "realized_loss_today_inr": 0,
-    "trade_risk_at_stop_inr": 98.64,
-    "net_profit_after_brokerage_inr": 401.99,
-    "reward_risk_ratio": 4.42,
+    "trade_risk_at_stop_inr": 99.18,
+    "net_profit_after_brokerage_inr": 402.05,
+    "reward_risk_ratio": 4.18,
     "paper_mode": true
   },
-  "reasons": [],
-  "approved_order": {
-    "symbol": "HDFCBANK.BO",
-    "exchange": "BSE",
-    "product": "MIS",
-    "side": "buy",
-    "qty": 18,
-    "type": "limit",
-    "limit_price": 1746.33,
-    "time_in_force": "day",
-    "order_class": "bracket",
-    "take_profit": {
-      "limit_price": 1770.53
-    },
-    "stop_loss": {
-      "stop_price": 1740.85,
-      "strict": true
-    }
-  }
+  "reasons": [
+    "First trade closed at 17:40:01 IST (after 12:15 PM IST cutoff). Locking ₹-131.89 profit for the day."
+  ],
+  "approved_order": null
 }

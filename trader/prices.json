@@ -1,13 +1,13 @@
 {
-  "as_of": "2026-11-09T11:16:16+05:30",
+  "as_of": "2026-11-09T17:40:07+05:30",
   "market": "INDIA_NSE_BSE",
   "currency": "INR",
   "quotes": {
-    "HDFCBANK.BO": {
-      "price": 1746.33,
+    "PNB.NS": {
+      "price": 128,
       "currency": "INR",
-      "exchange": "BSE",
-      "as_of": "2026-11-09T11:16:16+05:30"
+      "exchange": "NSE",
+      "as_of": "2026-11-09T17:40:07+05:30"
     }
   }
 }
