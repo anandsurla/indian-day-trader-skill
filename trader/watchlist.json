@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-09T10:51:41+05:30",
+  "as_of": "2026-11-09T11:16:15+05:30",
   "market": "INDIA_NSE_BSE",
   "timezone": "Asia/Kolkata",
   "mode": "orb",
@@ -19,9 +19,9 @@
     "LiveMint",
     "Business Standard"
   ],
-  "universe_size": 40,
-  "scanned": 40,
-  "matched": 19,
+  "universe_size": 55,
+  "scanned": 55,
+  "matched": 25,
   "results": [
     {
       "ticker": "HDFCBANK.BO",
@@ -154,6 +154,135 @@
       "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹413.13), RSI 69.5, RVOL 2.8x."
     },
     {
+      "ticker": "HINDALCO.NS",
+      "name": "Hindalco Industries",
+      "exchange": "NSE",
+      "sector": "Metals & Aluminium",
+      "side": "BUY",
+      "setups": [
+        "BUY_LONG_TREND",
+        "15m_ORB_Breakout",
+        "Session_VWAP",
+        "Stage2_200DMA_Uptrend",
+        "Narrow_CPR",
+        "Supertrend_Bullish",
+        "EMA_9_21_50_Stack"
+      ],
+      "score": 198.27,
+      "historical_win_rate_pct": 76,
+      "close": 657.41,
+      "latest_close": 670.92,
+      "change_pct": 3.02,
+      "rvol": 2.9,
+      "atr": 1.45,
+      "technicals": {
+        "vwap": 658.11,
+        "ema9": 669.81,
+        "ema20": 669.34,
+        "ema50": 667.87,
+        "dma50": 638,
+        "dma200": 595,
+        "cpr_pivot": 652.11,
+        "cpr_tc": 652.55,
+        "cpr_r1": 656.12,
+        "narrow_cpr": true,
+        "supertrend": "BULLISH_GREEN",
+        "rsi14": 66.2,
+        "above_vwap": true,
+        "ema_stack_aligned": true,
+        "stage2_historical_uptrend": true
+      },
+      "business_news": {
+        "source": "Economic Times / Moneycontrol India",
+        "sentiment": "BULLISH",
+        "headline": "Hindalco Industries: Hindalco Industries (NSE) sees positive institutional volume flow and bullish sector breadth"
+      },
+      "levels": {
+        "or_high": 655.97,
+        "or_low": 654.44,
+        "or_mid": 655.21,
+        "stop_hint": 655.21,
+        "target_2r": 661.81,
+        "target_net_400": 667.05
+      },
+      "sizing_preview": {
+        "side": "BUY",
+        "shares": 45,
+        "stop_distance_inr": 2.2,
+        "max_loss_inr": 99,
+        "brokerage_and_taxes_inr": 31.64,
+        "shoonya_zero_brokerage_tax_inr": 10.55,
+        "gross_profit_at_target_inr": 433.8,
+        "net_profit_excl_brokerage_inr": 402.16
+      },
+      "data_source": "indian_market_sim",
+      "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹658.11), RSI 66.2, RVOL 2.9x."
+    },
+    {
+      "ticker": "COALINDIA.NS",
+      "name": "Coal India Ltd",
+      "exchange": "NSE",
+      "sector": "Mining & Energy",
+      "side": "BUY",
+      "setups": [
+        "BUY_LONG_TREND",
+        "15m_ORB_Breakout",
+        "Session_VWAP",
+        "Stage2_200DMA_Uptrend",
+        "Supertrend_Bullish",
+        "EMA_9_21_50_Stack"
+      ],
+      "score": 192.78,
+      "historical_win_rate_pct": 78,
+      "close": 440.66,
+      "latest_close": 452.36,
+      "change_pct": 4.23,
+      "rvol": 2.93,
+      "atr": 1.09,
+      "technicals": {
+        "vwap": 441.12,
+        "ema9": 451.18,
+        "ema20": 450.17,
+        "ema50": 448.06,
+        "dma50": 428,
+        "dma200": 402,
+        "cpr_pivot": 436.42,
+        "cpr_tc": 437.62,
+        "cpr_r1": 439.27,
+        "narrow_cpr": false,
+        "supertrend": "BULLISH_GREEN",
+        "rsi14": 66.8,
+        "above_vwap": true,
+        "ema_stack_aligned": true,
+        "stage2_historical_uptrend": true
+      },
+      "business_news": {
+        "source": "Economic Times / Moneycontrol India",
+        "sentiment": "BULLISH",
+        "headline": "Coal India Ltd: Coal India Ltd (NSE) sees positive institutional volume flow and bullish sector breadth"
+      },
+      "levels": {
+        "or_high": 439.69,
+        "or_low": 439.03,
+        "or_mid": 439.36,
+        "stop_hint": 439.36,
+        "target_2r": 443.26,
+        "target_net_400": 446.42
+      },
+      "sizing_preview": {
+        "side": "BUY",
+        "shares": 76,
+        "stop_distance_inr": 1.3,
+        "max_loss_inr": 98.8,
+        "brokerage_and_taxes_inr": 35.76,
+        "shoonya_zero_brokerage_tax_inr": 11.91,
+        "gross_profit_at_target_inr": 437.76,
+        "net_profit_excl_brokerage_inr": 402
+      },
+      "data_source": "indian_market_sim",
+      "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹441.12), RSI 66.8, RVOL 2.93x."
+    },
+    {
       "ticker": "HDFCBANK.NS",
       "name": "HDFC Bank",
       "exchange": "NSE",
@@ -282,6 +411,71 @@
       },
       "data_source": "indian_market_sim",
       "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹4434.23), RSI 60.8, RVOL 2.57x."
+    },
+    {
+      "ticker": "BPCL.NS",
+      "name": "Bharat Petroleum (BPCL)",
+      "exchange": "NSE",
+      "sector": "Oil & Gas",
+      "side": "BUY",
+      "setups": [
+        "BUY_LONG_TREND",
+        "15m_ORB_Breakout",
+        "Session_VWAP",
+        "Stage2_200DMA_Uptrend",
+        "Narrow_CPR",
+        "Supertrend_Bullish",
+        "EMA_9_21_50_Stack"
+      ],
+      "score": 189.47,
+      "historical_win_rate_pct": 76,
+      "close": 310.48,
+      "latest_close": 317.75,
+      "change_pct": 2.37,
+      "rvol": 2.42,
+      "atr": 0.67,
+      "technicals": {
+        "vwap": 310.81,
+        "ema9": 317.95,
+        "ema20": 317.46,
+        "ema50": 315.99,
+        "dma50": 302,
+        "dma200": 284,
+        "cpr_pivot": 309.86,
+        "cpr_tc": 310.13,
+        "cpr_r1": 311.62,
+        "narrow_cpr": true,
+        "supertrend": "BULLISH_GREEN",
+        "rsi14": 56.2,
+        "above_vwap": true,
+        "ema_stack_aligned": true,
+        "stage2_historical_uptrend": true
+      },
+      "business_news": {
+        "source": "Economic Times / Moneycontrol India",
+        "sentiment": "BULLISH",
+        "headline": "Bharat Petroleum (BPCL): Bharat Petroleum (BPCL) (NSE) sees positive institutional volume flow and bullish sector breadth"
+      },
+      "levels": {
+        "or_high": 309.8,
+        "or_low": 309.35,
+        "or_mid": 309.58,
+        "stop_hint": 309.58,
+        "target_2r": 312.28,
+        "target_net_400": 314.43
+      },
+      "sizing_preview": {
+        "side": "BUY",
+        "shares": 111,
+        "stop_distance_inr": 0.9,
+        "max_loss_inr": 99.9,
+        "brokerage_and_taxes_inr": 36.81,
+        "shoonya_zero_brokerage_tax_inr": 12.26,
+        "gross_profit_at_target_inr": 438.45,
+        "net_profit_excl_brokerage_inr": 401.64
+      },
+      "data_source": "indian_market_sim",
+      "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹310.81), RSI 56.2, RVOL 2.42x."
     },
     {
       "ticker": "SBIN.NS",
@@ -476,201 +670,6 @@
       },
       "data_source": "indian_market_sim",
       "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹1859.89), RSI 50.2, RVOL 2.67x."
-    },
-    {
-      "ticker": "WIPRO.NS",
-      "name": "Wipro Ltd",
-      "exchange": "NSE",
-      "sector": "IT Services",
-      "side": "BUY",
-      "setups": [
-        "BUY_LONG_TREND",
-        "15m_ORB_Breakout",
-        "Session_VWAP",
-        "Stage2_200DMA_Uptrend",
-        "Narrow_CPR",
-        "Supertrend_Bullish",
-        "EMA_9_21_50_Stack"
-      ],
-      "score": 180.06,
-      "historical_win_rate_pct": 72,
-      "close": 564.79,
-      "latest_close": 572.85,
-      "change_pct": 0.62,
-      "rvol": 2.24,
-      "atr": 1.25,
-      "technicals": {
-        "vwap": 564.88,
-        "ema9": 572.54,
-        "ema20": 571.66,
-        "ema50": 570.15,
-        "dma50": 552,
-        "dma200": 520,
-        "cpr_pivot": 567.7,
-        "cpr_tc": 568.51,
-        "cpr_r1": 572.69,
-        "narrow_cpr": true,
-        "supertrend": "BULLISH_GREEN",
-        "rsi14": 72.1,
-        "above_vwap": true,
-        "ema_stack_aligned": true,
-        "stage2_historical_uptrend": true
-      },
-      "business_news": {
-        "source": "LiveMint Markets / Business Standard",
-        "sentiment": "BULLISH",
-        "headline": "Wipro Ltd: Large-cap IT stocks witness strong buying on global cloud deal wins and margin expansion outlook"
-      },
-      "levels": {
-        "or_high": 563.55,
-        "or_low": 562.45,
-        "or_mid": 563,
-        "stop_hint": 563,
-        "target_2r": 568.37,
-        "target_net_400": 572.7
-      },
-      "sizing_preview": {
-        "side": "BUY",
-        "shares": 55,
-        "stop_distance_inr": 1.79,
-        "max_loss_inr": 98.45,
-        "brokerage_and_taxes_inr": 33.2,
-        "shoonya_zero_brokerage_tax_inr": 11.07,
-        "gross_profit_at_target_inr": 435.05,
-        "net_profit_excl_brokerage_inr": 401.85
-      },
-      "data_source": "indian_market_sim",
-      "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹564.88), RSI 72.1, RVOL 2.24x."
-    },
-    {
-      "ticker": "TATASTEEL.NS",
-      "name": "Tata Steel",
-      "exchange": "NSE",
-      "sector": "Metals & Mining",
-      "side": "BUY",
-      "setups": [
-        "BUY_LONG_TREND",
-        "15m_ORB_Breakout",
-        "Session_VWAP",
-        "Stage2_200DMA_Uptrend",
-        "Narrow_CPR",
-        "Supertrend_Bullish",
-        "EMA_9_21_50_Stack"
-      ],
-      "score": 179.99,
-      "historical_win_rate_pct": 73,
-      "close": 154.58,
-      "latest_close": 156.48,
-      "change_pct": 1.83,
-      "rvol": 2,
-      "atr": 0.39,
-      "technicals": {
-        "vwap": 154.59,
-        "ema9": 156.23,
-        "ema20": 156.07,
-        "ema50": 155.69,
-        "dma50": 150,
-        "dma200": 144,
-        "cpr_pivot": 153.8,
-        "cpr_tc": 153.86,
-        "cpr_r1": 154.55,
-        "narrow_cpr": true,
-        "supertrend": "BULLISH_GREEN",
-        "rsi14": 72.6,
-        "above_vwap": true,
-        "ema_stack_aligned": true,
-        "stage2_historical_uptrend": true
-      },
-      "business_news": {
-        "source": "Economic Times / Moneycontrol India",
-        "sentiment": "BULLISH",
-        "headline": "Tata Steel: Tata Steel (NSE) sees positive institutional volume flow and bullish sector breadth"
-      },
-      "levels": {
-        "or_high": 154.24,
-        "or_low": 153.92,
-        "or_mid": 154.08,
-        "stop_hint": 154.08,
-        "target_2r": 155.58,
-        "target_net_400": 156.76
-      },
-      "sizing_preview": {
-        "side": "BUY",
-        "shares": 200,
-        "stop_distance_inr": 0.5,
-        "max_loss_inr": 100,
-        "brokerage_and_taxes_inr": 33.04,
-        "shoonya_zero_brokerage_tax_inr": 11.01,
-        "gross_profit_at_target_inr": 436,
-        "net_profit_excl_brokerage_inr": 402.96
-      },
-      "data_source": "indian_market_sim",
-      "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹154.59), RSI 72.6, RVOL 2x."
-    },
-    {
-      "ticker": "POWERGRID.BO",
-      "name": "Power Grid Corp (BSE)",
-      "exchange": "BSE",
-      "sector": "Power & Utilities",
-      "side": "BUY",
-      "setups": [
-        "BUY_LONG_TREND",
-        "15m_ORB_Breakout",
-        "Session_VWAP",
-        "Stage2_200DMA_Uptrend",
-        "Narrow_CPR",
-        "Supertrend_Bullish",
-        "EMA_9_21_50_Stack"
-      ],
-      "score": 178.06,
-      "historical_win_rate_pct": 76,
-      "close": 325.36,
-      "latest_close": 332.08,
-      "change_pct": 1.77,
-      "rvol": 2.11,
-      "atr": 0.76,
-      "technicals": {
-        "vwap": 325.58,
-        "ema9": 331.57,
-        "ema20": 331.13,
-        "ema50": 330.13,
-        "dma50": 318,
-        "dma200": 298,
-        "cpr_pivot": 325.4,
-        "cpr_tc": 325.86,
-        "cpr_r1": 327.58,
-        "narrow_cpr": true,
-        "supertrend": "BULLISH_GREEN",
-        "rsi14": 70.3,
-        "above_vwap": true,
-        "ema_stack_aligned": true,
-        "stage2_historical_uptrend": true
-      },
-      "business_news": {
-        "source": "Economic Times / Moneycontrol India",
-        "sentiment": "BULLISH",
-        "headline": "Power Grid Corp (BSE): Power Grid Corp (BSE) (BSE) sees positive institutional volume flow and bullish sector breadth"
-      },
-      "levels": {
-        "or_high": 324.65,
-        "or_low": 324.05,
-        "or_mid": 324.35,
-        "stop_hint": 324.35,
-        "target_2r": 327.38,
-        "target_net_400": 329.77
-      },
-      "sizing_preview": {
-        "side": "BUY",
-        "shares": 99,
-        "stop_distance_inr": 1.01,
-        "max_loss_inr": 99.99,
-        "brokerage_and_taxes_inr": 34.42,
-        "shoonya_zero_brokerage_tax_inr": 11.47,
-        "gross_profit_at_target_inr": 436.59,
-        "net_profit_excl_brokerage_inr": 402.17
-      },
-      "data_source": "indian_market_sim",
-      "why": "BSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹325.58), RSI 70.3, RVOL 2.11x."
     }
   ]
 }

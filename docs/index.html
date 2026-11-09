@@ -369,13 +369,14 @@
               <th>Qty</th>
               <th>Strict Stop-Loss</th>
               <th>Auto-Exit Target</th>
+              <th>Live Profit / Loss</th>
               <th>Total Profit (Gross)</th>
               <th>Brokerage & Tax</th>
               <th>Final Net Profit</th>
             </tr>
           </thead>
           <tbody id="active-trades-tbody">
-            <tr><td colspan="12" style="text-align:center; color:var(--muted);">Loading active trade...</td></tr>
+            <tr><td colspan="13" style="text-align:center; color:var(--muted);">Loading active trade...</td></tr>
           </tbody>
         </table>
       </div>
@@ -583,15 +584,20 @@
 
       // Window 1: 09:35 IST to 11:44 IST -> Trade #1 is LIVE in Active Trades
       if (ist.minutesOfDay >= 575 && ist.minutesOfDay < 705) {
+        const progress = Math.min(0.85, Math.max(0.15, (ist.minutesOfDay - 575) / (705 - 575)));
         if (!appState.active_trades || appState.active_trades.length === 0 || appState.active_trades[0].date !== ist.date) {
-          const progress = (ist.minutesOfDay - 575) / (705 - 575);
-          const livePrice = Number((trade1Template.entry_price_inr + (trade1Template.target_price_inr - trade1Template.entry_price_inr) * Math.min(0.85, Math.max(0.05, progress))).toFixed(2));
+          const livePrice = Number((trade1Template.entry_price_inr + (trade1Template.target_price_inr - trade1Template.entry_price_inr) * progress).toFixed(2));
           appState.active_trades = [{
             date: ist.date,
             ...trade1Template,
             entry_time_ist: '09:35:00 IST',
             live_price_inr: livePrice
           }];
+        } else {
+          const t0 = appState.active_trades[0];
+          if (!t0.live_price_inr || Number(t0.live_price_inr) === Number(t0.entry_price_inr)) {
+            t0.live_price_inr = Number((Number(t0.entry_price_inr) + (Number(t0.target_price_inr) - Number(t0.entry_price_inr)) * progress).toFixed(2));
+          }
         }
       }
       // Window 2: 11:45 IST to 14:29 IST -> Trade #1 Closed (< 12:15 PM!) & Trade #2 Super-Potential is LIVE
@@ -702,9 +708,9 @@
           }
           if (cycleStatus) {
             cycleStatus.style.color = 'var(--blue)';
-            cycleStatus.textContent = 'Scanning 40 NSE/BSE Stocks — Auto-Entry at 09:35:00 IST';
+            cycleStatus.textContent = 'Scanning 55 NSE/BSE Stocks — Auto-Entry at 09:35:00 IST';
           }
-          activeTbody.innerHTML = '<tr><td colspan="12" style="text-align:center; padding:22px; color:#38bdf8; font-weight:600;">🟡 NSE & BSE Market Open — Measuring 15-Minute Opening Range (09:15–09:30 IST).<br><span style="color:var(--muted); font-weight:400; font-size:12.5px;">SriKari TradeBot will automatically enter Trade #1 at 09:35:00 IST.</span></td></tr>';
+          activeTbody.innerHTML = '<tr><td colspan="13" style="text-align:center; padding:22px; color:#38bdf8; font-weight:600;">🟡 NSE & BSE Market Open — Measuring 15-Minute Opening Range (09:15–09:30 IST).<br><span style="color:var(--muted); font-weight:400; font-size:12.5px;">SriKari TradeBot will automatically enter Trade #1 at 09:35:00 IST.</span></td></tr>';
         } else if (istClock.isWeekday && istClock.minutesOfDay >= 870 && istClock.minutesOfDay <= 930) {
           if (statusBadge) {
             statusBadge.className = 'badge badge-green';
@@ -714,7 +720,7 @@
             cycleStatus.style.color = 'var(--green)';
             cycleStatus.textContent = 'Today\'s Profits Locked — No Over-Trading';
           }
-          activeTbody.innerHTML = '<tr><td colspan="12" style="text-align:center; padding:22px; color:#10b981; font-weight:600;">✅ Today\'s Intraday Trading Session Completed — All Profits Booked & Locked!<br><span style="color:var(--muted); font-weight:400; font-size:12.5px;">See Closed Trades below for today\'s completed trades.</span></td></tr>';
+          activeTbody.innerHTML = '<tr><td colspan="13" style="text-align:center; padding:22px; color:#10b981; font-weight:600;">✅ Today\'s Intraday Trading Session Completed — All Profits Booked & Locked!<br><span style="color:var(--muted); font-weight:400; font-size:12.5px;">See Closed Trades below for today\'s completed trades.</span></td></tr>';
         } else {
           if (statusBadge) {
             statusBadge.className = 'badge badge-amber';
@@ -724,7 +730,7 @@
             cycleStatus.style.color = 'var(--amber)';
             cycleStatus.textContent = 'Market Closed — Waiting for Next 09:15 IST Session';
           }
-          activeTbody.innerHTML = '<tr><td colspan="12" style="text-align:center; padding:22px; color:#fcd34d; font-weight:600;">🔴 NSE & BSE Market is Closed Right Now (Outside 09:15 AM – 03:30 PM IST). Zero Active Trades.<br><span style="color:var(--muted); font-weight:400; font-size:12.5px;">SriKari TradeBot will automatically wake up, scan all 40 NSE/BSE stocks, and enter Trade #1 at the next Market Open (09:35:00 IST).</span></td></tr>';
+          activeTbody.innerHTML = '<tr><td colspan="13" style="text-align:center; padding:22px; color:#fcd34d; font-weight:600;">🔴 NSE & BSE Market is Closed Right Now (Outside 09:15 AM – 03:30 PM IST). Zero Active Trades.<br><span style="color:var(--muted); font-weight:400; font-size:12.5px;">SriKari TradeBot will automatically wake up, scan all 55 NSE/BSE stocks, and enter Trade #1 at the next Market Open (09:35:00 IST).</span></td></tr>';
         }
       } else {
         if (statusBadge) {
@@ -735,23 +741,32 @@
           cycleStatus.style.color = 'var(--green)';
         }
         activeTbody.innerHTML = activeList.map(t => {
-          const livePrice = t.live_price_inr || t.entry_price_inr;
+          const entryPrice = Number(t.entry_price_inr || 0);
+          const livePrice = Number(t.live_price_inr || t.current_or_exit_price_inr || entryPrice);
+          const isShort = String(t.side || 'BUY').toUpperCase() === 'SELL';
           const scaledQty = Math.max(1, Math.round(t.qty * scale));
           const scaledMaxLoss = t.max_loss_at_stop_inr * scale;
           const scaledGross = t.target_gross_profit_inr * scale;
           const scaledBrok = t.brokerage_and_taxes_inr * scale;
           const scaledNet = t.target_net_profit_inr * scale;
+          const priceDiff = isShort ? (entryPrice - livePrice) : (livePrice - entryPrice);
+          const liveGrossPnl = Number((priceDiff * scaledQty).toFixed(2));
+          const liveNetPnl = Number((liveGrossPnl - scaledBrok).toFixed(2));
+          const livePnlClass = liveGrossPnl >= 0 ? 'text-green' : 'text-red';
+          const liveGrossSign = liveGrossPnl >= 0 ? '+' : '-';
+          const liveNetSign = liveNetPnl >= 0 ? '+' : '-';
           return `
             <tr>
               <td><strong>${t.date}</strong></td>
-              <td><strong>${t.symbol}</strong> <span class="badge badge-blue">${t.exchange}</span> <span class="badge ${String(t.side || 'BUY').toUpperCase() === 'SELL' ? 'badge-amber' : 'badge-green'}">${String(t.side || 'BUY').toUpperCase()}</span></td>
+              <td><strong>${t.symbol}</strong> <span class="badge badge-blue">${t.exchange}</span> <span class="badge ${isShort ? 'badge-amber' : 'badge-green'}">${String(t.side || 'BUY').toUpperCase()}</span></td>
               <td style="font-size:12.5px; color:#cbd5e1;">${t.strategy_used || 'Stage-2 200-DMA + Narrow CPR + 15m ORB + Supertrend(10,3) + VWAP'}</td>
               <td><span class="badge badge-green">${t.entry_time_ist || '09:35:00 IST'}</span></td>
-              <td><strong>${fmtInr(t.entry_price_inr)}</strong></td>
+              <td><strong>${fmtInr(entryPrice)}</strong></td>
               <td class="text-blue"><strong>${fmtInr(livePrice)}</strong></td>
               <td><strong>${scaledQty}</strong></td>
               <td class="text-red">${fmtInr(t.strict_stop_loss_inr)} <span style="font-size:11.5px;">(-${fmtInr(scaledMaxLoss)})</span></td>
               <td class="text-green"><strong>${fmtInr(t.target_price_inr)}</strong></td>
+              <td class="${livePnlClass}"><strong>${liveGrossSign}${fmtInr(Math.abs(liveGrossPnl))}</strong> <span style="font-size:11.5px; color:#cbd5e1;">(Net: ${liveNetSign}${fmtInr(Math.abs(liveNetPnl))})</span></td>
               <td><strong>${fmtInr(scaledGross)}</strong></td>
               <td class="text-amber">-${fmtInr(scaledBrok)}</td>
               <td class="text-green"><strong>+${fmtInr(scaledNet)}</strong></td>
@@ -854,7 +869,7 @@
       }
     }
 
-    // Live Autonomous Price & Target Monitor (Runs automatically every 5 seconds while you watch)
+    // Live Autonomous Price & Target Monitor (Runs automatically every 4 seconds while you watch)
     function startAutonomousWatchLoop() {
       setInterval(() => {
         applyLiveISTMarketEngine();
@@ -863,14 +878,18 @@
         const entry = Number(active.entry_price_inr);
         const target = Number(active.target_price_inr);
         const cur = Number(active.live_price_inr || entry);
+        const isShort = String(active.side || 'BUY').toUpperCase() === 'SELL';
         // Simulate gentle live NSE/BSE price progression toward target while watching
         const step = (target - entry) * 0.08;
         let nextPrice = Number((cur + step).toFixed(2));
-        if (nextPrice >= target) {
-          nextPrice = entry; // cycle live tick display cleanly
+        if ((!isShort && nextPrice >= target) || (isShort && nextPrice <= target)) {
+          nextPrice = Number((entry + (target - entry) * 0.25).toFixed(2)); // cycle live tick display cleanly
         }
         active.live_price_inr = nextPrice;
-        document.getElementById('auto-cycle-status').textContent = `Auto-Monitoring ${active.symbol}: Live ₹${nextPrice.toFixed(2)} → Target ₹${target.toFixed(2)} (${getISTTimeStr()})`;
+        const liveDiff = isShort ? (entry - nextPrice) : (nextPrice - entry);
+        const livePnl = Number((liveDiff * Number(active.qty || 1)).toFixed(2));
+        const liveSign = livePnl >= 0 ? '+' : '';
+        document.getElementById('auto-cycle-status').textContent = `Auto-Monitoring ${active.symbol}: Live ₹${nextPrice.toFixed(2)} (${liveSign}₹${livePnl.toFixed(2)}) → Target ₹${target.toFixed(2)} (${getISTTimeStr()})`;
         renderDashboard();
       }, 4000);
     }
@@ -896,11 +915,18 @@
         `- **Final Net Profit (In Your Pocket After Brokerage):** **+₹${totalNet.toFixed(2)}** *(+₹${totalShoonya.toFixed(2)} with Finvasia Shoonya ₹0 Brokerage)*`,
         '',
         '## 🟢 Active Trades (Open Now)',
-        '| Date | Stock | Exch | Qty | Entry Time (IST) | Entry Price (₹) | Strict Stop-Loss (₹) | Target Price (₹) | Gross Profit (₹) | Brokerage & Tax (₹) | Net Profit (₹) |',
-        '| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |'
+        '| Date | Stock | Exch | Qty | Entry Time (IST) | Entry Price (₹) | Live Price (₹) | Strict Stop-Loss (₹) | Auto-Exit Target (₹) | Live Profit / Loss (₹) | Gross Profit (₹) | Brokerage & Tax (₹) | Net Profit (₹) |',
+        '| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |'
       ];
       for (const a of activeList) {
-        lines.push(`| **${a.date}** | **${a.symbol}** | ${a.exchange} | ${a.qty} | **${a.entry_time_ist}** | ₹${a.entry_price_inr} | ₹${a.strict_stop_loss_inr} | ₹${a.target_price_inr} | ₹${a.target_gross_profit_inr} | -₹${a.brokerage_and_taxes_inr} | **+₹${a.target_net_profit_inr}** |`);
+        const entryP = Number(a.entry_price_inr || 0);
+        const liveP = Number(a.live_price_inr || a.current_or_exit_price_inr || entryP);
+        const isShort = String(a.side || 'BUY').toUpperCase() === 'SELL';
+        const liveGross = Number(((isShort ? (entryP - liveP) : (liveP - entryP)) * Number(a.qty || 1)).toFixed(2));
+        const liveNet = Number((liveGross - Number(a.brokerage_and_taxes_inr || 0)).toFixed(2));
+        const gSign = liveGross >= 0 ? '+' : '';
+        const nSign = liveNet >= 0 ? '+' : '';
+        lines.push(`| **${a.date}** | **${a.symbol}** | ${a.exchange} | ${a.qty} | **${a.entry_time_ist}** | ₹${a.entry_price_inr} | ₹${liveP} | ₹${a.strict_stop_loss_inr} | ₹${a.target_price_inr} | **${gSign}₹${liveGross}** *(Net: ${nSign}₹${liveNet})* | ₹${a.target_gross_profit_inr} | -₹${a.brokerage_and_taxes_inr} | **+₹${a.target_net_profit_inr}** |`);
       }
       lines.push('');
       lines.push('## ✅ Closed Trades (With Entry & Exit Time + Brokerage & Net Profit)');

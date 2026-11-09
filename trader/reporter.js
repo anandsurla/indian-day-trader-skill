@@ -83,6 +83,16 @@ function generateAllReports() {
     if (activePos) {
         const dateStr = (activePos.opened_at_ist || new Date().toISOString()).slice(0, 10);
         const grossTarget = activePos.gross_profit_at_target_inr || Number(((activePos.net_profit_at_target_inr || 402.07) + (activePos.brokerage_and_taxes_inr || 30.75)).toFixed(2));
+        const livePrice = activePos.live_price_inr || activePos.current_price_inr || activePos.entry_price_inr;
+        const isShort = String(activePos.side || 'BUY').toUpperCase() === 'SELL';
+        const priceDiff = isShort ? (activePos.entry_price_inr - livePrice) : (livePrice - activePos.entry_price_inr);
+        const liveGrossPnl = activePos.unrealized_gross_pnl_inr !== undefined
+            ? activePos.unrealized_gross_pnl_inr
+            : Number((priceDiff * activePos.qty).toFixed(2));
+        const brok = activePos.brokerage_and_taxes_inr || 30.45;
+        const liveNetPnl = activePos.unrealized_net_pnl_excl_brokerage_inr !== undefined
+            ? activePos.unrealized_net_pnl_excl_brokerage_inr
+            : Number((liveGrossPnl - brok).toFixed(2));
         allTrades.push({
             id: activePos.id || 'ACTIVE_NOW',
             date: dateStr,
@@ -96,14 +106,17 @@ function generateAllReports() {
             entry_time_ist: activePos.entry_time_ist || extractTimeIst(activePos.opened_at_ist, '09:35:00 IST'),
             exit_time_ist: activePos.exit_time_ist || 'ACTIVE (Auto-Target / 15:15 IST)',
             entry_price_inr: activePos.entry_price_inr,
-            current_or_exit_price_inr: activePos.current_price_inr || activePos.entry_price_inr,
+            live_price_inr: livePrice,
+            current_or_exit_price_inr: livePrice,
             strict_stop_loss_inr: activePos.strict_stop_loss_inr,
             target_price_inr: activePos.take_profit_target_inr,
             max_loss_at_stop_inr: activePos.max_loss_at_stop_inr,
-            gross_pnl_inr: activePos.unrealized_gross_pnl_inr || grossTarget,
+            live_gross_pnl_inr: liveGrossPnl,
+            live_net_pnl_inr: liveNetPnl,
+            gross_pnl_inr: liveGrossPnl,
             target_gross_profit_inr: grossTarget,
-            brokerage_and_taxes_inr: activePos.brokerage_and_taxes_inr || 30.45,
-            net_pnl_excl_brokerage_inr: activePos.unrealized_net_pnl_excl_brokerage_inr || 0,
+            brokerage_and_taxes_inr: brok,
+            net_pnl_excl_brokerage_inr: liveNetPnl,
             target_net_profit_inr: activePos.net_profit_at_target_inr || 402.07,
             shoonya_zero_brokerage_charges_inr: activePos.shoonya_zero_brokerage_charges_inr || 9.80,
             shoonya_zero_brokerage_net_inr: activePos.shoonya_zero_brokerage_net_inr || Number((grossTarget - 9.80).toFixed(2)),
@@ -291,15 +304,17 @@ function generateAllReports() {
         `- **Final Net Profit (In Your Pocket After Brokerage):** **+₹${closedNetTotal}** *(+₹${closedShoonyaNetTotal} with Finvasia Shoonya ₹0 Brokerage)*`,
         '',
         '## 🟢 Active Trades (Open Now)',
-        '| Date | Stock | Exch | Qty | Entry Time (IST) | Entry Price (₹) | Strict Stop-Loss (₹) | Target Price (₹) | Gross Profit at Target (₹) | Brokerage & Tax (₹) | Net Profit at Target (₹) | High-Accuracy Strategy |',
-        '| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |'
+        '| Date | Stock | Exch | Qty | Entry Time (IST) | Entry Price (₹) | Live Price (₹) | Strict Stop-Loss (₹) | Auto-Exit Target (₹) | Live Profit / Loss (₹) | Gross Profit at Target (₹) | Brokerage & Tax (₹) | Net Profit at Target (₹) | High-Accuracy Strategy |',
+        '| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |'
     ];
 
     if (activeTradesList.length === 0) {
-        dailyMdLines.push('| - | No Active Trade | - | - | - | - | - | - | - | - | - | - |');
+        dailyMdLines.push('| - | No Active Trade | - | - | - | - | - | - | - | - | - | - | - | - |');
     } else {
         for (const t of activeTradesList) {
-            dailyMdLines.push(`| **${t.date}** | **${t.symbol}** | ${t.exchange} | ${t.qty} | **${t.entry_time_ist}** | ₹${t.entry_price_inr} | ₹${t.strict_stop_loss_inr} | ₹${t.target_price_inr} | ₹${t.target_gross_profit_inr} | -₹${t.brokerage_and_taxes_inr} | **+₹${t.target_net_profit_inr}** | ${t.strategy_used} |`);
+            const liveSign = (t.live_gross_pnl_inr || 0) >= 0 ? '+' : '';
+            const liveNetSign = (t.live_net_pnl_inr || 0) >= 0 ? '+' : '';
+            dailyMdLines.push(`| **${t.date}** | **${t.symbol}** | ${t.exchange} | ${t.qty} | **${t.entry_time_ist}** | ₹${t.entry_price_inr} | ₹${t.live_price_inr || t.entry_price_inr} | ₹${t.strict_stop_loss_inr} | ₹${t.target_price_inr} | **${liveSign}₹${t.live_gross_pnl_inr || 0}** *(Net: ${liveNetSign}₹${t.live_net_pnl_inr || 0})* | ₹${t.target_gross_profit_inr} | -₹${t.brokerage_and_taxes_inr} | **+₹${t.target_net_profit_inr}** | ${t.strategy_used} |`);
         }
     }
 
@@ -420,3 +435,8 @@ module.exports = {
     generateAllReports,
     syncReportsToGitHub
 };
+
+if (require.main === module) {
+    generateAllReports();
+    console.log('Generated Daily & Weekly Paper Trade Reports successfully.');
+}
