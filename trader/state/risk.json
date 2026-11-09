@@ -1,6 +1,6 @@
 {
-  "as_of": "2026-11-08T12:54:24+05:30",
-  "date": "2026-11-08",
+  "as_of": "2026-11-09T10:51:42+05:30",
+  "date": "2026-11-09",
   "market": "INDIA_NSE_BSE",
   "currency": "INR",
   "verdict": "PASS",
@@ -11,27 +11,27 @@
     "strict_max_loss_per_trade_inr": 100,
     "strict_max_daily_loss_inr": 100,
     "realized_loss_today_inr": 0,
-    "trade_risk_at_stop_inr": 99.54,
-    "net_profit_after_brokerage_inr": 401.89,
-    "reward_risk_ratio": 4.39,
+    "trade_risk_at_stop_inr": 98.64,
+    "net_profit_after_brokerage_inr": 401.99,
+    "reward_risk_ratio": 4.42,
     "paper_mode": true
   },
   "reasons": [],
   "approved_order": {
-    "symbol": "NTPC.BO",
+    "symbol": "HDFCBANK.BO",
     "exchange": "BSE",
     "product": "MIS",
     "side": "buy",
-    "qty": 79,
+    "qty": 18,
     "type": "limit",
-    "limit_price": 414.16,
+    "limit_price": 1746.33,
     "time_in_force": "day",
     "order_class": "bracket",
     "take_profit": {
-      "limit_price": 419.69
+      "limit_price": 1770.53
     },
     "stop_loss": {
-      "stop_price": 412.9,
+      "stop_price": 1740.85,
       "strict": true
     }
   }

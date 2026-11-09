@@ -1,17 +1,46 @@
 {
-  "generated_at": "2026-11-08T07:24:24.417Z",
+  "generated_at": "2026-11-09T05:21:42.152Z",
   "account_budget_inr": 20000,
   "mandatory_daily_net_profit_inr": 400,
   "strict_max_loss_per_trade_inr": 100,
   "summary_totals": {
     "closed_trades_count": 3,
-    "active_trades_count": 0,
+    "active_trades_count": 1,
     "total_gross_profit_inr": 1302.76,
     "total_brokerage_and_taxes_inr": 95.76,
     "total_net_profit_inr": 1207,
     "total_shoonya_zero_brokerage_net_inr": 1272.11
   },
-  "active_trades": [],
+  "active_trades": [
+    {
+      "id": "IND_1794201702113",
+      "date": "2026-11-09",
+      "week_start": "2026-11-09",
+      "status": "OPEN (ACTIVE)",
+      "symbol": "HDFCBANK.BO",
+      "exchange": "BSE",
+      "side": "BUY",
+      "qty": 18,
+      "strategy_used": "Stage-2 200-DMA + Narrow CPR + 15m ORB + Supertrend(10,3) + VWAP (Trade #1)",
+      "entry_time_ist": "09:35:00 IST",
+      "exit_time_ist": "ACTIVE (Target / 15:15 IST)",
+      "entry_price_inr": 1746.33,
+      "current_or_exit_price_inr": 1746.33,
+      "strict_stop_loss_inr": 1740.85,
+      "target_price_inr": 1770.53,
+      "max_loss_at_stop_inr": 98.64,
+      "gross_pnl_inr": 435.6,
+      "target_gross_profit_inr": 435.6,
+      "brokerage_and_taxes_inr": 33.61,
+      "net_pnl_excl_brokerage_inr": 0,
+      "target_net_profit_inr": 401.99,
+      "shoonya_zero_brokerage_charges_inr": 9.8,
+      "shoonya_zero_brokerage_net_inr": 425.8,
+      "exit_reason": "ACTIVE_MONITORING (Target ₹1770.53 / Strict SL ₹1740.85)",
+      "opened_at_ist": "2026-11-09 09:35:00 IST",
+      "closed_at_ist": "-"
+    }
+  ],
   "closed_trades": [
     {
       "id": "IND_20261106_01",
@@ -99,6 +128,51 @@
     }
   ],
   "days": [
+    {
+      "date": "2026-11-09",
+      "week_start": "2026-11-09",
+      "daily_target_net_inr": 400,
+      "strict_daily_loss_limit_inr": 100,
+      "total_trades": 1,
+      "open_trades": 1,
+      "closed_trades": 0,
+      "wins": 0,
+      "losses": 0,
+      "realized_gross_pnl_inr": 0,
+      "realized_brokerage_and_taxes_inr": 0,
+      "realized_net_pnl_excl_brokerage_inr": 0,
+      "projected_net_pnl_at_target_inr": 401.99,
+      "trades": [
+        {
+          "id": "IND_1794201702113",
+          "date": "2026-11-09",
+          "week_start": "2026-11-09",
+          "status": "OPEN (ACTIVE)",
+          "symbol": "HDFCBANK.BO",
+          "exchange": "BSE",
+          "side": "BUY",
+          "qty": 18,
+          "strategy_used": "Stage-2 200-DMA + Narrow CPR + 15m ORB + Supertrend(10,3) + VWAP (Trade #1)",
+          "entry_time_ist": "09:35:00 IST",
+          "exit_time_ist": "ACTIVE (Target / 15:15 IST)",
+          "entry_price_inr": 1746.33,
+          "current_or_exit_price_inr": 1746.33,
+          "strict_stop_loss_inr": 1740.85,
+          "target_price_inr": 1770.53,
+          "max_loss_at_stop_inr": 98.64,
+          "gross_pnl_inr": 435.6,
+          "target_gross_profit_inr": 435.6,
+          "brokerage_and_taxes_inr": 33.61,
+          "net_pnl_excl_brokerage_inr": 0,
+          "target_net_profit_inr": 401.99,
+          "shoonya_zero_brokerage_charges_inr": 9.8,
+          "shoonya_zero_brokerage_net_inr": 425.8,
+          "exit_reason": "ACTIVE_MONITORING (Target ₹1770.53 / Strict SL ₹1740.85)",
+          "opened_at_ist": "2026-11-09 09:35:00 IST",
+          "closed_at_ist": "-"
+        }
+      ]
+    },
     {
       "date": "2026-11-06",
       "week_start": "2026-11-02",

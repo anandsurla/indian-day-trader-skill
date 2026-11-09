@@ -1,35 +1,35 @@
 {
-  "as_of": "2026-11-08T12:54:24+05:30",
+  "as_of": "2026-11-09T10:51:42+05:30",
   "market": "INDIA_NSE_BSE",
   "exchange": "BSE",
   "currency": "INR",
-  "ticker": "NTPC.BO",
+  "ticker": "HDFCBANK.BO",
   "plan": {
-    "entry": 414.16,
-    "stop": 412.9,
-    "target_2r_trail": 416.68,
-    "target": 419.69,
-    "reward_risk": 4.39,
+    "entry": 1746.33,
+    "stop": 1740.85,
+    "target_2r_trail": 1757.29,
+    "target": 1770.53,
+    "reward_risk": 4.42,
     "flat_by": "15:15"
   },
   "monte_carlo": {
     "method": "intraday_block_bootstrap_with_2r_trailing_lock",
     "sims": 10000,
     "horizon_bars": 68,
-    "p_target_full_400": 0.1955,
-    "p_trail_2r_win": 0.4698,
-    "p_win_combined": 0.6653,
-    "p_stop": 0.3304,
-    "p_expired": 0.0043,
-    "expected_r": 1.24,
+    "p_target_full_400": 0.2104,
+    "p_trail_2r_win": 0.4538,
+    "p_win_combined": 0.6642,
+    "p_stop": 0.331,
+    "p_expired": 0.0048,
+    "expected_r": 1.29,
     "close_Loop_quantiles_inr": {
-      "p10": 412.9,
-      "p25": 412.9,
-      "p50": 416.05,
-      "p75": 416.05,
-      "p90": 419.69
+      "p10": 1740.85,
+      "p25": 1740.85,
+      "p50": 1754.55,
+      "p75": 1754.55,
+      "p90": 1770.53
     }
   },
   "verdict": "favorable",
-  "summary": "10,000 NSE/BSE session replays for NTPC.BO: 66.5% win rate -> Expected +1.24R per trade."
+  "summary": "10,000 NSE/BSE session replays for HDFCBANK.BO: 66.4% win rate -> Expected +1.29R per trade."
 }

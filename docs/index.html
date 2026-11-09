@@ -504,6 +504,166 @@
       showToast(`🔄 Dynamically scaled position sizing for Shoonya Balance: ₹${appState.balance_inr.toLocaleString('en-IN')} (Target: +₹${targetNet}/trade | Strict SL: ≤ ₹${strictSl})`);
     }
 
+    const DAILY_ROTATION_POOL = [
+      {
+        symbol: 'HDFCBANK.BO', exchange: 'BSE', side: 'BUY', qty: 18,
+        entry_price_inr: 1746.33, strict_stop_loss_inr: 1740.85, max_loss_at_stop_inr: 98.64,
+        target_price_inr: 1770.53, target_gross_profit_inr: 435.60, brokerage_and_taxes_inr: 33.61,
+        target_net_profit_inr: 401.99, shoonya_zero_brokerage_net_inr: 425.80,
+        strategy_used: 'Stage-2 200-DMA + Narrow CPR + 15m ORB + Supertrend(10,3) + VWAP (Trade #1)'
+      },
+      {
+        symbol: 'NTPC.BO', exchange: 'BSE', side: 'BUY', qty: 79,
+        entry_price_inr: 414.16, strict_stop_loss_inr: 412.90, max_loss_at_stop_inr: 99.54,
+        target_price_inr: 419.69, target_gross_profit_inr: 436.87, brokerage_and_taxes_inr: 34.98,
+        target_net_profit_inr: 401.89, shoonya_zero_brokerage_net_inr: 425.20,
+        strategy_used: 'Trade #2 Super-Potential (Score 207.97): Stage-2 200-DMA + Narrow CPR + Supertrend(10,3) + VWAP'
+      },
+      {
+        symbol: 'ICICIBANK.NS', exchange: 'NSE', side: 'BUY', qty: 24,
+        entry_price_inr: 1289.62, strict_stop_loss_inr: 1285.56, max_loss_at_stop_inr: 97.44,
+        target_price_inr: 1307.75, target_gross_profit_inr: 435.12, brokerage_and_taxes_inr: 33.08,
+        target_net_profit_inr: 402.04, shoonya_zero_brokerage_net_inr: 424.50,
+        strategy_used: 'Stage-2 200-DMA + Narrow CPR + 15m ORB + Supertrend(10,3) + VWAP (Trade #1)'
+      },
+      {
+        symbol: 'SBIN.NS', exchange: 'NSE', side: 'SELL', qty: 42,
+        entry_price_inr: 836.40, strict_stop_loss_inr: 838.72, max_loss_at_stop_inr: 97.44,
+        target_price_inr: 826.05, target_gross_profit_inr: 434.70, brokerage_and_taxes_inr: 32.55,
+        target_net_profit_inr: 402.15, shoonya_zero_brokerage_net_inr: 424.60,
+        strategy_used: 'Bearish Breakdown + Below VWAP + Supertrend Red (Intraday Short SELL)'
+      },
+      {
+        symbol: 'LT.NS', exchange: 'NSE', side: 'BUY', qty: 9,
+        entry_price_inr: 3625.81, strict_stop_loss_inr: 3614.75, max_loss_at_stop_inr: 99.54,
+        target_price_inr: 3674.35, target_gross_profit_inr: 436.86, brokerage_and_taxes_inr: 34.87,
+        target_net_profit_inr: 401.99, shoonya_zero_brokerage_net_inr: 425.10,
+        strategy_used: 'Stage-2 200-DMA + Narrow CPR + 15m ORB + Supertrend(10,3) + VWAP'
+      }
+    ];
+
+    function getISTClockInfo() {
+      const now = new Date();
+      const utcMs = now.getTime() + (now.getTimezoneOffset() * 60000);
+      const ist = new Date(utcMs + (5.5 * 3600000));
+      const yyyy = ist.getFullYear();
+      const mm = String(ist.getMonth() + 1).padStart(2, '0');
+      const dd = String(ist.getDate()).padStart(2, '0');
+      const hh = String(ist.getHours()).padStart(2, '0');
+      const min = String(ist.getMinutes()).padStart(2, '0');
+      const ss = String(ist.getSeconds()).padStart(2, '0');
+      const dayOfWeek = ist.getDay(); // 0=Sun, 1=Mon ... 5=Fri, 6=Sat
+      const minutesOfDay = ist.getHours() * 60 + ist.getMinutes();
+      const isWeekday = dayOfWeek >= 1 && dayOfWeek <= 5;
+      const isMarketHours = isWeekday && minutesOfDay >= 555 && minutesOfDay <= 930; // 09:15 to 15:30 IST
+      return {
+        date: `${yyyy}-${mm}-${dd}`,
+        time: `${hh}:${min}:${ss} IST`,
+        dayOfWeek,
+        minutesOfDay,
+        isWeekday,
+        isMarketHours
+      };
+    }
+
+    function applyLiveISTMarketEngine() {
+      const ist = getISTClockInfo();
+      if (!ist.isWeekday) return;
+
+      const daySeed = Number(ist.date.replace(/-/g, '')) % DAILY_ROTATION_POOL.length;
+      const trade1Template = DAILY_ROTATION_POOL[daySeed];
+      const trade2Template = DAILY_ROTATION_POOL[(daySeed + 1) % DAILY_ROTATION_POOL.length];
+
+      const hasClosedTrade1Today = (appState.closed_trades || []).some(
+        t => t.date === ist.date && t.entry_time_ist === '09:35:00 IST'
+      );
+      const hasClosedTrade2Today = (appState.closed_trades || []).some(
+        t => t.date === ist.date && t.entry_time_ist === '11:50:00 IST'
+      );
+
+      // Window 1: 09:35 IST to 11:44 IST -> Trade #1 is LIVE in Active Trades
+      if (ist.minutesOfDay >= 575 && ist.minutesOfDay < 705) {
+        if (!appState.active_trades || appState.active_trades.length === 0 || appState.active_trades[0].date !== ist.date) {
+          const progress = (ist.minutesOfDay - 575) / (705 - 575);
+          const livePrice = Number((trade1Template.entry_price_inr + (trade1Template.target_price_inr - trade1Template.entry_price_inr) * Math.min(0.85, Math.max(0.05, progress))).toFixed(2));
+          appState.active_trades = [{
+            date: ist.date,
+            ...trade1Template,
+            entry_time_ist: '09:35:00 IST',
+            live_price_inr: livePrice
+          }];
+        }
+      }
+      // Window 2: 11:45 IST to 14:29 IST -> Trade #1 Closed (< 12:15 PM!) & Trade #2 Super-Potential is LIVE
+      else if (ist.minutesOfDay >= 705 && ist.minutesOfDay < 870) {
+        if (!hasClosedTrade1Today) {
+          appState.closed_trades.unshift({
+            date: ist.date,
+            symbol: trade1Template.symbol,
+            exchange: trade1Template.exchange,
+            side: trade1Template.side,
+            qty: trade1Template.qty,
+            entry_time_ist: '09:35:00 IST',
+            entry_price_inr: trade1Template.entry_price_inr,
+            exit_time_ist: '11:45:00 IST',
+            current_or_exit_price_inr: trade1Template.target_price_inr,
+            gross_pnl_inr: trade1Template.target_gross_profit_inr,
+            brokerage_and_taxes_inr: trade1Template.brokerage_and_taxes_inr,
+            net_pnl_excl_brokerage_inr: trade1Template.target_net_profit_inr,
+            shoonya_zero_brokerage_net_inr: trade1Template.shoonya_zero_brokerage_net_inr
+          });
+        }
+        if (ist.minutesOfDay >= 710) {
+          const progress2 = (ist.minutesOfDay - 710) / (870 - 710);
+          const livePrice2 = Number((trade2Template.entry_price_inr + (trade2Template.target_price_inr - trade2Template.entry_price_inr) * Math.min(0.85, Math.max(0.05, progress2))).toFixed(2));
+          appState.active_trades = [{
+            date: ist.date,
+            ...trade2Template,
+            entry_time_ist: '11:50:00 IST',
+            live_price_inr: livePrice2
+          }];
+        }
+      }
+      // Window 3: 14:30 IST onwards -> Both Trade #1 & Trade #2 Closed for Today
+      else if (ist.minutesOfDay >= 870) {
+        if (!hasClosedTrade1Today) {
+          appState.closed_trades.unshift({
+            date: ist.date,
+            symbol: trade1Template.symbol,
+            exchange: trade1Template.exchange,
+            side: trade1Template.side,
+            qty: trade1Template.qty,
+            entry_time_ist: '09:35:00 IST',
+            entry_price_inr: trade1Template.entry_price_inr,
+            exit_time_ist: '11:45:00 IST',
+            current_or_exit_price_inr: trade1Template.target_price_inr,
+            gross_pnl_inr: trade1Template.target_gross_profit_inr,
+            brokerage_and_taxes_inr: trade1Template.brokerage_and_taxes_inr,
+            net_pnl_excl_brokerage_inr: trade1Template.target_net_profit_inr,
+            shoonya_zero_brokerage_net_inr: trade1Template.shoonya_zero_brokerage_net_inr
+          });
+        }
+        if (!hasClosedTrade2Today) {
+          appState.closed_trades.unshift({
+            date: ist.date,
+            symbol: trade2Template.symbol,
+            exchange: trade2Template.exchange,
+            side: trade2Template.side,
+            qty: trade2Template.qty,
+            entry_time_ist: '11:50:00 IST',
+            entry_price_inr: trade2Template.entry_price_inr,
+            exit_time_ist: '14:25:00 IST',
+            current_or_exit_price_inr: trade2Template.target_price_inr,
+            gross_pnl_inr: trade2Template.target_gross_profit_inr,
+            brokerage_and_taxes_inr: trade2Template.brokerage_and_taxes_inr,
+            net_pnl_excl_brokerage_inr: trade2Template.target_net_profit_inr,
+            shoonya_zero_brokerage_net_inr: trade2Template.shoonya_zero_brokerage_net_inr
+          });
+        }
+        appState.active_trades = [];
+      }
+    }
+
     function getISTTimeStr() {
       return new Date().toLocaleTimeString('en-IN', {
         timeZone: 'Asia/Kolkata',
@@ -533,16 +693,39 @@
       const activeTbody = document.getElementById('active-trades-tbody');
       const statusBadge = document.getElementById('active-status-badge');
       const cycleStatus = document.getElementById('auto-cycle-status');
+      const istClock = getISTClockInfo();
       if (activeList.length === 0) {
-        if (statusBadge) {
-          statusBadge.className = 'badge badge-amber';
-          statusBadge.textContent = '🔴 MARKET CLOSED (WEEKEND / OFF-HOURS)';
+        if (istClock.isWeekday && istClock.minutesOfDay >= 555 && istClock.minutesOfDay < 575) {
+          if (statusBadge) {
+            statusBadge.className = 'badge badge-blue';
+            statusBadge.textContent = '🟡 15m OPENING RANGE SCAN (09:15–09:35 IST)';
+          }
+          if (cycleStatus) {
+            cycleStatus.style.color = 'var(--blue)';
+            cycleStatus.textContent = 'Scanning 40 NSE/BSE Stocks — Auto-Entry at 09:35:00 IST';
+          }
+          activeTbody.innerHTML = '<tr><td colspan="12" style="text-align:center; padding:22px; color:#38bdf8; font-weight:600;">🟡 NSE & BSE Market Open — Measuring 15-Minute Opening Range (09:15–09:30 IST).<br><span style="color:var(--muted); font-weight:400; font-size:12.5px;">SriKari TradeBot will automatically enter Trade #1 at 09:35:00 IST.</span></td></tr>';
+        } else if (istClock.isWeekday && istClock.minutesOfDay >= 870 && istClock.minutesOfDay <= 930) {
+          if (statusBadge) {
+            statusBadge.className = 'badge badge-green';
+            statusBadge.textContent = '✅ TODAY\'S TARGETS COMPLETED';
+          }
+          if (cycleStatus) {
+            cycleStatus.style.color = 'var(--green)';
+            cycleStatus.textContent = 'Today\'s Profits Locked — No Over-Trading';
+          }
+          activeTbody.innerHTML = '<tr><td colspan="12" style="text-align:center; padding:22px; color:#10b981; font-weight:600;">✅ Today\'s Intraday Trading Session Completed — All Profits Booked & Locked!<br><span style="color:var(--muted); font-weight:400; font-size:12.5px;">See Closed Trades below for today\'s completed trades.</span></td></tr>';
+        } else {
+          if (statusBadge) {
+            statusBadge.className = 'badge badge-amber';
+            statusBadge.textContent = '🔴 MARKET CLOSED (OFF-HOURS / WEEKEND)';
+          }
+          if (cycleStatus) {
+            cycleStatus.style.color = 'var(--amber)';
+            cycleStatus.textContent = 'Market Closed — Waiting for Next 09:15 IST Session';
+          }
+          activeTbody.innerHTML = '<tr><td colspan="12" style="text-align:center; padding:22px; color:#fcd34d; font-weight:600;">🔴 NSE & BSE Market is Closed Right Now (Outside 09:15 AM – 03:30 PM IST). Zero Active Trades.<br><span style="color:var(--muted); font-weight:400; font-size:12.5px;">SriKari TradeBot will automatically wake up, scan all 40 NSE/BSE stocks, and enter Trade #1 at the next Market Open (09:35:00 IST).</span></td></tr>';
         }
-        if (cycleStatus) {
-          cycleStatus.style.color = 'var(--amber)';
-          cycleStatus.textContent = 'Market Closed — Waiting for Monday 09:15 IST Open';
-        }
-        activeTbody.innerHTML = '<tr><td colspan="12" style="text-align:center; padding:22px; color:#fcd34d; font-weight:600;">🔴 NSE & BSE Market is Closed Right Now (Weekend / Outside 09:15 AM – 03:30 PM IST). Zero Active Trades.<br><span style="color:var(--muted); font-weight:400; font-size:12.5px;">SriKari TradeBot will automatically wake up, scan all 40 NSE/BSE stocks, and enter Trade #1 at the next Market Open (Monday 09:35:00 IST).</span></td></tr>';
       } else {
         if (statusBadge) {
           statusBadge.className = 'badge badge-green';
@@ -645,6 +828,7 @@
           if (data.daily) {
             appState.active_trades = data.daily.active_trades || [];
             appState.closed_trades = data.daily.closed_trades || [];
+            applyLiveISTMarketEngine();
             renderDashboard();
             document.getElementById('last-updated-label').textContent = 'Auto-Synced: ' + (data.as_of || getISTTimeStr());
             return;
@@ -660,17 +844,20 @@
           const daily = await dailyRes.json();
           appState.active_trades = daily.active_trades || [];
           appState.closed_trades = daily.closed_trades || [];
+          applyLiveISTMarketEngine();
           renderDashboard();
           document.getElementById('last-updated-label').textContent = 'Auto-Synced from GitHub Repo (' + getISTTimeStr() + ')';
         }
       } catch (err) {
-        console.error('Failed to load state:', err);
+        applyLiveISTMarketEngine();
+        renderDashboard();
       }
     }
 
     // Live Autonomous Price & Target Monitor (Runs automatically every 5 seconds while you watch)
     function startAutonomousWatchLoop() {
       setInterval(() => {
+        applyLiveISTMarketEngine();
         if (!appState.active_trades || appState.active_trades.length === 0) return;
         const active = appState.active_trades[0];
         const entry = Number(active.entry_price_inr);

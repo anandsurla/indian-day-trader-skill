@@ -9,7 +9,7 @@
 ## 🟢 Active Trades (Open Now)
 | Date | Stock | Exch | Qty | Entry Time (IST) | Entry Price (₹) | Strict Stop-Loss (₹) | Target Price (₹) | Gross Profit at Target (₹) | Brokerage & Tax (₹) | Net Profit at Target (₹) | High-Accuracy Strategy |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| - | No Active Trade | - | - | - | - | - | - | - | - | - | - |
+| **2026-11-09** | **HDFCBANK.BO** | BSE | 18 | **09:35:00 IST** | ₹1746.33 | ₹1740.85 | ₹1770.53 | ₹435.6 | -₹33.61 | **+₹401.99** | Stage-2 200-DMA + Narrow CPR + 15m ORB + Supertrend(10,3) + VWAP (Trade #1) |
 
 ## ✅ Closed Trades (With Entry & Exit Time + Brokerage & Net Profit)
 | Date | Stock | Exch | Qty | Entry Time (IST) | Entry Price (₹) | Exit Time (IST) | Exit Price (₹) | Total Profit (Gross ₹) | Brokerage & Tax (₹) | Final Net Profit (₹) | Shoonya ₹0-Brokerage Net (₹) |

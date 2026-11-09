@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-08T12:54:24+05:30",
+  "as_of": "2026-11-09T10:51:42+05:30",
   "market": "INDIA_NSE_BSE",
   "currency": "INR",
   "budget_inr": 20000,
@@ -9,50 +9,50 @@
   "brokerage_excluded_from_profit": true,
   "strict_max_loss_per_trade_inr": 100,
   "sizing": {
-    "ticker": "NTPC.BO",
+    "ticker": "HDFCBANK.BO",
     "exchange": "BSE",
-    "entry_price_inr": 414.16,
-    "stop_price_inr": 412.9,
-    "target_price_inr": 419.69,
-    "stop_distance_inr": 1.26,
-    "target_distance_inr": 5.53,
-    "shares_by_strict_stop_loss": 79,
-    "shares_by_intraday_margin": 229,
-    "shares_selected": 79,
+    "entry_price_inr": 1746.33,
+    "stop_price_inr": 1740.85,
+    "target_price_inr": 1770.53,
+    "stop_distance_inr": 5.48,
+    "target_distance_inr": 24.2,
+    "shares_by_strict_stop_loss": 18,
+    "shares_by_intraday_margin": 54,
+    "shares_selected": 18,
     "binding_constraint": "strict_max_loss_per_trade_100_inr",
-    "notional_value_inr": 32718.64,
-    "margin_used_inr": 6543.73,
-    "max_loss_at_stop_inr": 99.54,
-    "gross_profit_at_target_inr": 436.87,
-    "estimated_indian_taxes_and_brokerage_inr": 34.98,
-    "shoonya_zero_brokerage_taxes_inr": 11.67,
+    "notional_value_inr": 31433.94,
+    "margin_used_inr": 6286.79,
+    "max_loss_at_stop_inr": 98.64,
+    "gross_profit_at_target_inr": 435.6,
+    "estimated_indian_taxes_and_brokerage_inr": 33.61,
+    "shoonya_zero_brokerage_taxes_inr": 11.2,
     "brokerage_breakdown": {
-      "brokerage": 19.76,
-      "stt": 8.29,
-      "exchangeCharge": 1.96,
-      "sebiCharge": 0.07,
-      "gst": 3.92,
-      "stampDuty": 0.98
+      "brokerage": 18.99,
+      "stt": 7.97,
+      "exchangeCharge": 1.88,
+      "sebiCharge": 0.06,
+      "gst": 3.77,
+      "stampDuty": 0.94
     },
-    "net_profit_at_target_inr": 401.89,
-    "net_profit_with_shoonya_zero_brokerage_inr": 425.2
+    "net_profit_at_target_inr": 401.99,
+    "net_profit_with_shoonya_zero_brokerage_inr": 424.4
   },
   "orders": [
     {
-      "symbol": "NTPC.BO",
+      "symbol": "HDFCBANK.BO",
       "exchange": "BSE",
       "product": "MIS",
       "side": "buy",
-      "qty": 79,
+      "qty": 18,
       "type": "limit",
-      "limit_price": 414.16,
+      "limit_price": 1746.33,
       "time_in_force": "day",
       "order_class": "bracket",
       "take_profit": {
-        "limit_price": 419.69
+        "limit_price": 1770.53
       },
       "stop_loss": {
-        "stop_price": 412.9,
+        "stop_price": 1740.85,
         "strict": true
       }
     }

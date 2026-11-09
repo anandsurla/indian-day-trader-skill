@@ -1,54 +1,54 @@
 {
-  "as_of": "2026-11-08T12:54:24+05:30",
+  "as_of": "2026-11-09T10:51:42+05:30",
   "market": "INDIA_NSE_BSE",
   "exchange": "BSE",
   "currency": "INR",
-  "ticker": "NTPC.BO",
+  "ticker": "HDFCBANK.BO",
   "side": "buy",
   "entry": {
-    "price": 414.16,
+    "price": 1746.33,
     "source": "trader-entry",
     "rule": "6_pillar_cpr_orb_supertrend_vwap",
-    "triggered_at_ist": "2026-11-08 09:35:00 IST"
+    "triggered_at_ist": "2026-11-09 09:35:00 IST"
   },
   "opening_range": {
     "start": "09:15",
     "end": "09:30",
-    "high": 413.25,
-    "low": 412.55,
-    "mid": 412.9,
-    "range": 0.7,
+    "high": 1742.5,
+    "low": 1739.2,
+    "mid": 1740.85,
+    "range": 3.3,
     "bars": 3
   },
-  "atr": 1.13,
+  "atr": 4.93,
   "stop": {
-    "price": 412.9,
+    "price": 1740.85,
     "rule": "strict-or-mid",
-    "distance": 1.26,
-    "pct": 0.304,
+    "distance": 5.48,
+    "pct": 0.314,
     "strict_max_loss_inr": 100
   },
   "breakeven_1r_lock": {
-    "trigger_price": 415.42,
-    "new_stop_price": 414.7,
+    "trigger_price": 1751.81,
+    "new_stop_price": 1748.3,
     "note": "Covers 100% of brokerage & statutory taxes once price moves +1R"
   },
   "target_1_trail_trigger": {
-    "price": 416.68,
+    "price": 1757.29,
     "rule": "2R_lock_profit_trail",
-    "distance": 2.52,
+    "distance": 10.96,
     "r_multiple": 2
   },
   "target": {
-    "price": 419.69,
-    "rule": "4.39R_mandatory_400_net_excl_brokerage",
-    "distance": 5.53,
-    "pct": 1.335,
-    "r_multiple": 4.39,
+    "price": 1770.53,
+    "rule": "4.42R_mandatory_400_net_excl_brokerage",
+    "distance": 24.2,
+    "pct": 1.386,
+    "r_multiple": 4.42,
     "mandatory_net_profit_goal_inr": 400,
-    "estimated_brokerage_and_taxes_inr": 34.96
+    "estimated_brokerage_and_taxes_inr": 33.59
   },
-  "reward_risk": 4.39,
+  "reward_risk": 4.42,
   "flat_by": "15:15",
-  "summary": "NTPC.BO BUY @ ₹414.16: Strict SL ₹412.9 (Max Loss <= ₹100), Target ₹419.69 (Gross ₹436.87 - Brokerage/Taxes ₹34.96 = Pure Net Profit >= ₹400)."
+  "summary": "HDFCBANK.BO BUY @ ₹1746.33: Strict SL ₹1740.85 (Max Loss <= ₹100), Target ₹1770.53 (Gross ₹435.60 - Brokerage/Taxes ₹33.59 = Pure Net Profit >= ₹400)."
 }

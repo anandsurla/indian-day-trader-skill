@@ -9,6 +9,10 @@ on:
     - cron: '0,5,10,15,20,25,30 10 * * 1-5'
   workflow_dispatch:
 
+concurrency:
+  group: srikari-tradebot-live
+  cancel-in-progress: false
+
 permissions:
   contents: write
   pages: write
@@ -20,6 +24,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -45,8 +51,11 @@ jobs:
 
       - name: Commit & Push Live Trade State + Day/Weekly Reports + GitHub Pages Dashboard
         run: |
-          git config user.name "Anand Surla (Autonomous Bot)"
+          git config user.name "Anand Surla (SriKari TradeBot)"
           git config user.email "anand.bvc@gmail.com"
           git add reports/ trader/ docs/
-          git diff --staged --quiet || git commit -m "Live Trade Monitor: Update NSE/BSE position, Day-Wise & Weekly reports ($(date -u +'%Y-%m-%d %H:%M UTC'))"
-          git push origin main
+          if ! git diff --staged --quiet; then
+            git commit -m "SriKari TradeBot Live Update ($(date -u +'%Y-%m-%d %H:%M UTC'))"
+            git pull --rebase -X ours origin main || true
+            git push origin main
+          fi
