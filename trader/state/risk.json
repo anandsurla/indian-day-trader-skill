@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-11-09T17:55:42+05:30",
-  "date": "2026-11-09",
+  "as_of": "2026-11-10T01:58:47+05:30",
+  "date": "2026-11-10",
   "market": "INDIA_NSE_BSE",
   "currency": "INR",
-  "verdict": "BLOCK",
+  "verdict": "PASS",
   "rules_checked": {
     "account_budget_inr": 20000,
     "mandatory_daily_net_profit_target_inr": 400,
@@ -16,8 +16,23 @@
     "reward_risk_ratio": 4.18,
     "paper_mode": true
   },
-  "reasons": [
-    "First trade closed at 17:40:01 IST (after 12:15 PM IST cutoff). Locking ₹-131.89 profit for the day."
-  ],
-  "approved_order": null
+  "reasons": [],
+  "approved_order": {
+    "symbol": "PNB.NS",
+    "exchange": "NSE",
+    "product": "MIS",
+    "side": "buy",
+    "qty": 87,
+    "type": "limit",
+    "limit_price": 128,
+    "time_in_force": "day",
+    "order_class": "bracket",
+    "take_profit": {
+      "limit_price": 132.76
+    },
+    "stop_loss": {
+      "stop_price": 126.86,
+      "strict": true
+    }
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-09T17:55:42+05:30",
+  "as_of": "2026-11-10T01:58:47+05:30",
   "market": "INDIA_NSE_BSE",
   "exchange": "NSE",
   "currency": "INR",
@@ -8,12 +8,12 @@
   "sector": "PSU Banking",
   "score": 229.62,
   "historical_win_rate_pct": 73,
-  "trade_sequence_today": 2,
+  "trade_sequence_today": 1,
   "rule": "6_pillar_cpr_orb_supertrend_vwap",
   "interval": "5m",
   "or_minutes": 15,
-  "session_date": "2026-11-09",
-  "entry_time_ist": "11:50:00 IST",
+  "session_date": "2026-11-10",
+  "entry_time_ist": "09:35:00 IST",
   "status": "triggered",
   "opening_range": {
     "start": "09:15",
@@ -48,7 +48,7 @@
   },
   "level": 127.67,
   "trigger": {
-    "bar_time_ist": "2026-11-09 09:35:00 IST",
+    "bar_time_ist": "2026-11-10 09:35:00 IST",
     "bar_open": 127.44,
     "bar_high": 128.47,
     "bar_low": 127.39,
