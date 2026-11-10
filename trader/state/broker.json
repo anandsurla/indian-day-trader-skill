@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-10T01:58:47+05:30",
+  "as_of": "2026-11-10T17:19:19+05:30",
   "market": "INDIA_NSE_BSE",
   "exchange": "NSE",
   "currency": "INR",
@@ -8,7 +8,7 @@
   "market_open_now": false,
   "status": "MARKET_CLOSED_WAITING_FOR_OPEN",
   "ticket": {
-    "id": "IND_1794256127292",
+    "id": "IND_1794311359667",
     "date": "2026-11-10",
     "symbol": "PNB.NS",
     "name": "Punjab National Bank",

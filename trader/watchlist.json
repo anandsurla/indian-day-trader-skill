@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-10T01:58:42+05:30",
+  "as_of": "2026-11-10T17:19:14+05:30",
   "market": "INDIA_NSE_BSE",
   "timezone": "Asia/Kolkata",
   "mode": "orb",
@@ -21,7 +21,7 @@
   ],
   "universe_size": 55,
   "scanned": 55,
-  "matched": 15,
+  "matched": 14,
   "results": [
     {
       "ticker": "PNB.NS",
@@ -152,70 +152,6 @@
       "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹943.01), RSI 61.6, RVOL 2.92x."
     },
     {
-      "ticker": "TATAMOTORS.NS",
-      "name": "Tata Motors",
-      "exchange": "NSE",
-      "sector": "Automobile & EV",
-      "side": "BUY",
-      "setups": [
-        "BUY_LONG_TREND",
-        "15m_ORB_Breakout",
-        "Session_VWAP",
-        "Stage2_200DMA_Uptrend",
-        "Supertrend_Bullish",
-        "EMA_9_21_50_Stack"
-      ],
-      "score": 169.06,
-      "historical_win_rate_pct": 74,
-      "close": 840.89,
-      "latest_close": 856.07,
-      "change_pct": 3.3,
-      "rvol": 1.67,
-      "atr": 1.79,
-      "technicals": {
-        "vwap": 842,
-        "ema9": 855.11,
-        "ema20": 854.28,
-        "ema50": 851.71,
-        "dma50": 825,
-        "dma200": 790,
-        "cpr_pivot": 832.41,
-        "cpr_tc": 834.25,
-        "cpr_r1": 837.59,
-        "narrow_cpr": false,
-        "supertrend": "BULLISH_GREEN",
-        "rsi14": 63.1,
-        "above_vwap": true,
-        "ema_stack_aligned": true,
-        "stage2_historical_uptrend": true
-      },
-      "business_news": {
-        "source": "Economic Times Markets / Moneycontrol",
-        "sentiment": "BULLISH",
-        "headline": "Tata Motors: Indian Auto & EV stocks rally on strong monthly dispatch growth and institutional FII inflows"
-      },
-      "levels": {
-        "or_high": 839.04,
-        "or_low": 837.6,
-        "or_mid": 838.32,
-        "stop_hint": 838.32,
-        "target_2r": 846.03,
-        "target_net_400": 852.37
-      },
-      "sizing_preview": {
-        "side": "BUY",
-        "shares": 38,
-        "stop_distance_inr": 2.57,
-        "max_loss_inr": 97.66,
-        "brokerage_and_taxes_inr": 34.14,
-        "shoonya_zero_brokerage_tax_inr": 11.37,
-        "gross_profit_at_target_inr": 436.24,
-        "net_profit_excl_brokerage_inr": 402.1
-      },
-      "data_source": "indian_market_sim",
-      "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹842), RSI 63.1, RVOL 1.67x."
-    },
-    {
       "ticker": "BHEL.NS",
       "name": "Bharat Heavy Electricals",
       "exchange": "NSE",
@@ -229,12 +165,12 @@
         "Supertrend_Bullish",
         "EMA_9_21_50_Stack"
       ],
-      "score": 165.65,
+      "score": 166.05,
       "historical_win_rate_pct": 74,
       "close": 422.7,
       "latest_close": 422.95,
       "change_pct": 1.35,
-      "rvol": 2.17,
+      "rvol": 2.19,
       "atr": 2.08,
       "technicals": {
         "vwap": 422.67,
@@ -277,7 +213,7 @@
         "net_profit_excl_brokerage_inr": 402.06
       },
       "data_source": "yahoo_live_nse_bse",
-      "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹422.67), RSI 67, RVOL 2.17x."
+      "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹422.67), RSI 67, RVOL 2.19x."
     },
     {
       "ticker": "RELIANCE.NS",
@@ -293,12 +229,12 @@
         "Supertrend_Bullish",
         "EMA_9_21_50_Stack"
       ],
-      "score": 160.77,
+      "score": 160.37,
       "historical_win_rate_pct": 74,
       "close": 1324.45,
       "latest_close": 1324.4,
       "change_pct": 0.64,
-      "rvol": 1.53,
+      "rvol": 1.51,
       "atr": 3.46,
       "technicals": {
         "vwap": 1315.91,
@@ -341,7 +277,7 @@
         "net_profit_excl_brokerage_inr": 401.96
       },
       "data_source": "yahoo_live_nse_bse",
-      "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹1315.91), RSI 56.9, RVOL 1.53x."
+      "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹1315.91), RSI 56.9, RVOL 1.51x."
     },
     {
       "ticker": "RELIANCE.BO",
@@ -357,12 +293,12 @@
         "Supertrend_Bullish",
         "EMA_9_21_50_Stack"
       ],
-      "score": 149.44,
+      "score": 149.24,
       "historical_win_rate_pct": 74,
       "close": 1325.5,
       "latest_close": 1323.9,
       "change_pct": 0.67,
-      "rvol": 1.04,
+      "rvol": 1.03,
       "atr": 3.13,
       "technicals": {
         "vwap": 1313.12,
@@ -405,7 +341,7 @@
         "net_profit_excl_brokerage_inr": 402.06
       },
       "data_source": "yahoo_live_nse_bse",
-      "why": "BSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹1313.12), RSI 51.3, RVOL 1.04x."
+      "why": "BSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹1313.12), RSI 51.3, RVOL 1.03x."
     },
     {
       "ticker": "ICICIBANK.NS",
@@ -421,12 +357,12 @@
         "Supertrend_Bullish",
         "EMA_9_21_50_Stack"
       ],
-      "score": 146.23,
+      "score": 146.43,
       "historical_win_rate_pct": 76,
       "close": 1586.85,
       "latest_close": 1589,
       "change_pct": 1.54,
-      "rvol": 0.96,
+      "rvol": 0.97,
       "atr": 5.45,
       "technicals": {
         "vwap": 1577.18,
@@ -469,7 +405,7 @@
         "net_profit_excl_brokerage_inr": 401.95
       },
       "data_source": "yahoo_live_nse_bse",
-      "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹1577.18), RSI 63.4, RVOL 0.96x."
+      "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹1577.18), RSI 63.4, RVOL 0.97x."
     },
     {
       "ticker": "AXISBANK.NS",
@@ -485,12 +421,12 @@
         "Supertrend_Bullish",
         "EMA_9_21_50_Stack"
       ],
-      "score": 142.8,
+      "score": 143,
       "historical_win_rate_pct": 71,
       "close": 1324.05,
       "latest_close": 1310.7,
       "change_pct": -0.7,
-      "rvol": 0.83,
+      "rvol": 0.84,
       "atr": 3.65,
       "technicals": {
         "vwap": 1307.39,
@@ -533,7 +469,7 @@
         "net_profit_excl_brokerage_inr": 402.05
       },
       "data_source": "yahoo_live_nse_bse",
-      "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹1307.39), RSI 72, RVOL 0.83x."
+      "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹1307.39), RSI 72, RVOL 0.84x."
     },
     {
       "ticker": "BEL.NS",
@@ -613,12 +549,12 @@
         "Supertrend_Bullish",
         "EMA_9_21_50_Stack"
       ],
-      "score": 139.4,
+      "score": 139.8,
       "historical_win_rate_pct": 70,
       "close": 12849.05,
       "latest_close": 12928,
       "change_pct": 1.4,
-      "rvol": 0.82,
+      "rvol": 0.84,
       "atr": 49.29,
       "technicals": {
         "vwap": 12765.72,
@@ -661,7 +597,71 @@
         "net_profit_excl_brokerage_inr": 402
       },
       "data_source": "yahoo_live_nse_bse",
-      "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹12765.72), RSI 69.9, RVOL 0.82x."
+      "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹12765.72), RSI 69.9, RVOL 0.84x."
+    },
+    {
+      "ticker": "AXISBANK.BO",
+      "name": "Axis Bank (BSE)",
+      "exchange": "BSE",
+      "sector": "Banking",
+      "side": "BUY",
+      "setups": [
+        "BUY_LONG_TREND",
+        "15m_ORB_Breakout",
+        "Session_VWAP",
+        "Stage2_200DMA_Uptrend",
+        "Supertrend_Bullish",
+        "EMA_9_21_50_Stack"
+      ],
+      "score": 136.89,
+      "historical_win_rate_pct": 71,
+      "close": 1323.95,
+      "latest_close": 1311,
+      "change_pct": -0.38,
+      "rvol": 0.51,
+      "atr": 3.97,
+      "technicals": {
+        "vwap": 1312.28,
+        "ema9": 1305.88,
+        "ema20": 1304.53,
+        "ema50": 1304.56,
+        "dma50": 1155,
+        "dma200": 1110,
+        "cpr_pivot": 1301.75,
+        "cpr_tc": 1308.88,
+        "cpr_r1": 1330.25,
+        "narrow_cpr": false,
+        "supertrend": "BULLISH_GREEN",
+        "rsi14": 74.2,
+        "above_vwap": true,
+        "ema_stack_aligned": true,
+        "stage2_historical_uptrend": true
+      },
+      "business_news": {
+        "source": "Moneycontrol / ET Markets",
+        "sentiment": "BULLISH",
+        "headline": "Axis Bank (BSE): Private & PSU Banks hold steady above key support on resilient credit growth and stable NIMs"
+      },
+      "levels": {
+        "or_high": 1323.9,
+        "or_low": 1310,
+        "or_mid": 1316.95,
+        "stop_hint": 1316.95,
+        "target_2r": 1337.95,
+        "target_net_400": 1354.09
+      },
+      "sizing_preview": {
+        "side": "BUY",
+        "shares": 14,
+        "stop_distance_inr": 7,
+        "max_loss_inr": 98,
+        "brokerage_and_taxes_inr": 19.91,
+        "shoonya_zero_brokerage_tax_inr": 6.65,
+        "gross_profit_at_target_inr": 421.96,
+        "net_profit_excl_brokerage_inr": 402.05
+      },
+      "data_source": "yahoo_live_nse_bse",
+      "why": "BSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹1312.28), RSI 74.2, RVOL 0.51x."
     }
   ]
 }
