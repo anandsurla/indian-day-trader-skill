@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-10T17:29:20+05:30",
+  "as_of": "2026-11-10T23:00:30+05:30",
   "market": "INDIA_NSE_BSE",
   "timezone": "Asia/Kolkata",
   "mode": "orb",
@@ -408,6 +408,70 @@
       "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹1577.18), RSI 63.4, RVOL 0.96x."
     },
     {
+      "ticker": "BEL.NS",
+      "name": "Bharat Electronics",
+      "exchange": "NSE",
+      "sector": "Defence Electronics",
+      "side": "BUY",
+      "setups": [
+        "BUY_LONG_TREND",
+        "15m_ORB_Breakout",
+        "Session_VWAP",
+        "Stage2_200DMA_Uptrend",
+        "Supertrend_Bullish",
+        "EMA_9_21_50_Stack"
+      ],
+      "score": 143.88,
+      "historical_win_rate_pct": 78,
+      "close": 398.95,
+      "latest_close": 394.55,
+      "change_pct": -0.16,
+      "rvol": 0.6,
+      "atr": 0.96,
+      "technicals": {
+        "vwap": 395.69,
+        "ema9": 394.29,
+        "ema20": 394.05,
+        "ema50": 394.06,
+        "dma50": 290,
+        "dma200": 265,
+        "cpr_pivot": 392,
+        "cpr_tc": 393.6,
+        "cpr_r1": 398.45,
+        "narrow_cpr": false,
+        "supertrend": "BULLISH_GREEN",
+        "rsi14": 53.3,
+        "above_vwap": true,
+        "ema_stack_aligned": true,
+        "stage2_historical_uptrend": true
+      },
+      "business_news": {
+        "source": "LiveMint Markets",
+        "sentiment": "NEUTRAL",
+        "headline": "OMC stocks: Brent slips below $90 to hit over 2-month low amid Iran peace hopes; Will HPCL, BPCL and IOC benefit?"
+      },
+      "levels": {
+        "or_high": 398.9,
+        "or_low": 394.9,
+        "or_mid": 396.9,
+        "stop_hint": 396.9,
+        "target_2r": 403.05,
+        "target_net_400": 407.75
+      },
+      "sizing_preview": {
+        "side": "BUY",
+        "shares": 48,
+        "stop_distance_inr": 2.05,
+        "max_loss_inr": 98.4,
+        "brokerage_and_taxes_inr": 20.56,
+        "shoonya_zero_brokerage_tax_inr": 6.86,
+        "gross_profit_at_target_inr": 422.4,
+        "net_profit_excl_brokerage_inr": 401.84
+      },
+      "data_source": "yahoo_live_nse_bse",
+      "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹395.69), RSI 53.3, RVOL 0.6x."
+    },
+    {
       "ticker": "AXISBANK.NS",
       "name": "Axis Bank",
       "exchange": "NSE",
@@ -470,70 +534,6 @@
       },
       "data_source": "yahoo_live_nse_bse",
       "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹1307.39), RSI 72, RVOL 0.83x."
-    },
-    {
-      "ticker": "BEL.NS",
-      "name": "Bharat Electronics",
-      "exchange": "NSE",
-      "sector": "Defence Electronics",
-      "side": "BUY",
-      "setups": [
-        "BUY_LONG_TREND",
-        "15m_ORB_Breakout",
-        "Session_VWAP",
-        "Stage2_200DMA_Uptrend",
-        "Supertrend_Bullish",
-        "EMA_9_21_50_Stack"
-      ],
-      "score": 140.88,
-      "historical_win_rate_pct": 78,
-      "close": 398.95,
-      "latest_close": 394.55,
-      "change_pct": -0.16,
-      "rvol": 0.6,
-      "atr": 0.96,
-      "technicals": {
-        "vwap": 395.69,
-        "ema9": 394.29,
-        "ema20": 394.05,
-        "ema50": 394.06,
-        "dma50": 290,
-        "dma200": 265,
-        "cpr_pivot": 392,
-        "cpr_tc": 393.6,
-        "cpr_r1": 398.45,
-        "narrow_cpr": false,
-        "supertrend": "BULLISH_GREEN",
-        "rsi14": 53.3,
-        "above_vwap": true,
-        "ema_stack_aligned": true,
-        "stage2_historical_uptrend": true
-      },
-      "business_news": {
-        "source": "Economic Times / Moneycontrol India",
-        "sentiment": "BULLISH",
-        "headline": "Bharat Electronics: Bharat Electronics (NSE) sees positive institutional volume flow and bullish sector breadth"
-      },
-      "levels": {
-        "or_high": 398.9,
-        "or_low": 394.9,
-        "or_mid": 396.9,
-        "stop_hint": 396.9,
-        "target_2r": 403.05,
-        "target_net_400": 407.75
-      },
-      "sizing_preview": {
-        "side": "BUY",
-        "shares": 48,
-        "stop_distance_inr": 2.05,
-        "max_loss_inr": 98.4,
-        "brokerage_and_taxes_inr": 20.56,
-        "shoonya_zero_brokerage_tax_inr": 6.86,
-        "gross_profit_at_target_inr": 422.4,
-        "net_profit_excl_brokerage_inr": 401.84
-      },
-      "data_source": "yahoo_live_nse_bse",
-      "why": "NSE High-Accuracy BUY Confluence: Stage-2 Uptrend + Above VWAP (₹395.69), RSI 53.3, RVOL 0.6x."
     },
     {
       "ticker": "MARUTI.NS",
