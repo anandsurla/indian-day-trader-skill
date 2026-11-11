@@ -12,6 +12,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const https = require('https');
 const { execSync } = require('child_process');
 
 const ROOT_DIR = path.resolve(__dirname, '..');
@@ -545,10 +546,92 @@ function generateAllReports() {
     };
 }
 
-function syncReportsToGitHub(commitMsg = 'Auto-sync Daily & Weekly Paper Trade Reports to GitHub') {
-    generateAllReports();
+function githubApiRequest(token, method, apiPath, bodyObj = null) {
+    return new Promise((resolve, reject) => {
+        const payload = bodyObj ? JSON.stringify(bodyObj) : null;
+        const headers = {
+            'User-Agent': 'SriKari-TradeBot',
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github+json',
+            'X-GitHub-Api-Version': '2022-11-28'
+        };
+        if (payload) {
+            headers['Content-Type'] = 'application/json';
+            headers['Content-Length'] = Buffer.byteLength(payload);
+        }
+        const req = https.request({
+            hostname: 'api.github.com',
+            path: apiPath,
+            method,
+            headers,
+            timeout: 8000
+        }, res => {
+            let data = '';
+            res.on('data', d => { data += d; });
+            res.on('end', () => resolve({ statusCode: res.statusCode, body: data }));
+        });
+        req.on('error', reject);
+        if (payload) req.write(payload);
+        req.end();
+    });
+}
+
+async function syncViaGitHubRestApi(token, relPaths, commitMsg) {
+    const owner = process.env.GITHUB_OWNER || 'anandsurla';
+    const repo = process.env.GITHUB_REPO || 'indian-day-trader-skill';
+    let updatedCount = 0;
+    for (const rel of relPaths) {
+        const full = path.join(ROOT_DIR, rel);
+        if (!fs.existsSync(full)) continue;
+        const contentB64 = Buffer.from(fs.readFileSync(full, 'utf8'), 'utf8').toString('base64');
+        const getRes = await githubApiRequest(token, 'GET', `/repos/${owner}/${repo}/contents/${rel}`);
+        let sha = null;
+        if (getRes.statusCode === 200) {
+            const parsed = JSON.parse(getRes.body);
+            if (parsed.content && parsed.content.replace(/\n/g, '') === contentB64) continue;
+            sha = parsed.sha;
+        }
+        const putRes = await githubApiRequest(token, 'PUT', `/repos/${owner}/${repo}/contents/${rel}`, {
+            message: `${commitMsg} (${rel})`,
+            content: contentB64,
+            ...(sha ? { sha } : {}),
+            branch: 'main'
+        });
+        if (putRes.statusCode >= 200 && putRes.statusCode < 300) updatedCount++;
+    }
+    return {
+        success: true,
+        via: 'github_rest_api',
+        updated_files: updatedCount,
+        message: `Synced ${updatedCount} file(s) via GitHub REST API.`
+    };
+}
+
+async function syncReportsToGitHub(commitMsg = 'Auto-sync Daily & Weekly Paper Trade Reports to GitHub') {
+    const reps = generateAllReports();
+    const ghToken = process.env.GITHUB_TOKEN || '';
+    if (ghToken) {
+        try {
+            const todayRel = path.relative(ROOT_DIR, reps.files.today_daily_md).replace(/\\/g, '/');
+            const weekRel = path.relative(ROOT_DIR, reps.files.current_weekly_md).replace(/\\/g, '/');
+            return await syncViaGitHubRestApi(ghToken, [
+                todayRel,
+                weekRel,
+                'reports/DAILY_PAPER_TRADES.md',
+                'reports/WEEKLY_CONSOLIDATED_REPORT.md',
+                'reports/PAPER_TRADES_AUDIT.csv',
+                'trader/daily_summary.json',
+                'trader/weekly_summary.json',
+                'trader/active_chart.json',
+                'trader/portfolio.json',
+                'trader/trade_history.json'
+            ], commitMsg);
+        } catch (err) {
+            return { success: false, error: err.message };
+        }
+    }
     try {
-        execSync(`git -C "${ROOT_DIR}" add reports/ trader/`, { stdio: 'pipe' });
+        execSync(`git -C "${ROOT_DIR}" add -A reports/ trader/`, { stdio: 'pipe' });
         const status = execSync(`git -C "${ROOT_DIR}" status --porcelain`, { encoding: 'utf8' }).trim();
         let committed = false;
         if (status.length > 0) {

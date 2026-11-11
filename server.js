@@ -14,6 +14,26 @@ const PORT = process.env.PORT || 3001;
 const TRADER_DIR = path.join(__dirname, 'trader');
 
 let latestRun = null;
+let lastTickMs = 0;
+
+async function runScheduledTick(forceSync = false) {
+  const ist = indianTrader.getISTInfo();
+  const mon = await indianTrader.monitorAndManageActiveTrade();
+  let pipe = null;
+  if (mon.status === 'NO_OPEN_POSITION' || mon.status === 'CLOSED_AUTONOMOUSLY') {
+    pipe = await indianTrader.runAutonomousPipeline();
+    latestRun = pipe;
+  }
+  await indianTrader.saveActiveChartSnapshot();
+  let syncRes = null;
+  if (forceSync || ist.isMarketHours || mon.status === 'CLOSED_AUTONOMOUSLY') {
+    syncRes = await reporter.syncReportsToGitHub(`Auto-sync IST ${ist.date} ${ist.time}`);
+  } else {
+    reporter.generateAllReports();
+  }
+  lastTickMs = Date.now();
+  return { ist, monitor: mon.status, pipeline: pipe ? (pipe.execution_status || pipe.status) : null, sync: syncRes };
+}
 
 function readJsonSafe(filePath, fallback = null) {
   try {
@@ -112,15 +132,28 @@ function seedInitialPaperHistoryIfEmpty() {
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://localhost:${PORT}`);
 
-  // 0. Health Check API for Render Free Tier
+  // 0. Health Check API for Render Free Tier (auto-ticks if >4m since last check during market hours)
   if (url.pathname === '/api/health') {
+    const istNow = indianTrader.getISTInfo();
+    if (istNow.isMarketHours && Date.now() - lastTickMs > 4 * 60 * 1000) {
+      runScheduledTick(false).catch(() => {});
+    }
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({
       status: 'OK',
       project: 'indian-day-trader-skill',
       market: 'INDIA_NSE_BSE',
-      timestamp_ist: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+      market_open_now: istNow.isMarketHours,
+      timestamp_ist: `${istNow.date} ${istNow.time}`
     }));
+    return;
+  }
+
+  // 0B. Cloud Cron Tick Endpoint (for cron-job.org / external pingers every 5m)
+  if (url.pathname === '/api/tick') {
+    const out = await runScheduledTick(false);
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ ok: true, ...out }));
     return;
   }
 
@@ -183,25 +216,27 @@ const server = http.createServer(async (req, res) => {
       const grossProfit = Number(((active.take_profit_target_inr - active.entry_price_inr) * active.qty).toFixed(2));
       const closedRecord = {
         ...active,
+        entry_date_ist: active.entry_date_ist || istInfo.date,
+        exit_date_ist: istInfo.date,
         exit_price_inr: active.take_profit_target_inr,
-        entry_time_ist: active.entry_time_ist || '09:35:00 IST',
-        exit_time_ist: `${istInfo.timeStr}:00 IST`,
+        entry_time_ist: active.entry_time_ist || istInfo.time,
+        exit_time_ist: istInfo.time,
         gross_pnl_inr: grossProfit,
         net_pnl_excl_brokerage_inr: active.net_profit_at_target_inr,
         shoonya_zero_brokerage_charges_inr: active.shoonya_zero_brokerage_charges_inr || 9.80,
         shoonya_zero_brokerage_net_inr: active.shoonya_zero_brokerage_net_inr || Number((grossProfit - 9.80).toFixed(2)),
         exit_reason: 'TARGET_HIT_MANDATORY_400_NET_PROFIT',
-        closed_at_ist: istInfo.iso
+        closed_at_ist: `${istInfo.date} ${istInfo.time}`
       };
       const hist = readJsonSafe(histPath, { closed_trades: [] });
-      const datePrefix = istInfo.iso.slice(0, 10);
+      const datePrefix = istInfo.date;
       hist.closed_trades = (hist.closed_trades || []).filter(t => !(t.symbol === closedRecord.symbol && String(t.closed_at_ist).startsWith(datePrefix)));
       hist.closed_trades.unshift(closedRecord);
       fs.writeFileSync(histPath, JSON.stringify(hist, null, 2) + '\n', 'utf8');
       // Re-run pipeline so a fresh active monitoring state is ready
       latestRun = await indianTrader.runAutonomousPipeline();
     }
-    const syncRes = reporter.syncReportsToGitHub('Daily Paper Trade Booked (+₹400 Net After Brokerage)');
+    const syncRes = await reporter.syncReportsToGitHub('Daily Paper Trade Booked (+₹400 Net After Brokerage)');
     const reps = reporter.generateAllReports();
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({
@@ -215,7 +250,7 @@ const server = http.createServer(async (req, res) => {
 
   // 4. Send Daily Report to GitHub API
   if (url.pathname === '/api/sync-github' && req.method === 'POST') {
-    const syncRes = reporter.syncReportsToGitHub();
+    const syncRes = await reporter.syncReportsToGitHub();
     const reps = reporter.generateAllReports();
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({
@@ -256,12 +291,7 @@ indianTrader.runAutonomousPipeline().then(res => {
       const ist = indianTrader.getISTInfo();
       if (ist.isMarketHours) {
         console.log(`[AUTO-LOOP ${ist.date} ${ist.time}] Monitoring active trade & scanning NSE/BSE...`);
-        const mon = await indianTrader.monitorAndManageActiveTrade();
-        if (mon.status === 'NO_OPEN_POSITION' || mon.status === 'CLOSED_AUTONOMOUSLY') {
-          latestRun = await indianTrader.runAutonomousPipeline();
-        }
-        await indianTrader.saveActiveChartSnapshot();
-        reporter.syncReportsToGitHub(`Auto-sync IST ${ist.date} ${ist.time}`);
+        await runScheduledTick(false);
       }
     } catch (e) {
       console.error('[AUTO-LOOP ERROR]', e.message);

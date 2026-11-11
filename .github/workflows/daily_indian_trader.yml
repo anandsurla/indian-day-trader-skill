@@ -1,13 +1,21 @@
-name: Live Indian NSE & BSE Autonomous Paper Trader (Every 5m + Full Candle High/Low Bracket Check)
+name: Live Indian NSE & BSE Autonomous Paper Trader
 
 on:
   schedule:
-    # Runs every 5 minutes during Indian Market Hours (09:15 IST to 15:30 IST, Mon-Fri)
-    # 03:45 UTC to 10:00 UTC = 09:15 IST to 15:30 IST
+    # Backup GitHub schedule: every 5 minutes during Indian Market Hours (09:15-15:40 IST, Mon-Fri)
+    # Note: GitHub's free schedule cron can delay/skip; pair with cron-job.org hitting workflow_dispatch for exact 5-min runs.
     - cron: '*/5 4-9 * * 1-5'
     - cron: '45,50,55 3 * * 1-5'
-    - cron: '0,5,10,15,20,25,30 10 * * 1-5'
+    - cron: '0,5,10,15,20,25,30,35,40 10 * * 1-5'
   workflow_dispatch:
+    inputs:
+      force_run:
+        description: 'Force scan/chart update even outside market hours'
+        required: false
+        type: boolean
+        default: false
+  repository_dispatch:
+    types: [run-trader]
 
 concurrency:
   group: srikari-tradebot-live
@@ -32,14 +40,31 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Monitor Active Trade (Entry / Trail / Exit) & Scan NSE/BSE
+      - name: Check Market Window & Run Autonomous Trader
         env:
           LIVE_YAHOO: 'true'
+          FORCE_RUN: ${{ inputs.force_run || 'false' }}
         run: |
           node -e '
+            const fs = require("fs");
             const trader = require("./trader/indian_trader");
             const reporter = require("./trader/reporter");
             (async () => {
+              const ist = trader.getISTInfo();
+              let hasOpenPos = false;
+              try {
+                const port = JSON.parse(fs.readFileSync("./trader/portfolio.json", "utf8"));
+                hasOpenPos = Boolean(port && port.active_position);
+              } catch (e) {}
+
+              const inSessionBuffer = ist.isWeekday && ist.minutesOfDay >= 555 && ist.minutesOfDay <= 940; // 09:15 to 15:40 IST
+              const force = process.env.FORCE_RUN === "true";
+
+              if (!inSessionBuffer && !hasOpenPos && !force) {
+                console.log(`Outside IST market window (${ist.date} ${ist.time}) & no open position. Skipping cleanly.`);
+                return;
+              }
+
               const mon = await trader.monitorAndManageActiveTrade();
               console.log("Monitor status:", mon.status);
               if (mon.status === "NO_OPEN_POSITION" || mon.status === "CLOSED_AUTONOMOUSLY") {
