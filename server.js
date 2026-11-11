@@ -15,24 +15,37 @@ const TRADER_DIR = path.join(__dirname, 'trader');
 
 let latestRun = null;
 let lastTickMs = 0;
+let lastScanMs = 0;
+let lastGitSyncMs = 0;
+let isTickRunning = false;
 
 async function runScheduledTick(forceSync = false) {
-  const ist = indianTrader.getISTInfo();
-  const mon = await indianTrader.monitorAndManageActiveTrade();
-  let pipe = null;
-  if (mon.status === 'NO_OPEN_POSITION' || mon.status === 'CLOSED_AUTONOMOUSLY') {
-    pipe = await indianTrader.runAutonomousPipeline();
-    latestRun = pipe;
+  if (isTickRunning) return { skipped: true };
+  isTickRunning = true;
+  try {
+    const ist = indianTrader.getISTInfo();
+    const mon = await indianTrader.monitorAndManageActiveTrade();
+    let pipe = null;
+    const now = Date.now();
+    if ((mon.status === 'NO_OPEN_POSITION' || mon.status === 'CLOSED_AUTONOMOUSLY') && (now - lastScanMs >= 60 * 1000 || forceSync)) {
+      pipe = await indianTrader.runAutonomousPipeline();
+      latestRun = pipe;
+      lastScanMs = now;
+    }
+    await indianTrader.saveActiveChartSnapshot();
+    const tradeOpenedOrClosed = mon.status === 'CLOSED_AUTONOMOUSLY' || (pipe && pipe.execution_status === 'FILLED_PAPER_OPEN');
+    let syncRes = null;
+    if (forceSync || tradeOpenedOrClosed || (ist.isMarketHours && now - lastGitSyncMs >= 3 * 60 * 1000)) {
+      syncRes = await reporter.syncReportsToGitHub(`Auto-sync IST ${ist.date} ${ist.time}`);
+      lastGitSyncMs = now;
+    } else {
+      reporter.generateAllReports();
+    }
+    lastTickMs = now;
+    return { ist, monitor: mon.status, pipeline: pipe ? (pipe.execution_status || pipe.status) : null, sync: syncRes };
+  } finally {
+    isTickRunning = false;
   }
-  await indianTrader.saveActiveChartSnapshot();
-  let syncRes = null;
-  if (forceSync || ist.isMarketHours || mon.status === 'CLOSED_AUTONOMOUSLY') {
-    syncRes = await reporter.syncReportsToGitHub(`Auto-sync IST ${ist.date} ${ist.time}`);
-  } else {
-    reporter.generateAllReports();
-  }
-  lastTickMs = Date.now();
-  return { ist, monitor: mon.status, pipeline: pipe ? (pipe.execution_status || pipe.status) : null, sync: syncRes };
 }
 
 function readJsonSafe(filePath, fallback = null) {
@@ -285,16 +298,16 @@ indianTrader.runAutonomousPipeline().then(res => {
     console.log(`========================================================================\n`);
   });
 
-  // Autonomous background scan every 5 minutes during IST market hours
+  // High-frequency 30-second live monitor during IST market hours (catches SL/Target/Trail every 30s)
   setInterval(async () => {
     try {
       const ist = indianTrader.getISTInfo();
       if (ist.isMarketHours) {
-        console.log(`[AUTO-LOOP ${ist.date} ${ist.time}] Monitoring active trade & scanning NSE/BSE...`);
+        console.log(`[AUTO-30S ${ist.date} ${ist.time}] Monitoring active trade & scanning NSE/BSE...`);
         await runScheduledTick(false);
       }
     } catch (e) {
-      console.error('[AUTO-LOOP ERROR]', e.message);
+      console.error('[AUTO-30S ERROR]', e.message);
     }
-  }, 5 * 60 * 1000);
+  }, 30 * 1000);
 });

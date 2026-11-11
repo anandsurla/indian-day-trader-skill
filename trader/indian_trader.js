@@ -1813,7 +1813,11 @@ async function monitorAndManageActiveTrade() {
     }
 
     const pos = portfolio.active_position;
-    const { candles, source } = await fetchSymbolBars(pos.symbol, '5m', '5d');
+    let barRes = await fetchSymbolBars(pos.symbol, '1m', '2d');
+    if (!barRes.candles || barRes.candles.length === 0 || barRes.source === 'yahoo_unavailable') {
+        barRes = await fetchSymbolBars(pos.symbol, '5m', '5d');
+    }
+    const { candles, source } = barRes;
     if (!candles || candles.length === 0 || source === 'yahoo_unavailable') {
         return { status: 'DATA_UNAVAILABLE_HOLDING', active_position: pos };
     }

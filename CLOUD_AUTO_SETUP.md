@@ -4,7 +4,18 @@ Because GitHub's built-in `schedule` cron can be delayed or skipped during busy 
 
 ---
 
-## Setup Steps on cron-job.org (~2 Minutes)
+## Why 30-Second Monitoring Works Best With Render (`server.js`) vs GitHub Actions
+
+| Cloud Method | Monitoring Speed | Why |
+| :--- | :--- | :--- |
+| **Render.com (`render.yaml`) + `cron-job.org` 5m Keepalive** | **Every 30 Seconds (`1m` OHLC)** | `server.js` runs an in-memory **30-second monitoring loop** (`monitorAndManageActiveTrade` on 1-minute Yahoo candles). `cron-job.org` just pings `/api/health` every 5 min to keep Render awake! |
+| **GitHub Actions + `cron-job.org` (`workflow_dispatch`)** | **Every 1–5 Minutes (`1m` OHLC)** | Each GitHub Actions run boots a fresh VM (~30–40s startup), so `cron-job.org` (1-min minimum) triggers `workflow_dispatch`. Inside each run, the bot inspects **every 1-minute High/Low candle** between wakeups so SL/Target hits are still captured cleanly. |
+
+> **Real-Money Shoonya Mode:** Once you connect your real Finvasia Shoonya account with Bracket/OCO orders, your Stop-Loss and Target orders sit directly on the **NSE/BSE exchange server** and execute in **milliseconds (< 0.05s)** — not 30s or 5m!
+
+---
+
+## Setup Steps on cron-job.org (~2 Minutes) — GitHub Actions Option
 
 ### Step 1: Create a Fine-Grained GitHub Token
 1. Open **GitHub -> Settings -> Developer settings -> Personal access tokens -> Fine-grained tokens -> Generate new token**
