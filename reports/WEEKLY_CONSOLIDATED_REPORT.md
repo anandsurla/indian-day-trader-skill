@@ -1,15 +1,21 @@
-# 📊 Weekly Consolidated Paper Trade Report (NSE & BSE)
-**Account Capital:** ₹20,000 | **Weekly Net Target (5 Days × ₹400):** ₹2,000/week (After All Brokerage & Taxes)
+# Weekly Consolidated Trade Report — Week Ending 2026-11-13
+**Week Period:** 2026-11-09 (Monday) to 2026-11-13 (Friday)
 
-## 📈 Week Starting Monday: 2026-11-02
-- **Active Trading Days:** 4 | **Total Trades:** 4 (0 Open, 4 Closed)
-- **Realized Gross Profit:** ₹1204.12 | **Total Brokerage & Taxes Deducted:** -₹129.01
-- **Realized Final Net Profit:** **+₹1075.11** | **Projected Net Profit (with Active Trade Target):** **+₹1075.11**
+## Weekly Summary (Current Week Only)
+- **Total Weekly Profit / Loss (Excl. Brokerage & Taxes):** **-₹131.89**
+- **Total Weekly Gross P&L:** -₹98.64
+- **Total Weekly Brokerage & Govt Taxes:** -₹33.25
+- **Completed Trades:** 1 (0 Wins / 1 Losses | Win Rate: 0%)
 
-| Date | Total Trades | Open | Closed | Total Profit (Gross ₹) | Brokerage & Taxes (₹) | Final Net Profit (₹) | Projected Net Profit with Active Target (₹) |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **2026-11-09** | 1 | 0 | 1 | ₹-98.64 | -₹33.25 | **+₹-131.89** | **+₹-131.89** |
-| **2026-11-06** | 1 | 0 | 1 | ₹432.82 | -₹30.75 | **+₹402.07** | **+₹402.07** |
-| **2026-11-05** | 1 | 0 | 1 | ₹435.88 | -₹33.83 | **+₹402.05** | **+₹402.05** |
-| **2026-11-04** | 1 | 0 | 1 | ₹434.06 | -₹31.18 | **+₹402.88** | **+₹402.88** |
+## Day-by-Day Breakdown
+| Date | Trades Closed | Gross P&L | Brokerage & Tax | Net P&L (Excl. Brokerage) | Daily Report File |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **2026-11-09** | 1 | -₹98.64 | -₹33.25 | **-₹131.89** | [`2026-11-09.md`](../daily/2026-11-09.md) |
+| **2026-11-10** | 0 | ₹0.00 | ₹0.00 | **₹0.00** | [`2026-11-10.md`](../daily/2026-11-10.md) |
+| **2026-11-11** | 0 | ₹0.00 | ₹0.00 | **₹0.00** | [`2026-11-11.md`](../daily/2026-11-11.md) |
+| **WEEK TOTAL** | **1** | **-₹98.64** | **-₹33.25** | **-₹131.89** | - |
 
+## All Completed Trades This Week
+| Stock | Side | Qty | Entry Date & Time (IST) | Entry ₹ | Exit Date & Time (IST) | Exit ₹ | Brokerage & Tax ₹ | Net P&L (Excl. Brokerage) | Reason |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **HDFCBANK.BO** (BSE) | BUY | 18 | 2026-11-09 09:35:00 IST | ₹1746.33 | 2026-11-09 17:40:01 IST | ₹1740.85 | -₹33.25 | **-₹131.89** | STRICT_100_INR_STOP_LOSS_EXIT |

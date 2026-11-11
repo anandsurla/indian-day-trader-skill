@@ -43,8 +43,10 @@ jobs:
               const mon = await trader.monitorAndManageActiveTrade();
               console.log("Monitor status:", mon.status);
               if (mon.status === "NO_OPEN_POSITION" || mon.status === "CLOSED_AUTONOMOUSLY") {
-                await trader.runAutonomousPipeline();
+                const pipe = await trader.runAutonomousPipeline();
+                console.log("Pipeline status:", pipe.execution_status || pipe.status);
               }
+              await trader.saveActiveChartSnapshot();
               reporter.generateAllReports();
             })();
           '
@@ -53,7 +55,7 @@ jobs:
         run: |
           git config user.name "Anand Surla (SriKari TradeBot)"
           git config user.email "anand.bvc@gmail.com"
-          git add reports/ trader/ docs/
+          git add -A reports/ trader/ docs/
           if ! git diff --staged --quiet; then
             git commit -m "SriKari TradeBot Live Update ($(date -u +'%Y-%m-%d %H:%M UTC'))"
             git pull --rebase -X ours origin main || true

@@ -35,6 +35,7 @@ const FILES = {
     alerts: path.join(TRADER_DIR, 'alerts.json'),
     portfolio: path.join(TRADER_DIR, 'portfolio.json'),
     history: path.join(TRADER_DIR, 'trade_history.json'),
+    activeChart: path.join(TRADER_DIR, 'active_chart.json'),
     riskState: path.join(STATE_DIR, 'risk.json'),
     brokerState: path.join(STATE_DIR, 'broker.json'),
     newsState: path.join(STATE_DIR, 'news.json')
@@ -42,63 +43,65 @@ const FILES = {
 
 const NSE_BSE_UNIVERSE = [
     // NSE Top Liquid Leaders
-    { ticker: 'RELIANCE.NS', name: 'Reliance Industries', exchange: 'NSE', sector: 'Energy & Telecom', basePrice: 1320, dma50: 1295, dma200: 1240, histWinRate: 74 },
-    { ticker: 'TCS.NS', name: 'Tata Consultancy Services', exchange: 'NSE', sector: 'IT Services', basePrice: 3850, dma50: 3790, dma200: 3650, histWinRate: 72 },
-    { ticker: 'HDFCBANK.NS', name: 'HDFC Bank', exchange: 'NSE', sector: 'Banking', basePrice: 1740, dma50: 1710, dma200: 1645, histWinRate: 73 },
-    { ticker: 'INFY.NS', name: 'Infosys', exchange: 'NSE', sector: 'IT Services', basePrice: 1860, dma50: 1825, dma200: 1730, histWinRate: 75 },
-    { ticker: 'ICICIBANK.NS', name: 'ICICI Bank', exchange: 'NSE', sector: 'Banking', basePrice: 1290, dma50: 1265, dma200: 1195, histWinRate: 76 },
-    { ticker: 'SBIN.NS', name: 'State Bank of India', exchange: 'NSE', sector: 'PSU Banking', basePrice: 835, dma50: 818, dma200: 780, histWinRate: 75 },
-    { ticker: 'BHARTIARTL.NS', name: 'Bharti Airtel', exchange: 'NSE', sector: 'Telecom', basePrice: 1680, dma50: 1640, dma200: 1520, histWinRate: 77 },
-    { ticker: 'TATAMOTORS.NS', name: 'Tata Motors', exchange: 'NSE', sector: 'Automobile & EV', basePrice: 840, dma50: 825, dma200: 790, histWinRate: 74 },
-    { ticker: 'LT.NS', name: 'Larsen & Toubro', exchange: 'NSE', sector: 'Infrastructure', basePrice: 3620, dma50: 3560, dma200: 3410, histWinRate: 75 },
-    { ticker: 'AXISBANK.NS', name: 'Axis Bank', exchange: 'NSE', sector: 'Banking', basePrice: 1175, dma50: 1155, dma200: 1110, histWinRate: 71 },
-    { ticker: 'SUNPHARMA.NS', name: 'Sun Pharma', exchange: 'NSE', sector: 'Healthcare', basePrice: 1820, dma50: 1785, dma200: 1690, histWinRate: 74 },
-    { ticker: 'M&M.NS', name: 'Mahindra & Mahindra', exchange: 'NSE', sector: 'Automobile', basePrice: 2980, dma50: 2910, dma200: 2720, histWinRate: 78 },
-    { ticker: 'ITC.NS', name: 'ITC Ltd', exchange: 'NSE', sector: 'FMCG', basePrice: 485, dma50: 478, dma200: 455, histWinRate: 72 },
-    { ticker: 'BAJFINANCE.NS', name: 'Bajaj Finance', exchange: 'NSE', sector: 'NBFC Finance', basePrice: 7150, dma50: 7020, dma200: 6810, histWinRate: 71 },
-    { ticker: 'MARUTI.NS', name: 'Maruti Suzuki', exchange: 'NSE', sector: 'Automobile', basePrice: 11900, dma50: 11700, dma200: 11250, histWinRate: 70 },
-    { ticker: 'KOTAKBANK.NS', name: 'Kotak Mahindra Bank', exchange: 'NSE', sector: 'Banking', basePrice: 1790, dma50: 1765, dma200: 1720, histWinRate: 70 },
-    { ticker: 'TITAN.NS', name: 'Titan Company', exchange: 'NSE', sector: 'Consumer Retail', basePrice: 3350, dma50: 3290, dma200: 3180, histWinRate: 72 },
-    { ticker: 'TATASTEEL.NS', name: 'Tata Steel', exchange: 'NSE', sector: 'Metals & Mining', basePrice: 154, dma50: 150, dma200: 144, histWinRate: 73 },
-    { ticker: 'NTPC.NS', name: 'NTPC Ltd', exchange: 'NSE', sector: 'Power & Energy', basePrice: 412, dma50: 402, dma200: 378, histWinRate: 79 },
-    { ticker: 'POWERGRID.NS', name: 'Power Grid Corp', exchange: 'NSE', sector: 'Power & Utilities', basePrice: 325, dma50: 318, dma200: 298, histWinRate: 76 },
-    { ticker: 'HAL.NS', name: 'Hindustan Aeronautics', exchange: 'NSE', sector: 'Defence & Aerospace', basePrice: 4420, dma50: 4310, dma200: 3980, histWinRate: 77 },
-    { ticker: 'BEL.NS', name: 'Bharat Electronics', exchange: 'NSE', sector: 'Defence Electronics', basePrice: 298, dma50: 290, dma200: 265, histWinRate: 78 },
-    { ticker: 'TRENT.NS', name: 'Trent Ltd', exchange: 'NSE', sector: 'Consumer Retail', basePrice: 6850, dma50: 6600, dma200: 5900, histWinRate: 76 },
-    { ticker: 'ZOMATO.NS', name: 'Zomato Ltd', exchange: 'NSE', sector: 'Consumer Tech', basePrice: 262, dma50: 252, dma200: 220, histWinRate: 77 },
-    { ticker: 'WIPRO.NS', name: 'Wipro Ltd', exchange: 'NSE', sector: 'IT Services', basePrice: 565, dma50: 552, dma200: 520, histWinRate: 72 },
-    // High-Volume Low & Mid-Price NSE Liquid Leaders (₹100 - ₹655 Range)
-    { ticker: 'CANBK.NS', name: 'Canara Bank', exchange: 'NSE', sector: 'PSU Banking', basePrice: 102, dma50: 99, dma200: 94, histWinRate: 74 },
-    { ticker: 'PNB.NS', name: 'Punjab National Bank', exchange: 'NSE', sector: 'PSU Banking', basePrice: 104, dma50: 101, dma200: 96, histWinRate: 73 },
-    { ticker: 'IOC.NS', name: 'Indian Oil Corporation', exchange: 'NSE', sector: 'Oil & Gas', basePrice: 142, dma50: 138, dma200: 131, histWinRate: 74 },
-    { ticker: 'IRFC.NS', name: 'Indian Railway Finance Corp', exchange: 'NSE', sector: 'Railway Finance', basePrice: 152, dma50: 147, dma200: 138, histWinRate: 75 },
-    { ticker: 'GAIL.NS', name: 'GAIL (India) Ltd', exchange: 'NSE', sector: 'Natural Gas', basePrice: 205, dma50: 199, dma200: 186, histWinRate: 76 },
-    { ticker: 'ASHOKLEY.NS', name: 'Ashok Leyland', exchange: 'NSE', sector: 'Commercial Vehicles', basePrice: 222, dma50: 216, dma200: 202, histWinRate: 75 },
-    { ticker: 'BHEL.NS', name: 'Bharat Heavy Electricals', exchange: 'NSE', sector: 'Power Equipment', basePrice: 238, dma50: 231, dma200: 215, histWinRate: 74 },
-    { ticker: 'BANKBARODA.NS', name: 'Bank of Baroda', exchange: 'NSE', sector: 'PSU Banking', basePrice: 248, dma50: 242, dma200: 228, histWinRate: 76 },
-    { ticker: 'ONGC.NS', name: 'Oil & Natural Gas Corp', exchange: 'NSE', sector: 'Oil & Gas', basePrice: 265, dma50: 258, dma200: 242, histWinRate: 77 },
-    { ticker: 'BPCL.NS', name: 'Bharat Petroleum (BPCL)', exchange: 'NSE', sector: 'Oil & Gas', basePrice: 310, dma50: 302, dma200: 284, histWinRate: 76 },
-    { ticker: 'COALINDIA.NS', name: 'Coal India Ltd', exchange: 'NSE', sector: 'Mining & Energy', basePrice: 440, dma50: 428, dma200: 402, histWinRate: 78 },
-    { ticker: 'PFC.NS', name: 'Power Finance Corporation', exchange: 'NSE', sector: 'Power Finance', basePrice: 455, dma50: 442, dma200: 410, histWinRate: 77 },
-    { ticker: 'VEDL.NS', name: 'Vedanta Ltd', exchange: 'NSE', sector: 'Metals & Mining', basePrice: 460, dma50: 446, dma200: 412, histWinRate: 75 },
-    { ticker: 'RECLTD.NS', name: 'REC Limited', exchange: 'NSE', sector: 'Power Finance', basePrice: 510, dma50: 495, dma200: 460, histWinRate: 77 },
-    { ticker: 'HINDALCO.NS', name: 'Hindalco Industries', exchange: 'NSE', sector: 'Metals & Aluminium', basePrice: 655, dma50: 638, dma200: 595, histWinRate: 76 },
+    { ticker: 'RELIANCE.NS', name: 'Reliance Industries', exchange: 'NSE', sector: 'Energy & Telecom', basePrice: 1335, dma50: 1237, dma200: 1324, histWinRate: 74 },
+    { ticker: 'TCS.NS', name: 'Tata Consultancy Services', exchange: 'NSE', sector: 'IT Services', basePrice: 2455, dma50: 2292, dma200: 2406, histWinRate: 72 },
+    { ticker: 'HDFCBANK.NS', name: 'HDFC Bank', exchange: 'NSE', sector: 'Banking', basePrice: 809, dma50: 717, dma200: 783, histWinRate: 73 },
+    { ticker: 'INFY.NS', name: 'Infosys', exchange: 'NSE', sector: 'IT Services', basePrice: 1149, dma50: 1090, dma200: 1199, histWinRate: 75 },
+    { ticker: 'ICICIBANK.NS', name: 'ICICI Bank', exchange: 'NSE', sector: 'Banking', basePrice: 1567, dma50: 1388, dma200: 1358, histWinRate: 76 },
+    { ticker: 'SBIN.NS', name: 'State Bank of India', exchange: 'NSE', sector: 'PSU Banking', basePrice: 1063, dma50: 984, dma200: 1039, histWinRate: 75 },
+    { ticker: 'BHARTIARTL.NS', name: 'Bharti Airtel', exchange: 'NSE', sector: 'Telecom', basePrice: 2086, dma50: 1876, dma200: 1890, histWinRate: 77 },
+    { ticker: 'TMPV.NS', name: 'Tata Motors Passenger Vehicles', exchange: 'NSE', sector: 'Automobile & EV', basePrice: 300, dma50: 290, dma200: 335, histWinRate: 74 },
+    { ticker: 'TMCV.NS', name: 'Tata Motors Commercial Vehicles', exchange: 'NSE', sector: 'Automobile', basePrice: 447, dma50: 428, dma200: 430, histWinRate: 75 },
+    { ticker: 'LT.NS', name: 'Larsen & Toubro', exchange: 'NSE', sector: 'Infrastructure', basePrice: 4217, dma50: 3842, dma200: 3936, histWinRate: 75 },
+    { ticker: 'AXISBANK.NS', name: 'Axis Bank', exchange: 'NSE', sector: 'Banking', basePrice: 1335, dma50: 1246, dma200: 1283, histWinRate: 71 },
+    { ticker: 'SUNPHARMA.NS', name: 'Sun Pharma', exchange: 'NSE', sector: 'Healthcare', basePrice: 1899, dma50: 1824, dma200: 1813, histWinRate: 74 },
+    { ticker: 'M&M.NS', name: 'Mahindra & Mahindra', exchange: 'NSE', sector: 'Automobile', basePrice: 3418, dma50: 3005, dma200: 3184, histWinRate: 78 },
+    { ticker: 'ITC.NS', name: 'ITC Ltd', exchange: 'NSE', sector: 'FMCG', basePrice: 285, dma50: 265, dma200: 290, histWinRate: 72 },
+    { ticker: 'BAJFINANCE.NS', name: 'Bajaj Finance', exchange: 'NSE', sector: 'NBFC Finance', basePrice: 1072, dma50: 997, dma200: 975, histWinRate: 71 },
+    { ticker: 'MARUTI.NS', name: 'Maruti Suzuki', exchange: 'NSE', sector: 'Automobile', basePrice: 13169, dma50: 12022, dma200: 13343, histWinRate: 70 },
+    { ticker: 'KOTAKBANK.NS', name: 'Kotak Mahindra Bank', exchange: 'NSE', sector: 'Banking', basePrice: 484, dma50: 433, dma200: 402, histWinRate: 70 },
+    { ticker: 'TITAN.NS', name: 'Titan Company', exchange: 'NSE', sector: 'Consumer Retail', basePrice: 4970, dma50: 4706, dma200: 4466, histWinRate: 72 },
+    { ticker: 'TATASTEEL.NS', name: 'Tata Steel', exchange: 'NSE', sector: 'Metals & Mining', basePrice: 189, dma50: 180, dma200: 194, histWinRate: 73 },
+    { ticker: 'NTPC.NS', name: 'NTPC Ltd', exchange: 'NSE', sector: 'Power & Energy', basePrice: 327, dma50: 320, dma200: 355, histWinRate: 79 },
+    { ticker: 'POWERGRID.NS', name: 'Power Grid Corp', exchange: 'NSE', sector: 'Power & Utilities', basePrice: 263, dma50: 260, dma200: 283, histWinRate: 76 },
+    { ticker: 'HAL.NS', name: 'Hindustan Aeronautics', exchange: 'NSE', sector: 'Defence & Aerospace', basePrice: 4984, dma50: 4834, dma200: 4469, histWinRate: 77 },
+    { ticker: 'BEL.NS', name: 'Bharat Electronics', exchange: 'NSE', sector: 'Defence Electronics', basePrice: 397, dma50: 388, dma200: 415, histWinRate: 78 },
+    { ticker: 'TRENT.NS', name: 'Trent Ltd', exchange: 'NSE', sector: 'Consumer Retail', basePrice: 3213, dma50: 2853, dma200: 2799, histWinRate: 76 },
+    { ticker: 'ETERNAL.NS', name: 'Eternal (Zomato) Ltd', exchange: 'NSE', sector: 'Consumer Tech', basePrice: 363, dma50: 329, dma200: 283, histWinRate: 77 },
+    { ticker: 'WIPRO.NS', name: 'Wipro Ltd', exchange: 'NSE', sector: 'IT Services', basePrice: 198, dma50: 176, dma200: 191, histWinRate: 72 },
+    // High-Volume Low & Mid-Price NSE Liquid Leaders
+    { ticker: 'CANBK.NS', name: 'Canara Bank', exchange: 'NSE', sector: 'PSU Banking', basePrice: 133, dma50: 122, dma200: 132, histWinRate: 74 },
+    { ticker: 'PNB.NS', name: 'Punjab National Bank', exchange: 'NSE', sector: 'PSU Banking', basePrice: 138, dma50: 118, dma200: 114, histWinRate: 73 },
+    { ticker: 'IOC.NS', name: 'Indian Oil Corporation', exchange: 'NSE', sector: 'Oil & Gas', basePrice: 148, dma50: 134, dma200: 145, histWinRate: 74 },
+    { ticker: 'IRFC.NS', name: 'Indian Railway Finance Corp', exchange: 'NSE', sector: 'Railway Finance', basePrice: 86, dma50: 79, dma200: 94, histWinRate: 75 },
+    { ticker: 'GAIL.NS', name: 'GAIL (India) Ltd', exchange: 'NSE', sector: 'Natural Gas', basePrice: 188, dma50: 173, dma200: 167, histWinRate: 76 },
+    { ticker: 'ASHOKLEY.NS', name: 'Ashok Leyland', exchange: 'NSE', sector: 'Commercial Vehicles', basePrice: 173, dma50: 157, dma200: 168, histWinRate: 75 },
+    { ticker: 'BHEL.NS', name: 'Bharat Heavy Electricals', exchange: 'NSE', sector: 'Power Equipment', basePrice: 432, dma50: 423, dma200: 364, histWinRate: 74 },
+    { ticker: 'BANKBARODA.NS', name: 'Bank of Baroda', exchange: 'NSE', sector: 'PSU Banking', basePrice: 274, dma50: 237, dma200: 263, histWinRate: 76 },
+    { ticker: 'ONGC.NS', name: 'Oil & Natural Gas Corp', exchange: 'NSE', sector: 'Oil & Gas', basePrice: 235, dma50: 230, dma200: 255, histWinRate: 77 },
+    { ticker: 'BPCL.NS', name: 'Bharat Petroleum (BPCL)', exchange: 'NSE', sector: 'Oil & Gas', basePrice: 319, dma50: 302, dma200: 315, histWinRate: 76 },
+    { ticker: 'COALINDIA.NS', name: 'Coal India Ltd', exchange: 'NSE', sector: 'Mining & Energy', basePrice: 404, dma50: 412, dma200: 433, histWinRate: 78 },
+    { ticker: 'PFC.NS', name: 'Power Finance Corporation', exchange: 'NSE', sector: 'Power Finance', basePrice: 344, dma50: 335, dma200: 396, histWinRate: 77 },
+    { ticker: 'VEDL.NS', name: 'Vedanta Ltd', exchange: 'NSE', sector: 'Metals & Mining', basePrice: 263, dma50: 257, dma200: 421, histWinRate: 75 },
+    { ticker: 'RECLTD.NS', name: 'REC Limited', exchange: 'NSE', sector: 'Power Finance', basePrice: 311, dma50: 304, dma200: 339, histWinRate: 77 },
+    { ticker: 'HINDALCO.NS', name: 'Hindalco Industries', exchange: 'NSE', sector: 'Metals & Aluminium', basePrice: 959, dma50: 947, dma200: 981, histWinRate: 76 },
     // BSE Top Liquid Leaders
-    { ticker: 'RELIANCE.BO', name: 'Reliance Industries (BSE)', exchange: 'BSE', sector: 'Energy & Telecom', basePrice: 1320, dma50: 1295, dma200: 1240, histWinRate: 74 },
-    { ticker: 'TCS.BO', name: 'Tata Consultancy Services (BSE)', exchange: 'BSE', sector: 'IT Services', basePrice: 3850, dma50: 3790, dma200: 3650, histWinRate: 72 },
-    { ticker: 'HDFCBANK.BO', name: 'HDFC Bank (BSE)', exchange: 'BSE', sector: 'Banking', basePrice: 1740, dma50: 1710, dma200: 1645, histWinRate: 73 },
-    { ticker: 'INFY.BO', name: 'Infosys (BSE)', exchange: 'BSE', sector: 'IT Services', basePrice: 1860, dma50: 1825, dma200: 1730, histWinRate: 75 },
-    { ticker: 'ICICIBANK.BO', name: 'ICICI Bank (BSE)', exchange: 'BSE', sector: 'Banking', basePrice: 1290, dma50: 1265, dma200: 1195, histWinRate: 76 },
-    { ticker: 'SBIN.BO', name: 'State Bank of India (BSE)', exchange: 'BSE', sector: 'PSU Banking', basePrice: 835, dma50: 818, dma200: 780, histWinRate: 75 },
-    { ticker: 'TATAMOTORS.BO', name: 'Tata Motors (BSE)', exchange: 'BSE', sector: 'Automobile & EV', basePrice: 840, dma50: 825, dma200: 790, histWinRate: 74 },
-    { ticker: 'BHARTIARTL.BO', name: 'Bharti Airtel (BSE)', exchange: 'BSE', sector: 'Telecom', basePrice: 1680, dma50: 1640, dma200: 1520, histWinRate: 77 },
-    { ticker: 'LT.BO', name: 'Larsen & Toubro (BSE)', exchange: 'BSE', sector: 'Infrastructure', basePrice: 3620, dma50: 3560, dma200: 3410, histWinRate: 75 },
-    { ticker: 'AXISBANK.BO', name: 'Axis Bank (BSE)', exchange: 'BSE', sector: 'Banking', basePrice: 1175, dma50: 1155, dma200: 1110, histWinRate: 71 },
-    { ticker: 'ITC.BO', name: 'ITC Ltd (BSE)', exchange: 'BSE', sector: 'FMCG', basePrice: 485, dma50: 478, dma200: 455, histWinRate: 72 },
-    { ticker: 'TATASTEEL.BO', name: 'Tata Steel (BSE)', exchange: 'BSE', sector: 'Metals & Mining', basePrice: 154, dma50: 150, dma200: 144, histWinRate: 73 },
-    { ticker: 'NTPC.BO', name: 'NTPC Ltd (BSE)', exchange: 'BSE', sector: 'Power & Energy', basePrice: 412, dma50: 402, dma200: 378, histWinRate: 79 },
-    { ticker: 'POWERGRID.BO', name: 'Power Grid Corp (BSE)', exchange: 'BSE', sector: 'Power & Utilities', basePrice: 325, dma50: 318, dma200: 298, histWinRate: 76 },
-    { ticker: 'BEL.BO', name: 'Bharat Electronics (BSE)', exchange: 'BSE', sector: 'Defence Electronics', basePrice: 298, dma50: 290, dma200: 265, histWinRate: 78 }
+    { ticker: 'RELIANCE.BO', name: 'Reliance Industries (BSE)', exchange: 'BSE', sector: 'Energy & Telecom', basePrice: 1338, dma50: 1237, dma200: 1324, histWinRate: 74 },
+    { ticker: 'TCS.BO', name: 'Tata Consultancy Services (BSE)', exchange: 'BSE', sector: 'IT Services', basePrice: 2453, dma50: 2291, dma200: 2406, histWinRate: 72 },
+    { ticker: 'HDFCBANK.BO', name: 'HDFC Bank (BSE)', exchange: 'BSE', sector: 'Banking', basePrice: 812, dma50: 717, dma200: 783, histWinRate: 73 },
+    { ticker: 'INFY.BO', name: 'Infosys (BSE)', exchange: 'BSE', sector: 'IT Services', basePrice: 1150, dma50: 1090, dma200: 1199, histWinRate: 75 },
+    { ticker: 'ICICIBANK.BO', name: 'ICICI Bank (BSE)', exchange: 'BSE', sector: 'Banking', basePrice: 1569, dma50: 1388, dma200: 1358, histWinRate: 76 },
+    { ticker: 'SBIN.BO', name: 'State Bank of India (BSE)', exchange: 'BSE', sector: 'PSU Banking', basePrice: 1068, dma50: 984, dma200: 1039, histWinRate: 75 },
+    { ticker: 'TMPV.BO', name: 'Tata Motors PV (BSE)', exchange: 'BSE', sector: 'Automobile & EV', basePrice: 300, dma50: 290, dma200: 335, histWinRate: 74 },
+    { ticker: 'BHARTIARTL.BO', name: 'Bharti Airtel (BSE)', exchange: 'BSE', sector: 'Telecom', basePrice: 2086, dma50: 1875, dma200: 1890, histWinRate: 77 },
+    { ticker: 'LT.BO', name: 'Larsen & Toubro (BSE)', exchange: 'BSE', sector: 'Infrastructure', basePrice: 4231, dma50: 3842, dma200: 3936, histWinRate: 75 },
+    { ticker: 'AXISBANK.BO', name: 'Axis Bank (BSE)', exchange: 'BSE', sector: 'Banking', basePrice: 1344, dma50: 1246, dma200: 1283, histWinRate: 71 },
+    { ticker: 'ITC.BO', name: 'ITC Ltd (BSE)', exchange: 'BSE', sector: 'FMCG', basePrice: 285, dma50: 265, dma200: 290, histWinRate: 72 },
+    { ticker: 'TATASTEEL.BO', name: 'Tata Steel (BSE)', exchange: 'BSE', sector: 'Metals & Mining', basePrice: 189, dma50: 180, dma200: 194, histWinRate: 73 },
+    { ticker: 'NTPC.BO', name: 'NTPC Ltd (BSE)', exchange: 'BSE', sector: 'Power & Energy', basePrice: 327, dma50: 320, dma200: 355, histWinRate: 79 },
+    { ticker: 'POWERGRID.BO', name: 'Power Grid Corp (BSE)', exchange: 'BSE', sector: 'Power & Utilities', basePrice: 263, dma50: 260, dma200: 283, histWinRate: 76 },
+    { ticker: 'BEL.BO', name: 'Bharat Electronics (BSE)', exchange: 'BSE', sector: 'Defence Electronics', basePrice: 397, dma50: 388, dma200: 415, histWinRate: 78 },
+    { ticker: 'ETERNAL.BO', name: 'Eternal (Zomato) (BSE)', exchange: 'BSE', sector: 'Consumer Tech', basePrice: 362, dma50: 329, dma200: 283, histWinRate: 77 }
 ];
 
 function ensureDirs() {
@@ -272,6 +275,58 @@ function fetchHttpsText(url, userAgent = 'Mozilla/5.0') {
     });
 }
 
+function formatISTParts(date = new Date()) {
+    const fmt = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Asia/Kolkata',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        weekday: 'short',
+        hour12: false
+    });
+    const parts = {};
+    for (const p of fmt.formatToParts(date)) {
+        parts[p.type] = p.value;
+    }
+    const hh = parts.hour === '24' ? '00' : parts.hour;
+    const min = parts.minute;
+    const ss = parts.second;
+    const dayMap = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+    const dayOfWeek = dayMap[parts.weekday] !== undefined ? dayMap[parts.weekday] : date.getUTCDay();
+    return {
+        yyyy: parts.year,
+        mm: parts.month,
+        dd: parts.day,
+        hh,
+        min,
+        ss,
+        dayOfWeek,
+        date: `${parts.year}-${parts.month}-${parts.day}`,
+        time: `${hh}:${min}:${ss} IST`,
+        shortTime: `${hh}:${min}`,
+        minutesOfDay: Number(hh) * 60 + Number(min)
+    };
+}
+
+function getWeekBoundsIST(dateStr) {
+    const d = new Date(`${dateStr}T12:00:00+05:30`);
+    const day = d.getUTCDay();
+    const istDay = formatISTParts(d).dayOfWeek;
+    const diffToMon = istDay === 0 ? -6 : 1 - istDay;
+    const mon = new Date(d.getTime() + diffToMon * 86400000);
+    const fri = new Date(mon.getTime() + 4 * 86400000);
+    const sun = new Date(mon.getTime() + 6 * 86400000);
+    return {
+        weekStart: formatISTParts(mon).date,
+        weekFriday: formatISTParts(fri).date,
+        weekEnd: formatISTParts(sun).date,
+        dayOfWeek: day
+    };
+}
+
 async function fetchYahooChartLive(ticker, interval = '5m', range = '5d') {
     const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?interval=${interval}&range=${range}`;
     const raw = await fetchHttpsText(url);
@@ -283,11 +338,18 @@ async function fetchYahooChartLive(ticker, interval = '5m', range = '5d') {
     const bars = [];
     for (let i = 0; i < ts.length; i++) {
         if (q.close[i] == null || q.open[i] == null) continue;
+        const barDate = new Date(ts[i] * 1000);
+        const istParts = formatISTParts(barDate);
         bars.push({
-            time: new Date(ts[i] * 1000).toISOString(),
+            timestampMs: ts[i] * 1000,
+            time: barDate.toISOString(),
+            istDate: istParts.date,
+            istTime: istParts.shortTime,
+            istTimeFull: istParts.time,
+            istMinutes: istParts.minutesOfDay,
             open: Number(q.open[i].toFixed(2)),
-            high: Number(q.high[i].toFixed(2)),
-            low: Number(q.low[i].toFixed(2)),
+            high: Number((q.high[i] != null ? q.high[i] : q.close[i]).toFixed(2)),
+            low: Number((q.low[i] != null ? q.low[i] : q.close[i]).toFixed(2)),
             close: Number(q.close[i].toFixed(2)),
             volume: Number(q.volume[i] || 0)
         });
@@ -295,29 +357,47 @@ async function fetchYahooChartLive(ticker, interval = '5m', range = '5d') {
     return bars;
 }
 
-function getISTInfo(date = new Date()) {
-    const utcMs = date.getTime() + (date.getTimezoneOffset() * 60000);
-    const istDate = new Date(utcMs + (5.5 * 3600000));
-    const yyyy = istDate.getFullYear();
-    const mm = String(istDate.getMonth() + 1).padStart(2, '0');
-    const dd = String(istDate.getDate()).padStart(2, '0');
-    const hh = String(istDate.getHours()).padStart(2, '0');
-    const min = String(istDate.getMinutes()).padStart(2, '0');
-    const ss = String(istDate.getSeconds()).padStart(2, '0');
-    const dayOfWeek = istDate.getDay();
-    const minutesOfDay = istDate.getHours() * 60 + istDate.getMinutes();
+const DAILY_DMA_CACHE = {};
+async function fetchLiveMovingAverages(ticker, fallbackMeta) {
+    const baseSym = ticker.split('.')[0];
+    const dailyTicker = `${baseSym}.NS`;
+    if (DAILY_DMA_CACHE[dailyTicker]) return DAILY_DMA_CACHE[dailyTicker];
+    try {
+        const bars = await fetchYahooChartLive(dailyTicker, '1d', '1y');
+        if (bars && bars.length >= 200) {
+            const closes = bars.map(b => b.close);
+            const dma50 = Number((closes.slice(-50).reduce((s, v) => s + v, 0) / 50).toFixed(2));
+            const dma200 = Number((closes.slice(-200).reduce((s, v) => s + v, 0) / 200).toFixed(2));
+            const val = { dma50, dma200, live: true };
+            DAILY_DMA_CACHE[dailyTicker] = val;
+            return val;
+        }
+    } catch (e) {}
+    return {
+        dma50: fallbackMeta ? fallbackMeta.dma50 : 0,
+        dma200: fallbackMeta ? fallbackMeta.dma200 : 0,
+        live: false
+    };
+}
 
-    const isWeekday = dayOfWeek >= 1 && dayOfWeek <= 5;
-    const isMarketHours = isWeekday && minutesOfDay >= 555 && minutesOfDay <= 930;
-    const isEntryWindow = isWeekday && minutesOfDay >= 570 && minutesOfDay <= 885;
-    const isSquareOffWindow = isWeekday && minutesOfDay >= 915 && minutesOfDay <= 930;
+function getISTInfo(date = new Date()) {
+    const p = formatISTParts(date);
+    const bounds = getWeekBoundsIST(p.date);
+    const isWeekday = p.dayOfWeek >= 1 && p.dayOfWeek <= 5;
+    const isMarketHours = isWeekday && p.minutesOfDay >= 555 && p.minutesOfDay <= 930;
+    const isEntryWindow = isWeekday && p.minutesOfDay >= 570 && p.minutesOfDay <= 885;
+    const isSquareOffWindow = isWeekday && p.minutesOfDay >= 915 && p.minutesOfDay <= 930;
 
     return {
-        iso: `${yyyy}-${mm}-${dd}T${hh}:${min}:${ss}+05:30`,
-        date: `${yyyy}-${mm}-${dd}`,
-        time: `${hh}:${min}:${ss} IST`,
-        shortTime: `${hh}:${min}`,
-        minutesOfDay,
+        iso: `${p.date}T${p.hh}:${p.min}:${p.ss}+05:30`,
+        date: p.date,
+        time: p.time,
+        shortTime: p.shortTime,
+        dayOfWeek: p.dayOfWeek,
+        minutesOfDay: p.minutesOfDay,
+        weekStart: bounds.weekStart,
+        weekFriday: bounds.weekFriday,
+        weekEnd: bounds.weekEnd,
         isWeekday,
         isMarketHours,
         isEntryWindow,
@@ -447,9 +527,9 @@ async function fetchSymbolBars(ticker, interval = '5m', range = '5d') {
         name: ticker,
         exchange: ticker.endsWith('.BO') ? 'BSE' : 'NSE',
         sector: 'Indian Equities',
-        basePrice: 1200,
-        dma50: 1170,
-        dma200: 1110,
+        basePrice: 500,
+        dma50: 480,
+        dma200: 450,
         histWinRate: 74
     };
 
@@ -460,11 +540,67 @@ async function fetchSymbolBars(ticker, interval = '5m', range = '5d') {
         }
     } catch (err) {}
 
+    if (process.env.ALLOW_OFFLINE_SIM === 'true') {
+        return {
+            candles: generateRealisticIndianBars(ticker, meta.basePrice, interval),
+            source: 'indian_market_sim',
+            meta
+        };
+    }
+
     return {
-        candles: generateRealisticIndianBars(ticker, meta.basePrice, interval),
-        source: 'indian_market_sim',
+        candles: [],
+        source: 'yahoo_unavailable',
         meta
     };
+}
+
+async function saveActiveChartSnapshot(preferredTrade = null) {
+    const ist = getISTInfo();
+    const portfolio = readJson(FILES.portfolio, {});
+    const history = readJson(FILES.history, { closed_trades: [] });
+    const trade = preferredTrade
+        || portfolio.active_position
+        || (history.closed_trades && history.closed_trades[0])
+        || null;
+
+    const targetSymbol = trade ? trade.symbol : '^NSEI';
+    const res = await fetchSymbolBars(targetSymbol, '5m', '5d');
+    let bars = res.candles || [];
+    if (bars.length === 0 && targetSymbol !== '^NSEI') {
+        const idxRes = await fetchSymbolBars('^NSEI', '5m', '5d');
+        bars = idxRes.candles || [];
+    }
+
+    const latestDate = bars.length > 0 ? bars[bars.length - 1].istDate : ist.date;
+    const sessionBars = bars.filter(b => b.istDate === latestDate);
+    const displayBars = (sessionBars.length >= 10 ? sessionBars : bars.slice(-75)).map(b => ({
+        t: b.istTime || '',
+        time: b.time,
+        o: b.open,
+        h: b.high,
+        l: b.low,
+        c: b.close,
+        v: b.volume
+    }));
+
+    const chartPayload = {
+        as_of: ist.iso,
+        symbol: targetSymbol,
+        name: trade ? (trade.name || targetSymbol) : 'NIFTY 50',
+        exchange: trade ? trade.exchange : 'NSE',
+        has_active_trade: Boolean(portfolio.active_position),
+        side: trade ? String(trade.side || 'BUY').toUpperCase() : 'BUY',
+        entry_price_inr: trade ? trade.entry_price_inr : null,
+        stop_loss_inr: trade ? (trade.strict_stop_loss_inr || null) : null,
+        target_price_inr: trade ? (trade.take_profit_target_inr || trade.target_price_inr || null) : null,
+        current_price_inr: displayBars.length > 0 ? displayBars[displayBars.length - 1].c : (trade ? trade.current_price_inr : null),
+        session_date: latestDate,
+        bars: displayBars
+    };
+
+    writeJson(FILES.activeChart, chartPayload);
+    return chartPayload;
 }
 
 function generateRealisticIndianBars(ticker, basePrice = 1000, interval = '5m') {
@@ -721,12 +857,17 @@ async function runScanner(mode = 'orb', topN = 10) {
 
     for (const item of NSE_BSE_UNIVERSE) {
         const { candles: bars5m, source } = await fetchSymbolBars(item.ticker, '5m', '5d');
-        if (!bars5m || bars5m.length < 150) continue;
+        if (!bars5m || bars5m.length < 30 || source === 'yahoo_unavailable') continue;
 
         const tickerNews = newsByTicker[item.ticker] || { sentiment: 'NEUTRAL', catalyst_score: 10, adverse_event: false };
 
-        const sessionBars = bars5m.slice(-75);
-        const prevSessionBars = bars5m.slice(-150, -75);
+        const latestDate = bars5m[bars5m.length - 1].istDate;
+        const allTodayBars = bars5m.filter(b => b.istDate === latestDate && b.istMinutes >= 555 && b.istMinutes <= 930);
+        const sessionBars = allTodayBars.length >= 3 ? allTodayBars : bars5m.slice(-30);
+        const prevDates = [...new Set(bars5m.map(b => b.istDate).filter(d => d && d < latestDate))];
+        const prevDate = prevDates[prevDates.length - 1];
+        const prevSessionBars = prevDate ? bars5m.filter(b => b.istDate === prevDate) : bars5m.slice(0, -sessionBars.length);
+        if (sessionBars.length < 3 || prevSessionBars.length < 3) continue;
 
         // 1. 15-Minute Opening Range (09:15 - 09:30 IST)
         const orBars = sessionBars.slice(0, 3);
@@ -734,7 +875,7 @@ async function runScanner(mode = 'orb', topN = 10) {
         const orLow = Number(Math.min(...orBars.map(b => b.low)).toFixed(2));
         const orMid = Number(((orHigh + orLow) / 2).toFixed(2));
         const orRange = Number((orHigh - orLow).toFixed(2));
-        const orPct = Number(((orRange / orLow) * 100).toFixed(2));
+        const orPct = Number(((orRange / Math.max(1, orLow)) * 100).toFixed(2));
 
         const latestBar = sessionBars[sessionBars.length - 1];
         const closes = bars5m.map(b => b.close);
@@ -744,38 +885,32 @@ async function runScanner(mode = 'orb', topN = 10) {
         // 2. Central Pivot Range (CPR) & R1/S1 from previous session
         const cpr = calcCPR(prevSessionBars);
 
-        // 3. Supertrend (10, 3), Session VWAP, EMA 9/21/50, RSI-14, ATR-14
-        const supertrend = calcSupertrend(sessionBars.slice(0, 15), 10, 2.5);
-        const vwap = calcSessionVWAP(sessionBars.slice(0, 15));
+        // 3. Supertrend (10, 2.5), Session VWAP, EMA 9/21/50, RSI-14, ATR-14
+        const supertrend = calcSupertrend(sessionBars, 10, 2.5);
+        const vwap = calcSessionVWAP(sessionBars);
         const ema9 = calcEMA(closes.slice(-30), 9);
         const ema20 = calcEMA(closes.slice(-45), 21);
         const ema50 = calcEMA(closes.slice(-75), 50);
         const rsi14 = calcRSI(closes, 14);
-        const atr = calcATR(sessionBars.slice(0, 15), 14);
+        const atr = calcATR(sessionBars, 14) || Number((latestBar.close * 0.003).toFixed(2));
 
-        // Determine Market Direction: BUY (LONG) vs SELL (SHORT) according to Market Position & News
+        // Determine Market Direction: BUY (LONG) vs SELL (SHORT) from Live Price Structure & News
         const isBearishSetup = (tickerNews.sentiment === 'BEARISH' || tickerNews.adverse_event) ||
             (!supertrend.is_bullish && latestBar.close < vwap && rsi14 < 48);
         const tradeSide = isBearishSetup ? 'SELL' : 'BUY';
 
-        let triggerBar;
-        let entryPrice;
-        if (tradeSide === 'BUY') {
-            triggerBar = sessionBars.slice(3, 18).find(b => b.close > orHigh) || sessionBars[4];
-            entryPrice = Number(Math.max(triggerBar.close, orHigh + 0.05).toFixed(2));
-        } else {
-            triggerBar = sessionBars.slice(3, 18).find(b => b.close < orLow) || sessionBars[4];
-            entryPrice = Number(Math.min(triggerBar.close, orLow - 0.05).toFixed(2));
-        }
+        // Enter strictly at actual live current market price (latestBar.close)
+        const triggerBar = latestBar;
+        const entryPrice = Number(latestBar.close.toFixed(2));
 
-        const stage2HistoricalUptrend = entryPrice > item.dma50 && item.dma50 > item.dma200;
-        const stage4HistoricalDowntrend = entryPrice < item.dma50;
+        const dma = await fetchLiveMovingAverages(item.ticker, item);
+        const stage2HistoricalUptrend = entryPrice > dma.dma50 && entryPrice > dma.dma200;
 
-        const avgVol = bars5m.slice(0, -10).reduce((s, b) => s + b.volume, 0) / Math.max(1, bars5m.length - 10);
+        const avgVol = sessionBars.slice(0, -1).reduce((s, b) => s + b.volume, 0) / Math.max(1, sessionBars.length - 1);
         const rvol = Number((triggerBar.volume / Math.max(1, avgVol)).toFixed(2));
 
-        const aboveVwap = entryPrice >= vwap * 0.998;
-        const belowVwap = entryPrice <= vwap * 1.002;
+        const aboveVwap = entryPrice >= vwap * 0.998 && (entryPrice > orHigh * 0.999);
+        const belowVwap = entryPrice <= vwap * 1.002 && (entryPrice < orLow * 1.001);
         const emaAligned = tradeSide === 'BUY'
             ? (ema9 >= ema20 * 0.998 && ema20 >= ema50 * 0.995)
             : (ema9 <= ema20 * 1.002);
@@ -787,9 +922,12 @@ async function runScanner(mode = 'orb', topN = 10) {
         if (tradeSide === 'SELL' && (!belowVwap || !rsiHealthy)) continue;
 
         // 5. Strict Stop-Loss & Mandatory Net Profit (Excl. Brokerage) Sizing for BOTH BUY & SELL
+        const minSlBand = Math.max(0.5, Number((entryPrice * 0.0032).toFixed(2)));
+        const maxSlBand = Math.max(minSlBand, Number((entryPrice * 0.0065).toFixed(2)));
+        const rawStopDist = Math.min(maxSlBand, Math.max(minSlBand, Number((atr * 1.25).toFixed(2))));
         const rawStop = tradeSide === 'BUY'
-            ? (orMid < entryPrice ? orMid : Number((entryPrice - Math.max(atr * 1.2, entryPrice * 0.0035)).toFixed(2)))
-            : (orMid > entryPrice ? orMid : Number((entryPrice + Math.max(atr * 1.2, entryPrice * 0.0035)).toFixed(2)));
+            ? Number((entryPrice - rawStopDist).toFixed(2))
+            : Number((entryPrice + rawStopDist).toFixed(2));
         const stopDistance = Math.max(0.5, Number(Math.abs(entryPrice - rawStop).toFixed(2)));
         const maxSharesByRisk = Math.floor((cfg.max_loss_per_trade_inr || 100) / stopDistance);
         const maxSharesByLeverage = Math.floor(((cfg.budget || 20000) * (cfg.intraday_leverage || 5) * 0.95) / entryPrice);
@@ -839,6 +977,7 @@ async function runScanner(mode = 'orb', topN = 10) {
             historical_win_rate_pct: item.histWinRate || 75,
             close: entryPrice,
             latest_close: latestBar.close,
+            latest_bar_time_ist: triggerBar.istTimeFull || ist.time,
             change_pct: changePct,
             rvol,
             atr,
@@ -847,8 +986,8 @@ async function runScanner(mode = 'orb', topN = 10) {
                 ema9,
                 ema20,
                 ema50,
-                dma50: item.dma50,
-                dma200: item.dma200,
+                dma50: dma.dma50,
+                dma200: dma.dma200,
                 cpr_pivot: cpr.pivot,
                 cpr_tc: cpr.tc,
                 cpr_r1: cpr.r1,
@@ -917,10 +1056,19 @@ async function runEntry(tickerArg = null) {
         watchlist = await runScanner('orb', 10);
     }
 
+    if (!watchlist || !watchlist.results || watchlist.results.length === 0) {
+        return {
+            status: 'NO_LIVE_SETUP',
+            date: ist.date,
+            time: ist.time,
+            reason: 'No NSE/BSE stock met all live technical criteria or market feed is unavailable.'
+        };
+    }
+
     const history = readJson(FILES.history, { closed_trades: [] });
     const tradedTodaySymbols = new Set(
         (history.closed_trades || [])
-            .filter(t => String(t.closed_at_ist || '').startsWith(ist.date))
+            .filter(t => String(t.entry_date_ist || t.closed_at_ist || '').startsWith(ist.date))
             .map(t => t.symbol)
     );
 
@@ -928,19 +1076,30 @@ async function runEntry(tickerArg = null) {
         ? (watchlist.results.find(r => r.ticker === tickerArg) || watchlist.results[0])
         : (watchlist.results.find(r => !tradedTodaySymbols.has(r.ticker)) || watchlist.results[0]);
 
-    const { candles: bars5m } = await fetchSymbolBars(chosen.ticker, '5m', '5d');
-    const sessionBars = bars5m.slice(-75);
+    const { candles: bars5m, source } = await fetchSymbolBars(chosen.ticker, '5m', '5d');
+    if (!bars5m || bars5m.length < 5 || source === 'yahoo_unavailable') {
+        return {
+            status: 'NO_LIVE_DATA',
+            ticker: chosen.ticker,
+            reason: 'Live price candles unavailable.'
+        };
+    }
+
+    const latestDate = bars5m[bars5m.length - 1].istDate;
+    const todaySessionBars = bars5m.filter(b => b.istDate === latestDate && b.istMinutes >= 555 && b.istMinutes <= 930);
+    const sessionBars = todaySessionBars.length >= 3 ? todaySessionBars : bars5m.slice(-30);
     const orBars = sessionBars.slice(0, 3);
     const orHigh = Number(Math.max(...orBars.map(b => b.high)).toFixed(2));
     const orLow = Number(Math.min(...orBars.map(b => b.low)).toFixed(2));
     const orMid = Number(((orHigh + orLow) / 2).toFixed(2));
     const orRange = Number((orHigh - orLow).toFixed(2));
 
-    let triggerBar = sessionBars.slice(3, 20).find(b => b.close > orHigh) || sessionBars[4];
-    const entryPrice = Number(Math.max(triggerBar.close, orHigh + 0.05).toFixed(2));
-
+    const triggerBar = sessionBars[sessionBars.length - 1];
+    const tradeSide = String(chosen.side || 'BUY').toUpperCase();
+    const entryPrice = Number(triggerBar.close.toFixed(2));
     const isSecondTradeToday = tradedTodaySymbols.size > 0;
-    const computedEntryTimeIst = isSecondTradeToday ? '11:50:00 IST' : '09:35:00 IST';
+    const exactEntryDateIst = ist.date;
+    const exactEntryTimeIst = ist.time;
 
     const entryPayload = {
         as_of: ist.iso,
@@ -950,14 +1109,17 @@ async function runEntry(tickerArg = null) {
         ticker: chosen.ticker,
         name: chosen.name,
         sector: chosen.sector,
-        score: chosen.score || 202.28,
-        historical_win_rate_pct: chosen.historical_win_rate_pct || 76,
+        side: tradeSide,
+        score: chosen.score || 200,
+        historical_win_rate_pct: chosen.historical_win_rate_pct || 75,
         trade_sequence_today: isSecondTradeToday ? 2 : 1,
         rule: '6_pillar_cpr_orb_supertrend_vwap',
         interval: '5m',
         or_minutes: 15,
-        session_date: ist.date,
-        entry_time_ist: computedEntryTimeIst,
+        session_date: exactEntryDateIst,
+        entry_date_ist: exactEntryDateIst,
+        entry_time_ist: exactEntryTimeIst,
+        opened_at_ms: Date.now(),
         status: 'triggered',
         opening_range: {
             start: '09:15',
@@ -966,23 +1128,23 @@ async function runEntry(tickerArg = null) {
             low: orLow,
             mid: orMid,
             range: orRange,
-            bars: 3
+            bars: orBars.length
         },
         technicals: chosen.technicals,
         business_news: chosen.business_news,
-        level: orHigh,
+        level: tradeSide === 'BUY' ? orHigh : orLow,
         trigger: {
-            bar_time_ist: `${ist.date} 09:35:00 IST`,
+            bar_time_ist: `${exactEntryDateIst} ${exactEntryTimeIst}`,
             bar_open: triggerBar.open,
-            bar_high: Math.max(triggerBar.high, entryPrice),
+            bar_high: triggerBar.high,
             bar_low: triggerBar.low,
             bar_close: entryPrice,
             bar_volume: triggerBar.volume,
-            volume_ratio: chosen.rvol || 1.95
+            volume_ratio: chosen.rvol || 1.5
         },
         entry_price_hint: entryPrice,
         stop_hint: chosen.levels ? chosen.levels.stop_hint : orMid,
-        summary: `${chosen.ticker} (${chosen.exchange}) triggered 6-Strategy High-Accuracy Entry (Narrow CPR + 15m ORB + Supertrend + VWAP) @ ₹${entryPrice} at 09:35:00 IST.`
+        summary: `${chosen.ticker} (${chosen.exchange}) ${tradeSide} triggered @ ₹${entryPrice} on ${exactEntryDateIst} ${exactEntryTimeIst}.`
     };
 
     writeJson(FILES.entry, entryPayload);
@@ -993,42 +1155,58 @@ async function runExit(tickerArg = null) {
     const cfg = loadConfig();
     const ist = getISTInfo();
     let entryData = readJson(FILES.entry, null);
-    if (!entryData || (tickerArg && entryData.ticker !== tickerArg)) {
+    if (!entryData || entryData.status !== 'triggered' || (tickerArg && entryData.ticker !== tickerArg)) {
         entryData = await runEntry(tickerArg);
+    }
+    if (!entryData || entryData.status !== 'triggered') {
+        return { status: 'NO_LIVE_SETUP', reason: entryData && entryData.reason ? entryData.reason : 'No triggered entry' };
     }
 
     const ticker = entryData.ticker;
+    const tradeSide = String(entryData.side || 'BUY').toUpperCase();
+    const isShort = tradeSide === 'SELL';
     const entryPrice = Number(entryData.entry_price_hint);
-    const orLow = Number(entryData.opening_range.low);
-    const orMid = Number(entryData.opening_range.mid);
+    const rawHint = Number(entryData.stop_hint || (isShort ? entryPrice * 1.004 : entryPrice * 0.996));
 
-    let stopPrice = orMid < entryPrice ? orMid : orLow;
-    if (stopPrice >= entryPrice || (entryPrice - stopPrice) < entryPrice * 0.002) {
-        stopPrice = Number((entryPrice * 0.996).toFixed(2));
-    }
-    stopPrice = Math.floor(stopPrice * 100) / 100;
+    const minStopDist = Math.max(0.5, Number((entryPrice * 0.003).toFixed(2)));
+    const maxStopDist = Math.max(minStopDist, Number((entryPrice * 0.0065).toFixed(2)));
+    const distFromHint = Math.abs(entryPrice - rawHint);
+    const boundedDist = Math.min(maxStopDist, Math.max(minStopDist, Number(distFromHint.toFixed(2))));
 
-    const riskPerShare = Number((entryPrice - stopPrice).toFixed(2));
+    let stopPrice = isShort
+        ? Number((entryPrice + boundedDist).toFixed(2))
+        : Number((entryPrice - boundedDist).toFixed(2));
+    const riskPerShare = Number(Math.abs(entryPrice - stopPrice).toFixed(2));
     const maxLossInr = Number(cfg.max_loss_per_trade_inr || 100);
     const dailyProfitGoalInr = Number(cfg.daily_profit_target_inr || 400);
     const maxBuyingPower = Number(cfg.budget || 20000) * Number(cfg.intraday_leverage || 5) * 0.95;
     const estShares = Math.max(1, Math.min(Math.floor(maxLossInr / riskPerShare), Math.floor(maxBuyingPower / entryPrice)));
 
-    const approxTarget = entryPrice + (dailyProfitGoalInr / estShares);
+    const approxTarget = isShort
+        ? entryPrice - (dailyProfitGoalInr / estShares)
+        : entryPrice + (dailyProfitGoalInr / estShares);
     const estTax = calculateIndianCharges({
         exchange: entryData.exchange || (ticker.endsWith('.BO') ? 'BSE' : 'NSE'),
         entryPrice,
-        exitPrice: approxTarget,
+        exitPrice: Math.max(1, approxTarget),
         quantity: estShares
     });
     const requiredGrossProfitInr = dailyProfitGoalInr + estTax.total + 2.0;
-    const targetPerShare = Number(Math.max(riskPerShare * 4.0, requiredGrossProfitInr / estShares).toFixed(2));
-    const targetPrice = Number((entryPrice + targetPerShare).toFixed(2));
+    const targetPerShare = Number(Math.max(riskPerShare * 2.5, requiredGrossProfitInr / estShares).toFixed(2));
+    const targetPrice = isShort
+        ? Number((entryPrice - targetPerShare).toFixed(2))
+        : Number((entryPrice + targetPerShare).toFixed(2));
     const rewardRiskRatio = Number((targetPerShare / riskPerShare).toFixed(2));
 
-    const breakevenTriggerPrice = Number((entryPrice + riskPerShare * 1.0).toFixed(2));
-    const taxFreeBreakevenStop = Number((entryPrice + estTax.perShareBuffer + 0.10).toFixed(2));
-    const target1Price = Number((entryPrice + riskPerShare * 2.0).toFixed(2));
+    const breakevenTriggerPrice = isShort
+        ? Number((entryPrice - riskPerShare).toFixed(2))
+        : Number((entryPrice + riskPerShare).toFixed(2));
+    const taxFreeBreakevenStop = isShort
+        ? Number((entryPrice - estTax.perShareBuffer - 0.10).toFixed(2))
+        : Number((entryPrice + estTax.perShareBuffer + 0.10).toFixed(2));
+    const target1Price = isShort
+        ? Number((entryPrice - riskPerShare * 2.0).toFixed(2))
+        : Number((entryPrice + riskPerShare * 2.0).toFixed(2));
 
     const planPayload = {
         as_of: ist.iso,
@@ -1036,18 +1214,18 @@ async function runExit(tickerArg = null) {
         exchange: entryData.exchange || (ticker.endsWith('.BO') ? 'BSE' : 'NSE'),
         currency: 'INR',
         ticker,
-        side: 'buy',
+        side: tradeSide,
         entry: {
             price: entryPrice,
             source: 'trader-entry',
             rule: entryData.rule || '6_pillar_cpr_orb_supertrend_vwap',
-            triggered_at_ist: entryData.trigger ? entryData.trigger.bar_time_ist : `${ist.date} 09:35:00 IST`
+            triggered_at_ist: `${entryData.entry_date_ist || ist.date} ${entryData.entry_time_ist || ist.time}`
         },
         opening_range: entryData.opening_range,
         atr: Number((riskPerShare * 0.9).toFixed(2)),
         stop: {
             price: stopPrice,
-            rule: 'strict-or-mid',
+            rule: 'strict-100-inr-cap',
             distance: riskPerShare,
             pct: Number(((riskPerShare / entryPrice) * 100).toFixed(3)),
             strict_max_loss_inr: maxLossInr
@@ -1074,7 +1252,7 @@ async function runExit(tickerArg = null) {
         },
         reward_risk: rewardRiskRatio,
         flat_by: cfg.flat_by || '15:15',
-        summary: `${ticker} BUY @ ₹${entryPrice}: Strict SL ₹${stopPrice} (Max Loss <= ₹${maxLossInr}), Target ₹${targetPrice} (Gross ₹${(targetPerShare * estShares).toFixed(2)} - Brokerage/Taxes ₹${estTax.total} = Pure Net Profit >= ₹${dailyProfitGoalInr}).`
+        summary: `${ticker} ${tradeSide} @ ₹${entryPrice}: Strict SL ₹${stopPrice}, Target ₹${targetPrice} (Net Target >= ₹${dailyProfitGoalInr}).`
     };
 
     writeJson(FILES.plan, planPayload);
@@ -1085,17 +1263,23 @@ async function runTimeMachine(simsCount = 10000) {
     loadConfig();
     const ist = getISTInfo();
     let plan = readJson(FILES.plan, null);
-    if (!plan) {
+    if (!plan || !plan.entry) {
         plan = await runExit();
+    }
+    if (!plan || !plan.entry) {
+        return { status: 'NO_LIVE_SETUP', monte_carlo: null };
     }
 
     const ticker = plan.ticker;
+    const isShort = String(plan.side || 'BUY').toUpperCase() === 'SELL';
     const entry = Number(plan.entry.price);
     const stop = Number(plan.stop.price);
     const target = Number(plan.target.price);
-    const target2R = plan.target_1_trail_trigger ? Number(plan.target_1_trail_trigger.price) : Number((entry + (entry - stop) * 2).toFixed(2));
-    const riskPerShare = Number((entry - stop).toFixed(2));
-    const rewardRisk = Number(plan.reward_risk || 4.2);
+    const riskPerShare = Number(Math.abs(entry - stop).toFixed(2));
+    const target2R = plan.target_1_trail_trigger
+        ? Number(plan.target_1_trail_trigger.price)
+        : Number((isShort ? entry - riskPerShare * 2 : entry + riskPerShare * 2).toFixed(2));
+    const rewardRisk = Number(plan.reward_risk || 4.0);
 
     const { candles: bars5m } = await fetchSymbolBars(ticker, '5m', '5d');
 
@@ -1108,6 +1292,9 @@ async function runTimeMachine(simsCount = 10000) {
             retHigh: Math.max(0, (bars5m[i].high - prev) / prev),
             retLow: Math.min(0, (bars5m[i].low - prev) / prev)
         });
+    }
+    if (empiricalSteps.length === 0) {
+        empiricalSteps.push({ retClose: 0.001, retHigh: 0.002, retLow: -0.001 });
     }
 
     let rng = 133742;
@@ -1138,7 +1325,7 @@ async function runTimeMachine(simsCount = 10000) {
             const barLow = p * (1 + sample.retLow);
             const barClose = p * (1 + sample.retClose);
 
-            if (barLow <= activeStop) {
+            if (!isShort ? barLow <= activeStop : barHigh >= activeStop) {
                 if (locked2R) {
                     outcome = 'trail_2r_lock';
                     rResult = 1.5;
@@ -1152,7 +1339,7 @@ async function runTimeMachine(simsCount = 10000) {
                 break;
             }
 
-            if (barHigh >= target) {
+            if (!isShort ? barHigh >= target : barLow <= target) {
                 outcome = 'target';
                 rResult = rewardRisk;
                 targetHits++;
@@ -1160,9 +1347,9 @@ async function runTimeMachine(simsCount = 10000) {
                 break;
             }
 
-            if (!locked2R && barHigh >= target2R) {
+            if (!locked2R && (!isShort ? barHigh >= target2R : barLow <= target2R)) {
                 locked2R = true;
-                activeStop = Number((entry + riskPerShare * 1.5).toFixed(2));
+                activeStop = Number((isShort ? entry - riskPerShare * 1.5 : entry + riskPerShare * 1.5).toFixed(2));
             }
 
             p = barClose;
@@ -1170,7 +1357,7 @@ async function runTimeMachine(simsCount = 10000) {
 
         if (outcome === 'expired') {
             expiredHits++;
-            rResult = (p - entry) / riskPerShare;
+            rResult = (isShort ? (entry - p) : (p - entry)) / riskPerShare;
         }
 
         totalR += rResult;
@@ -1229,16 +1416,20 @@ async function runSizer() {
     const cfg = loadConfig();
     const ist = getISTInfo();
     let plan = readJson(FILES.plan, null);
-    if (!plan) {
+    if (!plan || !plan.entry) {
         plan = await runExit();
+    }
+    if (!plan || !plan.entry) {
+        return { status: 'NO_LIVE_SETUP', orders: [] };
     }
 
     const ticker = plan.ticker;
+    const tradeSide = String(plan.side || 'BUY').toUpperCase();
     const entry = Number(plan.entry.price);
     const stop = Number(plan.stop.price);
     const target = Number(plan.target.price);
-    const stopDistance = Number((entry - stop).toFixed(2));
-    const targetDistance = Number((target - entry).toFixed(2));
+    const stopDistance = Number(Math.abs(entry - stop).toFixed(2));
+    const targetDistance = Number(Math.abs(target - entry).toFixed(2));
 
     const budgetInr = Number(cfg.budget || 20000);
     const leverage = Number(cfg.intraday_leverage || 5.0);
@@ -1267,7 +1458,7 @@ async function runSizer() {
         symbol: ticker,
         exchange: plan.exchange || (ticker.endsWith('.BO') ? 'BSE' : 'NSE'),
         product: 'MIS',
-        side: 'buy',
+        side: tradeSide,
         qty: shares,
         type: 'limit',
         limit_price: entry,
@@ -1339,65 +1530,94 @@ async function runSizer() {
 async function runRiskCheck() {
     const cfg = loadConfig();
     const ist = getISTInfo();
+    const portfolio = readJson(FILES.portfolio, { active_position: null });
     let ordersData = readJson(FILES.orders, null);
     if (!ordersData || !ordersData.orders || ordersData.orders.length === 0) {
         ordersData = await runSizer();
     }
+    if (!ordersData || !ordersData.orders || ordersData.orders.length === 0) {
+        const blocked = {
+            as_of: ist.iso,
+            date: ist.date,
+            market: 'INDIA_NSE_BSE',
+            currency: 'INR',
+            verdict: 'BLOCK',
+            reasons: ['No qualifying live trade setup found in market scan.'],
+            approved_order: null
+        };
+        writeJson(FILES.riskState, blocked);
+        return blocked;
+    }
 
     const order = ordersData.orders[0];
     const sizing = ordersData.sizing;
-    const prevRiskState = readJson(FILES.riskState, { date: ist.date, realized_loss_today_inr: 0, realized_net_profit_today_inr: 0, trades_today: 0 });
-    const realizedLossToday = prevRiskState.date === ist.date ? Number(prevRiskState.realized_loss_today_inr || 0) : 0;
+    const isShort = String(order.side || 'BUY').toUpperCase() === 'SELL';
 
     const history = readJson(FILES.history, { closed_trades: [] });
-    const closedToday = (history.closed_trades || []).filter(t => String(t.closed_at_ist || '').startsWith(ist.date));
+    const closedToday = (history.closed_trades || []).filter(t => {
+        const d = t.exit_date_ist || t.date || String(t.closed_at_ist || '').slice(0, 10);
+        return d === ist.date;
+    });
     const tradesClosedTodayCount = closedToday.length;
     const realizedProfitToday = closedToday.reduce((acc, t) => acc + Number(t.net_pnl_excl_brokerage_inr || 0), 0);
+    const realizedLossToday = closedToday
+        .filter(t => Number(t.net_pnl_excl_brokerage_inr || 0) < 0)
+        .reduce((acc, t) => acc + Math.abs(Number(t.net_pnl_excl_brokerage_inr || 0)), 0);
     const maxTradesPerDay = Number(cfg.max_trades_per_day || 2);
 
     const reasons = [];
     const maxLossPerTrade = Number(cfg.max_loss_per_trade_inr || cfg.max_loss_per_trade_usd || 100);
     const maxDailyLoss = Number(cfg.max_daily_loss_inr || cfg.max_daily_loss_usd || 100);
 
-    if (tradesClosedTodayCount >= maxTradesPerDay) {
-        reasons.push(`Max daily trade cap (${maxTradesPerDay} trades/day) reached with ₹${realizedProfitToday.toFixed(2)} net profit locked. Stopping to prevent over-trading & extra brokerage.`);
+    if (portfolio && portfolio.active_position) {
+        reasons.push(`Position already open in ${portfolio.active_position.symbol}. One focused trade at a time.`);
     }
-    if (tradesClosedTodayCount === 1) {
+    if (tradesClosedTodayCount >= maxTradesPerDay) {
+        reasons.push(`Max daily trade cap (${maxTradesPerDay} trades/day) reached with ₹${realizedProfitToday.toFixed(2)} net P&L.`);
+    }
+    if (tradesClosedTodayCount >= 1) {
         const firstTrade = closedToday[0];
-        const closeTimeStr = String(firstTrade.exit_time_ist || '11:45:00 IST').replace(' IST', '');
-        const [ch, cm] = closeTimeStr.split(':').map(Number);
-        const firstCloseMinutes = (Number.isFinite(ch) ? ch : 11) * 60 + (Number.isFinite(cm) ? cm : 45);
-        const cutoffMinutes = 12 * 60 + 15; // 12:15 PM IST
-        const entryData = readJson(FILES.entry, { score: 202.28, historical_win_rate_pct: 74 });
-        const superScore = Number(entryData.score || 202.28);
+        if (Number(firstTrade.net_pnl_excl_brokerage_inr || 0) < 0) {
+            reasons.push(`Trade #1 closed with loss (₹${Number(firstTrade.net_pnl_excl_brokerage_inr).toFixed(2)}). Daily circuit breaker active.`);
+        } else {
+            const closeTimeStr = String(firstTrade.exit_time_ist || '14:00:00 IST').replace(' IST', '');
+            const [ch, cm] = closeTimeStr.split(':').map(Number);
+            const firstCloseMinutes = (Number.isFinite(ch) ? ch : 14) * 60 + (Number.isFinite(cm) ? cm : 0);
+            const cutoffMinutes = 12 * 60 + 15; // 12:15 PM IST
+            const entryData = readJson(FILES.entry, { score: 0 });
+            const superScore = Number(entryData.score || 0);
 
-        if (firstCloseMinutes > cutoffMinutes) {
-            reasons.push(`First trade closed at ${firstTrade.exit_time_ist} (after 12:15 PM IST cutoff). Locking ₹${realizedProfitToday.toFixed(2)} profit for the day.`);
-        }
-        if (superScore < 200) {
-            reasons.push(`Second trade candidate (${order.symbol}) score ${superScore} is below the Super-Potential threshold (200.0). Skipping 2nd trade.`);
+            if (firstCloseMinutes > cutoffMinutes) {
+                reasons.push(`First trade closed at ${firstTrade.exit_time_ist} (after 12:15 PM IST cutoff). Locking ₹${realizedProfitToday.toFixed(2)} profit.`);
+            }
+            if (superScore < Number(cfg.second_trade_min_super_score || 200)) {
+                reasons.push(`Second trade candidate (${order.symbol}) score ${superScore} is below 200.0 threshold.`);
+            }
         }
     }
 
     if (!/^[A-Z0-9&-]+\.(NS|BO)$/.test(order.symbol)) {
         reasons.push(`Invalid Indian NSE/BSE ticker format: ${order.symbol}`);
     }
-    if (!order.stop_loss || !order.stop_loss.stop_price || order.stop_loss.stop_price >= order.limit_price) {
-        reasons.push('Strict stop-loss is missing or not below entry price.');
+    if (!order.stop_loss || !order.stop_loss.stop_price) {
+        reasons.push('Strict stop-loss is missing.');
+    } else if (!isShort && order.stop_loss.stop_price >= order.limit_price) {
+        reasons.push('BUY stop-loss must be strictly below entry price.');
+    } else if (isShort && order.stop_loss.stop_price <= order.limit_price) {
+        reasons.push('SELL stop-loss must be strictly above entry price.');
     }
     if (sizing.max_loss_at_stop_inr > maxLossPerTrade + 0.01) {
         reasons.push(`Trade risk ₹${sizing.max_loss_at_stop_inr} exceeds strict ₹${maxLossPerTrade} max loss per trade.`);
     }
     if (realizedLossToday >= maxDailyLoss) {
-        reasons.push(`Daily loss limit of ₹${maxDailyLoss} reached (₹${realizedLossToday}). Circuit breaker active.`);
-    }
-    if (realizedLossToday + sizing.max_loss_at_stop_inr > maxDailyLoss + 0.01) {
-        reasons.push(`Open risk ₹${sizing.max_loss_at_stop_inr} + today's loss ₹${realizedLossToday} exceeds ₹${maxDailyLoss} daily loss cap.`);
+        reasons.push(`Daily loss limit of ₹${maxDailyLoss} reached (₹${realizedLossToday.toFixed(2)}).`);
     }
     if (sizing.net_profit_at_target_inr < (cfg.daily_profit_target_inr || 400)) {
         reasons.push(`Net profit after brokerage (₹${sizing.net_profit_at_target_inr}) is below mandatory ₹${cfg.daily_profit_target_inr || 400}.`);
     }
-    const rr = (order.take_profit.limit_price - order.limit_price) / (order.limit_price - order.stop_loss.stop_price);
+    const stopDistAbs = Math.abs(order.limit_price - order.stop_loss.stop_price);
+    const targetDistAbs = Math.abs(order.take_profit.limit_price - order.limit_price);
+    const rr = stopDistAbs > 0 ? targetDistAbs / stopDistAbs : 0;
     if (rr < (cfg.min_reward_risk || 2.0) - 0.01) {
         reasons.push(`Reward:Risk ${rr.toFixed(2)} is below minimum ${cfg.min_reward_risk || 2.0}`);
     }
@@ -1415,7 +1635,7 @@ async function runRiskCheck() {
             brokerage_excluded_from_profit: true,
             strict_max_loss_per_trade_inr: maxLossPerTrade,
             strict_max_daily_loss_inr: maxDailyLoss,
-            realized_loss_today_inr: realizedLossToday,
+            realized_loss_today_inr: Number(realizedLossToday.toFixed(2)),
             trade_risk_at_stop_inr: sizing.max_loss_at_stop_inr,
             net_profit_after_brokerage_inr: sizing.net_profit_at_target_inr,
             reward_risk_ratio: Number(rr.toFixed(2)),
@@ -1432,6 +1652,20 @@ async function runRiskCheck() {
 async function runBroker(autoExecute = true) {
     const cfg = loadConfig();
     const ist = getISTInfo();
+    const portfolio = readJson(FILES.portfolio, {
+        account_budget_inr: cfg.budget,
+        today_date: ist.date,
+        realized_net_profit_today_inr: 0,
+        total_brokerage_paid_today_inr: 0,
+        active_position: null
+    });
+
+    if (portfolio.today_date !== ist.date) {
+        portfolio.today_date = ist.date;
+        portfolio.realized_net_profit_today_inr = 0;
+        portfolio.total_brokerage_paid_today_inr = 0;
+    }
+
     const risk = await runRiskCheck();
     const ordersData = readJson(FILES.orders, null);
     const planData = readJson(FILES.plan, null);
@@ -1449,20 +1683,78 @@ async function runBroker(autoExecute = true) {
 
     const order = risk.approved_order;
     const sizing = ordersData.sizing;
+    const canExecuteNow = Boolean(ist.isMarketHours && ist.isEntryWindow);
 
-    const isLiveMarketOpen = Boolean(ist.isMarketHours);
-    const isShortOrder = String(order.side || 'BUY').toUpperCase() === 'SELL';
-    const sessionProgress = isLiveMarketOpen
-        ? Math.min(0.82, Math.max(0.15, (ist.minutesOfDay - 575) / (705 - 575)))
-        : 0;
-    const liveCurrentPrice = isLiveMarketOpen
-        ? Number((order.limit_price + (order.take_profit.limit_price - order.limit_price) * sessionProgress).toFixed(2))
-        : order.limit_price;
-    const livePriceDiff = isShortOrder
-        ? (order.limit_price - liveCurrentPrice)
-        : (liveCurrentPrice - order.limit_price);
-    const liveGrossPnl = Number((livePriceDiff * order.qty).toFixed(2));
-    const liveNetPnl = Number((liveGrossPnl - sizing.estimated_indian_taxes_and_brokerage_inr).toFixed(2));
+    if (!canExecuteNow) {
+        const waiting = {
+            as_of: ist.iso,
+            market: 'INDIA_NSE_BSE',
+            exchange: order.exchange,
+            currency: 'INR',
+            paper: Boolean(cfg.paper),
+            market_open_now: Boolean(ist.isMarketHours),
+            status: 'MARKET_CLOSED_WAITING_FOR_OPEN',
+            ticket: null
+        };
+        writeJson(FILES.brokerState, waiting);
+        writeJson(FILES.portfolio, {
+            ...portfolio,
+            as_of: ist.iso,
+            account_budget_inr: cfg.budget,
+            market_open_now: Boolean(ist.isMarketHours)
+        });
+        await saveActiveChartSnapshot();
+        return waiting;
+    }
+
+    const exactEntryDateIst = (entryData && entryData.entry_date_ist) ? entryData.entry_date_ist : ist.date;
+    const exactEntryTimeIst = (entryData && entryData.entry_time_ist) ? entryData.entry_time_ist : ist.time;
+    const openedAtMs = (entryData && entryData.opened_at_ms) ? entryData.opened_at_ms : Date.now();
+    const tradeSide = String(order.side || 'BUY').toUpperCase();
+    const initialNetPnl = Number((-sizing.estimated_indian_taxes_and_brokerage_inr).toFixed(2));
+
+    const ticket = {
+        id: `IND_${Date.now()}`,
+        date: exactEntryDateIst,
+        entry_date_ist: exactEntryDateIst,
+        entry_time_ist: exactEntryTimeIst,
+        opened_at_ist: `${exactEntryDateIst} ${exactEntryTimeIst}`,
+        opened_at_ms: openedAtMs,
+        exit_time_ist: 'ACTIVE',
+        symbol: order.symbol,
+        name: entryData ? entryData.name : order.symbol,
+        exchange: order.exchange,
+        product: 'MIS (Intraday)',
+        side: tradeSide,
+        qty: order.qty,
+        strategy_used: (entryData && entryData.trade_sequence_today === 2)
+            ? `Trade #2 (Score ${entryData.score})`
+            : '6-Pillar ORB + VWAP + Supertrend',
+        entry_price_inr: order.limit_price,
+        current_price_inr: order.limit_price,
+        live_price_inr: order.limit_price,
+        peak_price_inr: order.limit_price,
+        strict_stop_loss_inr: order.stop_loss.stop_price,
+        initial_stop_loss_inr: order.stop_loss.stop_price,
+        breakeven_1r_trigger_inr: planData && planData.breakeven_1r_lock
+            ? planData.breakeven_1r_lock.trigger_price
+            : Number((tradeSide === 'SELL' ? order.limit_price - sizing.stop_distance_inr : order.limit_price + sizing.stop_distance_inr).toFixed(2)),
+        trail_2r_trigger_inr: planData && planData.target_1_trail_trigger
+            ? planData.target_1_trail_trigger.price
+            : Number((tradeSide === 'SELL' ? order.limit_price - sizing.stop_distance_inr * 2 : order.limit_price + sizing.stop_distance_inr * 2).toFixed(2)),
+        take_profit_target_inr: order.take_profit.limit_price,
+        max_loss_at_stop_inr: sizing.max_loss_at_stop_inr,
+        unrealized_gross_pnl_inr: 0,
+        unrealized_net_pnl_excl_brokerage_inr: initialNetPnl,
+        gross_profit_at_target_inr: sizing.gross_profit_at_target_inr,
+        brokerage_and_taxes_inr: sizing.estimated_indian_taxes_and_brokerage_inr,
+        shoonya_zero_brokerage_taxes_inr: sizing.shoonya_zero_brokerage_taxes_inr,
+        net_profit_at_target_inr: sizing.net_profit_at_target_inr,
+        net_profit_with_shoonya_inr: sizing.net_profit_with_shoonya_zero_brokerage_inr,
+        breakeven_locked: false,
+        trailing_stop_active: false,
+        flat_by_ist: cfg.flat_by || '15:15'
+    };
 
     const brokerPayload = {
         as_of: ist.iso,
@@ -1471,58 +1763,16 @@ async function runBroker(autoExecute = true) {
         currency: 'INR',
         paper: Boolean(cfg.paper),
         autonomous: Boolean(cfg.autonomous || autoExecute),
-        market_open_now: isLiveMarketOpen,
-        status: !isLiveMarketOpen
-            ? 'MARKET_CLOSED_WAITING_FOR_OPEN'
-            : (autoExecute ? 'FILLED_PAPER_OPEN' : 'READY_FOR_EXECUTION'),
-        ticket: {
-            id: `IND_${Date.now()}`,
-            date: ist.date,
-            symbol: order.symbol,
-            name: entryData ? entryData.name : order.symbol,
-            exchange: order.exchange,
-            product: 'MIS (Intraday)',
-            side: order.side || 'BUY',
-            qty: order.qty,
-            strategy_used: (entryData && entryData.trade_sequence_today === 2)
-                ? `Trade #2 Super-Potential (Score ${entryData.score}): Stage-2 200-DMA + Narrow CPR + Supertrend(10,3) + VWAP`
-                : 'Stage-2 200-DMA + Narrow CPR + 15m ORB + Supertrend(10,3) + VWAP (Trade #1)',
-            entry_time_ist: (entryData && entryData.entry_time_ist) ? entryData.entry_time_ist : '09:35:00 IST',
-            exit_time_ist: 'ACTIVE (Target / 15:15 IST)',
-            entry_price_inr: order.limit_price,
-            current_price_inr: liveCurrentPrice,
-            live_price_inr: liveCurrentPrice,
-            peak_price_inr: liveCurrentPrice,
-            strict_stop_loss_inr: order.stop_loss.stop_price,
-            initial_stop_loss_inr: order.stop_loss.stop_price,
-            breakeven_1r_trigger_inr: planData && planData.breakeven_1r_lock ? planData.breakeven_1r_lock.trigger_price : Number((order.limit_price + sizing.stop_distance_inr).toFixed(2)),
-            trail_2r_trigger_inr: planData && planData.target_1_trail_trigger ? planData.target_1_trail_trigger.price : Number((order.limit_price + sizing.stop_distance_inr * 2).toFixed(2)),
-            take_profit_target_inr: order.take_profit.limit_price,
-            max_loss_at_stop_inr: sizing.max_loss_at_stop_inr,
-            unrealized_gross_pnl_inr: liveGrossPnl,
-            unrealized_net_pnl_excl_brokerage_inr: liveNetPnl,
-            gross_profit_at_target_inr: sizing.gross_profit_at_target_inr,
-            brokerage_and_taxes_inr: sizing.estimated_indian_taxes_and_brokerage_inr,
-            shoonya_zero_brokerage_taxes_inr: sizing.shoonya_zero_brokerage_taxes_inr,
-            net_profit_at_target_inr: sizing.net_profit_at_target_inr,
-            net_profit_with_shoonya_inr: sizing.net_profit_with_shoonya_zero_brokerage_inr,
-            breakeven_locked: false,
-            trailing_stop_active: false,
-            flat_by_ist: cfg.flat_by || '15:15',
-            opened_at_ist: `${ist.date} 09:35:00 IST`
-        }
+        market_open_now: true,
+        status: autoExecute ? 'FILLED_PAPER_OPEN' : 'READY_FOR_EXECUTION',
+        ticket
     };
 
     writeJson(FILES.brokerState, brokerPayload);
 
-    const existingPort = readJson(FILES.portfolio, {
-        account_budget_inr: cfg.budget,
-        realized_net_profit_today_inr: 0,
-        total_brokerage_paid_today_inr: 0
-    });
-
     writeJson(FILES.portfolio, {
         as_of: ist.iso,
+        today_date: ist.date,
         market: 'INDIA_NSE_BSE',
         currency: 'INR',
         paper: Boolean(cfg.paper),
@@ -1531,12 +1781,13 @@ async function runBroker(autoExecute = true) {
         brokerage_excluded_from_profit: true,
         strict_max_loss_per_trade_inr: cfg.max_loss_per_trade_inr,
         strict_max_daily_loss_inr: cfg.max_daily_loss_inr,
-        realized_net_profit_today_inr: existingPort.realized_net_profit_today_inr || 0,
-        total_brokerage_paid_today_inr: existingPort.total_brokerage_paid_today_inr || 0,
-        market_open_now: isLiveMarketOpen,
-        active_position: isLiveMarketOpen ? brokerPayload.ticket : null
+        realized_net_profit_today_inr: portfolio.realized_net_profit_today_inr || 0,
+        total_brokerage_paid_today_inr: portfolio.total_brokerage_paid_today_inr || 0,
+        market_open_now: true,
+        active_position: ticket
     });
 
+    await saveActiveChartSnapshot(ticket);
     return brokerPayload;
 }
 
@@ -1544,29 +1795,51 @@ async function monitorAndManageActiveTrade() {
     loadConfig();
     const ist = getISTInfo();
     const portfolio = readJson(FILES.portfolio, null);
-    if (!portfolio || !portfolio.active_position) {
+    if (!portfolio) {
+        return { status: 'NO_OPEN_POSITION' };
+    }
+
+    // Reset today-only counters when IST calendar date rolls over
+    if (portfolio.today_date !== ist.date) {
+        portfolio.today_date = ist.date;
+        portfolio.realized_net_profit_today_inr = 0;
+        portfolio.total_brokerage_paid_today_inr = 0;
+        writeJson(FILES.portfolio, portfolio);
+    }
+
+    if (!portfolio.active_position) {
+        await saveActiveChartSnapshot();
         return { status: 'NO_OPEN_POSITION' };
     }
 
     const pos = portfolio.active_position;
-    const { candles } = await fetchSymbolBars(pos.symbol, '5m', '5d');
-    // Inspect ALL intraday candles since entry (High & Low) so if Target or Stop-Loss was touched
-    // in between wakeups (Exchange Bracket Order OCO fill), the exact touch price & minute are captured!
-    const recentBars = candles.slice(-6);
-    const latestBar = candles[candles.length - 1];
-    const currentPrice = latestBar ? latestBar.close : pos.current_price_inr;
+    const { candles, source } = await fetchSymbolBars(pos.symbol, '5m', '5d');
+    if (!candles || candles.length === 0 || source === 'yahoo_unavailable') {
+        return { status: 'DATA_UNAVAILABLE_HOLDING', active_position: pos };
+    }
+
+    const entryDate = pos.entry_date_ist || pos.date || String(pos.opened_at_ist || ist.date).slice(0, 10);
+    const openedMs = Number(pos.opened_at_ms || 0);
+    const entryDayBars = candles.filter(b => b.istDate === entryDate && b.istMinutes <= 930);
+    // Only inspect bars that completed AFTER entry time (never pre-entry bars!)
+    const postEntryBars = entryDayBars.filter(b => openedMs > 0 ? b.timestampMs > openedMs : b.istMinutes >= 575);
+    const latestEntryDayBar = entryDayBars[entryDayBars.length - 1] || candles[candles.length - 1];
+    const currentPrice = latestEntryDayBar ? latestEntryDayBar.close : pos.current_price_inr;
 
     const isShort = String(pos.side || 'BUY').toUpperCase() === 'SELL';
     pos.current_price_inr = currentPrice;
+    pos.live_price_inr = currentPrice;
 
     let exitReason = null;
     let exitPrice = currentPrice;
+    let exactExitDateIst = ist.date;
     let exactExitTimeIst = ist.time;
 
-    for (const bar of recentBars) {
+    for (const bar of postEntryBars) {
         const barHigh = Number(bar.high || bar.close);
         const barLow = Number(bar.low || bar.close);
-        const barTimeIst = bar.istTime ? `${bar.istTime}:00 IST` : ist.time;
+        const barDateIst = bar.istDate || entryDate;
+        const barTimeIst = bar.istTimeFull || (bar.istTime ? `${bar.istTime}:00 IST` : ist.time);
 
         if (!isShort && barHigh > (pos.peak_price_inr || pos.entry_price_inr)) {
             pos.peak_price_inr = barHigh;
@@ -1574,62 +1847,90 @@ async function monitorAndManageActiveTrade() {
             pos.peak_price_inr = barLow;
         }
 
-        const liveCharges = calculateIndianCharges({
+        const barCharges = calculateIndianCharges({
             exchange: pos.exchange,
             entryPrice: pos.entry_price_inr,
             exitPrice: bar.close,
             quantity: pos.qty
         });
 
-        // 1. Check if Stop-Loss was hit inside this candle (barLow for BUY, barHigh for SELL)
+        // 1. Check Stop-Loss touch inside completed post-entry candle
         if (!isShort ? barLow <= pos.strict_stop_loss_inr : barHigh >= pos.strict_stop_loss_inr) {
             exitReason = pos.trailing_stop_active
                 ? 'TRAILING_PROFIT_STOP_BOOKED'
                 : (pos.breakeven_locked ? 'TAX_FREE_BREAKEVEN_EXIT' : 'STRICT_100_INR_STOP_LOSS_EXIT');
             exitPrice = pos.strict_stop_loss_inr;
+            exactExitDateIst = barDateIst;
             exactExitTimeIst = barTimeIst;
             break;
         }
 
-        // 2. Check if Target was hit inside this candle (barHigh for BUY, barLow for SELL)
+        // 2. Check Target touch inside completed post-entry candle
         if (!isShort ? barHigh >= pos.take_profit_target_inr : barLow <= pos.take_profit_target_inr) {
             exitReason = 'TARGET_HIT_MANDATORY_400_NET_PROFIT';
             exitPrice = pos.take_profit_target_inr;
+            exactExitDateIst = barDateIst;
             exactExitTimeIst = barTimeIst;
             break;
         }
 
-        // 3. Activate +1R Breakeven Shield if touched inside this candle
+        // 3. Activate +1R Breakeven Shield
         if (!pos.breakeven_locked && (!isShort ? barHigh >= pos.breakeven_1r_trigger_inr : barLow <= pos.breakeven_1r_trigger_inr)) {
             pos.breakeven_locked = true;
             if (!isShort) {
-                const taxFreeStop = Number((pos.entry_price_inr + liveCharges.perShareBuffer + 0.10).toFixed(2));
+                const taxFreeStop = Number((pos.entry_price_inr + barCharges.perShareBuffer + 0.10).toFixed(2));
                 if (taxFreeStop > pos.strict_stop_loss_inr) pos.strict_stop_loss_inr = taxFreeStop;
             } else {
-                const taxFreeStop = Number((pos.entry_price_inr - liveCharges.perShareBuffer - 0.10).toFixed(2));
+                const taxFreeStop = Number((pos.entry_price_inr - barCharges.perShareBuffer - 0.10).toFixed(2));
                 if (taxFreeStop < pos.strict_stop_loss_inr) pos.strict_stop_loss_inr = taxFreeStop;
             }
         }
 
-        // 4. Activate +2R Dynamic Trailing Stop if touched inside this candle
+        // 4. Activate +2R Dynamic Trailing Stop
         if (!isShort ? barHigh >= pos.trail_2r_trigger_inr : barLow <= pos.trail_2r_trigger_inr) {
             pos.trailing_stop_active = true;
             if (!isShort) {
                 const peakGain = pos.peak_price_inr - pos.entry_price_inr;
-                const trailedStop = Number((pos.entry_price_inr + Math.max(peakGain * 0.65, liveCharges.perShareBuffer * 2)).toFixed(2));
+                const trailedStop = Number((pos.entry_price_inr + Math.max(peakGain * 0.65, barCharges.perShareBuffer * 2)).toFixed(2));
                 if (trailedStop > pos.strict_stop_loss_inr) pos.strict_stop_loss_inr = trailedStop;
             } else {
                 const peakGain = pos.entry_price_inr - pos.peak_price_inr;
-                const trailedStop = Number((pos.entry_price_inr - Math.max(peakGain * 0.65, liveCharges.perShareBuffer * 2)).toFixed(2));
+                const trailedStop = Number((pos.entry_price_inr - Math.max(peakGain * 0.65, barCharges.perShareBuffer * 2)).toFixed(2));
                 if (trailedStop < pos.strict_stop_loss_inr) pos.strict_stop_loss_inr = trailedStop;
             }
         }
     }
 
-    if (!exitReason && ist.isSquareOffWindow) {
+    // Also check current live quote on the open candle if not already closed on completed bars
+    if (!exitReason) {
+        if (!isShort && currentPrice > (pos.peak_price_inr || pos.entry_price_inr)) {
+            pos.peak_price_inr = currentPrice;
+        } else if (isShort && currentPrice < (pos.peak_price_inr || pos.entry_price_inr)) {
+            pos.peak_price_inr = currentPrice;
+        }
+
+        if (!isShort ? currentPrice <= pos.strict_stop_loss_inr : currentPrice >= pos.strict_stop_loss_inr) {
+            exitReason = pos.trailing_stop_active
+                ? 'TRAILING_PROFIT_STOP_BOOKED'
+                : (pos.breakeven_locked ? 'TAX_FREE_BREAKEVEN_EXIT' : 'STRICT_100_INR_STOP_LOSS_EXIT');
+            exitPrice = pos.strict_stop_loss_inr;
+            exactExitDateIst = ist.date;
+            exactExitTimeIst = ist.time;
+        } else if (!isShort ? currentPrice >= pos.take_profit_target_inr : currentPrice <= pos.take_profit_target_inr) {
+            exitReason = 'TARGET_HIT_MANDATORY_400_NET_PROFIT';
+            exitPrice = pos.take_profit_target_inr;
+            exactExitDateIst = ist.date;
+            exactExitTimeIst = ist.time;
+        }
+    }
+
+    // Mandatory 15:15 IST Intraday MIS Auto Square-Off (also handles missed-close catchup if runner woke up late)
+    if (!exitReason && (ist.date > entryDate || (ist.date === entryDate && ist.minutesOfDay >= 915))) {
+        const sqBar = entryDayBars.find(b => b.istMinutes >= 915) || latestEntryDayBar;
         exitReason = 'MANDATORY_1515_IST_MIS_SQUARE_OFF';
-        exitPrice = currentPrice;
-        exactExitTimeIst = ist.time;
+        exitPrice = sqBar ? sqBar.close : currentPrice;
+        exactExitDateIst = entryDate;
+        exactExitTimeIst = (sqBar && sqBar.istMinutes >= 915 && sqBar.istTimeFull) ? sqBar.istTimeFull : '15:15:00 IST';
     }
 
     const liveCharges = calculateIndianCharges({
@@ -1653,13 +1954,19 @@ async function monitorAndManageActiveTrade() {
 
         const closedRecord = {
             ...pos,
-            exit_price_inr: exitPrice,
+            date: exactExitDateIst,
+            entry_date_ist: entryDate,
+            entry_time_ist: pos.entry_time_ist || '09:35:00 IST',
+            exit_date_ist: exactExitDateIst,
             exit_time_ist: exactExitTimeIst,
+            exit_price_inr: exitPrice,
             exit_reason: exitReason,
-            closed_at_ist: `${ist.date} ${exactExitTimeIst}`,
+            opened_at_ist: pos.opened_at_ist || `${entryDate} ${pos.entry_time_ist || '09:35:00 IST'}`,
+            closed_at_ist: `${exactExitDateIst} ${exactExitTimeIst}`,
             gross_pnl_inr: grossPnl,
             brokerage_and_taxes_inr: finalCharges.total,
             shoonya_zero_brokerage_taxes_inr: finalCharges.shoonyaZeroBrokerageTotal,
+            shoonya_zero_brokerage_net_inr: Number((grossPnl - finalCharges.shoonyaZeroBrokerageTotal).toFixed(2)),
             net_pnl_excl_brokerage_inr: netPnlExclBrokerage
         };
 
@@ -1667,11 +1974,15 @@ async function monitorAndManageActiveTrade() {
         history.closed_trades.unshift(closedRecord);
         writeJson(FILES.history, history);
 
-        portfolio.realized_net_profit_today_inr = Number(((portfolio.realized_net_profit_today_inr || 0) + netPnlExclBrokerage).toFixed(2));
-        portfolio.total_brokerage_paid_today_inr = Number(((portfolio.total_brokerage_paid_today_inr || 0) + finalCharges.total).toFixed(2));
+        if (exactExitDateIst === ist.date) {
+            portfolio.realized_net_profit_today_inr = Number(((portfolio.realized_net_profit_today_inr || 0) + netPnlExclBrokerage).toFixed(2));
+            portfolio.total_brokerage_paid_today_inr = Number(((portfolio.total_brokerage_paid_today_inr || 0) + finalCharges.total).toFixed(2));
+        }
+        portfolio.market_open_now = Boolean(ist.isMarketHours);
         portfolio.active_position = null;
         writeJson(FILES.portfolio, portfolio);
 
+        await saveActiveChartSnapshot(closedRecord);
         return { status: 'CLOSED_AUTONOMOUSLY', closed_trade: closedRecord, portfolio };
     }
 
@@ -1679,17 +1990,51 @@ async function monitorAndManageActiveTrade() {
         ? Number(((currentPrice - pos.entry_price_inr) * pos.qty).toFixed(2))
         : Number(((pos.entry_price_inr - currentPrice) * pos.qty).toFixed(2));
     pos.unrealized_gross_pnl_inr = grossUnrealized;
+    pos.brokerage_and_taxes_inr = liveCharges.total;
     pos.unrealized_net_pnl_excl_brokerage_inr = Number((grossUnrealized - liveCharges.total).toFixed(2));
+    portfolio.market_open_now = Boolean(ist.isMarketHours);
     portfolio.active_position = pos;
     writeJson(FILES.portfolio, portfolio);
 
+    await saveActiveChartSnapshot(pos);
     return { status: 'HOLDING_AND_TRAILING', active_position: pos };
 }
 
 async function runAutonomousPipeline() {
     const cfg = loadConfig();
+    const ist = getISTInfo();
     const uni = buildUniverse();
+
+    const mon = await monitorAndManageActiveTrade();
+    if (mon.status === 'HOLDING_AND_TRAILING' || mon.status === 'DATA_UNAVAILABLE_HOLDING') {
+        return {
+            status: mon.status,
+            active_position: mon.active_position,
+            market_open_now: ist.isMarketHours
+        };
+    }
+
+    if (!ist.isEntryWindow && process.env.FORCE_PIPELINE !== 'true') {
+        await saveActiveChartSnapshot();
+        return {
+            status: 'OUTSIDE_ENTRY_WINDOW',
+            ist_time: ist.time,
+            market_open_now: ist.isMarketHours,
+            universe_count: uni.count
+        };
+    }
+
     const scan = await runScanner('orb', 10);
+    if (!scan.results || scan.results.length === 0) {
+        await saveActiveChartSnapshot();
+        return {
+            status: 'NO_LIVE_SETUP',
+            ist_time: ist.time,
+            universe_count: uni.count,
+            matched: 0
+        };
+    }
+
     const entry = await runEntry();
     const plan = await runExit();
     const tm = await runTimeMachine(10000);
@@ -1702,23 +2047,20 @@ async function runAutonomousPipeline() {
             budget_inr: cfg.budget,
             daily_profit_target_inr: cfg.daily_profit_target_inr,
             brokerage_excluded_from_profit: true,
-            recommended_broker: 'Finvasia Shoonya / Kotak Neo (₹0 Brokerage)',
             max_loss_per_trade_inr: cfg.max_loss_per_trade_inr,
             max_daily_loss_inr: cfg.max_daily_loss_inr,
             paper: cfg.paper,
             market: 'INDIA_NSE_BSE'
         },
         universe_count: uni.count,
-        technical_standards_used: ['Stage2_200DMA_Uptrend', 'Narrow_CPR_Pivot', 'Supertrend_10_3', '15m_ORB', 'Session_VWAP', 'EMA_9_21_50', 'RSI_14', 'RVOL'],
         top_watchlist: scan.results.slice(0, 5).map(r => ({
             ticker: r.ticker,
             exchange: r.exchange,
+            side: r.side,
             sector: r.sector,
             score: r.score,
-            historical_win_rate_pct: r.historical_win_rate_pct,
             close: r.close,
             vwap: r.technicals.vwap,
-            cpr_pivot: r.technicals.cpr_pivot,
             supertrend: r.technicals.supertrend,
             rsi14: r.technicals.rsi14,
             shares: r.sizing_preview.shares,
@@ -1726,34 +2068,27 @@ async function runAutonomousPipeline() {
             brokerage_and_taxes_inr: r.sizing_preview.brokerage_and_taxes_inr,
             net_profit_excl_brokerage_inr: r.sizing_preview.net_profit_excl_brokerage_inr
         })),
-        selected_trade: {
+        selected_trade: entry.status === 'triggered' ? {
             ticker: entry.ticker,
             name: entry.name,
             exchange: entry.exchange,
+            side: entry.side,
             sector: entry.sector,
             trade_sequence_today: entry.trade_sequence_today || 1,
-            super_potential_score: entry.score || 202.28,
-            entry_time_ist: entry.entry_time_ist || '09:35:00 IST',
-            technicals: entry.technicals,
-            business_news: entry.business_news,
+            super_potential_score: entry.score,
+            entry_date_ist: entry.entry_date_ist,
+            entry_time_ist: entry.entry_time_ist,
             entry_price_inr: plan.entry.price,
             strict_stop_loss_inr: plan.stop.price,
-            breakeven_1r_trigger_inr: plan.breakeven_1r_lock.trigger_price,
-            trail_2r_trigger_inr: plan.target_1_trail_trigger.price,
             target_price_inr: plan.target.price,
             shares: sized.sizing.shares_selected,
-            margin_used_inr: sized.sizing.margin_used_inr,
-            notional_value_inr: sized.sizing.notional_value_inr,
             max_loss_at_stop_inr: sized.sizing.max_loss_at_stop_inr,
             gross_profit_at_target_inr: sized.sizing.gross_profit_at_target_inr,
             indian_charges_inr: sized.sizing.estimated_indian_taxes_and_brokerage_inr,
-            shoonya_zero_brokerage_taxes_inr: sized.sizing.shoonya_zero_brokerage_taxes_inr,
-            brokerage_breakdown: sized.sizing.brokerage_breakdown,
             net_profit_at_target_inr: sized.sizing.net_profit_at_target_inr,
-            net_profit_with_shoonya_inr: sized.sizing.net_profit_with_shoonya_zero_brokerage_inr,
             flat_by_ist: plan.flat_by
-        },
-        timemachine_10k: tm.monte_carlo,
+        } : null,
+        timemachine_10k: tm ? tm.monte_carlo : null,
         risk_verdict: risk.verdict,
         execution_status: broker.status
     };
@@ -1818,7 +2153,9 @@ module.exports = {
     NSE_BSE_UNIVERSE,
     loadConfig,
     getISTInfo,
+    getWeekBoundsIST,
     calculateIndianCharges,
+    saveActiveChartSnapshot,
     buildUniverse,
     runScanner,
     runNews,

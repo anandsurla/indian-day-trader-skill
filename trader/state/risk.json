@@ -1,6 +1,6 @@
 {
-  "as_of": "2026-11-10T23:00:35+05:30",
-  "date": "2026-11-10",
+  "as_of": "2026-11-11T14:33:04+05:30",
+  "date": "2026-11-11",
   "market": "INDIA_NSE_BSE",
   "currency": "INR",
   "verdict": "PASS",
@@ -11,27 +11,27 @@
     "strict_max_loss_per_trade_inr": 100,
     "strict_max_daily_loss_inr": 100,
     "realized_loss_today_inr": 0,
-    "trade_risk_at_stop_inr": 99.18,
-    "net_profit_after_brokerage_inr": 402.05,
-    "reward_risk_ratio": 4.18,
+    "trade_risk_at_stop_inr": 100,
+    "net_profit_after_brokerage_inr": 401.55,
+    "reward_risk_ratio": 4.3,
     "paper_mode": true
   },
   "reasons": [],
   "approved_order": {
-    "symbol": "PNB.NS",
+    "symbol": "CANBK.NS",
     "exchange": "NSE",
     "product": "MIS",
-    "side": "buy",
-    "qty": 87,
+    "side": "BUY",
+    "qty": 200,
     "type": "limit",
-    "limit_price": 128,
+    "limit_price": 132.88,
     "time_in_force": "day",
     "order_class": "bracket",
     "take_profit": {
-      "limit_price": 132.76
+      "limit_price": 135.03
     },
     "stop_loss": {
-      "stop_price": 126.86,
+      "stop_price": 132.38,
       "strict": true
     }
   }

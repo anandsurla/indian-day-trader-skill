@@ -126,16 +126,30 @@ const server = http.createServer(async (req, res) => {
 
   // 1. State API
   if (url.pathname === '/api/state') {
-    if (!latestRun) latestRun = await indianTrader.runAutonomousPipeline();
+    const mon = await indianTrader.monitorAndManageActiveTrade();
+    if (mon.status === 'NO_OPEN_POSITION') {
+      latestRun = await indianTrader.runAutonomousPipeline();
+    }
+    const chart = await indianTrader.saveActiveChartSnapshot();
     const reps = reporter.generateAllReports();
+    const istNow = indianTrader.getISTInfo();
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({
-      as_of: new Date().toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata' }) + ' IST',
+      as_of: `${istNow.date} ${istNow.time}`,
       summary: latestRun,
       daily: reps.daily,
       weekly: reps.weekly,
+      chart,
       portfolio: readJsonSafe(path.join(TRADER_DIR, 'portfolio.json'))
     }));
+    return;
+  }
+
+  // 1B. Live Chart API
+  if (url.pathname === '/api/chart') {
+    const chart = await indianTrader.saveActiveChartSnapshot();
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(chart));
     return;
   }
 
@@ -240,10 +254,14 @@ indianTrader.runAutonomousPipeline().then(res => {
   setInterval(async () => {
     try {
       const ist = indianTrader.getISTInfo();
-      if (ist.isMarketOpen) {
-        console.log(`[AUTO-LOOP ${ist.timeStr} IST] Scanning NSE/BSE & checking active trade Target/SL...`);
-        latestRun = await indianTrader.runAutonomousPipeline();
-        reporter.syncReportsToGitHub(`Auto-sync IST ${ist.dateStr} ${ist.timeStr}`);
+      if (ist.isMarketHours) {
+        console.log(`[AUTO-LOOP ${ist.date} ${ist.time}] Monitoring active trade & scanning NSE/BSE...`);
+        const mon = await indianTrader.monitorAndManageActiveTrade();
+        if (mon.status === 'NO_OPEN_POSITION' || mon.status === 'CLOSED_AUTONOMOUSLY') {
+          latestRun = await indianTrader.runAutonomousPipeline();
+        }
+        await indianTrader.saveActiveChartSnapshot();
+        reporter.syncReportsToGitHub(`Auto-sync IST ${ist.date} ${ist.time}`);
       }
     } catch (e) {
       console.error('[AUTO-LOOP ERROR]', e.message);

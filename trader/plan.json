@@ -1,54 +1,54 @@
 {
-  "as_of": "2026-11-10T23:00:35+05:30",
+  "as_of": "2026-11-11T14:33:01+05:30",
   "market": "INDIA_NSE_BSE",
   "exchange": "NSE",
   "currency": "INR",
-  "ticker": "PNB.NS",
-  "side": "buy",
+  "ticker": "CANBK.NS",
+  "side": "BUY",
   "entry": {
-    "price": 128,
+    "price": 132.88,
     "source": "trader-entry",
     "rule": "6_pillar_cpr_orb_supertrend_vwap",
-    "triggered_at_ist": "2026-11-10 09:35:00 IST"
+    "triggered_at_ist": "2026-11-11 14:33:01 IST"
   },
   "opening_range": {
     "start": "09:15",
     "end": "09:30",
-    "high": 127.67,
-    "low": 126.04,
-    "mid": 126.86,
-    "range": 1.63,
+    "high": 129.95,
+    "low": 128.66,
+    "mid": 129.31,
+    "range": 1.29,
     "bars": 3
   },
-  "atr": 1.03,
+  "atr": 0.45,
   "stop": {
-    "price": 126.86,
-    "rule": "strict-or-mid",
-    "distance": 1.14,
-    "pct": 0.891,
+    "price": 132.38,
+    "rule": "strict-100-inr-cap",
+    "distance": 0.5,
+    "pct": 0.376,
     "strict_max_loss_inr": 100
   },
   "breakeven_1r_lock": {
-    "trigger_price": 129.14,
-    "new_stop_price": 128.24,
+    "trigger_price": 133.38,
+    "new_stop_price": 133.12,
     "note": "Covers 100% of brokerage & statutory taxes once price moves +1R"
   },
   "target_1_trail_trigger": {
-    "price": 130.28,
+    "price": 133.88,
     "rule": "2R_lock_profit_trail",
-    "distance": 2.28,
+    "distance": 1,
     "r_multiple": 2
   },
   "target": {
-    "price": 132.76,
-    "rule": "4.18R_mandatory_400_net_excl_brokerage",
-    "distance": 4.76,
-    "pct": 3.719,
-    "r_multiple": 4.18,
+    "price": 135.03,
+    "rule": "4.3R_mandatory_400_net_excl_brokerage",
+    "distance": 2.15,
+    "pct": 1.618,
+    "r_multiple": 4.3,
     "mandatory_net_profit_goal_inr": 400,
-    "estimated_brokerage_and_taxes_inr": 12.05
+    "estimated_brokerage_and_taxes_inr": 28.44
   },
-  "reward_risk": 4.18,
+  "reward_risk": 4.3,
   "flat_by": "15:15",
-  "summary": "PNB.NS BUY @ ₹128: Strict SL ₹126.86 (Max Loss <= ₹100), Target ₹132.76 (Gross ₹414.12 - Brokerage/Taxes ₹12.05 = Pure Net Profit >= ₹400)."
+  "summary": "CANBK.NS BUY @ ₹132.88: Strict SL ₹132.38, Target ₹135.03 (Net Target >= ₹400)."
 }

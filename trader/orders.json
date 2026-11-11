@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-10T23:00:35+05:30",
+  "as_of": "2026-11-11T14:33:04+05:30",
   "market": "INDIA_NSE_BSE",
   "currency": "INR",
   "budget_inr": 20000,
@@ -9,50 +9,50 @@
   "brokerage_excluded_from_profit": true,
   "strict_max_loss_per_trade_inr": 100,
   "sizing": {
-    "ticker": "PNB.NS",
+    "ticker": "CANBK.NS",
     "exchange": "NSE",
-    "entry_price_inr": 128,
-    "stop_price_inr": 126.86,
-    "target_price_inr": 132.76,
-    "stop_distance_inr": 1.14,
-    "target_distance_inr": 4.76,
-    "shares_by_strict_stop_loss": 87,
-    "shares_by_intraday_margin": 742,
-    "shares_selected": 87,
+    "entry_price_inr": 132.88,
+    "stop_price_inr": 132.38,
+    "target_price_inr": 135.03,
+    "stop_distance_inr": 0.5,
+    "target_distance_inr": 2.15,
+    "shares_by_strict_stop_loss": 200,
+    "shares_by_intraday_margin": 714,
+    "shares_selected": 200,
     "binding_constraint": "strict_max_loss_per_trade_100_inr",
-    "notional_value_inr": 11136,
-    "margin_used_inr": 2227.2,
-    "max_loss_at_stop_inr": 99.18,
-    "gross_profit_at_target_inr": 414.12,
-    "estimated_indian_taxes_and_brokerage_inr": 12.07,
-    "shoonya_zero_brokerage_taxes_inr": 4.03,
+    "notional_value_inr": 26576,
+    "margin_used_inr": 5315.2,
+    "max_loss_at_stop_inr": 100,
+    "gross_profit_at_target_inr": 430,
+    "estimated_indian_taxes_and_brokerage_inr": 28.45,
+    "shoonya_zero_brokerage_taxes_inr": 9.49,
     "brokerage_breakdown": {
-      "brokerage": 6.81,
-      "stt": 2.89,
-      "exchangeCharge": 0.67,
-      "sebiCharge": 0.02,
-      "gst": 1.35,
-      "stampDuty": 0.33
+      "brokerage": 16.07,
+      "stt": 6.75,
+      "exchangeCharge": 1.59,
+      "sebiCharge": 0.05,
+      "gst": 3.19,
+      "stampDuty": 0.8
     },
-    "net_profit_at_target_inr": 402.05,
-    "net_profit_with_shoonya_zero_brokerage_inr": 410.09
+    "net_profit_at_target_inr": 401.55,
+    "net_profit_with_shoonya_zero_brokerage_inr": 420.51
   },
   "orders": [
     {
-      "symbol": "PNB.NS",
+      "symbol": "CANBK.NS",
       "exchange": "NSE",
       "product": "MIS",
-      "side": "buy",
-      "qty": 87,
+      "side": "BUY",
+      "qty": 200,
       "type": "limit",
-      "limit_price": 128,
+      "limit_price": 132.88,
       "time_in_force": "day",
       "order_class": "bracket",
       "take_profit": {
-        "limit_price": 132.76
+        "limit_price": 135.03
       },
       "stop_loss": {
-        "stop_price": 126.86,
+        "stop_price": 132.38,
         "strict": true
       }
     }

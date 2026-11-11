@@ -1,35 +1,35 @@
 {
-  "as_of": "2026-11-10T23:00:35+05:30",
+  "as_of": "2026-11-11T14:33:04+05:30",
   "market": "INDIA_NSE_BSE",
   "exchange": "NSE",
   "currency": "INR",
-  "ticker": "PNB.NS",
+  "ticker": "CANBK.NS",
   "plan": {
-    "entry": 128,
-    "stop": 126.86,
-    "target_2r_trail": 130.28,
-    "target": 132.76,
-    "reward_risk": 4.18,
+    "entry": 132.88,
+    "stop": 132.38,
+    "target_2r_trail": 133.88,
+    "target": 135.03,
+    "reward_risk": 4.3,
     "flat_by": "15:15"
   },
   "monte_carlo": {
     "method": "intraday_block_bootstrap_with_2r_trailing_lock",
     "sims": 10000,
     "horizon_bars": 68,
-    "p_target_full_400": 0.0866,
-    "p_trail_2r_win": 0.2316,
-    "p_win_combined": 0.3182,
-    "p_stop": 0.2883,
-    "p_expired": 0.3935,
-    "expected_r": 1.09,
+    "p_target_full_400": 0.2589,
+    "p_trail_2r_win": 0.3386,
+    "p_win_combined": 0.5975,
+    "p_stop": 0.4017,
+    "p_expired": 0.0008,
+    "expected_r": 1.22,
     "close_Loop_quantiles_inr": {
-      "p10": 126.86,
-      "p25": 126.86,
-      "p50": 129.71,
-      "p75": 130.31,
-      "p90": 132.19
+      "p10": 132.38,
+      "p25": 132.38,
+      "p50": 133.63,
+      "p75": 135.03,
+      "p90": 135.03
     }
   },
   "verdict": "favorable",
-  "summary": "10,000 NSE/BSE session replays for PNB.NS: 31.8% win rate -> Expected +1.09R per trade."
+  "summary": "10,000 NSE/BSE session replays for CANBK.NS: 59.8% win rate -> Expected +1.22R per trade."
 }

@@ -6,836 +6,825 @@
   <title>SriKari TradeBot</title>
   <style>
     :root {
-      --bg: #090d16;
-      --card: #111827;
-      --border: #1f2937;
-      --text: #f8fafc;
-      --muted: #94a3b8;
-      --green: #10b981;
-      --green-bg: rgba(16, 185, 129, 0.12);
-      --red: #f43f5e;
-      --red-bg: rgba(244, 63, 94, 0.12);
-      --amber: #f59e0b;
-      --amber-bg: rgba(245, 158, 11, 0.12);
-      --blue: #38bdf8;
-      --blue-bg: rgba(56, 189, 248, 0.12);
+      --bg: #f8f9fa;
+      --card: #ffffff;
+      --border: #e6e8eb;
+      --text: #333333;
+      --muted: #777777;
+      --blue: #387ed1;
+      --blue-bg: #eef5fc;
+      --green: #26a69a;
+      --green-bg: #e8f7f5;
+      --red: #df514c;
+      --red-bg: #fdeeee;
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.5;
-      padding: 28px 20px 60px;
+      line-height: 1.45;
+      padding: 20px 16px 40px;
     }
+
     .container {
-      max-width: 1220px;
+      max-width: 1180px;
       margin: 0 auto;
     }
 
-    /* Header */
-    .header {
+    /* Simple Top Header (Zerodha Kite Style) */
+    .topbar {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px 20px;
+      margin-bottom: 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 16px;
-      padding-bottom: 22px;
-      margin-bottom: 22px;
-      border-bottom: 1px solid var(--border);
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
     .brand h1 {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: -0.3px;
+      font-size: 19px;
+      font-weight: 600;
+      color: #222;
+    }
+
+    .top-actions {
       display: flex;
       align-items: center;
-      gap: 10px;
-    }
-    .brand p {
-      color: var(--muted);
-      font-size: 13.5px;
-      margin-top: 4px;
-    }
-    .actions {
-      display: flex;
       gap: 10px;
       flex-wrap: wrap;
-      align-items: center;
     }
-    .autopilot-pill {
-      background: var(--green-bg);
-      color: var(--green);
-      border: 1px solid rgba(16, 185, 129, 0.4);
-      padding: 8px 14px;
-      border-radius: 999px;
+
+    .clock-text {
       font-size: 12.5px;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      color: var(--muted);
     }
-    .pulse-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 8px var(--green);
-      animation: pulse 1.5s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.45; transform: scale(1.25); }
-    }
-    .btn {
-      background: #1e293b;
-      color: var(--text);
-      border: 1px solid #334155;
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-size: 12.5px;
+
+    .pill {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 4px;
+      font-size: 11.5px;
       font-weight: 600;
+    }
+    .pill-blue { background: var(--blue-bg); color: var(--blue); }
+    .pill-green { background: var(--green-bg); color: var(--green); }
+    .pill-red { background: var(--red-bg); color: var(--red); }
+    .pill-gray { background: #f1f3f5; color: var(--muted); }
+
+    .btn {
+      background: var(--card);
+      color: var(--blue);
+      border: 1px solid var(--blue);
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 12.5px;
+      font-weight: 500;
       cursor: pointer;
       text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.15s ease;
+      display: inline-block;
     }
-    .btn:hover { background: #334155; }
-    .btn-blue {
-      background: rgba(56, 189, 248, 0.15);
+    .btn:hover { background: var(--blue); color: #fff; }
+    .btn-tab {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 4px 10px;
+      font-size: 12px;
+    }
+    .btn-tab.active {
+      background: var(--blue-bg);
       color: var(--blue);
-      border-color: rgba(56, 189, 248, 0.35);
+      border-color: var(--blue);
+      font-weight: 600;
     }
 
-    /* Autonomous Status Banner */
-    .auto-banner {
-      background: rgba(16, 185, 129, 0.07);
-      border: 1px solid rgba(16, 185, 129, 0.28);
-      border-radius: 10px;
-      padding: 12px 16px;
-      margin-bottom: 22px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      font-size: 13px;
-      color: #d1fae5;
-    }
-
-    /* Toast Notification */
-    #toast {
-      display: none;
-      background: var(--green-bg);
-      border: 1px solid rgba(16, 185, 129, 0.4);
-      color: #6ee7b7;
-      padding: 12px 16px;
-      border-radius: 10px;
-      font-size: 13.5px;
-      font-weight: 500;
-      margin-bottom: 20px;
-    }
-
-    /* 4 Elegant KPI Summary Cards */
+    /* 3 Clean KPI Cards */
     .kpi-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-      margin-bottom: 28px;
+      gap: 14px;
+      margin-bottom: 16px;
     }
     .kpi-card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px 20px;
+      border-radius: 6px;
+      padding: 16px 18px;
     }
     .kpi-label {
       font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
       color: var(--muted);
-      font-weight: 600;
+      font-weight: 500;
+      margin-bottom: 6px;
     }
     .kpi-value {
-      font-size: 28px;
-      font-weight: 800;
-      margin: 6px 0 4px;
-      letter-spacing: -0.5px;
+      font-size: 26px;
+      font-weight: 600;
+      color: #222;
+      margin-bottom: 4px;
     }
     .kpi-sub {
-      font-size: 12.5px;
+      font-size: 12px;
       color: var(--muted);
     }
+
     .text-green { color: var(--green); }
     .text-red { color: var(--red); }
-    .text-amber { color: var(--amber); }
     .text-blue { color: var(--blue); }
 
-    /* Section Card & Clean Tables */
-    .section-card {
+    /* Sections */
+    .card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 22px;
-      margin-bottom: 24px;
+      border-radius: 6px;
+      padding: 16px 18px;
+      margin-bottom: 16px;
     }
-    .section-header {
+    .card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
-    .section-title {
-      font-size: 16px;
-      font-weight: 700;
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #222;
       display: flex;
       align-items: center;
       gap: 8px;
     }
-    .badge {
-      display: inline-block;
-      padding: 3px 9px;
-      border-radius: 999px;
-      font-size: 11.5px;
-      font-weight: 700;
-    }
-    .badge-green { background: var(--green-bg); color: var(--green); border: 1px solid rgba(16,185,129,0.3); }
-    .badge-amber { background: var(--amber-bg); color: var(--amber); border: 1px solid rgba(245,158,11,0.3); }
-    .badge-blue  { background: var(--blue-bg);  color: var(--blue);  border: 1px solid rgba(56,189,248,0.3); }
 
-    .table-wrap {
-      overflow-x: auto;
-    }
+    /* Tables */
+    .table-wrap { overflow-x: auto; }
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 13.5px;
+      font-size: 13px;
     }
     th {
       text-align: left;
-      padding: 11px 12px;
+      padding: 9px 10px;
       color: var(--muted);
-      font-weight: 600;
+      font-weight: 500;
       font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
       border-bottom: 1px solid var(--border);
       white-space: nowrap;
     }
     td {
-      padding: 13px 12px;
-      border-bottom: 1px solid rgba(31, 41, 55, 0.7);
+      padding: 11px 10px;
+      border-bottom: 1px solid #f1f3f5;
       white-space: nowrap;
+      color: var(--text);
     }
     tr:last-child td { border-bottom: none; }
     tr.total-row td {
-      background: rgba(16, 185, 129, 0.07);
-      border-top: 2px solid rgba(16, 185, 129, 0.35);
-      font-weight: 700;
-      font-size: 14px;
+      background: #fafbfc;
+      border-top: 1px solid var(--border);
+      font-weight: 600;
     }
 
-    /* Two-column Analyst Insights at bottom */
-    .analyst-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-      gap: 20px;
-    }
-    .info-list {
-      list-style: none;
-      margin-top: 10px;
-    }
-    .info-list li {
-      padding: 7px 0;
-      border-bottom: 1px solid rgba(31, 41, 55, 0.6);
-      font-size: 13.5px;
+    /* Live Chart */
+    .chart-meta {
       display: flex;
-      justify-content: space-between;
-      gap: 12px;
+      gap: 14px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      color: var(--muted);
+      align-items: center;
     }
-    .info-list li:last-child { border-bottom: none; }
+    .chart-box {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      border: 1px solid #f0f2f5;
+      border-radius: 4px;
+      background: #ffffff;
+    }
+    #tradeChartCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    #chartTooltip {
+      position: absolute;
+      display: none;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 6px 9px;
+      font-size: 11.5px;
+      color: #222;
+      pointer-events: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      z-index: 10;
+    }
 
-    /* Modal for Daily Report Preview */
+    /* Report Modal */
     .modal-backdrop {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.75);
+      background: rgba(0, 0, 0, 0.45);
       z-index: 1000;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 16px;
     }
     .modal-box {
       background: var(--card);
-      border: 1px solid #334155;
-      border-radius: 14px;
-      max-width: 900px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      max-width: 820px;
       width: 100%;
-      padding: 22px;
-      max-height: 88vh;
+      padding: 18px;
+      max-height: 86vh;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
     .modal-pre {
-      background: #060911;
+      background: #f8f9fa;
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 14px;
-      color: #cbd5e1;
-      font-family: monospace;
-      font-size: 12.5px;
+      border-radius: 4px;
+      padding: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
       overflow: auto;
       white-space: pre;
-      max-height: 50vh;
+      max-height: 55vh;
+      color: #222;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <!-- Top Header -->
-    <div class="header">
+    <div class="topbar">
       <div class="brand">
         <h1>SriKari TradeBot</h1>
-        <p id="capital-subtitle">Auto-Fetched Account Balance: <strong>₹20,000</strong> &nbsp;|&nbsp; Auto Daily Net Target (2%): <strong class="text-green">+₹400/trade</strong> &nbsp;|&nbsp; Auto Strict Stop-Loss (0.5%): <strong class="text-red">≤ ₹100/trade</strong></p>
+        <span class="pill pill-gray" id="market-status-pill">Checking Market...</span>
+        <span class="pill pill-blue" id="paper-mode-pill">Paper Trade</span>
       </div>
-      <div class="actions">
-        <div class="autopilot-pill">
-          <span class="pulse-dot"></span>
-          100% AUTO-PILOT & AUTO-BALANCE: ON
-        </div>
-        <button class="btn btn-blue" onclick="sendReportToGitHub()">📄 Daily GitHub Report</button>
+      <div class="top-actions">
+        <span class="clock-text" id="last-updated-label">-- IST</span>
+        <a class="btn" href="https://github.com/anandsurla/indian-day-trader-skill/tree/main/reports/daily" target="_blank">Daily Files</a>
+        <a class="btn" href="https://github.com/anandsurla/indian-day-trader-skill/tree/main/reports/weekly" target="_blank">Weekly Files</a>
+        <button class="btn" onclick="openDailyReport()">Today's Report</button>
       </div>
     </div>
 
-    <!-- Clear Explanation Banner: 100% Automatic + Two-Way BUY/SELL + 12:15 PM Trade #2 Rule -->
-    <div class="auto-banner">
-      <div>
-        <strong>🤖 Two-Way Autonomous Agent (BUY &amp; SELL Short + 12:15 PM Rule):</strong> SriKari TradeBot analyzes <strong>both BUY (Bullish Uptrend) and SELL (Bearish Intraday Short)</strong> opportunities based on market position &amp; news. If Trade #1 closes <strong>before 12:15 PM IST</strong> and another stock has <strong>Super-Potential (Score ≥ 200)</strong>, it automatically enters <strong>Trade #2</strong>.
-      </div>
-      <div id="auto-cycle-status" style="font-weight:700; color:var(--green);">Live Auto-Monitoring Active</div>
-    </div>
-
-    <div id="toast"></div>
-
-    <!-- 4 Minimalist Summary Cards: Total Profit, Brokerage, Net Profit -->
+    <!-- 3 Minimal KPI Cards: Daily Net P&L, Weekly Net P&L (Current Week Only), Today's Brokerage -->
     <div class="kpi-grid">
       <div class="kpi-card">
-        <div class="kpi-label">1. Total Profit (Gross)</div>
-        <div class="kpi-value" id="kpi-gross">₹1,302.76</div>
-        <div class="kpi-sub" id="kpi-gross-sub">Across 3 Closed Trades (Before Brokerage)</div>
+        <div class="kpi-label" id="kpi-day-label">Today's Profit / Loss (Excl. Brokerage)</div>
+        <div class="kpi-value" id="kpi-day-net">₹0.00</div>
+        <div class="kpi-sub" id="kpi-day-sub">Today only • 0 closed trades</div>
       </div>
+
       <div class="kpi-card">
-        <div class="kpi-label">2. Trade Brokerage & Govt Taxes</div>
-        <div class="kpi-value text-amber" id="kpi-brokerage">-₹95.76</div>
-        <div class="kpi-sub">Brokerage + STT + Exchange + GST + Stamp</div>
+        <div class="kpi-label" id="kpi-week-label">This Week's Profit / Loss (Excl. Brokerage)</div>
+        <div class="kpi-value" id="kpi-week-net">₹0.00</div>
+        <div class="kpi-sub" id="kpi-week-sub">Current week only • Resets Monday</div>
       </div>
+
       <div class="kpi-card">
-        <div class="kpi-label">3. Final Net Profit (After Brokerage)</div>
-        <div class="kpi-value text-green" id="kpi-net">+₹1,207.00</div>
-        <div class="kpi-sub">100% Pure Profit in Your Pocket (≥ ₹400/trade)</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">4. Net Profit with #1 Zero-Brokerage (Shoonya)</div>
-        <div class="kpi-value text-blue" id="kpi-shoonya">+₹1,272.11</div>
-        <div class="kpi-sub">Finvasia Shoonya: ₹0 Brokerage (Only ~₹9.80 Tax)</div>
+        <div class="kpi-label" id="kpi-brok-label">Today's Brokerage & Taxes</div>
+        <div class="kpi-value" id="kpi-day-brok">₹0.00</div>
+        <div class="kpi-sub" id="kpi-brok-sub">Today only</div>
       </div>
     </div>
 
-    <!-- Section 1: Active Trades (Auto-Selected & Auto-Managed by Agent) -->
-    <div class="section-card">
-      <div class="section-header">
-        <div class="section-title">
-          🟢 Active Trade (Auto-Selected & Auto-Monitored by Agent)
-          <span class="badge badge-green" id="active-status-badge">AUTO-TRADING LIVE</span>
+    <!-- Active Trade -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          Active Trade
+          <span class="pill pill-gray" id="active-badge">None</span>
         </div>
-        <div style="font-size: 12.5px; color: var(--muted);" id="last-updated-label">Agent Auto-Exits at Target (+₹400 Net) or 15:15 IST</div>
+        <div class="clock-text" id="active-rule-hint">Strict Stop-Loss ≤ ₹100 • Target +₹400 Net • Auto-Exit 15:15 IST</div>
       </div>
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th>Date</th>
-              <th>Auto-Selected Stock</th>
-              <th>High-Accuracy Historical & Technical Strategy</th>
-              <th>Time of Entry (IST)</th>
+              <th>Stock</th>
+              <th>Type</th>
+              <th>Qty</th>
+              <th>Entry Date &amp; Time</th>
               <th>Entry Price</th>
               <th>Live Price</th>
-              <th>Qty</th>
-              <th>Strict Stop-Loss</th>
+              <th>Stop Loss</th>
               <th>Auto-Exit Target</th>
-              <th>Live Profit / Loss</th>
-              <th>Total Profit (Gross)</th>
-              <th>Brokerage & Tax</th>
-              <th>Final Net Profit</th>
+              <th>Live P&amp;L (Excl. Brokerage)</th>
             </tr>
           </thead>
-          <tbody id="active-trades-tbody">
-            <tr><td colspan="13" style="text-align:center; color:var(--muted);">Loading active trade...</td></tr>
+          <tbody id="active-tbody">
+            <tr><td colspan="9" style="text-align:center; color:var(--muted);">Loading...</td></tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <!-- Section 2: Closed Trades (Auto-Closed by Agent) -->
-    <div class="section-card">
-      <div class="section-header">
-        <div class="section-title">
-          ✅ Closed Trades (Auto-Exited with Time of Entry & Exit + Total Profit, Brokerage & Net Profit)
-          <span class="badge badge-blue" id="closed-count-badge">3 Closed Trades</span>
+    <!-- Current Active Trade Live Chart -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span id="chart-title">Active Trade Live Chart</span>
+          <span class="pill pill-blue" id="chart-symbol-badge">--</span>
         </div>
-        <div style="display:flex; gap:8px; align-items:center;">
-          <span style="font-size:12px; color:var(--muted);">Auto-Synced with GitHub <code>reports/DAILY_PAPER_TRADES.md</code></span>
+        <div class="chart-meta" id="chart-levels-legend">
+          <span>Waiting for chart data...</span>
+        </div>
+      </div>
+      <div class="chart-box">
+        <canvas id="tradeChartCanvas"></canvas>
+        <div id="chartTooltip"></div>
+      </div>
+    </div>
+
+    <!-- Completed Trades -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          Completed Trades
+          <span class="pill pill-gray" id="closed-count-badge">0</span>
+        </div>
+        <div style="display:flex; gap:6px; align-items:center;">
+          <button class="btn btn-tab active" id="tab-week" onclick="setClosedFilter('week')">This Week</button>
+          <button class="btn btn-tab" id="tab-today" onclick="setClosedFilter('today')">Today</button>
+          <button class="btn btn-tab" id="tab-all" onclick="setClosedFilter('all')">All</button>
         </div>
       </div>
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th>Date</th>
-              <th>Stock (NSE/BSE)</th>
+              <th>Stock</th>
+              <th>Type</th>
               <th>Qty</th>
-              <th>Time of Entry (IST)</th>
+              <th>Entry Date &amp; Time</th>
               <th>Entry Price</th>
-              <th>Time of Exit (IST)</th>
+              <th>Exit Date &amp; Time</th>
               <th>Exit Price</th>
-              <th>Total Profit (Gross)</th>
-              <th>Trade Brokerage & Tax</th>
-              <th>Final Net Profit (Standard)</th>
-              <th>Net with Shoonya (₹0 Brok)</th>
+              <th>Brokerage &amp; Tax</th>
+              <th>Net P&amp;L (Excl. Brok)</th>
+              <th>Exit Reason</th>
             </tr>
           </thead>
-          <tbody id="closed-trades-tbody">
-            <tr><td colspan="11" style="text-align:center; color:var(--muted);">Loading closed trades...</td></tr>
+          <tbody id="closed-tbody">
+            <tr><td colspan="10" style="text-align:center; color:var(--muted);">Loading...</td></tr>
           </tbody>
         </table>
-      </div>
-    </div>
-
-    <!-- Section 3: Chief Stock Analyst's #1 Brokerage Recommendation & High-Accuracy Strategy Checklist -->
-    <div class="analyst-grid">
-      <div class="section-card" style="margin-bottom:0;">
-        <div class="section-header">
-          <div class="section-title">🏆 Analyst's #1 Lowest Brokerage & Tax Recommendation</div>
-          <span class="badge badge-green">SAVE ~₹21 PER TRADE</span>
-        </div>
-        <p style="font-size: 13.5px; color: var(--muted); margin-bottom: 10px;">
-          On a ₹20,000 account (~₹57,000 intraday round-trip turnover), standard brokers charge ₹20/order brokerage + 18% GST. Switching to a <strong>Zero-Brokerage Indian Broker</strong> keeps 100% of that brokerage in your pocket:
-        </p>
-        <ul class="info-list">
-          <li>
-            <span><strong>#1 Finvasia Shoonya</strong> (Best for Auto-API & ₹0 Intraday)</span>
-            <strong class="text-green">₹0 Brokerage + ₹0 AMC (~₹9.80 Govt Tax only)</strong>
-          </li>
-          <li>
-            <span><strong>#2 Kotak Neo</strong> (Trade Free Intraday Plan)</span>
-            <strong class="text-blue">₹0 Intraday Brokerage (~₹9.80 Govt Tax only)</strong>
-          </li>
-          <li>
-            <span><strong>Standard Brokers</strong> (Zerodha / Groww / Upstox / AngelOne)</span>
-            <span class="text-amber">~₹30.45 – ₹34.98 per trade (₹19.76 Brok + Tax)</span>
-          </li>
-          <li>
-            <span><strong>Your Net Profit Guarantee</strong></span>
-            <strong class="text-green">+₹402/day (Zerodha) &nbsp;|&nbsp; +₹423/day (Shoonya)</strong>
-          </li>
-        </ul>
-      </div>
-
-      <div class="section-card" style="margin-bottom:0;">
-        <div class="section-header">
-          <div class="section-title">📈 High-Accuracy Indian Historical & Technical Methods</div>
-          <span class="badge badge-blue">6/6 Institutional Filters</span>
-        </div>
-        <p style="font-size: 13.5px; color: var(--muted); margin-bottom: 10px;">
-          Every stock is <strong>automatically selected by the agent</strong> only when all 6 Indian institutional filters pass:
-        </p>
-        <ul class="info-list">
-          <li><span>1. <strong>Stage-2 Historical Trend</strong> (Price > 50-DMA > 200-DMA)</span><strong class="text-green">AUTO-VERIFIED</strong></li>
-          <li><span>2. <strong>Narrow CPR Breakout</strong> (Central Pivot Range &lt; 0.35% + R1)</span><strong class="text-green">AUTO-VERIFIED</strong></li>
-          <li><span>3. <strong>15-Min ORB</strong> (09:15–09:30 IST Opening Range Breakout)</span><strong class="text-green">AUTO-VERIFIED</strong></li>
-          <li><span>4. <strong>Supertrend (10, 3) & Session VWAP</strong> (Institutional Flow)</span><strong class="text-green">AUTO-VERIFIED</strong></li>
-          <li><span>5. <strong>EMA 9 > 21 > 50 + RSI-14 (55–72) + RVOL ≥ 1.2x</strong></span><strong class="text-green">AUTO-VERIFIED</strong></li>
-          <li><span>6. <strong>10,000-Session Historical Bootstrap & Business News NLP</strong></span><strong class="text-green">AUTO-VERIFIED</strong></li>
-        </ul>
       </div>
     </div>
   </div>
 
-  <!-- Daily Report Modal -->
+  <!-- Today's Report Modal -->
   <div class="modal-backdrop" id="report-modal">
     <div class="modal-box">
       <div style="display:flex; justify-content:space-between; align-items:center;">
-        <h3 style="font-size:16px;">📄 Daily Paper Trade Report (Auto-Synced to GitHub)</h3>
-        <button class="btn" onclick="closeReportModal()">✕ Close</button>
+        <h3 style="font-size:15px; font-weight:600;" id="report-modal-title">Today's Trade Report</h3>
+        <button class="btn" onclick="closeReportModal()">Close</button>
       </div>
-      <p style="font-size:13px; color:var(--muted);">
-        Below is your live generated <code>reports/DAILY_PAPER_TRADES.md</code> showing Active and Closed Trades with Entry Time, Exit Time, Total Gross Profit, Brokerage, and Final Net Profit:
-      </p>
       <pre class="modal-pre" id="report-markdown-box"></pre>
-      <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
-        <button class="btn btn-blue" onclick="copyReportMarkdown()">📋 Copy Report Markdown</button>
-        <button class="btn" onclick="downloadReportMarkdown()">⬇️ Download DAILY_PAPER_TRADES.md</button>
-        <a class="btn" href="https://github.com/anandsurla/indian-day-trader-skill/blob/main/reports/DAILY_PAPER_TRADES.md" target="_blank">🔗 View on GitHub Repo</a>
+      <div style="display:flex; gap:8px; justify-content:flex-end; flex-wrap:wrap;">
+        <a class="btn" id="github-daily-link" href="https://github.com/anandsurla/indian-day-trader-skill/tree/main/reports/daily" target="_blank">Open Daily Folder on GitHub</a>
+        <a class="btn" id="github-weekly-link" href="https://github.com/anandsurla/indian-day-trader-skill/tree/main/reports/weekly" target="_blank">Open Weekly Folder on GitHub</a>
+        <button class="btn" onclick="copyReportMarkdown()">Copy Report</button>
       </div>
     </div>
   </div>
 
   <script>
-    const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/anandsurla/indian-day-trader-skill/main/trader';
+    const GITHUB_RAW_TRADER = 'https://raw.githubusercontent.com/anandsurla/indian-day-trader-skill/main/trader';
 
     let appState = {
-      balance_inr: 20000,
+      today_date: '',
+      week_start: '',
+      week_friday: '',
+      week_end: '',
       active_trades: [],
-      closed_trades: []
+      closed_trades: [],
+      chart: null
     };
+    let closedFilter = 'week';
 
-    function onBalanceChange(val) {
-      appState.balance_inr = Number(val || 20000);
-      const targetNet = Math.round(appState.balance_inr * 0.02);
-      const strictSl = Math.round(appState.balance_inr * 0.005);
-      document.getElementById('capital-subtitle').innerHTML =
-        `Shoonya Account Balance: <strong>₹${appState.balance_inr.toLocaleString('en-IN')}</strong> &nbsp;|&nbsp; Daily Net Target (2%): <strong class="text-green">+₹${targetNet.toLocaleString('en-IN')}/trade</strong> &nbsp;|&nbsp; Strict Stop-Loss (0.5%): <strong class="text-red">≤ ₹${strictSl.toLocaleString('en-IN')}/trade</strong>`;
-      renderDashboard();
-      showToast(`🔄 Dynamically scaled position sizing for Shoonya Balance: ₹${appState.balance_inr.toLocaleString('en-IN')} (Target: +₹${targetNet}/trade | Strict SL: ≤ ₹${strictSl})`);
-    }
-
-    const DAILY_ROTATION_POOL = [
-      {
-        symbol: 'HDFCBANK.BO', exchange: 'BSE', side: 'BUY', qty: 18,
-        entry_price_inr: 1746.33, strict_stop_loss_inr: 1740.85, max_loss_at_stop_inr: 98.64,
-        target_price_inr: 1770.53, target_gross_profit_inr: 435.60, brokerage_and_taxes_inr: 33.61,
-        target_net_profit_inr: 401.99, shoonya_zero_brokerage_net_inr: 425.80,
-        strategy_used: 'Stage-2 200-DMA + Narrow CPR + 15m ORB + Supertrend(10,3) + VWAP (Trade #1)'
-      },
-      {
-        symbol: 'NTPC.BO', exchange: 'BSE', side: 'BUY', qty: 79,
-        entry_price_inr: 414.16, strict_stop_loss_inr: 412.90, max_loss_at_stop_inr: 99.54,
-        target_price_inr: 419.69, target_gross_profit_inr: 436.87, brokerage_and_taxes_inr: 34.98,
-        target_net_profit_inr: 401.89, shoonya_zero_brokerage_net_inr: 425.20,
-        strategy_used: 'Trade #2 Super-Potential (Score 207.97): Stage-2 200-DMA + Narrow CPR + Supertrend(10,3) + VWAP'
-      },
-      {
-        symbol: 'ICICIBANK.NS', exchange: 'NSE', side: 'BUY', qty: 24,
-        entry_price_inr: 1289.62, strict_stop_loss_inr: 1285.56, max_loss_at_stop_inr: 97.44,
-        target_price_inr: 1307.75, target_gross_profit_inr: 435.12, brokerage_and_taxes_inr: 33.08,
-        target_net_profit_inr: 402.04, shoonya_zero_brokerage_net_inr: 424.50,
-        strategy_used: 'Stage-2 200-DMA + Narrow CPR + 15m ORB + Supertrend(10,3) + VWAP (Trade #1)'
-      },
-      {
-        symbol: 'SBIN.NS', exchange: 'NSE', side: 'SELL', qty: 42,
-        entry_price_inr: 836.40, strict_stop_loss_inr: 838.72, max_loss_at_stop_inr: 97.44,
-        target_price_inr: 826.05, target_gross_profit_inr: 434.70, brokerage_and_taxes_inr: 32.55,
-        target_net_profit_inr: 402.15, shoonya_zero_brokerage_net_inr: 424.60,
-        strategy_used: 'Bearish Breakdown + Below VWAP + Supertrend Red (Intraday Short SELL)'
-      },
-      {
-        symbol: 'LT.NS', exchange: 'NSE', side: 'BUY', qty: 9,
-        entry_price_inr: 3625.81, strict_stop_loss_inr: 3614.75, max_loss_at_stop_inr: 99.54,
-        target_price_inr: 3674.35, target_gross_profit_inr: 436.86, brokerage_and_taxes_inr: 34.87,
-        target_net_profit_inr: 401.99, shoonya_zero_brokerage_net_inr: 425.10,
-        strategy_used: 'Stage-2 200-DMA + Narrow CPR + 15m ORB + Supertrend(10,3) + VWAP'
-      }
-    ];
-
-    function getISTClockInfo() {
-      const now = new Date();
-      const utcMs = now.getTime() + (now.getTimezoneOffset() * 60000);
-      const ist = new Date(utcMs + (5.5 * 3600000));
-      const yyyy = ist.getFullYear();
-      const mm = String(ist.getMonth() + 1).padStart(2, '0');
-      const dd = String(ist.getDate()).padStart(2, '0');
-      const hh = String(ist.getHours()).padStart(2, '0');
-      const min = String(ist.getMinutes()).padStart(2, '0');
-      const ss = String(ist.getSeconds()).padStart(2, '0');
-      const dayOfWeek = ist.getDay(); // 0=Sun, 1=Mon ... 5=Fri, 6=Sat
-      const minutesOfDay = ist.getHours() * 60 + ist.getMinutes();
+    function getISTNowParts() {
+      const fmt = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Asia/Kolkata',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        weekday: 'short',
+        hour12: false
+      });
+      const p = {};
+      for (const part of fmt.formatToParts(new Date())) p[part.type] = part.value;
+      const hh = p.hour === '24' ? '00' : p.hour;
+      const dayMap = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+      const dayOfWeek = dayMap[p.weekday] ?? new Date().getDay();
+      const minutesOfDay = Number(hh) * 60 + Number(p.minute);
       const isWeekday = dayOfWeek >= 1 && dayOfWeek <= 5;
-      const isMarketHours = isWeekday && minutesOfDay >= 555 && minutesOfDay <= 930; // 09:15 to 15:30 IST
+      const isMarketHours = isWeekday && minutesOfDay >= 555 && minutesOfDay <= 930;
+
+      // Current week Mon..Sun
+      const dateStr = `${p.year}-${p.month}-${p.day}`;
+      const d = new Date(`${dateStr}T12:00:00+05:30`);
+      const diffToMon = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+      const mon = new Date(d.getTime() + diffToMon * 86400000);
+      const fri = new Date(mon.getTime() + 4 * 86400000);
+      const sun = new Date(mon.getTime() + 6 * 86400000);
+      const fmtDate = (dt) => new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata' }).format(dt);
+
       return {
-        date: `${yyyy}-${mm}-${dd}`,
-        time: `${hh}:${min}:${ss} IST`,
-        dayOfWeek,
+        date: dateStr,
+        time: `${hh}:${p.minute}:${p.second} IST`,
         minutesOfDay,
         isWeekday,
-        isMarketHours
+        isMarketHours,
+        weekStart: fmtDate(mon),
+        weekFriday: fmtDate(fri),
+        weekEnd: fmtDate(sun)
       };
     }
 
-    function applyLiveISTMarketEngine() {
-      const ist = getISTClockInfo();
-      if (!ist.isWeekday) return;
-
-      const daySeed = Number(ist.date.replace(/-/g, '')) % DAILY_ROTATION_POOL.length;
-      const trade1Template = DAILY_ROTATION_POOL[daySeed];
-      const trade2Template = DAILY_ROTATION_POOL[(daySeed + 1) % DAILY_ROTATION_POOL.length];
-
-      const hasClosedTrade1Today = (appState.closed_trades || []).some(
-        t => t.date === ist.date && t.entry_time_ist === '09:35:00 IST'
-      );
-      const hasClosedTrade2Today = (appState.closed_trades || []).some(
-        t => t.date === ist.date && t.entry_time_ist === '11:50:00 IST'
-      );
-
-      // Window 1: 09:35 IST to 11:44 IST -> Trade #1 is LIVE in Active Trades
-      if (ist.minutesOfDay >= 575 && ist.minutesOfDay < 705) {
-        const progress = Math.min(0.85, Math.max(0.15, (ist.minutesOfDay - 575) / (705 - 575)));
-        if (!appState.active_trades || appState.active_trades.length === 0 || appState.active_trades[0].date !== ist.date) {
-          const livePrice = Number((trade1Template.entry_price_inr + (trade1Template.target_price_inr - trade1Template.entry_price_inr) * progress).toFixed(2));
-          appState.active_trades = [{
-            date: ist.date,
-            ...trade1Template,
-            entry_time_ist: '09:35:00 IST',
-            live_price_inr: livePrice
-          }];
-        } else {
-          const t0 = appState.active_trades[0];
-          if (!t0.live_price_inr || Number(t0.live_price_inr) === Number(t0.entry_price_inr)) {
-            t0.live_price_inr = Number((Number(t0.entry_price_inr) + (Number(t0.target_price_inr) - Number(t0.entry_price_inr)) * progress).toFixed(2));
-          }
-        }
-      }
-      // Window 2: 11:45 IST to 14:29 IST -> Trade #1 Closed (< 12:15 PM!) & Trade #2 Super-Potential is LIVE
-      else if (ist.minutesOfDay >= 705 && ist.minutesOfDay < 870) {
-        if (!hasClosedTrade1Today) {
-          appState.closed_trades.unshift({
-            date: ist.date,
-            symbol: trade1Template.symbol,
-            exchange: trade1Template.exchange,
-            side: trade1Template.side,
-            qty: trade1Template.qty,
-            entry_time_ist: '09:35:00 IST',
-            entry_price_inr: trade1Template.entry_price_inr,
-            exit_time_ist: '11:45:00 IST',
-            current_or_exit_price_inr: trade1Template.target_price_inr,
-            gross_pnl_inr: trade1Template.target_gross_profit_inr,
-            brokerage_and_taxes_inr: trade1Template.brokerage_and_taxes_inr,
-            net_pnl_excl_brokerage_inr: trade1Template.target_net_profit_inr,
-            shoonya_zero_brokerage_net_inr: trade1Template.shoonya_zero_brokerage_net_inr
-          });
-        }
-        if (ist.minutesOfDay >= 710) {
-          const progress2 = (ist.minutesOfDay - 710) / (870 - 710);
-          const livePrice2 = Number((trade2Template.entry_price_inr + (trade2Template.target_price_inr - trade2Template.entry_price_inr) * Math.min(0.85, Math.max(0.05, progress2))).toFixed(2));
-          appState.active_trades = [{
-            date: ist.date,
-            ...trade2Template,
-            entry_time_ist: '11:50:00 IST',
-            live_price_inr: livePrice2
-          }];
-        }
-      }
-      // Window 3: 14:30 IST onwards -> Both Trade #1 & Trade #2 Closed for Today
-      else if (ist.minutesOfDay >= 870) {
-        if (!hasClosedTrade1Today) {
-          appState.closed_trades.unshift({
-            date: ist.date,
-            symbol: trade1Template.symbol,
-            exchange: trade1Template.exchange,
-            side: trade1Template.side,
-            qty: trade1Template.qty,
-            entry_time_ist: '09:35:00 IST',
-            entry_price_inr: trade1Template.entry_price_inr,
-            exit_time_ist: '11:45:00 IST',
-            current_or_exit_price_inr: trade1Template.target_price_inr,
-            gross_pnl_inr: trade1Template.target_gross_profit_inr,
-            brokerage_and_taxes_inr: trade1Template.brokerage_and_taxes_inr,
-            net_pnl_excl_brokerage_inr: trade1Template.target_net_profit_inr,
-            shoonya_zero_brokerage_net_inr: trade1Template.shoonya_zero_brokerage_net_inr
-          });
-        }
-        if (!hasClosedTrade2Today) {
-          appState.closed_trades.unshift({
-            date: ist.date,
-            symbol: trade2Template.symbol,
-            exchange: trade2Template.exchange,
-            side: trade2Template.side,
-            qty: trade2Template.qty,
-            entry_time_ist: '11:50:00 IST',
-            entry_price_inr: trade2Template.entry_price_inr,
-            exit_time_ist: '14:25:00 IST',
-            current_or_exit_price_inr: trade2Template.target_price_inr,
-            gross_pnl_inr: trade2Template.target_gross_profit_inr,
-            brokerage_and_taxes_inr: trade2Template.brokerage_and_taxes_inr,
-            net_pnl_excl_brokerage_inr: trade2Template.target_net_profit_inr,
-            shoonya_zero_brokerage_net_inr: trade2Template.shoonya_zero_brokerage_net_inr
-          });
-        }
-        appState.active_trades = [];
-      }
-    }
-
-    function getISTTimeStr() {
-      return new Date().toLocaleTimeString('en-IN', {
-        timeZone: 'Asia/Kolkata',
-        hour12: false
-      }) + ' IST';
-    }
-
-    function showToast(msg) {
-      const el = document.getElementById('toast');
-      el.textContent = msg;
-      el.style.display = 'block';
-      clearTimeout(window._toastTimer);
-      window._toastTimer = setTimeout(() => { el.style.display = 'none'; }, 6000);
-    }
-
-    function fmtInr(val) {
+    function fmtInr(val, withSign = false) {
       const n = Number(val || 0);
-      return '₹' + n.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      const abs = '₹' + Math.abs(n).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      if (!withSign) return n < 0 ? '-' + abs : abs;
+      if (n > 0) return '+' + abs;
+      if (n < 0) return '-' + abs;
+      return abs;
+    }
+
+    function friendlyReason(raw) {
+      const r = String(raw || '').toUpperCase();
+      if (r.includes('TARGET_HIT')) return 'Target Hit';
+      if (r.includes('TRAILING')) return 'Trail Stop Profit';
+      if (r.includes('BREAKEVEN')) return 'Breakeven Exit';
+      if (r.includes('STOP_LOSS')) return 'Stop Loss Hit';
+      if (r.includes('1515')) return '3:15 PM Auto-Exit';
+      return raw || '-';
+    }
+
+    function setClosedFilter(mode) {
+      closedFilter = mode;
+      document.getElementById('tab-week').classList.toggle('active', mode === 'week');
+      document.getElementById('tab-today').classList.toggle('active', mode === 'today');
+      document.getElementById('tab-all').classList.toggle('active', mode === 'all');
+      renderDashboard();
+    }
+
+    function updateKPIs(ist) {
+      const todayDate = ist.date;
+      const weekStart = ist.weekStart;
+      const weekEnd = ist.weekEnd;
+      const closed = appState.closed_trades || [];
+      const active = appState.active_trades || [];
+
+      const todayClosed = closed.filter(t => (t.exit_date_ist || t.date) === todayDate);
+      const weekClosed = closed.filter(t => {
+        const d = t.exit_date_ist || t.date;
+        return d >= weekStart && d <= weekEnd;
+      });
+
+      const dayNet = todayClosed.reduce((s, t) => s + Number(t.net_pnl_excl_brokerage_inr || 0), 0);
+      const dayBrok = todayClosed.reduce((s, t) => s + Number(t.brokerage_and_taxes_inr || 0), 0);
+      const weekNet = weekClosed.reduce((s, t) => s + Number(t.net_pnl_excl_brokerage_inr || 0), 0);
+
+      const dayActiveLiveNet = active
+        .filter(a => (a.entry_date_ist || a.date) === todayDate)
+        .reduce((s, a) => s + Number(a.live_net_pnl_inr ?? a.net_pnl_excl_brokerage_inr ?? 0), 0);
+
+      // Card 1: Today's Net P&L (Excl. Brokerage)
+      const dayEl = document.getElementById('kpi-day-net');
+      dayEl.textContent = fmtInr(dayNet, true);
+      dayEl.className = 'kpi-value ' + (dayNet > 0 ? 'text-green' : (dayNet < 0 ? 'text-red' : ''));
+      document.getElementById('kpi-day-label').textContent = `Today's Profit / Loss (${todayDate})`;
+      document.getElementById('kpi-day-sub').textContent = active.length > 0
+        ? `Booked: ${fmtInr(dayNet, true)} • Open Live: ${fmtInr(dayActiveLiveNet, true)}`
+        : `${todayClosed.length} trade(s) closed today • After brokerage & taxes`;
+
+      // Card 2: Current Week Net P&L ONLY
+      const weekEl = document.getElementById('kpi-week-net');
+      weekEl.textContent = fmtInr(weekNet, true);
+      weekEl.className = 'kpi-value ' + (weekNet > 0 ? 'text-green' : (weekNet < 0 ? 'text-red' : ''));
+      document.getElementById('kpi-week-label').textContent = `This Week's Profit / Loss (${weekStart} to ${ist.weekFriday})`;
+      document.getElementById('kpi-week-sub').textContent = `${weekClosed.length} trade(s) this week • Resets next Monday`;
+
+      // Card 3: Today's Brokerage & Taxes ONLY
+      document.getElementById('kpi-day-brok').textContent = fmtInr(dayBrok, false);
+      document.getElementById('kpi-brok-label').textContent = `Today's Brokerage & Taxes (${todayDate})`;
+      document.getElementById('kpi-brok-sub').textContent = active.length > 0
+        ? `Closed: ${fmtInr(dayBrok)} • Strictly today only`
+        : `Strictly for ${todayDate} only`;
+    }
+
+    function renderActiveTable(ist) {
+      const tbody = document.getElementById('active-tbody');
+      const badge = document.getElementById('active-badge');
+      const active = appState.active_trades || [];
+
+      if (active.length === 0) {
+        badge.className = 'pill pill-gray';
+        badge.textContent = '0 Open';
+        let msg = 'No active trade right now.';
+        if (!ist.isMarketHours) {
+          msg = 'Market Closed (NSE & BSE Hours: Mon–Fri, 09:15 AM – 03:30 PM IST). Zero active trades.';
+        } else if (ist.minutesOfDay >= 555 && ist.minutesOfDay < 570) {
+          msg = 'Market Open — Measuring 15-minute Opening Range (09:15–09:30 IST).';
+        }
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding:18px; color:var(--muted);">${msg}</td></tr>`;
+        return;
+      }
+
+      badge.className = 'pill pill-green';
+      badge.textContent = `${active.length} Open`;
+      tbody.innerHTML = active.map(t => {
+        const side = String(t.side || 'BUY').toUpperCase();
+        const entryP = Number(t.entry_price_inr || 0);
+        const liveP = Number(t.live_price_inr || t.current_or_exit_price_inr || entryP);
+        const brok = Number(t.brokerage_and_taxes_inr || 0);
+        const diff = side === 'SELL' ? (entryP - liveP) : (liveP - entryP);
+        const grossLive = Number((diff * Number(t.qty || 1)).toFixed(2));
+        const netLive = Number((grossLive - brok).toFixed(2));
+        const pnlCls = netLive >= 0 ? 'text-green' : 'text-red';
+
+        return `
+          <tr>
+            <td><strong>${t.symbol}</strong> <span class="pill pill-gray">${t.exchange}</span></td>
+            <td><span class="pill ${side === 'SELL' ? 'pill-red' : 'pill-green'}">${side}</span></td>
+            <td><strong>${t.qty}</strong></td>
+            <td>${t.entry_date_ist || t.date} ${t.entry_time_ist}</td>
+            <td>${fmtInr(entryP)}</td>
+            <td class="text-blue"><strong>${fmtInr(liveP)}</strong></td>
+            <td class="text-red">${fmtInr(t.strict_stop_loss_inr)}</td>
+            <td class="text-green"><strong>${fmtInr(t.target_price_inr)}</strong></td>
+            <td class="${pnlCls}"><strong>${fmtInr(netLive, true)}</strong> <span style="color:var(--muted); font-size:11.5px;">(Gross ${fmtInr(grossLive, true)})</span></td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderClosedTable(ist) {
+      const tbody = document.getElementById('closed-tbody');
+      const badge = document.getElementById('closed-count-badge');
+      const allClosed = appState.closed_trades || [];
+
+      let filtered = allClosed;
+      let totalLabel = 'TOTAL (ALL)';
+      if (closedFilter === 'today') {
+        filtered = allClosed.filter(t => (t.exit_date_ist || t.date) === ist.date);
+        totalLabel = `TODAY TOTAL (${ist.date})`;
+      } else if (closedFilter === 'week') {
+        filtered = allClosed.filter(t => {
+          const d = t.exit_date_ist || t.date;
+          return d >= ist.weekStart && d <= ist.weekEnd;
+        });
+        totalLabel = `THIS WEEK TOTAL (${ist.weekStart} to ${ist.weekFriday})`;
+      }
+
+      badge.textContent = `${filtered.length} Trade${filtered.length === 1 ? '' : 's'}`;
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; padding:18px; color:var(--muted);">No completed trades for this period yet.</td></tr>`;
+        return;
+      }
+
+      let sumBrok = 0;
+      let sumNet = 0;
+      const rowsHtml = filtered.map(t => {
+        const side = String(t.side || 'BUY').toUpperCase();
+        const brok = Number(t.brokerage_and_taxes_inr || 0);
+        const net = Number(t.net_pnl_excl_brokerage_inr || 0);
+        sumBrok += brok;
+        sumNet += net;
+        const netCls = net >= 0 ? 'text-green' : 'text-red';
+
+        return `
+          <tr>
+            <td><strong>${t.symbol}</strong> <span class="pill pill-gray">${t.exchange}</span></td>
+            <td><span class="pill ${side === 'SELL' ? 'pill-red' : 'pill-green'}">${side}</span></td>
+            <td>${t.qty}</td>
+            <td>${t.entry_date_ist || t.date} ${t.entry_time_ist}</td>
+            <td>${fmtInr(t.entry_price_inr)}</td>
+            <td>${t.exit_date_ist || t.date} ${t.exit_time_ist}</td>
+            <td><strong>${fmtInr(t.current_or_exit_price_inr)}</strong></td>
+            <td>-${fmtInr(brok)}</td>
+            <td class="${netCls}"><strong>${fmtInr(net, true)}</strong></td>
+            <td><span class="pill ${net >= 0 ? 'pill-green' : 'pill-red'}">${friendlyReason(t.exit_reason)}</span></td>
+          </tr>
+        `;
+      }).join('');
+
+      const sumCls = sumNet >= 0 ? 'text-green' : 'text-red';
+      const totalRow = `
+        <tr class="total-row">
+          <td colspan="7">${totalLabel}</td>
+          <td>-${fmtInr(sumBrok)}</td>
+          <td class="${sumCls}">${fmtInr(sumNet, true)}</td>
+          <td>-</td>
+        </tr>
+      `;
+      tbody.innerHTML = rowsHtml + totalRow;
+    }
+
+    function drawCandlestickChart() {
+      const canvas = document.getElementById('tradeChartCanvas');
+      const tooltip = document.getElementById('chartTooltip');
+      const titleEl = document.getElementById('chart-title');
+      const badgeEl = document.getElementById('chart-symbol-badge');
+      const legendEl = document.getElementById('chart-levels-legend');
+      const chartData = appState.chart;
+
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = Math.max(300, Math.floor(rect.width * dpr));
+      canvas.height = Math.max(240, Math.floor(rect.height * dpr));
+      const ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+
+      const W = rect.width;
+      const H = rect.height;
+      ctx.clearRect(0, 0, W, H);
+
+      if (!chartData || !chartData.bars || chartData.bars.length === 0) {
+        titleEl.textContent = 'Live Intraday Chart';
+        badgeEl.textContent = 'No Data';
+        legendEl.innerHTML = '<span>Chart updates automatically with real NSE/BSE candles</span>';
+        ctx.fillStyle = '#777';
+        ctx.font = '13px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('No intraday chart data loaded yet.', W / 2, H / 2);
+        return;
+      }
+
+      const active = (appState.active_trades && appState.active_trades[0]) || null;
+      const bars = chartData.bars;
+      const entryP = active ? Number(active.entry_price_inr) : (chartData.entry_price_inr ? Number(chartData.entry_price_inr) : null);
+      const slP = active ? Number(active.strict_stop_loss_inr) : (chartData.stop_loss_inr ? Number(chartData.stop_loss_inr) : null);
+      const targetP = active ? Number(active.target_price_inr) : (chartData.target_price_inr ? Number(chartData.target_price_inr) : null);
+      const lastBar = bars[bars.length - 1];
+      const liveP = lastBar.c;
+
+      titleEl.textContent = active ? 'Active Trade Live Chart (5m Candles)' : `Latest Market Chart (${chartData.session_date || ''})`;
+      badgeEl.textContent = `${chartData.symbol} • ${fmtInr(liveP)}`;
+
+      const legendParts = [`<span><strong>LTP:</strong> ${fmtInr(liveP)}</span>`];
+      if (entryP != null) legendParts.push(`<span class="text-blue"><strong>Entry:</strong> ${fmtInr(entryP)}</span>`);
+      if (slP != null) legendParts.push(`<span class="text-red"><strong>SL:</strong> ${fmtInr(slP)}</span>`);
+      if (targetP != null) legendParts.push(`<span class="text-green"><strong>Target:</strong> ${fmtInr(targetP)}</span>`);
+      legendEl.innerHTML = legendParts.join('');
+
+      let minY = Math.min(...bars.map(b => b.l));
+      let maxY = Math.max(...bars.map(b => b.h));
+      for (const lvl of [entryP, slP, targetP]) {
+        if (lvl != null && Number.isFinite(lvl) && Math.abs(lvl - liveP) / Math.max(1, liveP) < 0.08) {
+          minY = Math.min(minY, lvl);
+          maxY = Math.max(maxY, lvl);
+        }
+      }
+      const padY = Math.max((maxY - minY) * 0.12, liveP * 0.0015);
+      minY -= padY;
+      maxY += padY;
+
+      const pad = { top: 16, right: 72, bottom: 28, left: 14 };
+      const plotW = W - pad.left - pad.right;
+      const plotH = H - pad.top - pad.bottom;
+      const yOf = (p) => pad.top + ((maxY - p) / Math.max(0.0001, maxY - minY)) * plotH;
+
+      // Grid lines + Right Y axis prices
+      ctx.strokeStyle = '#f1f3f5';
+      ctx.lineWidth = 1;
+      ctx.fillStyle = '#777';
+      ctx.font = '11px sans-serif';
+      ctx.textAlign = 'left';
+      for (let i = 0; i <= 4; i++) {
+        const y = pad.top + (plotH * i) / 4;
+        const priceVal = maxY - ((maxY - minY) * i) / 4;
+        ctx.beginPath();
+        ctx.moveTo(pad.left, y);
+        ctx.lineTo(W - pad.right, y);
+        ctx.stroke();
+        ctx.fillText('₹' + priceVal.toFixed(2), W - pad.right + 6, y + 4);
+      }
+
+      // Price level lines (Target / Entry / Stop Loss)
+      const drawLevelLine = (price, color, label) => {
+        if (price == null || price < minY || price > maxY) return;
+        const y = yOf(price);
+        ctx.save();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1.2;
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        ctx.moveTo(pad.left, y);
+        ctx.lineTo(W - pad.right, y);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = color;
+        ctx.fillRect(W - pad.right + 2, y - 8, 66, 16);
+        ctx.fillStyle = '#fff';
+        ctx.font = '10px sans-serif';
+        ctx.fillText(label, W - pad.right + 5, y + 3);
+        ctx.restore();
+      };
+      if (targetP != null) drawLevelLine(targetP, '#26a69a', `T ${targetP.toFixed(1)}`);
+      if (entryP != null) drawLevelLine(entryP, '#387ed1', `E ${entryP.toFixed(1)}`);
+      if (slP != null) drawLevelLine(slP, '#df514c', `SL ${slP.toFixed(1)}`);
+
+      // Candlesticks
+      const stepX = plotW / Math.max(1, bars.length);
+      const candleW = Math.max(2, Math.min(10, stepX * 0.65));
+
+      bars.forEach((b, idx) => {
+        const cx = pad.left + idx * stepX + stepX / 2;
+        const isGreen = b.c >= b.o;
+        const col = isGreen ? '#26a69a' : '#df514c';
+        ctx.strokeStyle = col;
+        ctx.fillStyle = col;
+        ctx.lineWidth = 1.1;
+
+        const yHigh = yOf(b.h);
+        const yLow = yOf(b.l);
+        const yOpen = yOf(b.o);
+        const yClose = yOf(b.c);
+
+        ctx.beginPath();
+        ctx.moveTo(cx, yHigh);
+        ctx.lineTo(cx, yLow);
+        ctx.stroke();
+
+        const bodyTop = Math.min(yOpen, yClose);
+        const bodyH = Math.max(1.5, Math.abs(yClose - yOpen));
+        ctx.fillRect(cx - candleW / 2, bodyTop, candleW, bodyH);
+
+        // Time labels on X-axis (~6 evenly spaced labels)
+        const labelEvery = Math.max(1, Math.floor(bars.length / 6));
+        if (idx % labelEvery === 0 || idx === bars.length - 1) {
+          ctx.fillStyle = '#777';
+          ctx.font = '10.5px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(b.t || '', cx, H - 8);
+        }
+      });
+
+      // Hover tooltip
+      canvas.onmousemove = (e) => {
+        const r = canvas.getBoundingClientRect();
+        const mx = e.clientX - r.left;
+        const idx = Math.floor((mx - pad.left) / stepX);
+        if (idx < 0 || idx >= bars.length) {
+          tooltip.style.display = 'none';
+          return;
+        }
+        const b = bars[idx];
+        tooltip.style.display = 'block';
+        tooltip.style.left = Math.min(r.width - 150, Math.max(8, mx + 12)) + 'px';
+        tooltip.style.top = '12px';
+        tooltip.innerHTML = `<strong>${b.t || ''} IST</strong><br>O: ₹${b.o} &nbsp; H: ₹${b.h}<br>L: ₹${b.l} &nbsp; C: ₹${b.c}`;
+      };
+      canvas.onmouseleave = () => { tooltip.style.display = 'none'; };
     }
 
     function renderDashboard() {
-      const scale = (appState.balance_inr || 20000) / 20000;
-      const activeList = appState.active_trades || [];
-      const closedList = appState.closed_trades || [];
-
-      // Render Active Trades Table
-      const activeTbody = document.getElementById('active-trades-tbody');
-      const statusBadge = document.getElementById('active-status-badge');
-      const cycleStatus = document.getElementById('auto-cycle-status');
-      const istClock = getISTClockInfo();
-      if (activeList.length === 0) {
-        if (istClock.isWeekday && istClock.minutesOfDay >= 555 && istClock.minutesOfDay < 575) {
-          if (statusBadge) {
-            statusBadge.className = 'badge badge-blue';
-            statusBadge.textContent = '🟡 15m OPENING RANGE SCAN (09:15–09:35 IST)';
-          }
-          if (cycleStatus) {
-            cycleStatus.style.color = 'var(--blue)';
-            cycleStatus.textContent = 'Scanning 55 NSE/BSE Stocks — Auto-Entry at 09:35:00 IST';
-          }
-          activeTbody.innerHTML = '<tr><td colspan="13" style="text-align:center; padding:22px; color:#38bdf8; font-weight:600;">🟡 NSE & BSE Market Open — Measuring 15-Minute Opening Range (09:15–09:30 IST).<br><span style="color:var(--muted); font-weight:400; font-size:12.5px;">SriKari TradeBot will automatically enter Trade #1 at 09:35:00 IST.</span></td></tr>';
-        } else if (istClock.isWeekday && istClock.minutesOfDay >= 870 && istClock.minutesOfDay <= 930) {
-          if (statusBadge) {
-            statusBadge.className = 'badge badge-green';
-            statusBadge.textContent = '✅ TODAY\'S TARGETS COMPLETED';
-          }
-          if (cycleStatus) {
-            cycleStatus.style.color = 'var(--green)';
-            cycleStatus.textContent = 'Today\'s Profits Locked — No Over-Trading';
-          }
-          activeTbody.innerHTML = '<tr><td colspan="13" style="text-align:center; padding:22px; color:#10b981; font-weight:600;">✅ Today\'s Intraday Trading Session Completed — All Profits Booked & Locked!<br><span style="color:var(--muted); font-weight:400; font-size:12.5px;">See Closed Trades below for today\'s completed trades.</span></td></tr>';
-        } else {
-          if (statusBadge) {
-            statusBadge.className = 'badge badge-amber';
-            statusBadge.textContent = '🔴 MARKET CLOSED (OFF-HOURS / WEEKEND)';
-          }
-          if (cycleStatus) {
-            cycleStatus.style.color = 'var(--amber)';
-            cycleStatus.textContent = 'Market Closed — Waiting for Next 09:15 IST Session';
-          }
-          activeTbody.innerHTML = '<tr><td colspan="13" style="text-align:center; padding:22px; color:#fcd34d; font-weight:600;">🔴 NSE & BSE Market is Closed Right Now (Outside 09:15 AM – 03:30 PM IST). Zero Active Trades.<br><span style="color:var(--muted); font-weight:400; font-size:12.5px;">SriKari TradeBot will automatically wake up, scan all 55 NSE/BSE stocks, and enter Trade #1 at the next Market Open (09:35:00 IST).</span></td></tr>';
-        }
+      const ist = getISTNowParts();
+      const marketPill = document.getElementById('market-status-pill');
+      if (ist.isMarketHours) {
+        marketPill.className = 'pill pill-green';
+        marketPill.textContent = 'Market Open';
       } else {
-        if (statusBadge) {
-          statusBadge.className = 'badge badge-green';
-          statusBadge.textContent = '🟢 LIVE AUTO-TRADING';
-        }
-        if (cycleStatus) {
-          cycleStatus.style.color = 'var(--green)';
-        }
-        activeTbody.innerHTML = activeList.map(t => {
-          const entryPrice = Number(t.entry_price_inr || 0);
-          const livePrice = Number(t.live_price_inr || t.current_or_exit_price_inr || entryPrice);
-          const isShort = String(t.side || 'BUY').toUpperCase() === 'SELL';
-          const scaledQty = Math.max(1, Math.round(t.qty * scale));
-          const scaledMaxLoss = t.max_loss_at_stop_inr * scale;
-          const scaledGross = t.target_gross_profit_inr * scale;
-          const scaledBrok = t.brokerage_and_taxes_inr * scale;
-          const scaledNet = t.target_net_profit_inr * scale;
-          const priceDiff = isShort ? (entryPrice - livePrice) : (livePrice - entryPrice);
-          const liveGrossPnl = Number((priceDiff * scaledQty).toFixed(2));
-          const liveNetPnl = Number((liveGrossPnl - scaledBrok).toFixed(2));
-          const livePnlClass = liveGrossPnl >= 0 ? 'text-green' : 'text-red';
-          const liveGrossSign = liveGrossPnl >= 0 ? '+' : '-';
-          const liveNetSign = liveNetPnl >= 0 ? '+' : '-';
-          return `
-            <tr>
-              <td><strong>${t.date}</strong></td>
-              <td><strong>${t.symbol}</strong> <span class="badge badge-blue">${t.exchange}</span> <span class="badge ${isShort ? 'badge-amber' : 'badge-green'}">${String(t.side || 'BUY').toUpperCase()}</span></td>
-              <td style="font-size:12.5px; color:#cbd5e1;">${t.strategy_used || 'Stage-2 200-DMA + Narrow CPR + 15m ORB + Supertrend(10,3) + VWAP'}</td>
-              <td><span class="badge badge-green">${t.entry_time_ist || '09:35:00 IST'}</span></td>
-              <td><strong>${fmtInr(entryPrice)}</strong></td>
-              <td class="text-blue"><strong>${fmtInr(livePrice)}</strong></td>
-              <td><strong>${scaledQty}</strong></td>
-              <td class="text-red">${fmtInr(t.strict_stop_loss_inr)} <span style="font-size:11.5px;">(-${fmtInr(scaledMaxLoss)})</span></td>
-              <td class="text-green"><strong>${fmtInr(t.target_price_inr)}</strong></td>
-              <td class="${livePnlClass}"><strong>${liveGrossSign}${fmtInr(Math.abs(liveGrossPnl))}</strong> <span style="font-size:11.5px; color:#cbd5e1;">(Net: ${liveNetSign}${fmtInr(Math.abs(liveNetPnl))})</span></td>
-              <td><strong>${fmtInr(scaledGross)}</strong></td>
-              <td class="text-amber">-${fmtInr(scaledBrok)}</td>
-              <td class="text-green"><strong>+${fmtInr(scaledNet)}</strong></td>
-            </tr>
-          `;
-        }).join('');
+        marketPill.className = 'pill pill-gray';
+        marketPill.textContent = 'Market Closed';
       }
 
-      // Render Closed Trades Table + Totals
-      let totalGross = 0;
-      let totalBrok = 0;
-      let totalNet = 0;
-      let totalShoonyaNet = 0;
-
-      const closedTbody = document.getElementById('closed-trades-tbody');
-      if (closedList.length === 0) {
-        closedTbody.innerHTML = '<tr><td colspan="11" style="text-align:center; color:var(--muted);">No closed trades yet.</td></tr>';
-      } else {
-        const rowsHtml = closedList.map(t => {
-          const scaledQty = Math.max(1, Math.round(t.qty * scale));
-          const gross = Number(t.gross_pnl_inr || 0) * scale;
-          const brok = Number(t.brokerage_and_taxes_inr || 0) * scale;
-          const net = Number(t.net_pnl_excl_brokerage_inr || 0) * scale;
-          const shoonyaNet = Number(t.shoonya_zero_brokerage_net_inr || (t.gross_pnl_inr - 9.85)) * scale;
-          totalGross += gross;
-          totalBrok += brok;
-          totalNet += net;
-          totalShoonyaNet += shoonyaNet;
-
-          return `
-            <tr>
-              <td><strong>${t.date}</strong></td>
-              <td><strong>${t.symbol}</strong> <span class="badge badge-blue">${t.exchange}</span> <span class="badge ${String(t.side || 'BUY').toUpperCase() === 'SELL' ? 'badge-amber' : 'badge-green'}">${String(t.side || 'BUY').toUpperCase()}</span></td>
-              <td><strong>${scaledQty}</strong></td>
-              <td><span class="badge badge-amber">${t.entry_time_ist || '09:35:00 IST'}</span></td>
-              <td>${fmtInr(t.entry_price_inr)}</td>
-              <td><span class="badge badge-green">${t.exit_time_ist || '14:10:00 IST'}</span></td>
-              <td><strong>${fmtInr(t.current_or_exit_price_inr)}</strong></td>
-              <td><strong>${fmtInr(gross)}</strong></td>
-              <td class="text-amber">-${fmtInr(brok)}</td>
-              <td class="text-green"><strong>+${fmtInr(net)}</strong></td>
-              <td class="text-blue"><strong>+${fmtInr(shoonyaNet)}</strong></td>
-            </tr>
-          `;
-        }).join('');
-
-        const totalRowHtml = `
-          <tr class="total-row">
-            <td colspan="7">TOTAL REALIZED PROFIT (${closedList.length} AUTO-CLOSED TRADES)</td>
-            <td>${fmtInr(totalGross)}</td>
-            <td class="text-amber">-${fmtInr(totalBrok)}</td>
-            <td class="text-green">+${fmtInr(totalNet)}</td>
-            <td class="text-blue">+${fmtInr(totalShoonyaNet)}</td>
-          </tr>
-        `;
-        closedTbody.innerHTML = rowsHtml + totalRowHtml;
-      }
-
-      // Update Top 4 KPI Summary Cards
-      document.getElementById('kpi-gross').textContent = fmtInr(totalGross);
-      document.getElementById('kpi-gross-sub').textContent = `Across ${closedList.length} Closed Trades (Before Brokerage)`;
-      document.getElementById('kpi-brokerage').textContent = '-' + fmtInr(totalBrok);
-      document.getElementById('kpi-net').textContent = '+' + fmtInr(totalNet);
-      document.getElementById('kpi-shoonya').textContent = '+' + fmtInr(totalShoonyaNet);
-      document.getElementById('closed-count-badge').textContent = `${closedList.length} Closed Trades`;
+      updateKPIs(ist);
+      renderActiveTable(ist);
+      renderClosedTable(ist);
+      drawCandlestickChart();
     }
 
     async function loadState() {
-      // 1. Try local/Render backend API first
+      const ist = getISTNowParts();
+      // 1. Try local / Render backend API first
       try {
         const res = await fetch('/api/state');
         if (res.ok) {
@@ -843,113 +832,59 @@
           if (data.daily) {
             appState.active_trades = data.daily.active_trades || [];
             appState.closed_trades = data.daily.closed_trades || [];
-            applyLiveISTMarketEngine();
+            if (data.chart) appState.chart = data.chart;
+            document.getElementById('last-updated-label').textContent = `Updated ${data.as_of || ist.time}`;
             renderDashboard();
-            document.getElementById('last-updated-label').textContent = 'Auto-Synced: ' + (data.as_of || getISTTimeStr());
             return;
           }
         }
       } catch (e) {}
 
-      // 2. Fallback for GitHub Pages static hosting: fetch live JSON from GitHub repo
+      // 2. GitHub Pages static JSON fetch
       try {
         const ts = Date.now();
-        const dailyRes = await fetch(`${GITHUB_RAW_BASE}/daily_summary.json?t=${ts}`);
+        const [dailyRes, chartRes] = await Promise.all([
+          fetch(`${GITHUB_RAW_TRADER}/daily_summary.json?t=${ts}`),
+          fetch(`${GITHUB_RAW_TRADER}/active_chart.json?t=${ts}`)
+        ]);
         if (dailyRes.ok) {
           const daily = await dailyRes.json();
           appState.active_trades = daily.active_trades || [];
           appState.closed_trades = daily.closed_trades || [];
-          applyLiveISTMarketEngine();
-          renderDashboard();
-          document.getElementById('last-updated-label').textContent = 'Auto-Synced from GitHub Repo (' + getISTTimeStr() + ')';
         }
-      } catch (err) {
-        applyLiveISTMarketEngine();
-        renderDashboard();
-      }
-    }
-
-    // Live Autonomous Price & Target Monitor (Runs automatically every 4 seconds while you watch)
-    function startAutonomousWatchLoop() {
-      setInterval(() => {
-        applyLiveISTMarketEngine();
-        if (!appState.active_trades || appState.active_trades.length === 0) return;
-        const active = appState.active_trades[0];
-        const entry = Number(active.entry_price_inr);
-        const target = Number(active.target_price_inr);
-        const cur = Number(active.live_price_inr || entry);
-        const isShort = String(active.side || 'BUY').toUpperCase() === 'SELL';
-        // Simulate gentle live NSE/BSE price progression toward target while watching
-        const step = (target - entry) * 0.08;
-        let nextPrice = Number((cur + step).toFixed(2));
-        if ((!isShort && nextPrice >= target) || (isShort && nextPrice <= target)) {
-          nextPrice = Number((entry + (target - entry) * 0.25).toFixed(2)); // cycle live tick display cleanly
+        if (chartRes.ok) {
+          appState.chart = await chartRes.json();
         }
-        active.live_price_inr = nextPrice;
-        const liveDiff = isShort ? (entry - nextPrice) : (nextPrice - entry);
-        const livePnl = Number((liveDiff * Number(active.qty || 1)).toFixed(2));
-        const liveSign = livePnl >= 0 ? '+' : '';
-        document.getElementById('auto-cycle-status').textContent = `Auto-Monitoring ${active.symbol}: Live ₹${nextPrice.toFixed(2)} (${liveSign}₹${livePnl.toFixed(2)}) → Target ₹${target.toFixed(2)} (${getISTTimeStr()})`;
-        renderDashboard();
-      }, 4000);
+        document.getElementById('last-updated-label').textContent = `Synced ${ist.time}`;
+      } catch (e) {}
+      renderDashboard();
     }
 
-    function generateMarkdownReportFromState() {
-      const activeList = appState.active_trades || [];
-      const closedList = appState.closed_trades || [];
-      let totalGross = 0, totalBrok = 0, totalNet = 0, totalShoonya = 0;
-      for (const c of closedList) {
-        totalGross += Number(c.gross_pnl_inr || 0);
-        totalBrok += Number(c.brokerage_and_taxes_inr || 0);
-        totalNet += Number(c.net_pnl_excl_brokerage_inr || 0);
-        totalShoonya += Number(c.shoonya_zero_brokerage_net_inr || (c.gross_pnl_inr - 9.85));
-      }
+    async function openDailyReport() {
+      const ist = getISTNowParts();
+      const todayFile = `${ist.date}.md`;
+      document.getElementById('report-modal-title').textContent = `Daily Trade Report — ${todayFile}`;
+      document.getElementById('github-daily-link').href = `https://github.com/anandsurla/indian-day-trader-skill/blob/main/reports/daily/${todayFile}`;
+      document.getElementById('github-weekly-link').href = `https://github.com/anandsurla/indian-day-trader-skill/blob/main/reports/weekly/WEEKLY_CONSOLIDATED_${ist.weekFriday}.md`;
 
-      const lines = [
-        '# 📅 Daily Paper Trade Report — Active & Closed Trades (NSE & BSE)',
-        '**Account Capital:** ₹20,000 | **Mandatory Daily Target:** ₹400/day Net Profit (After Brokerage) | **Strict Stop-Loss:** Max ₹100/trade',
-        '',
-        '## 💰 Overall Realized Profit Summary (Closed Trades)',
-        `- **Total Gross Profit:** **₹${totalGross.toFixed(2)}**`,
-        `- **Total Trade Brokerage & Govt Taxes Deducted:** **-₹${totalBrok.toFixed(2)}**`,
-        `- **Final Net Profit (In Your Pocket After Brokerage):** **+₹${totalNet.toFixed(2)}** *(+₹${totalShoonya.toFixed(2)} with Finvasia Shoonya ₹0 Brokerage)*`,
-        '',
-        '## 🟢 Active Trades (Open Now)',
-        '| Date | Stock | Exch | Qty | Entry Time (IST) | Entry Price (₹) | Live Price (₹) | Strict Stop-Loss (₹) | Auto-Exit Target (₹) | Live Profit / Loss (₹) | Gross Profit (₹) | Brokerage & Tax (₹) | Net Profit (₹) |',
-        '| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |'
-      ];
-      for (const a of activeList) {
-        const entryP = Number(a.entry_price_inr || 0);
-        const liveP = Number(a.live_price_inr || a.current_or_exit_price_inr || entryP);
-        const isShort = String(a.side || 'BUY').toUpperCase() === 'SELL';
-        const liveGross = Number(((isShort ? (entryP - liveP) : (liveP - entryP)) * Number(a.qty || 1)).toFixed(2));
-        const liveNet = Number((liveGross - Number(a.brokerage_and_taxes_inr || 0)).toFixed(2));
-        const gSign = liveGross >= 0 ? '+' : '';
-        const nSign = liveNet >= 0 ? '+' : '';
-        lines.push(`| **${a.date}** | **${a.symbol}** | ${a.exchange} | ${a.qty} | **${a.entry_time_ist}** | ₹${a.entry_price_inr} | ₹${liveP} | ₹${a.strict_stop_loss_inr} | ₹${a.target_price_inr} | **${gSign}₹${liveGross}** *(Net: ${nSign}₹${liveNet})* | ₹${a.target_gross_profit_inr} | -₹${a.brokerage_and_taxes_inr} | **+₹${a.target_net_profit_inr}** |`);
-      }
-      lines.push('');
-      lines.push('## ✅ Closed Trades (With Entry & Exit Time + Brokerage & Net Profit)');
-      lines.push('| Date | Stock | Exch | Qty | Entry Time (IST) | Entry Price (₹) | Exit Time (IST) | Exit Price (₹) | Total Profit (Gross ₹) | Brokerage & Tax (₹) | Final Net Profit (₹) | Shoonya ₹0-Brok Net (₹) |');
-      lines.push('| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |');
-      for (const c of closedList) {
-        lines.push(`| **${c.date}** | **${c.symbol}** | ${c.exchange} | ${c.qty} | **${c.entry_time_ist}** | ₹${c.entry_price_inr} | **${c.exit_time_ist}** | ₹${c.current_or_exit_price_inr} | ₹${Number(c.gross_pnl_inr).toFixed(2)} | -₹${Number(c.brokerage_and_taxes_inr).toFixed(2)} | **+₹${Number(c.net_pnl_excl_brokerage_inr).toFixed(2)}** | **+₹${Number(c.shoonya_zero_brokerage_net_inr || (c.gross_pnl_inr - 9.85)).toFixed(2)}** |`);
-      }
-      lines.push(`| **TOTAL** | **${closedList.length} Trades** | - | - | - | - | - | - | **₹${totalGross.toFixed(2)}** | **-₹${totalBrok.toFixed(2)}** | **+₹${totalNet.toFixed(2)}** | **+₹${totalShoonya.toFixed(2)}** |`);
-      return lines.join('\n');
-    }
-
-    async function sendReportToGitHub() {
+      let mdText = '';
       try {
-        const res = await fetch('/api/sync-github', { method: 'POST' });
-        if (res.ok) {
-          const data = await res.json();
-          showToast(data.message || 'Daily Report synced & pushed to GitHub!');
-        }
+        const res = await fetch(`https://raw.githubusercontent.com/anandsurla/indian-day-trader-skill/main/reports/daily/${todayFile}?t=${Date.now()}`);
+        if (res.ok) mdText = await res.text();
       } catch (e) {}
 
-      const md = generateMarkdownReportFromState();
-      document.getElementById('report-markdown-box').textContent = md;
+      if (!mdText) {
+        const todayClosed = (appState.closed_trades || []).filter(t => (t.exit_date_ist || t.date) === ist.date);
+        const dayNet = todayClosed.reduce((s, t) => s + Number(t.net_pnl_excl_brokerage_inr || 0), 0);
+        const dayBrok = todayClosed.reduce((s, t) => s + Number(t.brokerage_and_taxes_inr || 0), 0);
+        mdText = [
+          `# Daily Trade Report — ${ist.date}`,
+          `Daily Profit / Loss (Excl. Brokerage): ${fmtInr(dayNet, true)}`,
+          `Today's Brokerage & Taxes: -${fmtInr(dayBrok)}`,
+          `Closed Trades Today: ${todayClosed.length}`
+        ].join('\n');
+      }
+      document.getElementById('report-markdown-box').textContent = mdText;
       document.getElementById('report-modal').style.display = 'flex';
     }
 
@@ -960,23 +895,10 @@
     function copyReportMarkdown() {
       const md = document.getElementById('report-markdown-box').textContent;
       navigator.clipboard.writeText(md);
-      showToast('📋 Copied Daily Paper Trade Report Markdown to clipboard!');
     }
 
-    function downloadReportMarkdown() {
-      const md = document.getElementById('report-markdown-box').textContent;
-      const blob = new Blob([md], { type: 'text/markdown;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'DAILY_PAPER_TRADES.md';
-      a.click();
-      URL.revokeObjectURL(url);
-      showToast('⬇️ Downloaded DAILY_PAPER_TRADES.md!');
-    }
-
+    window.addEventListener('resize', drawCandlestickChart);
     loadState();
-    startAutonomousWatchLoop();
     setInterval(loadState, 30000);
   </script>
 </body>
