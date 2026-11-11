@@ -6,6 +6,11 @@ services:
     buildCommand: echo "Zero external dependencies - ready to run"
     startCommand: node server.js
     healthCheckPath: /api/health
+    buildFilter:
+      ignoredPaths:
+        - reports/**
+        - trader/*.json
+        - trader/state/*.json
     envVars:
       - key: NODE_ENV
         value: production
