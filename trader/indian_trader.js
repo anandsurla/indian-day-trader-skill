@@ -385,7 +385,7 @@ function getISTInfo(date = new Date()) {
     const bounds = getWeekBoundsIST(p.date);
     const isWeekday = p.dayOfWeek >= 1 && p.dayOfWeek <= 5;
     const isMarketHours = isWeekday && p.minutesOfDay >= 555 && p.minutesOfDay <= 930;
-    const isEntryWindow = isWeekday && p.minutesOfDay >= 570 && p.minutesOfDay <= 885;
+    const isEntryWindow = isWeekday && p.minutesOfDay >= 570 && p.minutesOfDay <= 825; // 09:30 to 13:45 IST (min 90m runway)
     const isSquareOffWindow = isWeekday && p.minutesOfDay >= 915 && p.minutesOfDay <= 930;
 
     return {
@@ -862,6 +862,8 @@ async function runScanner(mode = 'orb', topN = 10) {
         const tickerNews = newsByTicker[item.ticker] || { sentiment: 'NEUTRAL', catalyst_score: 10, adverse_event: false };
 
         const latestDate = bars5m[bars5m.length - 1].istDate;
+        // Skip automatically on NSE/BSE public holidays or if today's session hasn't traded yet
+        if (latestDate !== ist.date && process.env.FORCE_PIPELINE !== 'true') continue;
         const allTodayBars = bars5m.filter(b => b.istDate === latestDate && b.istMinutes >= 555 && b.istMinutes <= 930);
         const sessionBars = allTodayBars.length >= 3 ? allTodayBars : bars5m.slice(-30);
         const prevDates = [...new Set(bars5m.map(b => b.istDate).filter(d => d && d < latestDate))];
@@ -917,6 +919,10 @@ async function runScanner(mode = 'orb', topN = 10) {
         const rsiHealthy = tradeSide === 'BUY'
             ? (rsi14 >= 50 && rsi14 <= 75)
             : (rsi14 >= 25 && rsi14 <= 48);
+
+        const distFromVwapPct = Math.abs(entryPrice - vwap) / Math.max(1, vwap);
+        const notOverExtended = distFromVwapPct <= 0.015 && Math.abs(changePct) < 5.0;
+        if (!notOverExtended) continue;
 
         if (tradeSide === 'BUY' && (!aboveVwap || !rsiHealthy || !stage2HistoricalUptrend)) continue;
         if (tradeSide === 'SELL' && (!belowVwap || !rsiHealthy)) continue;
