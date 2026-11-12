@@ -1,14 +1,14 @@
 {
-  "as_of": "2026-11-12T10:11:45+05:30",
+  "as_of": "2026-11-12T10:13:16+05:30",
   "symbol": "HDFCBANK.NS",
   "name": "HDFC Bank",
   "exchange": "NSE",
-  "has_active_trade": true,
+  "has_active_trade": false,
   "side": "BUY",
   "entry_price_inr": 811.7,
   "stop_loss_inr": 808.5,
   "target_price_inr": 825.54,
-  "current_price_inr": 809.05,
+  "current_price_inr": 809,
   "session_date": "2026-11-12",
   "bars": [
     {
@@ -115,17 +115,17 @@
       "time": "2026-11-12T04:40:00.000Z",
       "o": 810.6,
       "h": 810.65,
-      "l": 809.5,
-      "c": 809.5,
-      "v": 113984
+      "l": 808.3,
+      "c": 809.3,
+      "v": 421324
     },
     {
-      "t": "10:11",
-      "time": "2026-11-12T04:41:44.000Z",
-      "o": 809.05,
-      "h": 809.05,
-      "l": 809.05,
-      "c": 809.05,
+      "t": "10:13",
+      "time": "2026-11-12T04:43:16.000Z",
+      "o": 809,
+      "h": 809,
+      "l": 809,
+      "c": 809,
       "v": 0
     }
   ]
