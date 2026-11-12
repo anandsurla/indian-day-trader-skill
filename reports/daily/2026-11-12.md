@@ -10,7 +10,7 @@
 ## Active Trade
 | Stock | Side | Qty | Entry Date & Time (IST) | Entry Price | Live Price | Stop Loss | Target | Live P&L (Excl. Brokerage) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **HDFCBANK.NS** (NSE) | BUY | 31 | 2026-11-12 09:30:30 IST | ₹811.7 | ₹811 | ₹808.5 | ₹825.54 | **-₹48.36** |
+| **HDFCBANK.NS** (NSE) | BUY | 31 | 2026-11-12 09:30:30 IST | ₹811.7 | ₹812.35 | ₹808.5 | ₹825.54 | **-₹6.55** |
 
 ## Completed Trades
 | Stock | Side | Qty | Entry Date & Time (IST) | Entry ₹ | Exit Date & Time (IST) | Exit ₹ | Brokerage & Tax ₹ | Net P&L (Excl. Brokerage) | Reason |
