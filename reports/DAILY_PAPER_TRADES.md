@@ -2,17 +2,12 @@
 **Week:** 2026-11-09 (Mon) to 2026-11-13 (Fri) | **Capital:** ₹20,000
 
 ## Day Summary (Strictly This Date Only)
-- **Daily Profit / Loss (Excl. Brokerage & Taxes):** **₹0.00**
-- **Daily Gross P&L:** ₹0.00
-- **Total Brokerage & Govt Taxes (Today Only):** ₹0.00
-- **Completed Trades:** 0 (0 Wins / 0 Losses) | **Active Trades:** 1
-
-## Active Trade
-| Stock | Side | Qty | Entry Date & Time (IST) | Entry Price | Live Price | Stop Loss | Target | Live P&L (Excl. Brokerage) |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **HDFCBANK.NS** (NSE) | BUY | 31 | 2026-11-12 09:30:30 IST | ₹811.7 | ₹809.05 | ₹808.5 | ₹825.54 | **-₹108.77** |
+- **Daily Profit / Loss (Excl. Brokerage & Taxes):** **-₹125.82**
+- **Daily Gross P&L:** -₹99.20
+- **Total Brokerage & Govt Taxes (Today Only):** -₹26.62
+- **Completed Trades:** 1 (0 Wins / 1 Losses) | **Active Trades:** 0
 
 ## Completed Trades
 | Stock | Side | Qty | Entry Date & Time (IST) | Entry ₹ | Exit Date & Time (IST) | Exit ₹ | Brokerage & Tax ₹ | Net P&L (Excl. Brokerage) | Reason |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| No completed trades recorded on this date | - | - | - | - | - | - | - | ₹0.00 | - |
+| **HDFCBANK.NS** (NSE) | BUY | 31 | 2026-11-12 09:30:30 IST | ₹811.7 | 2026-11-12 10:11:00 IST | ₹808.5 | -₹26.62 | **-₹125.82** | STRICT_100_INR_STOP_LOSS_EXIT |
