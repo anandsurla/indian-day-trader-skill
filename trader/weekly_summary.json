@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-12T09:28:48+05:30",
+  "generated_at": "2026-11-12T09:30:31+05:30",
   "account_budget_inr": 20000,
   "current_week_start": "2026-11-09",
   "current_week_friday": "2026-11-13",
@@ -15,7 +15,7 @@
     "current_week_gross_pnl_inr": -198.64,
     "current_week_brokerage_and_taxes_inr": 61.38,
     "current_week_net_pnl_excl_brokerage_inr": -260.02,
-    "active_trades_count": 0
+    "active_trades_count": 1
   },
   "weeks": [
     {
@@ -23,10 +23,10 @@
       "week_friday": "2026-11-13",
       "week_end": "2026-11-15",
       "weekly_target_net_inr": 2000,
-      "trading_days_active": 2,
-      "total_trades": 2,
+      "trading_days_active": 3,
+      "total_trades": 3,
       "closed_trades": 2,
-      "open_trades": 0,
+      "open_trades": 1,
       "wins": 0,
       "losses": 2,
       "win_rate_pct": 0,
@@ -36,8 +36,8 @@
       "days": [
         {
           "date": "2026-11-12",
-          "total_trades": 0,
-          "open_trades": 0,
+          "total_trades": 1,
+          "open_trades": 1,
           "closed_trades": 0,
           "realized_gross_pnl_inr": 0,
           "realized_brokerage_and_taxes_inr": 0,
