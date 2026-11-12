@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-11T15:04:55+05:30",
+  "generated_at": "2026-11-12T09:15:24+05:30",
   "account_budget_inr": 20000,
   "current_week_start": "2026-11-09",
   "current_week_friday": "2026-11-13",
   "summary_totals": {
-    "today_date": "2026-11-11",
-    "today_closed_count": 1,
-    "today_gross_pnl_inr": -100,
-    "today_brokerage_and_taxes_inr": 28.13,
-    "today_net_pnl_excl_brokerage_inr": -128.13,
+    "today_date": "2026-11-12",
+    "today_closed_count": 0,
+    "today_gross_pnl_inr": 0,
+    "today_brokerage_and_taxes_inr": 0,
+    "today_net_pnl_excl_brokerage_inr": 0,
     "current_week_start": "2026-11-09",
     "current_week_friday": "2026-11-13",
     "current_week_closed_count": 2,
@@ -34,6 +34,15 @@
       "realized_brokerage_and_taxes_inr": 61.38,
       "realized_net_pnl_excl_brokerage_inr": -260.02,
       "days": [
+        {
+          "date": "2026-11-12",
+          "total_trades": 0,
+          "open_trades": 0,
+          "closed_trades": 0,
+          "realized_gross_pnl_inr": 0,
+          "realized_brokerage_and_taxes_inr": 0,
+          "realized_net_pnl_excl_brokerage_inr": 0
+        },
         {
           "date": "2026-11-11",
           "total_trades": 1,
