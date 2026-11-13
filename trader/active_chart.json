@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-13T15:00:08+05:30",
+  "as_of": "2026-11-13T15:00:46+05:30",
   "symbol": "BHARTIARTL.NS",
   "name": "Bharti Airtel",
   "exchange": "NSE",
@@ -8,7 +8,7 @@
   "entry_price_inr": 2091.3,
   "stop_loss_inr": 2093.62,
   "target_price_inr": 2120.33,
-  "current_price_inr": 2119,
+  "current_price_inr": 2119.4,
   "session_date": "2026-11-13",
   "bars": [
     {
@@ -634,11 +634,11 @@
     },
     {
       "t": "15:00",
-      "time": "2026-11-13T09:30:04.000Z",
-      "o": 2119,
-      "h": 2119,
-      "l": 2119,
-      "c": 2119,
+      "time": "2026-11-13T09:30:36.000Z",
+      "o": 2119.4,
+      "h": 2119.4,
+      "l": 2119.4,
+      "c": 2119.4,
       "v": 0
     }
   ]
