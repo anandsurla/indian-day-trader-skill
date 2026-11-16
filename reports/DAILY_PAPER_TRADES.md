@@ -1,13 +1,13 @@
-# Daily Trade Report — 2026-11-13
-**Week:** 2026-11-09 (Mon) to 2026-11-13 (Fri) | **Capital:** ₹20,000
+# Daily Trade Report — 2026-11-16
+**Week:** 2026-11-16 (Mon) to 2026-11-20 (Fri) | **Capital:** ₹20,000
 
 ## Day Summary (Strictly This Date Only)
-- **Daily Profit / Loss (Excl. Brokerage & Taxes):** **+₹1.53**
-- **Daily Gross P&L:** +₹34.80
-- **Total Brokerage & Govt Taxes (Today Only):** -₹33.27
-- **Completed Trades:** 1 (1 Wins / 0 Losses) | **Active Trades:** 0
+- **Daily Profit / Loss (Excl. Brokerage & Taxes):** **₹0.00**
+- **Daily Gross P&L:** ₹0.00
+- **Total Brokerage & Govt Taxes (Today Only):** ₹0.00
+- **Completed Trades:** 0 (0 Wins / 0 Losses) | **Active Trades:** 0
 
 ## Completed Trades
 | Stock | Side | Qty | Entry Date & Time (IST) | Entry ₹ | Exit Date & Time (IST) | Exit ₹ | Brokerage & Tax ₹ | Net P&L (Excl. Brokerage) | Reason |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **BHARTIARTL.NS** (NSE) | BUY | 15 | 2026-11-13 09:30:33 IST | ₹2091.3 | 2026-11-13 09:31:00 IST | ₹2093.62 | -₹33.27 | **+₹1.53** | TAX_FREE_BREAKEVEN_EXIT |
+| No completed trades recorded on this date | - | - | - | - | - | - | - | ₹0.00 | - |
