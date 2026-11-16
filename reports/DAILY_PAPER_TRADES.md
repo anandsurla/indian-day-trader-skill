@@ -10,7 +10,7 @@
 ## Active Trade
 | Stock | Side | Qty | Entry Date & Time (IST) | Entry Price | Live Price | Stop Loss | Target | Live P&L (Excl. Brokerage) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **ETERNAL.BO** (BSE) | BUY | 85 | 2026-11-16 09:30:30 IST | ₹365.85 | ₹365.85 | ₹364.68 | ₹370.97 | **-₹33.25** |
+| **ETERNAL.BO** (BSE) | BUY | 85 | 2026-11-16 09:30:30 IST | ₹365.85 | ₹366.3 | ₹364.68 | ₹370.97 | **+₹5.26** |
 
 ## Completed Trades
 | Stock | Side | Qty | Entry Date & Time (IST) | Entry ₹ | Exit Date & Time (IST) | Exit ₹ | Brokerage & Tax ₹ | Net P&L (Excl. Brokerage) | Reason |
