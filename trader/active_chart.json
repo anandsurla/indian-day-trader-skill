@@ -1,14 +1,14 @@
 {
-  "as_of": "2026-11-16T09:47:06+05:30",
+  "as_of": "2026-11-16T09:48:01+05:30",
   "symbol": "ETERNAL.BO",
   "name": "Eternal (Zomato) (BSE)",
   "exchange": "BSE",
   "has_active_trade": true,
   "side": "BUY",
   "entry_price_inr": 365.85,
-  "stop_loss_inr": 366.34,
+  "stop_loss_inr": 367.48,
   "target_price_inr": 370.97,
-  "current_price_inr": 367.6,
+  "current_price_inr": 368.35,
   "session_date": "2026-11-16",
   "bars": [
     {
@@ -679,11 +679,11 @@
     },
     {
       "t": "09:32",
-      "time": "2026-11-16T04:02:00.000Z",
-      "o": 367.6,
-      "h": 367.6,
-      "l": 367.6,
-      "c": 367.6,
+      "time": "2026-11-16T04:02:58.000Z",
+      "o": 368.35,
+      "h": 368.35,
+      "l": 368.35,
+      "c": 368.35,
       "v": 0
     }
   ]
