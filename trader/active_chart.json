@@ -1,14 +1,14 @@
 {
-  "as_of": "2026-11-18T12:45:28+05:30",
+  "as_of": "2026-11-18T12:47:42+05:30",
   "symbol": "SUNPHARMA.NS",
   "name": "Sun Pharma",
   "exchange": "NSE",
-  "has_active_trade": true,
+  "has_active_trade": false,
   "side": "BUY",
   "entry_price_inr": 1883.7,
   "stop_loss_inr": 1877.77,
   "target_price_inr": 1910.84,
-  "current_price_inr": 1880.7,
+  "current_price_inr": 1875.2,
   "session_date": "2026-11-18",
   "bars": [
     {
@@ -391,11 +391,20 @@
     },
     {
       "t": "12:45",
-      "time": "2026-11-18T07:15:26.000Z",
-      "o": 1880.7,
-      "h": 1880.7,
-      "l": 1880.7,
-      "c": 1880.7,
+      "time": "2026-11-18T07:15:00.000Z",
+      "o": 1880.8,
+      "h": 1881.3,
+      "l": 1875.2,
+      "c": 1875.9,
+      "v": 42673
+    },
+    {
+      "t": "12:47",
+      "time": "2026-11-18T07:17:41.000Z",
+      "o": 1875.2,
+      "h": 1875.2,
+      "l": 1875.2,
+      "c": 1875.2,
       "v": 0
     }
   ]
