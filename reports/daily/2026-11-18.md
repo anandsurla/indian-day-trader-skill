@@ -10,7 +10,7 @@
 ## Active Trade
 | Stock | Side | Qty | Entry Date & Time (IST) | Entry Price | Live Price | Stop Loss | Target | Live P&L (Excl. Brokerage) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **SUNPHARMA.NS** (NSE) | BUY | 16 | 2026-11-18 12:26:15 IST | ₹1883.7 | ₹1880.7 | ₹1877.77 | ₹1910.84 | **-₹79.93** |
+| **SUNPHARMA.NS** (NSE) | BUY | 16 | 2026-11-18 12:26:15 IST | ₹1883.7 | ₹1882.3 | ₹1877.77 | ₹1910.84 | **-₹54.35** |
 
 ## Completed Trades
 | Stock | Side | Qty | Entry Date & Time (IST) | Entry ₹ | Exit Date & Time (IST) | Exit ₹ | Brokerage & Tax ₹ | Net P&L (Excl. Brokerage) | Reason |
