@@ -2,20 +2,21 @@
 **Week Period:** 2026-11-16 (Monday) to 2026-11-20 (Friday)
 
 ## Weekly Summary (Current Week Only)
-- **Total Weekly Profit / Loss (Excl. Brokerage & Taxes):** **+₹121.64**
-- **Total Weekly Gross P&L:** +₹154.70
-- **Total Weekly Brokerage & Govt Taxes:** -₹33.06
-- **Completed Trades:** 1 (1 Wins / 0 Losses | Win Rate: 100%)
+- **Total Weekly Profit / Loss (Excl. Brokerage & Taxes):** **-₹5.14**
+- **Total Weekly Gross P&L:** +₹59.82
+- **Total Weekly Brokerage & Govt Taxes:** -₹64.96
+- **Completed Trades:** 2 (1 Wins / 1 Losses | Win Rate: 50%)
 
 ## Day-by-Day Breakdown
 | Date | Trades Closed | Gross P&L | Brokerage & Tax | Net P&L (Excl. Brokerage) | Daily Report File |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **2026-11-16** | 1 | +₹154.70 | -₹33.06 | **+₹121.64** | [`2026-11-16.md`](../daily/2026-11-16.md) |
 | **2026-11-17** | 0 | ₹0.00 | ₹0.00 | **₹0.00** | [`2026-11-17.md`](../daily/2026-11-17.md) |
-| **2026-11-18** | 0 | ₹0.00 | ₹0.00 | **₹0.00** | [`2026-11-18.md`](../daily/2026-11-18.md) |
-| **WEEK TOTAL** | **1** | **+₹154.70** | **-₹33.06** | **+₹121.64** | - |
+| **2026-11-18** | 1 | -₹94.88 | -₹31.90 | **-₹126.78** | [`2026-11-18.md`](../daily/2026-11-18.md) |
+| **WEEK TOTAL** | **2** | **+₹59.82** | **-₹64.96** | **-₹5.14** | - |
 
 ## All Completed Trades This Week
 | Stock | Side | Qty | Entry Date & Time (IST) | Entry ₹ | Exit Date & Time (IST) | Exit ₹ | Brokerage & Tax ₹ | Net P&L (Excl. Brokerage) | Reason |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **SUNPHARMA.NS** (NSE) | BUY | 16 | 2026-11-18 12:26:15 IST | ₹1883.7 | 2026-11-18 12:45:00 IST | ₹1877.77 | -₹31.90 | **-₹126.78** | STRICT_100_INR_STOP_LOSS_EXIT |
 | **ETERNAL.BO** (BSE) | BUY | 85 | 2026-11-16 09:30:30 IST | ₹365.85 | 2026-11-16 09:31:00 IST | ₹367.67 | -₹33.06 | **+₹121.64** | TRAILING_PROFIT_STOP_BOOKED |
