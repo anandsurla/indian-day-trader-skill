@@ -2,12 +2,17 @@
 **Week:** 2026-11-16 (Mon) to 2026-11-20 (Fri) | **Capital:** ₹20,000
 
 ## Day Summary (Strictly This Date Only)
-- **Daily Profit / Loss (Excl. Brokerage & Taxes):** **-₹128.48**
-- **Daily Gross P&L:** -₹100.00
-- **Total Brokerage & Govt Taxes (Today Only):** -₹28.48
-- **Completed Trades:** 1 (0 Wins / 1 Losses) | **Active Trades:** 0
+- **Daily Profit / Loss (Excl. Brokerage & Taxes):** **₹0.00**
+- **Daily Gross P&L:** ₹0.00
+- **Total Brokerage & Govt Taxes (Today Only):** ₹0.00
+- **Completed Trades:** 0 (0 Wins / 0 Losses) | **Active Trades:** 1
+
+## Active Trade
+| Stock | Side | Qty | Entry Date & Time (IST) | Entry Price | Live Price | Stop Loss | Target | Live P&L (Excl. Brokerage) |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **SUNPHARMA.NS** (NSE) | BUY | 16 | 2026-11-18 12:26:15 IST | ₹1883.7 | ₹1883 | ₹1877.77 | ₹1910.84 | **-₹43.15** |
 
 ## Completed Trades
 | Stock | Side | Qty | Entry Date & Time (IST) | Entry ₹ | Exit Date & Time (IST) | Exit ₹ | Brokerage & Tax ₹ | Net P&L (Excl. Brokerage) | Reason |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **CANBK.NS** (NSE) | BUY | 200 | 2026-11-18 11:51:01 IST | ₹134.59 | 2026-11-18 12:20:00 IST | ₹134.09 | -₹28.48 | **-₹128.48** | STRICT_100_INR_STOP_LOSS_EXIT |
+| No completed trades recorded on this date | - | - | - | - | - | - | - | ₹0.00 | - |
