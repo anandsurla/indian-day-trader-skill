@@ -10,7 +10,7 @@
 ## Active Trade
 | Stock | Side | Qty | Entry Date & Time (IST) | Entry Price | Live Price | Stop Loss | Target | Live P&L (Excl. Brokerage) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **CANBK.NS** (NSE) | BUY | 200 | 2026-11-18 11:51:01 IST | ₹134.59 | ₹134.46 | ₹134.09 | ₹136.74 | **-₹54.52** |
+| **CANBK.NS** (NSE) | BUY | 200 | 2026-11-18 11:51:01 IST | ₹134.59 | ₹134.51 | ₹134.09 | ₹136.74 | **-₹44.54** |
 
 ## Completed Trades
 | Stock | Side | Qty | Entry Date & Time (IST) | Entry ₹ | Exit Date & Time (IST) | Exit ₹ | Brokerage & Tax ₹ | Net P&L (Excl. Brokerage) | Reason |
