@@ -1,21 +1,21 @@
 {
-  "generated_at": "2026-11-18T12:45:29+05:30",
+  "generated_at": "2026-11-18T12:47:43+05:30",
   "account_budget_inr": 20000,
   "current_week_start": "2026-11-16",
   "current_week_friday": "2026-11-20",
   "summary_totals": {
     "today_date": "2026-11-18",
-    "today_closed_count": 0,
-    "today_gross_pnl_inr": 0,
-    "today_brokerage_and_taxes_inr": 0,
-    "today_net_pnl_excl_brokerage_inr": 0,
+    "today_closed_count": 1,
+    "today_gross_pnl_inr": -94.88,
+    "today_brokerage_and_taxes_inr": 31.9,
+    "today_net_pnl_excl_brokerage_inr": -126.78,
     "current_week_start": "2026-11-16",
     "current_week_friday": "2026-11-20",
-    "current_week_closed_count": 1,
-    "current_week_gross_pnl_inr": 154.7,
-    "current_week_brokerage_and_taxes_inr": 33.06,
-    "current_week_net_pnl_excl_brokerage_inr": 121.64,
-    "active_trades_count": 1
+    "current_week_closed_count": 2,
+    "current_week_gross_pnl_inr": 59.82,
+    "current_week_brokerage_and_taxes_inr": 64.96,
+    "current_week_net_pnl_excl_brokerage_inr": -5.14,
+    "active_trades_count": 0
   },
   "weeks": [
     {
@@ -25,23 +25,23 @@
       "weekly_target_net_inr": 2000,
       "trading_days_active": 2,
       "total_trades": 2,
-      "closed_trades": 1,
-      "open_trades": 1,
+      "closed_trades": 2,
+      "open_trades": 0,
       "wins": 1,
-      "losses": 0,
-      "win_rate_pct": 100,
-      "realized_gross_pnl_inr": 154.7,
-      "realized_brokerage_and_taxes_inr": 33.06,
-      "realized_net_pnl_excl_brokerage_inr": 121.64,
+      "losses": 1,
+      "win_rate_pct": 50,
+      "realized_gross_pnl_inr": 59.82,
+      "realized_brokerage_and_taxes_inr": 64.96,
+      "realized_net_pnl_excl_brokerage_inr": -5.14,
       "days": [
         {
           "date": "2026-11-18",
           "total_trades": 1,
-          "open_trades": 1,
-          "closed_trades": 0,
-          "realized_gross_pnl_inr": 0,
-          "realized_brokerage_and_taxes_inr": 0,
-          "realized_net_pnl_excl_brokerage_inr": 0
+          "open_trades": 0,
+          "closed_trades": 1,
+          "realized_gross_pnl_inr": -94.88,
+          "realized_brokerage_and_taxes_inr": 31.9,
+          "realized_net_pnl_excl_brokerage_inr": -126.78
         },
         {
           "date": "2026-11-17",
